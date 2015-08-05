@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.dolibarrmaroc.com"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="21" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCComGeS0AyQUXkVt6OOaSh5wA60F7UgUk" />
+        <!-- android:value="    AIzaSyDKT3PMR0BmTUYYus2IspclJ_dwApDNUpE" /> -->
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".ConnexionActivity"
+            android:label="@string/title_activity_connexion"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".TrackingActivity"
+            android:label="@string/title_activity_tracking"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+
+        <service
+            android:name=".ShowLocationActivity"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":geocom_services" >
+        </service>
+		
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_feature1"
+            android:theme="@style/Theme.D1" />
+        
+        <activity
+            android:name=".F1Activity"
+            android:label="@string/title_feature1"
+            android:theme="@style/Theme.D1" />
+        <activity
+            android:name=".F2Activity"
+            android:label="@string/title_feature2"
+            android:theme="@style/Theme.D1" />
+        <activity
+            android:name=".F3Activity"
+            android:label="@string/title_feature3"
+            android:theme="@style/Theme.D1" />
+        <activity
+            android:name=".F4Activity"
+            android:label="@string/title_feature4"
+            android:theme="@style/Theme.D1" />
+        <activity
+            android:name=".F5Activity"
+            android:label="@string/title_feature5"
+            android:theme="@style/Theme.D1" />
+        <activity
+            android:name=".F6Activity"
+            android:label="@string/title_feature6"
+            android:theme="@style/Theme.D1" />
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_about"
+            android:theme="@style/Theme.D1" />
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_search"
+            android:theme="@style/Theme.D1" />
+        <activity
+            android:name=".VendeurActivity"
+            android:label="@string/title_activity_vendeur"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".TechnicienActivity"
+            android:label="@string/title_activity_technicien"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".CommercialActivity"
+            android:label="@string/title_activity_commercial"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".GpsTrackerActivity"
+            android:label="@string/title_activity_gps_tracker"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".FactureActivity"
+            android:label="@string/title_activity_facture"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".NextEtapeActivity"
+            android:label="@string/title_activity_next_etape"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".SignatureActivity"
+            android:label="@string/title_activity_signature"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".EsignatureActivity"
+            android:configChanges="keyboardHidden|orientation|screenLayout"
+            android:label="@string/title_activity_esignature"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".GroupeVendeurActivity"
+            android:label="@string/title_activity_groupe_vendeur"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".ReadPDFActivity"
+            android:label="@string/title_activity_read_pdf"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".AdminActivity"
+            android:label="@string/title_activity_admin"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".WebViewActivity"
+            android:label="@string/title_activity_web_view"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".VendeurTabActivity"
+            android:label="@string/title_activity_vendeur_tab"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1"
+            android:uiOptions="splitActionBarWhenNarrow" >
+        </activity>
+
+        <service
+            android:name=".ShowLocationActivity"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":geocom_services" >
+        </service>
+
+        <activity
+            android:name=".GpsFactureActivity"
+            android:label="@string/title_activity_gps_facture"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".PrintDialog"
+            android:label="@string/title_activity_print_dialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".TechnicienTabActivity"
+            android:label="@string/title_activity_technicien_tab"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".SecondStepTechnActivity"
+            android:label="@string/title_activity_second_step_techn"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".InterfaceTechnicienActivity"
+            android:label="@string/title_activity_interface_technicien"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".ObservationTechActivity"
+            android:label="@string/title_activity_observation_tech"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".CameraActivity"
+            android:label="@string/title_activity_camera"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".ImprimerActivity"
+            android:label="@string/title_activity_imprimer"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".PersonnePhysiqueActivity"
+            android:label="@string/title_activity_personne_physique"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".SecondeEtapeCommercialActivity"
+            android:label="@string/title_activity_seconde_etape_commercial"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+
+        <!-- Ticket Bluthouth -->
+        <activity
+            android:name=".DeviceListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/select_device"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".TicketActivity"
+            android:label="@string/title_activity_ticket"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".PayementActivity"
+            android:label="@string/title_activity_payement"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".OfflineActivity"
+            android:label="@string/title_activity_offline"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".TicketOfflineActivity"
+            android:label="@string/title_activity_ticket_offline"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name="com.dolibarrmaroc.com.ticket.FactureTicketActivity"
+            android:label="@string/title_activity_facture_ticket"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name="com.dolibarrmaroc.com.ticket.ReglementTicketActivity"
+            android:label="@string/title_activity_reglement_ticket"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".ReglementOfflineActivity"
+            android:label="@string/title_activity_reglement_offline"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".SettingsynchroActivity"
+            android:label="@string/title_activity_settingsynchro"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".ValiderActivity"
+            android:label="@string/title_activity_valider"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".InterventionhistoActivity"
+            android:label="@string/title_activity_interventionhisto"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".CmdViewActivity"
+            android:label="@string/title_activity_viewcommande"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".CommandeViewTicketActivity"
+            android:label="@string/title_activity_commande_view"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".TransfertstockActivity"
+            android:label="@string/title_activity_transfertstock"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".ViewstockActivity"
+            android:label="@string/title_activity_viewstock"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".CatalogeActivity"
+            android:label="@string/title_activity_cataloge"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".CmdDetailActivity"
+            android:label="@string/title_activity_cmd_detail"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".CmdPayActivity"
+            android:label="@string/title_activity_cmd_pay"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
+        </activity>
+        <activity
+            android:name=".UpdateClientActivity"
+            android:label="@string/title_activity_update_client" 
+            android:theme="@style/Theme.D1">
+        </activity>
+    </application>
+
+    <permission
+        android:name="com.dolibarrmaroc.com.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.dolibarrmaroc.com.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" >
+    </uses-permission>
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!--
+     The following two permissions are not required to use
+     Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- BlueTooth -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+</manifest>

@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.marocgeo.als.InterventionhistoActivity" >
+
+   <item
+       android:id="@+id/search"
+       android:actionViewClass="android.widget.SearchView"
+       android:showAsAction="always"
+       android:title="Search"/>
+   
+     <item
+        android:id="@+id/clshistinterv"
+        android:icon="@drawable/sys_minus"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom"
+        android:title="@string/tecv34"/>
+
+</menu>

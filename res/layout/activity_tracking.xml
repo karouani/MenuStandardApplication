@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="right"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    tools:context=".TrackingActivity" >
+
+    <Button
+        android:id="@+id/btn_enr_track"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/mybuttonbottom"
+        android:textColor="@android:color/white"
+        android:text="@string/btn_track" />
+
+    <EditText
+        android:id="@+id/level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_enr_track"
+        android:layout_toRightOf="@+id/imei"
+        android:ems="10"
+        android:hint="Niveau de battery en %"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:layout_alignLeft="@+id/relativeLayout2"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/logo" >
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/hhhhhhhhhhh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/relativeLayout2"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_marginTop="59dp"
+        android:text="IMEI : "
+        android:textColor="#ff0000" />
+
+    <TextView
+        android:id="@+id/imei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/hhhhhhhhhhh"
+        android:layout_alignBottom="@+id/hhhhhhhhhhh"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/stop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/level"
+        android:layout_alignLeft="@+id/step"
+        android:ems="10"
+        android:hint="@string/btn_stop"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/step"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/stop"
+        android:layout_alignRight="@+id/btn_enr_track"
+        android:ems="10"
+        android:hint="@string/btn_step"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/labelsignature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/step"
+        android:layout_alignBottom="@+id/step"
+        android:layout_alignLeft="@+id/hhhhhhhhhhh"
+        android:text="Step en s:" />
+
+    <TextView
+        android:id="@+id/totaltxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/stop"
+        android:layout_alignBottom="@+id/stop"
+        android:layout_alignLeft="@+id/labelsignature"
+        android:text="Stop en m:" />
+
+    <TextView
+        android:id="@+id/resttxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/level"
+        android:layout_alignBottom="@+id/level"
+        android:layout_alignLeft="@+id/btn_enr_track"
+        android:text="batterie en %" />
+
+</RelativeLayout>

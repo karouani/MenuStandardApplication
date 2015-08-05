@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/l4ww"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/txw4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="Prix vente" />
+    
+    <TextView
+        android:id="@+id/textView22w"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/txw4"
+        android:textAlignment="textEnd"
+        android:text="0" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/l1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/tx1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="Qte Disponible" />
+
+    <TextView
+        android:id="@+id/textView1w"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tx1"
+        android:textAlignment="textEnd"
+        android:text="0" />
+    
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/l2" >
+
+    <EditText
+        android:id="@+id/inpqty2"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/msgqnt"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/msgqnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/inpqty2"
+        android:layout_alignBottom="@+id/inpqty2"
+        android:layout_alignParentLeft="true"
+        android:text="Qte demander" />
+    
+    </RelativeLayout>
+    
+     <RelativeLayout
+        android:id="@+id/l3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/tx2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="Montant" />
+
+    <TextView
+        android:id="@+id/txw3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tx2"
+        android:textAlignment="textEnd"
+        android:text="0" />
+    
+    </RelativeLayout>
+    
+     
+     <RelativeLayout
+        android:id="@+id/limg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+       <ImageView
+        android:id="@+id/imageView1cat"
+        android:layout_width="268dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:src="@drawable/nophoto" />
+    
+    </RelativeLayout>
+  
+
+</LinearLayout>

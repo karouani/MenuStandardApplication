@@ -1,0 +1,104 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TechnicienActivity" >
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="0.05"
+        android:background="@drawable/legend"
+        android:orientation="vertical"
+        android:padding="10dp"
+         >
+
+        <Button
+            android:id="@+id/deconnecte"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignLeft="@+id/ajouterproduit"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/round_corner_drawable"
+            android:text="@string/tecv5" />
+
+        <Button
+            android:id="@+id/secondStep"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_above="@+id/deconnecte"
+            android:layout_alignLeft="@+id/deconnecte"
+            android:layout_marginBottom="1px"
+            android:background="@drawable/round_corner_drawable_2"
+            android:text="@string/tecv4" />
+
+        <TextView
+            android:id="@+id/labelsignature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/client_technicien"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="22dp"
+            android:text="@string/tecv2"
+            android:textDirection="anyRtl"
+            android:layoutDirection="locale" />
+
+        <AutoCompleteTextView
+            android:id="@+id/client_technicien"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/objet_tech"
+            android:layout_below="@+id/labelsignature"
+            android:completionThreshold="1"
+            android:dropDownHeight="150dp"
+            android:dropDownVerticalOffset="5dp"
+            android:dropDownWidth="wrap_content"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/tecv6"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:inputType="textAutoComplete|textAutoCorrect" />
+
+        <TextView
+            android:id="@+id/totaltxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/client_technicien"
+            android:text="@string/tecv3"
+             android:textDirection="anyRtl"
+            android:layoutDirection="locale" />
+
+        <Spinner
+            android:id="@+id/objet_tech"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignLeft="@+id/secondStep"
+            android:layout_below="@+id/totaltxt" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/relativeLayout2"
+        android:layout_alignTop="@+id/relativeLayout2"
+        android:layout_marginLeft="18dp"
+        android:background="@android:color/white"
+        android:text="@string/tecv1" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_above="@+id/relativeLayout2"
+        android:layout_alignLeft="@+id/relativeLayout2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/logo" />
+
+</RelativeLayout>

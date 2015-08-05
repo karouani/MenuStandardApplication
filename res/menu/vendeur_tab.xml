@@ -1,0 +1,52 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sig.google.maps.VendeurTabActivity" >
+
+
+	<item
+        android:id="@+id/pointerClt"
+        android:icon="@drawable/carte"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom"
+        android:title="Voir Carte"/>
+
+	<item
+        android:id="@+id/updateFactureUser"
+        android:icon="@drawable/app_dollar_sign"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom"
+        android:title="Ajouter Paiment" />
+	
+	<item
+        android:id="@+id/createUserMenu"
+        android:icon="@drawable/app_textboxdude"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom"
+        android:title="Ajouter Client"/>
+	
+	<item
+        android:id="@+id/createofflineticket"
+        android:icon="@drawable/sys_clipboard"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom"
+        android:title="Factures hors ligne"/>
+	<item
+        android:id="@+id/setingsynchrooff"
+        android:icon="@drawable/sys_settings"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom"
+        android:title="Paramétrage hors ligne"/>
+	<item
+        android:id="@+id/viewcmd"
+        android:icon="@drawable/sys_folder"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom"
+        android:title="Consultation des commandes"/>
+	<item
+        android:id="@+id/addcmd"
+        android:icon="@drawable/sys_grid"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom"
+        android:title="Passer des commandes"/>
+	
+</menu>

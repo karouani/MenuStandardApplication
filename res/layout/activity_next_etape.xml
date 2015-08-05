@@ -1,0 +1,174 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    tools:context=".NextEtapeActivity" >
+
+    <!-- This is the title label -->
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="215dp"
+                android:layout_height="135dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="1"
+                android:src="@drawable/logo" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="278dp"
+            android:background="@drawable/legend"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/apaye"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffff0000"
+                    android:orientation="horizontal" >
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffff0000"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/rendu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/total_ttc"
+                        android:textColor="#ffffffff" />
+
+                    <TextView
+                        android:id="@+id/txtTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:text="TextView"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textColor="#ffffffff" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/modepayementDico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/apaye" />
+
+            <EditText
+                android:id="@+id/apaye"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@+id/modepayementDico"
+                android:layout_below="@+id/linearLayout2"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/regle"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/check_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/modepayementDico"
+                android:ems="10"
+                android:hint="@string/cheque"
+                android:inputType="textPersonName"
+                android:padding="10dp" >
+
+                <requestFocus />
+            </EditText>
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/check_number"
+                android:layout_alignParentBottom="true"
+                android:background="#ffff0000"
+                android:text="@string/reste"
+                android:textColor="#ffffffff" />
+
+            <TextView
+                android:id="@+id/resteapaye"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView4"
+                android:layout_alignBottom="@+id/textView4"
+                android:layout_alignRight="@+id/textView4"
+                android:text="TextView"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ffffffff" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+
+        <Button
+            android:id="@+id/validerfactureNext"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_margin="5px"
+            android:layout_weight="0.03"
+            android:background="@drawable/mybuttontop"
+            android:padding="10dp"
+            android:text="PDF A4"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/validation"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_margin="5px"
+            android:layout_weight="0.03"
+            android:background="@drawable/mybuttontop"
+            android:padding="10dp"
+            android:text="Ticket"
+            android:textColor="@android:color/white" />
+         <Button
+            android:id="@+id/validation2"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_margin="5px"
+            android:layout_weight="0.03"
+            android:background="@drawable/mybuttontop"
+            android:padding="10dp"
+            android:text="Valider"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+</RelativeLayout>

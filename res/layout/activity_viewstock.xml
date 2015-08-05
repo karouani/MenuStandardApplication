@@ -1,0 +1,128 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    tools:context=".ViewstockActivity" >
+
+   <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_weight="0.03"
+            android:orientation="vertical"
+             >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/addnew"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="155dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="5px"
+                        android:layout_weight="0.03"
+                        android:background="@drawable/mybuttontop"
+                        android:padding="10dp"
+                        android:text="@string/mvm3"
+                        android:textColor="@android:color/white" />
+
+                    <Button
+                        android:id="@+id/savedata"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="155dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="5px"
+                        android:layout_weight="0.03"
+                        android:background="@drawable/mybuttontop"
+                        android:padding="10dp"
+                        android:text="@string/mvm4"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff347c12" >
+
+            <TextView
+                android:id="@+id/lsrefs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:text="Ref"
+                android:textColor="#ffffff" />
+            
+            <TextView
+                android:id="@+id/item2"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.42"
+                android:height="30dip"
+                android:text="@string/desig"
+                android:textColor="#ffffff"
+                android:width="100dip" />
+
+            <TextView
+                android:id="@+id/labelsignature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:text="Qte"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout22"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.45"
+            android:orientation="vertical"
+           >
+
+            <!-- List Divider -->
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="?android:attr/listDivider" />
+
+            <!-- ListView (grid_items) -->
+
+            <LinearLayout
+                android:id="@+id/layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <ListView
+                    android:id="@+id/listview"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="ifContentScrolls" >
+                </ListView>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

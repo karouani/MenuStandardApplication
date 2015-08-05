@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ALS APPLICATION</string>
+    <string name="hello_world">GEO.COM!</string>
+    <string name="action_settings">الإعدادات</string>
+    <string name="mapKey">AIzaSyBvwTmMEKU9rSPIn0EFD2_BH3AeTVI58Fk</string>
+    <string name="title_activity_connexion">cicin</string>
+
+    <!--
+    URL WEB SERVICES 
+    <string name="webservices">http://stratitge.marocgeo.com/doliDroid/</string>
+
+
+    -->
+	    <!--  RESTE -->
+	<string name="client_spinner">--حدد العميل--</string>
+	<string name="product_spinner">--حدد المنتوج--</string>
+	<string name="msg_add_product">!اظافة المنتوج نجحت</string>
+	<string name="msg_add_invoice">!تم انشاء الفاتورة بنجاح</string>
+	<string name="msg_add_signature">!تمت زيادة الامظاء بنجاح</string>
+	<string name="btn_validete_invoice">تأكيد صحة الفاتورة</string>
+	<string name="desig">تعيين</string>
+	<string name="product">منتج</string>
+	<string name="Commentaire">تعليق</string>
+	<string name="Recu">إيصال</string>
+	<string name="cheque">رقم الشيك de chéque</string>
+	<string name="reste">الرصيد المتبقي اصتخلاصه</string>
+	<string name="total_ttc">السعر الإجمالي مع الرسوم</string>
+	<string name="total_ht">السعر الإجمالي بدون رسوم</string>
+	<string name="btn_save">التسجيل</string>
+	<string name="btn_next">التالى</string>
+	<string name="btn_delete">حذف</string>
+	<string name="btn_validate">تاكيد</string>
+	<string name="btn_cancel">إلغاء</string>
+	<string name="btn_print">اطبع</string>
+	<string name="btn_decon">إطفاء</string>
+	<string name="msg_retour">أضغط مجددا</string>
+	<string name="msg_gps_desactive">نظام تحديد المواقع غير مشغل، هل تريدون تفعيله؟</string>
+	<string name="btn_gps_activer">تشغيل</string>
+	<string name="btn_gps_deactiver">توقيف</string>
+	<string name="msg_network">مشكلة في الشبكة</string>
+	<string name="msg_network_alert">الرجاء التحقق من اتصال الإنترنت الخاص بك</string>
+	<string name="msg_device_unsupported">جهاز غير المصرح به</string>
+	<string name="msg_deviced">contact@geocom.ma لتنشيط الهاتف:212522400587 + /  212522243544 + او بالبريد الإلكتروني GEO.COM عذرا، ليس لك الحق في استخدام هذا التطبيق مرجوالاتصال ب  pour l\'activer Num téléphone : +212522400587 / +212522243544 \n\r Email : contact@geocom.ma \n\r Email 2 : contact@marocgeo.ma</string>
+	<string name="appel">مكالمة</string>
+	<string name="subject_email">GEODROID تشغيل التطبيق</string>
+	<string name="no_email">لا يوجد اي تطبيق لإرسال البريد الإلكتروني</string>
+	<string name="msg_fields">جميع المعلومات إلزامية</string>
+	<string name="msg_wait">...يرجى الانتظار</string>
+	<string name="msg_profile_error">معلوماتك الشخصية : %1$s لهاذا    لا يحق لكم الدخول للموقع </string>
+	<string name="fatal_error">!!لا يجوز لكم فعل ذالك</string>
+	<string name="error">لقد وقع خطأ ما، حاول مرة أخرى في وقت لاحق</string>
+	<string name="facture_vide">لا توجد منتجات في الفاتورة</string>
+	<string name="qte_vide">كمية فارغة</string>
+	<string name="qte_zero">الكمية تساوي صفر</string>
+	<string name="qte_size">يجب أن تكون الكمية أعلى من 0</string>
+	<string name="facture_action">حركة على الفاتورة</string>
+	<string name="facture_num">رقم الفاتورة</string>
+	<string name="client_action">حركة على العميل</string>
+	<string name="facture_choice">:اختيارك</string>
+	<string name="stock_limit">المخزون محدود</string>
+	<string name="stock_msg">لقد طلبت أكثر من لكمية الموجودة لديك %1 $s \n يرجى الاتصال بالإدارة لزيادة مخزونك</string>
+	<string name="pdf_required">القارئ پدف الشعبي لا يتم تثبيت على جهازك</string>
+	<string name="map_data">استعادة البيانات</string>
+	<string name="facture">الفاتورة</string>
+	<string name="client">:العملاء</string>
+	<string name="promotion">:يمكنك التحقق من عروضنا الخاصة على موقع</string>
+	<string name="le">:و</string>
+	<string name="regle">اصتخلص</string>
+	<string name="rested">المتبقى</string>
+	<string name="produit_min">!اضف منتج واحد على الأقل في الفاتورة</string>
+	
+	<!-- String Pour Authentification -->
+    <string name="login">اسم الدخول</string>
+    <string name="sign">أنشئ حسابا جديدا</string>
+    <string name="password">كلمة المرور</string>
+    <string name="connexion">تسجيل الدخول</string>
+    <string name="title_activity_commercial">GEO.COM</string>
+    <string name="title_activity_technicien">GEO.COM</string>
+    <string name="title_activity_tracking">GEO.COM</string>
+
+    <!-- Cote tracking -->
+    <string name="btn_track">سجل</string>
+    <string name="btn_step">خطوة</string>
+    <string name="btn_stop">توقف</string>
+    <string name="btn_serveur">الحسوب URL</string>
+    <string name="title_activity_signin">تسجيل الدخول</string>
+
+    <!-- Cote Nouveau Compte -->
+    <string name="btn_signin">سجل</string>
+    <string name="field_login">اسم الدخول</string>
+    <string name="field_password">كلمة المرور</string>
+    <string name="field_Email">البريد الإلكتروني</string>
+
+    <string-array name="profile">
+        <item>مدير</item>
+        <item>مندوب مبيعات</item>
+        <item>فني</item>
+    </string-array>
+
+    <!-- Cote Nouveau Creation facture -->
+    <string name="btn_facture">رؤية الفاتورة</string>
+    <string name="btn_produit">إضافة منتج</string>
+    <string name="btn_add_client">إضافة على</string>
+    <string name="field_qte">كمية</string>
+    <string name="field_pu">سعر الوحدة</string>
+    <string name="field_total">السعر HT</string>
+    <string name="field_idFac">رقم الفاتورة</string>
+    <string name="title_activity_ad">GEO.COM</string>
+    <string name="title_activity_client">GEO.COM</string>
+
+    <!-- Proprieter d'un Client -->
+    <string name="clt_patente">ضريبة الباطونط</string>
+    <string name="clt_nom">الاسم العائلي</string>
+    <string name="clt_prenom">الاسم الشخصي</string>
+    <string name="clt_tel">الهاتف</string>
+    <string name="clt_address">عنوان</string>
+    <string name="clt_rc">السجل التجاري</string>
+    <string name="clt_list">قائمة العملاء</string>
+    <string name="clt_btn">سجل</string>
+    <string name="clt_facture">إضافة الفاتورة</string>
+    <string name="title_activity_update_client">GEO.COM</string>
+    <string name="clt_update">تحديث</string>
+    <string name="title_activity_test">GEO.COM</string>
+    <string name="title_activity_facture">GEO.COM</string>
+    <string name="color_gris">#FFBCC2BE</string>
+    <string name="title_activity_vendeur">إنشاء الفاتورة</string>
+    <string name="title_section1">القسم 1</string>
+    <string name="title_section2">القسم 2</string>
+    <string name="title_section3">القسم 3</string>
+    <string name="external_dir">الحصول على التوقيع</string>
+    <string name="title_activity_esignature">GEO.COM</string>
+    <string name="title_activity_service">GEO.COM</string>
+    <string name="title_activity_gps_tracker">GEO.COM</string>
+    <string name="title_activity_network_service">GEO.COM</string>
+    <string name="title_activity_next_etape">GEO.COM</string>
+    <string name="title_activity_signature">GEO.COM</string>
+    <string name="title_activity_groupe_vendeur">GEO.COM</string>
+    <string name="title_activity_read_pdf">PDF قارئ</string>
+    <string name="title_activity_admin">إدارة</string>
+    <string name="title_activity_web_view">إدارة</string>
+    <string name="title_activity_vendeur_tab">البائع</string>
+    <string name="title_activity_service_gps">Gps خدمة</string>
+    <string name="title_activity_show_location">مواقعي</string>
+
+    <!-- Chercher Map -->
+    <string name="btn_map_client">اشارة موقعي</string>
+    <string name="btn_map_facture">اشارة موقعي</string>
+    <string name="btn_map_itiniraire">ادلاء بالطريق الى موقعي</string>
+    <string name="title_activity_gps_facture">Gps فاتورة</string>
+    <string name="title_activity_print_dialog">PrintDialog</string>
+    <string name="title_activity_technicien_tab">فني</string>
+    <string name="title_activity_second_step_techn">فني</string>
+    <string name="title_activity_interface_technicien">اضهار السجل</string>
+    <string name="title_activity_observation_tech">ملاحضات</string>
+    <string name="title_activity_camera">كاميرا</string>
+    <string name="title_activity_imprimer">اطبع</string>
+
+    <!-- ************************* Commercial ***************************************** -->
+    <string name="comm_name">الاسم الكامل</string>
+    <string name="comm_address">العنوان</string>
+    <string name="comm_zip">الرمز البريدي</string>
+    <string name="comm_ville">المدينة</string>
+    <string name="comm_tel">الهاتف</string>
+    <string name="comm_email">عنوان البريد الإلكتروني</string>
+    <string name="comm_1">السجل التجاري</string>
+    <string name="comm_2">ضريبة الباطونط</string>
+    <string name="comm_3">التعريف الضريبي</string>
+    <string name="comm_4">C.N.S.S</string>
+    <string name="comm_capital">رئس المال</string>
+    <string name="comm_fax">الفاكس</string>
+
+    <string-array name="comm_effectif">
+        <item name="0">0</item>
+        <item name="1">1 - 5</item>
+        <item name="2">6 - 10</item>
+        <item name="3">11 - 50</item>
+        <item name="4">51 - 100</item>
+        <item name="5">100 - 500</item>
+        <item name="6">> 500</item>
+    </string-array>
+    <string-array name="comm_type">
+        <item name="1">العميل</item>
+        <item name="2">العميل المحتمل</item>
+    </string-array>
+    <string-array name="comm_tva">
+        <item name="1">Oui</item>
+        <item name="0">Non</item>
+    </string-array>
+    <string-array name="comm_personne">
+        <item name="0">الشخص الطبيعي</item>
+        <item name="1">شركة / جمعية</item>
+    </string-array>
+
+    <string name="title_activity_personne_physique">الشخص الطبيعي</string>
+    <string name="title_activity_seconde_etape_commercial">مندوب مبيعات</string>
+
+    <!-- IMPRIMENT BLUe -->
+    <string name="print_table_content2">"Produit         QTE        PU"</string>
+    <string name="bluetooth_unconnected">Non Connecter!</string>
+    <string name="bluetooth_connect_fail">Bluetooth Device a ceci de connecter!</string>
+    <string name="bluetooth_connect_sucess">Bluetooth connecté avec succés:</string>
+
+    <!-- DeviceListActivity -->
+    <string name="scanning">Recherchant les appareils...</string>
+    <string name="select_device">تحديد جهاز</string>
+    <string name="none_paired">لا يوجد جهاز مرتبط</string>
+    <string name="none_found">لا نجد أجهزة</string>
+    <string name="title_paired_devices">فرق</string>
+    <string name="title_other_devices">الأجهزة الأخرى المتاحة</string>
+    <string name="button_scan">البحث عن أجهزة</string>
+    <string name="title_activity_ticket">TicketActivity</string>
+    
+    
+    <!--  intervention technicien -->
+	<string name="tecboredereau">بيان</string>
+	<string name="teccarte">خريطة</string>
+	<string name="tecv1">بيان المعاينة</string>
+	<string name="tecv2">الزبون</string>
+	<string name="tecv3">الموضوع--</string>
+	<string name="tecv4">التالي</string>
+	<string name="tecv5">اغلاق</string>
+	<string name="tecv6">--اختيار الزبون--</string>
+	<string name="tecv12">التاريخ</string>
+	<string name="tecv7">البداية</string>
+	<string name="tecv8">النهاية</string>
+	<string name="tecv9">ملاحظ الزبون</string>
+	<string name="tecv10">الاسم و النسب</string>
+	<string name="tecv11">المرحلة التالية</string>
+	<string name="tecv13">رقم   البطاقة</string>
+	<string name="tecv14">المعاينة</string>
+	<string name="tecv15">اتمام</string>
+	<string name="tecv16">الغاء</string>
+	<string name="caus15">جاري الاتصال مع الخادم المركزي</string>
+	<string name="tecv17">اتمام المعاينة</string>
+	<string name="tecv18">علامة تجارية</string>
+	<string name="tecv19">النموذج</string>
+	<string name="tecv20">رقم لوحة السيارة</string>
+	<string name="tecv21"> : الزبون</string>
+	<string name="tecv22"> : التاريخ</string>
+	<string name="tecv23"> : المدة الزمنية</string>
+	<string name="tecv24">كاميرا</string>
+	<string name="tecv25">الا لبومات</string>
+	<string name="tecv26">حفظ</string>
+	<string name="tecv27">الاستمارة</string>
+	<string name="tecv28">الحالة قبل المعاينة </string>
+	<string name="tecv29">الحالة بعد المعاينة</string>
+	<string name="tecv30">نتيجة المعاينة</string>
+	<string name="tecv31">تم حفظ العملية بنجاح</string>
+	<string name="tecv32">لم يتم حفظ العملية بنجاح</string>
+	<string name="tecv33">خروج</string>
+	<string name="tecv34">مسح البيانات المخزنة</string>
+	<string name="tecv35"> هذه العملية سوف تقوم بمسح كل البيانات  المخزنة  \n في الذاكرة و المتعلقة بالمعاينات \n أدخل الرمز السري</string>
+	<string name="tecv36">طلب التأكيد</string>
+	<string name="tecv37">بدأ عملية المسح</string>
+	<string name="tecv38">الرقم السري غير صحيح</string>
+	<string name="tecv39">معاينة استعدادات البرنامج</string>
+	<string name="title_activity_interventionhisto">لائحة المعاينات</string>
+	
+	<string name="tecv40">الزبون </string>
+    <string name="tecv41">التاريخ </string>
+    <string name="tecv42">المدة الزمنية </string>
+    <string name="tecv43">الموضوع </string>
+	<string name="tecv44">هذه العملية سوف تقوم بمسح كل البيانات المخزنة المتعلقة بالمعاينات  \n \n أدخل الرمز السري</string>
+	<string name="tecv45">يجب اختيار الزبون او الموضوع</string>
+	<string name="tecv46">PSN رقم</string>
+	<string name="tecv48">SIM رقم</string>
+	<string name="tecv47">هل تريد الغاء هذه العملية</string>
+	<string name="tecv49">لديكم</string>
+	<string name="tecv50">مغاينة لم يتم ارسالها الى الخادم المركزي</string>
+	
+</resources>

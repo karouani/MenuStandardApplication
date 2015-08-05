@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Stratitge DoliDroid</string>
+    <string name="hello_world">GEO.COM!</string>
+    <string name="action_settings">Settings</string>
+    <string name="mapKey">AIzaSyAYuhVsKwmYYaHdmLD-epCdDDlc7eW4-xQ</string>
+    <string name="title_activity_connexion">GEO.COM</string>
+
+    <!--
+    URL WEB SERVICES 
+    <string name="webservices">http://stratitge.marocgeo.com/doliDroid/</string>
+    -->
+    <!-- RESTE -->
+    <string name="client_spinner">--Select Customer--</string>
+    <string name="product_spinner">--Select Products--</string>
+    <string name="msg_add_product">Product add with success !</string>
+    <string name="msg_add_invoice">Invoice send with success !</string>
+    <string name="msg_add_signature">Signature send with success !</string>
+    <string name="btn_validete_invoice">Validate Invoice</string>
+    <string name="desig">Designation</string>
+    <string name="product">Product</string>
+    <string name="Commentaire">Comment</string>
+    <string name="Recu">Billed</string>
+    <string name="cheque">Cheque Number</string>
+    <string name="reste">Remainder to pay</string>
+    <string name="total_ttc">Total (inc. tax)</string>
+    <string name="total_ht">Total (net of tax)</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_validate">Validate</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_print">Print</string>
+    <string name="btn_decon">Log out</string>
+    <string name="msg_retour">Click again</string>
+    <string name="msg_gps_desactive">The GPS is off, you want to activate?</string>
+    <string name="btn_gps_activer">Activated</string>
+    <string name="btn_gps_deactiver">Deactivated</string>
+    <string name="msg_network">Network Alert</string>
+    <string name="msg_network_alert">Please check your connexion !</string>
+    <string name="msg_device_unsupported">Unauthorized Device</string>
+    <string name="msg_deviced">Sorry you do not yet have the right to use this application contact GEO.COM to activate Num phone: +212522400587 / +212522243544 \n \r Email: contact@geocom.ma \n \r 2 Email: contact @ marocgeo .ma</string>
+    <string name="appel">Call</string>
+    <string name="subject_email">Activation Application GEODROID</string>
+    <string name="no_email">No any application to send Mail installed</string>
+    <string name="msg_fields">All fields is required !!</string>
+    <string name="msg_wait">Wait please...</string>
+    <string name="msg_profile_error">Your profile is : %1$s why you not have a permission to connect !!</string>
+    <string name="fatal_error">oops! Error related to the System Android try later !! !!</string>
+    <string name="error">Error occurred again later</string>
+    <string name="facture_vide">No products in the Invoice</string>
+    <string name="qte_vide">Quantity is blank</string>
+    <string name="qte_zero">Amount equal to zero</string>
+    <string name="qte_size">Quantity must be higher than 0</string>
+    <string name="facture_action">Share on Invoice</string>
+    <string name="client_action">Share on Customer</string>
+    <string name="facture_num">Invoice number</string>
+    <string name="facture_choice">Your Choice :</string>
+    <string name="btn_delete">delete</string>
+    <string name="stock_limit">Limited Stock</string>
+    <string name="stock_msg">You asked for more than the amount you have %1$s \n Kindly contact Directors to increase your stock</string>
+    <string name="pdf_required">Pdf reader not install on your device</string>
+    <string name="map_data">Recuperation Data</string>
+    <string name="facture">Invoice</string>
+    <string name="client">Customers :</string>
+    <string name="promotion">You Can Check our offers on the site:</string>
+    <string name="le">In :</string>
+    <string name="regle">Amount to be collected</string>	<string name="rested">REST</string>
+	<string name="produit_min">Add to moin a product invoice! </string> 
+	<string name="promo_alert">Promotion</string>
+	<string name="promo_msg">You asked for more than the amount you have %1$s \n </string>
+	<string name="promotion_list">List of promotion</string>
+	<string name="produit_offert">products offered :</string>
+	<string name="promotion_remise">"Reference        rebate Value"</string>
+	
+	<!-- String Pour Authentification -->
+	<string name="login">Login</string>
+	<string name="sign">Sign in</string>
+	<string name="password">Password</string>
+	<string name="connexion">Connexion</string>
+	<string name="title_activity_Sales_commercial">GEO.COM</string>
+	<string name="title_activity_technicien">GEO.COM</string>
+	<string name="title_activity_tracking">GEO.COM</string> 
+	<!-- Cote tracking -->
+	<string name="btn_track">Save</string>
+	<string name="btn_step">Step</string>
+	<string name="btn_stop">Stop</string>
+	<string name="btn_serveur">Server URL</string>
+	<string name="title_activity_signin">Connexion</string> 
+	<!-- Cote Nouveau Compte -->
+	<string name="btn_signin">Save</string>
+	<string name="field_login">Login</string>
+	<string name="field_password">Password</string>
+	<string name="field_Email">Email</string>
+	<string-array name="profile">
+	    <item>Administrator</item>
+	    <item>Sales Representative</item>
+	    <item>Technicien</item>
+	</string-array> 
+	<!-- Cote Nouveau Creation facture -->
+	<string name="btn_facture">see Invoice</string>
+	<string name="btn_produit">add Products</string>
+	<string name="btn_add_Customer">add</string>
+	<string name="field_qte">Quantity</string>
+	<string name="field_pu">Price unit</string>
+	<string name="field_total">Total (net of tax)</string>
+	<string name="field_idFac">Invoce Number</string>
+	<string name="title_activity_ad">GEO.COM</string>
+	<string name="title_activity_Customer">GEO.COM</string> 
+	<!-- Proprieter d'un Customer -->
+	<string name="clt_patente">Patente</string>
+	<string name="clt_nom">Last Name</string>
+	<string name="clt_prenom">First Name</string>
+	<string name="clt_tel">Mobile</string>
+	<string name="clt_address">Adress</string>
+	<string name="clt_rc">Sales Representative register</string>
+	<string name="clt_list">Customer list</string>
+	<string name="clt_btn">Save</string>
+	<string name="clt_facture">Add Invoice</string>
+	<string name="title_activity_update_Customer">GEO.COM</string>
+	<string name="clt_update">Update</string>
+	<string name="title_activity_test">GEO.COM</string>
+	<string name="title_activity_facture">GEO.COM</string>
+	<string name="color_gris">#FFBCC2BE</string>
+	<string name="title_activity_vendeur">Create Invoice</string>
+	<string name="title_section1">Section 1</string>
+	<string name="title_section2">Section 2</string>
+	<string name="title_section3">Section 3</string>
+	<string name="external_dir">GetSignature</string>
+	<string name="title_activity_esignature">GEO.COM</string>
+	<string name="title_activity_service">GEO.COM</string>
+	<string name="title_activity_gps_tracker">GEO.COM</string>
+	<string name="title_activity_network_service">GEO.COM</string>
+	<string name="title_activity_next_etape">GEO.COM</string>
+	<string name="title_activity_signature">GEO.COM</string>
+	<string name="title_activity_groupe_vendeur">GEO.COM</string>
+	<string name="title_activity_read_pdf">Lecteur PDF</string>
+	<string name="title_activity_admin">Administration</string>
+	<string name="title_activity_web_view">Administration</string>
+	<string name="title_activity_vendeur_tab">seller</string>
+	<string name="title_activity_service_gps">Service Gps</string>
+	<string name="title_activity_show_location">My Positions</string> 
+	<string name="title_activity_facture_ticket">Print Invoice</string>
+    <string name="title_activity_reglement_ticket">Invoice Ticket</string>
+    <string name="title_activity_offline">List of invoices cache</string>
+    <string name="title_activity_ticket_offline">Oflline Ticket</string>
+    <string name="title_activity_ticket">TicketActivity</string>
+    <string name="title_activity_payement">Invoice paid</string>
+	<!-- Chercher Map -->
+	<string name="btn_map_Customer">Marker Me</string>
+	<string name="btn_map_facture">Marker Me</string>
+	<string name="btn_map_itiniraire">way to draw me</string>
+	<string name="title_activity_gps_facture">Invoice GPS</string>
+	<string name="title_activity_print_dialog">PrintDialog</string>
+	<string name="title_activity_technicien_tab">Technicien</string>
+	<string name="title_activity_second_step_techn">Technicien</string>
+	<string name="title_activity_interface_technicien">displays Slip</string>
+	<string name="title_activity_observation_tech">Observation</string>
+	<string name="title_activity_camera">Camera</string>
+	<string name="title_activity_imprimer">print</string> 
+	<!-- ************************* Sales Representative ***************************************** -->
+	<string name="comm_name">Name</string>
+	<string name="comm_address">ADDRESS</string>
+	<string name="comm_zip">CODE</string>
+	<string name="comm_ville">CITY</string>
+	<string name="comm_tel">MOBILE</string>
+	<string name="comm_email">EMAIL</string>
+	<string name="comm_1">R.C</string>
+	<string name="comm_2">PATENTE</string>
+	<string name="comm_3">I.F</string>
+	<string name="comm_4">C.N.S.S</string>
+	<string name="comm_capital">CAPITAL</string>
+	<string name="comm_fax">FAX</string>
+	<string-array name="comm_effectif">
+	    <item name="0">0</item>
+	    <item name="1">1 - 5</item>
+	    <item name="2">6 - 10</item>
+	    <item name="3">11 - 50</item>
+	    <item name="4">51 - 100</item>
+	    <item name="5">100 - 500</item>
+	    <item name="6">> 500</item>
+	</string-array>
+	<string-array name="comm_type">
+	    <item name="1">Customer</item>
+	    <item name="2">Prospect</item>
+	</string-array>
+	<string-array name="comm_tva">
+	    <item name="1">Yes</item>
+	    <item name="0">No</item>
+	</string-array>
+	<string-array name="comm_personne">
+	    <item name="0">Private individual</item>
+	    <item name="1">Company/Foundation</item>
+	</string-array>
+	<string name="title_activity_personne_physique">Private individual</string>
+	<string name="title_activity_seconde_etape_Sales_commercial">Sales Representative</string> 
+	<!-- IMPRIMENT BLUe -->
+	<string name="print_table_content2">"Product         QTE        PU"</string> 
+	<!-- DeviceListActivity -->
+	<string name="scanning">scanning for devices...</string>
+	<string name="select_device">select a device to connect</string>
+	<string name="none_paired">No devices have been paired</string>
+	<string name="none_found">No devices found</string>
+	<string name="title_paired_devices">Paired Devices</string>
+	<string name="title_other_devices">Other Available Devices</string>
+	<string name="button_scan">Scan for devices</string>
+	
+	
+	<!-- new added cici -->
+	<string name="msg_add_reglement">Payment successfully added</string>
+    <string name="refclient">Ref Client</string>
+    <string name="reffact">Ref Fact</string>
+    <string name="refreg">Ref Reglement</string>
+    <string name="montantfact">Total TTC</string>
+    <string name="payermontantfact">Paid</string>
+    <!-- ticket dialog -->
+    <string name="movetoticket">Print Ticket</string>
+    <string name="movetoregls">List payements</string>
+    <string name="movetoreglscncl">Cancel</string>
+    <string name="title_activity_reglement_offline">List payements</string>
+    <!-- avertisement stockage offline -->
+    <string name="caus1">Synchronization failure</string>
+    <string name="caus2">You can not work offline because synchronization is not performed </string>
+    <string name="caus3">Please make attention of the following remarks:</string>
+    <string name="caus4">Make sure you are connected to the Internet</string>
+    <string name="caus5">Make sure you have a storage space</string>
+    <string name="caus6">Make sure your phone is not connected with a computer (USB cable)</string>
+    <string name="caus7">Thinking of making your offline synchronization</string>
+    <string name="caus8">Go back</string>
+    <string name="caus9">Your action is not registered</string>
+    <string name="caus10">Try this again</string>
+    <!-- setting synnchronization offline -->
+    <string name="caus11">Empty your transactions offline </string>
+    <string name="caus12">Empty your offline caching</string>
+    <string name="caus13">This action will remove all your cache downloaded from the server such as (products, customers, payments ..) \ n \ n Please enter your password</string>
+    <string name="caus14">This action will remove all your bills and customers and tickets in offline \ n \ n Please enter your password</string>
+    <string name="caus15">Synchronization with Server</string>
+    <string name="caus16">The reference customer is already registered</string>
+    <string name="caus17">The map is not accessible</string>
+    <string name="caus18">You are in the offline mode</string>
+    <string name="caus19">The PDF option is not available</string>
+    <string name="caus20">You are in the offline mode, try to connect with wifi or 3G</string>
+    <string name="caus21">Required fields</string>
+    <string name="caus22">Traitement fail</string>
+    <string name="caus23">Your action was rejected by the remote system. \ N Please repeat your transaction again</string>
+    <string name="caus24">This option allows you to search for an available update</string>
+    <string name="caus25">Search for an available update</string>
+    <string name="title_activity_settingsynchro">Offline configuration</string>
+    <string name="data_clean">Deleting Data</string>
+    <string name="msg_wait_sys">Please do not interrupt the Internet connection</string>
+    <string name="title_activity_valider">ValiderActivity</string>
+    <!-- intervention technicien -->
+    <string name="title_activity_interventionhisto">Historiques des interventions</string>
+    <string name="tecboredereau">Bordereau</string>
+    <string name="teccarte">Carte</string>
+    <string name="tecv1">Bordereau d\'intervention</string>
+    <string name="tecv2">Clients</string>
+    <string name="tecv3">Objets</string>
+    <string name="tecv4">Suivant</string>
+    <string name="tecv5">Quitter</string>
+    <string name="tecv6">--Choisir un Client--</string>
+    <string name="tecv12">Date</string>
+    <string name="tecv7">Heur Debut</string>
+    <string name="tecv8">Heur Fin</string>
+    <string name="tecv9">Superviseur Client</string>
+    <string name="tecv10">Nom et Prénom</string>
+    <string name="tecv11">Etape suivante</string>
+    <string name="tecv13">Numero de la fiche</string>
+    <string name="tecv14">Observation</string>
+    <string name="tecv15">Valider</string>
+    <string name="tecv16">Annuller</string>
+    <string name="tecv17">Valider l\'intervention</string>
+    <string name="tecv21">Client : </string>
+    <string name="tecv22">Date : </string>
+    <string name="tecv23">Durée : </string>
+    <string name="tecv24">Camera</string>
+    <string name="tecv25">Gallery</string>
+    <string name="tecv26">Enregistrer</string>
+    <string name="tecv27">Fiche</string>
+    <string name="tecv28">Etat_objet_avant</string>
+    <string name="tecv29">Etat_objet_apres</string>
+    <string name="tecv30">Resultats de votre traitement</string>
+    <string name="tecv31">Operation effectuer avec success</string>
+    <string name="tecv32">Operation non enregistrer</string>
+    <string name="tecv33">Sortir</string>
+    <string name="tecv34">Vider votre cache</string>
+    <string name="tecv35">Cette action va supprimer tout votre cache hors ligne des intérvention \n \n Veuillez saisir votre mot de passe</string>
+    <string name="tecv36">Demande de confirmation</string>
+    <string name="tecv37">Lancer votre action</string>
+    <string name="tecv38">Votre code est invalide</string>
+    <string name="tecv39">Prépartion de l\'application</string>
+    <string name="tecv40">Client </string>
+    <string name="tecv41">Date </string>
+    <string name="tecv42">Durée </string>
+    <string name="tecv43">Objets </string>
+	<string name="tecv44">Cette action va supprimer tout votre historique des intérvention \n \n Veuillez saisir votre mot de passe</string>
+	<string name="tecv45">Veuillez Choisir Le client et L\'objet</string>
+	<string name="tecv47">Vous voulez vraiment déconnecter</string>
+	<string name="tecv48">Num SIM</string>
+	<string name="tecv49">Vous avez</string>
+	<string name="tecv50">Intervention(s) hors ligne pas encours synchroniser avec le serveur</string>
+	<string name="title_activity_viewcommande">Consultation des commandes</string>
+    <string name="title_activity_commande_view">Impression des commandes</string>
+    
+    <string name="title_activity_transfertstock">Stock Transfer</string>
+    <string name="btn_mvmstck">Select</string>
+    <string name="btn_mvmstckgo">Save transfer</string>
+    <string name="mvm1">No products selected</string>
+    <string name="mvm2">Check your choice</string>
+    <string name="mvm3">Add transfer</string>
+    <string name="mvm4">Save transfer</string>
+    <string name="mvm5">Please select one product</string>
+    <string name="mvm6">Result of your transaction</string>
+    <string name="mvm7">Your stock transfer has been saved</string>
+    <string name="mvm8">An error occurred while processing your stock transfer</string>
+    <string name="mvm9">Please contact the administrator to verify the existence of your warehouse source or target</string>
+    <string name="mvm10">An error occurred while retrieving data from the server</string>
+    <string name="mvm2_stock">You asked for more than the amount you %1$s </string>
+    <string name="title_activity_viewstock">List of transfer</string>
+
+</resources>

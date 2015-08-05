@@ -1,0 +1,185 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".FactureActivity" >
+
+    <!-- Header -->
+
+
+    <!-- This is the title label -->
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="160dp"
+            android:layout_weight="0.03"
+            android:background="@drawable/legend"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                
+                <LinearLayout
+		            android:id="@+id/linearLayout44"
+		            android:layout_width="match_parent"
+		            android:layout_height="wrap_content"
+		           	>
+		
+		            <TextView
+		                android:id="@+id/labelsignature44"
+		                android:layout_width="40dp"
+		                android:layout_height="wrap_content"
+		                android:layout_marginRight="47dp"
+		                android:layout_weight="0.21"
+		                android:text="@string/field_mtnttc"
+		                android:textColor="#ffff0000"
+		                android:textStyle="bold" />
+		
+		            <TextView
+		                android:id="@+id/labelqntdispo44"
+		                android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                android:text="@string/field_total"
+		                android:textColor="#ffff0000"
+						android:layout_weight="0.21"
+		                android:textStyle="bold"
+		                android:textAlignment="textEnd" />
+		            
+		        </LinearLayout>
+		        
+                <EditText
+                    android:id="@+id/commentaire"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="@string/Commentaire"
+                    android:inputType="textImeMultiLine"
+                    android:scrollHorizontally="false" >
+
+                    <requestFocus />
+                </EditText>
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <Button
+                        android:id="@+id/retour"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="155dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="5px"
+                        android:layout_weight="0.03"
+                        android:background="@drawable/mybuttontop"
+                        android:padding="10dp"
+                        android:text="@string/btn_produit"
+                        android:textColor="@android:color/white" />
+
+                    <Button
+                        android:id="@+id/validerfacture"
+                        style="?android:attr/buttonStyleSmall"
+                        android:layout_width="155dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="5px"
+                        android:layout_weight="0.03"
+                        android:background="@drawable/mybuttontop"
+                        android:padding="10dp"
+                        android:text="@string/btn_validete_invoice"
+                        android:textColor="@android:color/white" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#ff347c12" >
+
+            <TextView
+                android:id="@+id/totaltxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/product"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/item2"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.42"
+                android:height="30dip"
+                android:text="@string/desig"
+                android:textColor="#ffffff"
+                android:textAlignment="center"
+                android:width="100dip" />
+
+            <TextView
+                android:id="@+id/labelsignature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:text="Qte"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id="@+id/item3"
+                android:layout_width="56dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.07"
+                android:height="30dip"
+                android:text="Pu"
+                android:textColor="#ffffff"
+                android:width="100dip" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout22"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.45"
+            android:background="@drawable/legend"
+            android:orientation="vertical"
+            android:padding="10dp" >
+
+            <!-- List Divider -->
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="?android:attr/listDivider" />
+
+            <!-- ListView (grid_items) -->
+
+            <LinearLayout
+                android:id="@+id/layout"
+                android:layout_width="wrap_content"
+                android:layout_height="354dp" >
+
+                <ListView
+                    android:id="@+id/listview"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="ifContentScrolls" >
+                </ListView>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

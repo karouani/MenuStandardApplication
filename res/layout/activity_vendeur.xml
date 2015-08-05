@@ -1,0 +1,233 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="0dp"
+    android:scrollbarAlwaysDrawVerticalTrack="true" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="268dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo" />
+
+     <LinearLayout
+            android:id="@+id/nourian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView1" 
+             >
+
+            <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="316dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:gravity="center" >
+
+                <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cmdtofc22" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cmdtofc23" />
+                
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cmdtofc24" />
+            </RadioGroup>
+        </LinearLayout>
+     
+	<com.karouani.cicin.widget.CustomAutoCompleteView
+        android:id="@+id/clientspinner"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5px"
+        android:layout_marginRight="5px"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.00"
+        android:dropDownHeight="150dp"
+        android:dropDownVerticalOffset="5dp"
+        android:dropDownWidth="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="--Select Client--"
+        android:imeOptions="actionNext"
+        android:inputType="textAutoComplete|textAutoCorrect"
+        android:windowSoftInputMode="stateHidden|adjustPan"
+        android:singleLine="true"
+        android:focusable="true"
+        android:completionThreshold="1" >
+    </com.karouani.cicin.widget.CustomAutoCompleteView>
+    
+   	<com.karouani.cicin.widget.CustomAutoCompleteView
+        android:id="@+id/produitspinner"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5px"
+        android:layout_marginRight="5px"
+        android:layout_weight="0.00"
+        android:completionThreshold="1"
+        android:dropDownHeight="150dp"
+        android:dropDownVerticalOffset="5dp"
+        android:dropDownWidth="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/product_spinner"
+        android:imeOptions="actionNext"
+        android:inputType="textAutoComplete|textAutoCorrect"
+        android:windowSoftInputMode="stateHidden|adjustPan" 
+        android:singleLine="true"
+        android:focusable="true" >
+ </com.karouani.cicin.widget.CustomAutoCompleteView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_weight="0.00" >
+
+        <EditText
+            android:id="@+id/qte"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/field_qte"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/pu"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.62"
+            android:editable="false"
+            android:ems="10"
+            android:hint="@string/field_pu" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_weight="0.04" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/labelsignature"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="47dp"
+                android:layout_weight="0.21"
+                android:text="@string/field_total"
+                android:textColor="#ffff0000"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/totaltext"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_weight="0.21"
+                android:editable="false"
+                android:ems="10"
+                android:hint="@string/field_total" />
+            
+        </LinearLayout>
+		
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           	android:layout_below="@+id/linearLayout3" 
+           	android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/labelsignature4"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="47dp"
+                android:layout_weight="0.21"
+                android:text="@string/field_qntdsp"
+                android:textColor="#4280DC"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/labelqntdispo4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/field_total"
+                android:textColor="#4280DC"
+				android:layout_weight="0.21"
+                android:textStyle="bold" />
+            
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/linearLayout44"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           	android:layout_below="@+id/linearLayout4" 
+           	>
+
+            <TextView
+                android:id="@+id/labelsignature44"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="47dp"
+                android:layout_weight="0.21"
+                android:text="@string/field_mtnttc"
+                android:textColor="#ffff0000"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/labelqntdispo44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/field_total"
+                android:textColor="#ffff0000"
+				android:layout_weight="0.21"
+                android:textStyle="bold"
+                android:textAlignment="textEnd" />
+            
+        </LinearLayout>
+       
+       
+        
+	<Button
+            android:id="@+id/facture"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="5px"
+            android:layout_marginRight="5px"
+            android:layout_marginTop="5px"
+            android:background="@drawable/round_corner_drawable"
+            android:text="@string/btn_validete_invoice" />
+
+        <Button
+            android:id="@+id/ajouterproduit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_above="@+id/facture"
+            android:layout_marginLeft="5px"
+            android:layout_marginRight="5px"
+            android:background="@drawable/round_corner_drawable"
+            android:text="@string/btn_produit" />
+    </RelativeLayout>
+
+</LinearLayout>

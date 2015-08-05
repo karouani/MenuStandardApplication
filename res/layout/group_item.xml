@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/list_Item_layout"
+    android:background="@drawable/card_background_sqr_white" 
+    >
+    
+    <TextView
+        android:id="@+id/lblListItem2"
+        android:layout_width="fill_parent"
+        android:layout_height="35dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="2dp"
+        android:text="listitem"
+        android:textStyle="bold"
+        android:textColor="#366AD3"
+        android:textSize="20sp" />
+    
+    <!-- 
+       android:layout_toRightOf="@+id/flag2"
+     <ImageView
+        android:id="@+id/flag2"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+         android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_launcher" />
+     -->
+
+   </RelativeLayout>
+
+ 
+ 
+</RelativeLayout>
+
+    

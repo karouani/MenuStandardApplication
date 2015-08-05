@@ -1,0 +1,134 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    tools:context=".UpdateClientActivity" >
+
+    <AutoCompleteTextView
+        android:id="@+id/clientspinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5px"
+        android:layout_marginRight="5px"
+        android:layout_weight="0.00"
+        android:completionThreshold="1"
+        android:dropDownHeight="150dp"
+        android:dropDownVerticalOffset="5dp"
+        android:dropDownWidth="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="--Select Client--"
+        android:imeOptions="actionNext"
+        android:inputType="textAutoComplete|textAutoCorrect"
+        android:singleLine="true"
+        android:windowSoftInputMode="stateHidden|adjustPan" />
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/clientspinner" >
+
+        <LinearLayout
+            android:id="@+id/malineaire"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="5dp" >
+
+            <Spinner
+                android:id="@+id/comm_ste"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_weight="0.00"
+                android:entries="@array/comm_personne" />
+
+            <LinearLayout
+                android:id="@+id/comm_interface"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.00" >
+
+                <TextView
+                    android:id="@+id/idtxt"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp" />
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/comm_type"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_weight="0.00"
+                android:entries="@array/comm_type" />
+
+            <EditText
+                android:id="@+id/comm_address"
+                android:layout_width="match_parent"
+                android:layout_height="79dp"
+                android:layout_weight="2.33"
+                android:ems="10"
+                android:hint="@string/comm_address"
+                android:inputType="textMultiLine" >
+
+                <requestFocus />
+            </EditText>
+
+            <EditText
+                android:id="@+id/comm_ville"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.00"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="ville" />
+
+            <EditText
+                android:id="@+id/comm_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.00"
+                android:ems="10"
+                android:hint="@string/comm_tel"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/comm_fax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.00"
+                android:ems="10"
+                android:hint="@string/comm_fax"
+                android:inputType="phone" />
+
+            <EditText
+                android:id="@+id/comm_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.00"
+                android:ems="10"
+                android:hint="@string/comm_email"
+                android:inputType="textEmailAddress" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_weight="0.00" >
+
+                <Button
+                    android:id="@+id/comm_etape"
+                    android:layout_width="155dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="5px"
+                    android:layout_weight="0.03"
+                    android:background="@drawable/mybuttontop"
+                    android:padding="10dp"
+                    android:text="@string/btn_save"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

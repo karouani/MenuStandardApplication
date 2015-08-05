@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sig.google.maps.ConnexionActivity" >
+
+    <item
+        android:id="@+id/updatefind"
+        android:orderInCategory="0"
+        android:title="Update APK"
+        android:showAsAction="always"
+        android:icon="@drawable/update"/>
+    	
+
+</menu>

@@ -1,0 +1,84 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/serveur"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GpsTrackerActivity" >
+
+    <Button
+        android:id="@+id/pointerClt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/lngfieldbd"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/mybuttonbottom"
+        android:text="Enregistrer" />
+
+    <EditText
+        android:id="@+id/serveurbd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/loginbd"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="Serveur" />
+
+    <EditText
+        android:id="@+id/latfieldbd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tablebd"
+        android:layout_below="@+id/tablebd"
+        android:ems="10"
+        android:hint="champs lat" />
+
+    <EditText
+        android:id="@+id/lngfieldbd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/latfieldbd"
+        android:layout_below="@+id/latfieldbd"
+        android:ems="10"
+        android:hint="champs lng" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/namebd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/serveurbd"
+        android:layout_below="@+id/serveurbd"
+        android:ems="10"
+        android:hint="Nom Base de donnee" />
+
+    <EditText
+        android:id="@+id/loginbd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/namebd"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Login Bd" />
+
+    <EditText
+        android:id="@+id/passbd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/loginbd"
+        android:layout_below="@+id/loginbd"
+        android:ems="10"
+        android:hint="password de donnee" />
+
+    <EditText
+        android:id="@+id/tablebd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/passbd"
+        android:layout_below="@+id/passbd"
+        android:ems="10"
+        android:hint="table gps" />
+
+</RelativeLayout>

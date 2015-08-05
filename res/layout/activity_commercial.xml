@@ -1,0 +1,119 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    tools:context=".CommercialActivity" >
+
+    <LinearLayout
+        android:id="@+id/layoutall"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"
+        android:padding="5dp" >
+
+        <Spinner
+            android:id="@+id/comm_ste"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:entries="@array/comm_personne"
+            android:layout_marginBottom="5dp" />
+
+        <LinearLayout
+            android:id="@+id/comm_interface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/idtxt"
+                android:layout_width="0dp"
+                android:layout_height="0dp" />
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/comm_type"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:entries="@array/comm_type" />
+
+        <EditText
+            android:id="@+id/comm_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/comm_address"
+            android:inputType="textPostalAddress" />
+
+        <EditText
+            android:id="@+id/comm_zip"
+            android:layout_width="126dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/comm_zip"
+            android:inputType="numberSigned" />
+
+        <Spinner
+            android:id="@+id/comm_ville"
+            android:layout_width="match_parent"
+            android:layout_height="54dp" />
+
+        <EditText
+            android:id="@+id/comm_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/comm_tel"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/comm_fax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/comm_fax"
+            android:inputType="phone" />
+
+        <EditText
+            android:id="@+id/comm_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/comm_email"
+            android:inputType="textEmailAddress" />
+
+    </LinearLayout>
+
+     <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+
+            <Button
+                android:id="@+id/comm_etape"
+                android:layout_width="155dp"
+                android:layout_height="50dp"
+                android:layout_margin="5px"
+                android:layout_weight="0.03"
+                android:background="@drawable/mybuttontop"
+                android:padding="10dp"
+                android:text="@string/btn_save"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/comm_suivant"
+                android:layout_width="155dp"
+                android:layout_height="50dp"
+                android:layout_margin="5px"
+                android:layout_weight="0.03"
+                android:background="@drawable/mybuttontop"
+                android:padding="10dp"
+                android:text="@string/btn_next"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+</RelativeLayout>
