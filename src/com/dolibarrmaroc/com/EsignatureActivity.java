@@ -2,10 +2,14 @@ package com.dolibarrmaroc.com;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,30 +20,49 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.FileData;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.utils.Base64;
+import com.dolibarrmaroc.com.utils.MyLocationListener;
+import com.dolibarrmaroc.com.utils.ServiceDao;
+import com.dolibarrmaroc.com.utils.URL;
+
+
 import android.app.Activity;
+import android.app.ActionBar;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.gesture.GestureOverlayView;
 import android.gesture.GestureOverlayView.OnGestureListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
+import android.os.BatteryManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.PowerManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.FileData;
-import com.dolibarrmaroc.com.models.Produit;
-import com.dolibarrmaroc.com.utils.Base64;
-import com.dolibarrmaroc.com.utils.URL;
+import android.os.Build;
 
 public class EsignatureActivity extends Activity {
 

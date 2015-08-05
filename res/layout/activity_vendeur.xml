@@ -14,14 +14,14 @@
 
      <LinearLayout
             android:id="@+id/nourian"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView1" 
              >
 
             <RadioGroup
                 android:id="@+id/radioGroup1"
-                android:layout_width="316dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"

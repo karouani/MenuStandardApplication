@@ -3,9 +3,8 @@ package com.dolibarrmaroc.com.business;
 import com.dolibarrmaroc.com.dao.ConnexionDao;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.ConfigGps;
+import com.dolibarrmaroc.com.models.MyTicketWitouhtProduct;
 import com.dolibarrmaroc.com.models.Services;
-
-
 
 public class DefaultAuthentificationManager implements AuthentificationManager {
 
@@ -40,6 +39,12 @@ public class DefaultAuthentificationManager implements AuthentificationManager {
 	@Override
 	public Services getService(String login, String password) {
 		return dao.getService(login, password);
+	}
+
+	@Override
+	public MyTicketWitouhtProduct lodSociete(String st) {
+		// TODO Auto-generated method stub
+		return dao.lodSociete(st);
 	}
 
 

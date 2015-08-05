@@ -9,6 +9,40 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
+
+import com.dolibarrmaroc.com.CmdDetailActivity.ConnexionTask;
+import com.dolibarrmaroc.com.NextEtapeActivity.ValidationOfflineTask;
+import com.dolibarrmaroc.com.NextEtapeActivity.ValidationTask;
+import com.dolibarrmaroc.com.SignatureActivity.ImageGalleryTask;
+import com.dolibarrmaroc.com.business.CommandeManager;
+import com.dolibarrmaroc.com.business.FactureManager;
+import com.dolibarrmaroc.com.business.MouvementManager;
+import com.dolibarrmaroc.com.dao.CategorieDao;
+import com.dolibarrmaroc.com.dao.CategorieDaoMysql;
+import com.dolibarrmaroc.com.models.Commande;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.FileData;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.Mouvement;
+import com.dolibarrmaroc.com.models.MouvementGrabage;
+import com.dolibarrmaroc.com.models.MyGpsInvoice;
+import com.dolibarrmaroc.com.models.MyProdRemise;
+import com.dolibarrmaroc.com.models.Myinvoice;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.Promotion;
+import com.dolibarrmaroc.com.models.Prospection;
+import com.dolibarrmaroc.com.models.Remises;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
+import com.dolibarrmaroc.com.utils.FactureManagerFactory;
+import com.dolibarrmaroc.com.utils.MouvementManagerFactory;
+import com.dolibarrmaroc.com.utils.TinyDB;
+import com.dolibarrmaroc.com.database.DatabaseHandler;
+import com.dolibarrmaroc.com.database.StockVirtual;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,9 +51,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.sax.TextElementListener;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
@@ -30,6 +66,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -37,31 +74,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.business.CommandeManager;
-import com.dolibarrmaroc.com.business.MouvementManager;
-import com.dolibarrmaroc.com.dao.CategorieDao;
-import com.dolibarrmaroc.com.dao.CategorieDaoMysql;
-import com.dolibarrmaroc.com.database.DataErreur.DatabaseHandler;
-import com.dolibarrmaroc.com.database.DataErreur.StockVirtual;
-import com.dolibarrmaroc.com.models.Commande;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.GpsTracker;
-import com.dolibarrmaroc.com.models.Mouvement;
-import com.dolibarrmaroc.com.models.MouvementGrabage;
-import com.dolibarrmaroc.com.models.MyProdRemise;
-import com.dolibarrmaroc.com.models.Myinvoice;
-import com.dolibarrmaroc.com.models.Produit;
-import com.dolibarrmaroc.com.models.Promotion;
-import com.dolibarrmaroc.com.models.Remises;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
-import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
-import com.dolibarrmaroc.com.utils.MouvementManagerFactory;
-import com.dolibarrmaroc.com.utils.TinyDB;
 
 public class FactureActivity extends Activity implements OnItemClickListener,OnClickListener{
 
@@ -954,7 +969,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 			return true;
 		}
 		else{
-			Log.e("Stock Limite","Stock Limitï¿½ "+x);
+			Log.e("Stock Limite","Stock Limité "+x);
 			return false;
 		}
 	}
@@ -985,19 +1000,21 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 		Remises r = new Remises();
 		Promotion pro = new Promotion();
 		pro = db.loadMapPromotion("allpromotion").get(p.getRef());
-		
-		if(pro.getType() == 0){
-			r.setId(p.getId());
-			r.setQte(pro.getQuantite());
-			r.setRemise(pro.getPromos());
-			r.setType(pro.getType());
-		}else{
-			int gratuite = (p.getQtedemander() / pro.getPromos()) * pro.getQuantite();
-			r.setId(p.getId());
-			r.setQte(gratuite);
-			r.setRemise(pro.getPromos());
-			r.setType(pro.getType());
+		if(pro != null){
+			if(pro.getType() == 0){
+				r.setId(p.getId());
+				r.setQte(pro.getQuantite());
+				r.setRemise(pro.getPromos());
+				r.setType(pro.getType());
+			}else{
+				int gratuite = (p.getQtedemander() / pro.getPromos()) * pro.getQuantite();
+				r.setId(p.getId());
+				r.setQte(gratuite);
+				r.setRemise(pro.getPromos());
+				r.setType(pro.getType());
+			}
 		}
+	
 		return r;
 	}
 	
@@ -1177,7 +1194,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 						.setCancelable(false)
 						.create().show();
 					}else{
-						res = getResources().getString(R.string.cmdtofc17); //"Une erreur de communication avec le server distant. Veuillez rï¿½essayer plus tard";
+						res = getResources().getString(R.string.cmdtofc17); //"Une erreur de communication avec le server distant. Veuillez réessayer plus tard";
 						new AlertDialog.Builder(FactureActivity.this)
 						.setTitle(getResources().getString(R.string.cmdtofc10))
 						.setMessage(res)
@@ -1282,7 +1299,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 				lsmv.add(new Mouvement(produitsFacture.get(i).getId(), produitsFacture.get(i), ""+compte.getIduser(), ""+compte.getIduser(), (double)produitsFacture.get(i).getQtedemander()));
 			}
 			
-			res = stockManager.makeechange(lsmv, compte, prepa_label(),idclt+"");  // stockManager.makemouvement(lsmv, compte, prepa_label());
+			res = stockManager.makeechange(lsmv, compte, prepa_label(),idclt+"",0);  // stockManager.makemouvement(lsmv, compte, prepa_label());
 			
 			return "success";
 		}
@@ -1302,7 +1319,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 						
 						sv = new StockVirtual(FactureActivity.this);
 						for (int i = 0; i < produitsFacture.size(); i++) {
-							sv.addrow("", produitsFacture.get(i).getId(), produitsFacture.get(i).getQtedemander(), type_invoice+"");
+							sv.addrow("", produitsFacture.get(i).getId(), produitsFacture.get(i).getQtedemander(), type_invoice+"",produitsFacture.get(i).getDesig(),idclt);
 						}
 						alert_response(getResources().getString(R.string.mvm7));
 					}else{
@@ -1360,7 +1377,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 						
 						sv = new StockVirtual(FactureActivity.this);
 						for (int i = 0; i < produitsFacture.size(); i++) {
-							sv.addrow("", produitsFacture.get(i).getId(), produitsFacture.get(i).getQtedemander(), type_invoice+"");
+							sv.addrow("", produitsFacture.get(i).getId(), produitsFacture.get(i).getQtedemander(), type_invoice+"",produitsFacture.get(i).getDesig(),idclt);
 						}
 						alert_response(getResources().getString(R.string.mvm7));
 					}else{

@@ -24,8 +24,6 @@ import org.apache.http.message.BasicNameValuePair;
 import com.dolibarrmaroc.com.dashboard.DashboardActivity;
 import com.dolibarrmaroc.com.utils.JSONParser;
 
-import com.rest.client.arc.Arc;
-import com.rest.client.arc.Response;
 
 import android.os.Bundle;
 import android.widget.TextView;

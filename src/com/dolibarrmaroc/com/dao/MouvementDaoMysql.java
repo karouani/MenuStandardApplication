@@ -12,9 +12,12 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.FactureGps;
+import com.dolibarrmaroc.com.models.FileData;
 import com.dolibarrmaroc.com.models.LoadStock;
 import com.dolibarrmaroc.com.models.Mouvement;
 import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.Remises;
 import com.dolibarrmaroc.com.utils.JSONParser;
 import com.dolibarrmaroc.com.utils.URL;
 
@@ -146,7 +149,7 @@ public class MouvementDaoMysql implements MouvementDao {
 	}
 
 	@Override
-	public String makeechange(List<Mouvement> mvs, Compte cp, String label,String clt) {
+	public String makeechange(List<Mouvement> mvs, Compte cp, String label,String clt,int tpmv) {
 		// TODO Auto-generated method stub
 		String in ="-1";
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
@@ -161,6 +164,7 @@ public class MouvementDaoMysql implements MouvementDao {
 		
 		nameValuePairs.add(new BasicNameValuePair("iduser",cp.getId()+""));
 		nameValuePairs.add(new BasicNameValuePair("clt",clt+""));
+		nameValuePairs.add(new BasicNameValuePair("tpmv",tpmv+""));
 		
 		
 		

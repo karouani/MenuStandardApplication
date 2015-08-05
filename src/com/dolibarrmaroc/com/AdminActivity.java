@@ -1,15 +1,18 @@
 package com.dolibarrmaroc.com;
 
+import com.dolibarrmaroc.com.models.Compte;
+
+
 import android.app.TabActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTabHost;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-
-import com.dolibarrmaroc.com.models.Compte;
 
 public class AdminActivity extends TabActivity{
 

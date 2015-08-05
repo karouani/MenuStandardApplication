@@ -1,8 +1,33 @@
 package com.dolibarrmaroc.com;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.List;
 import java.util.Locale;
+
+
+import com.dolibarrmaroc.com.VendeurActivity.ConnexionTask;
+import com.dolibarrmaroc.com.business.TechnicienManager;
+import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.models.BordreauIntervention;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.LabelService;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.Services;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.JSONParser;
+import com.dolibarrmaroc.com.utils.MyLocationListener;
+import com.dolibarrmaroc.com.utils.TechnicienManagerFactory;
+import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -13,41 +38,33 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.WindowManager;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.business.TechnicienManager;
-import com.dolibarrmaroc.com.business.VendeurManager;
-import com.dolibarrmaroc.com.models.BordreauIntervention;
-import com.dolibarrmaroc.com.models.Client;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.GpsTracker;
-import com.dolibarrmaroc.com.models.Services;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
-import com.dolibarrmaroc.com.utils.JSONParser;
-import com.dolibarrmaroc.com.utils.MyLocationListener;
-import com.dolibarrmaroc.com.utils.TechnicienManagerFactory;
-import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.os.Build;
+import android.os.PowerManager.WakeLock;
 
 public class TechnicienActivity extends  Activity implements OnClickListener,OnItemSelectedListener{
 	//IOC

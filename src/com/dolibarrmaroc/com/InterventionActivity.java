@@ -10,38 +10,38 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.LevelListDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
+import android.os.PowerManager.WakeLock;
 import android.text.InputFilter;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.android2ee.formation.librairies.google.map.utils.direction.DCACallBack;
 import com.android2ee.formation.librairies.google.map.utils.direction.GDirectionsApiUtils;
 import com.android2ee.formation.librairies.google.map.utils.direction.model.GDirection;
-import com.dolibarrmaroc.com.business.TechnicienManager;
-import com.dolibarrmaroc.com.models.BordereauGps;
-import com.dolibarrmaroc.com.models.Client;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.utils.MyLocationListener;
-import com.dolibarrmaroc.com.utils.TechnicienManagerFactory;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
 import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
@@ -50,15 +50,32 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import com.dolibarrmaroc.com.VendeurActivity.ConnexionTask;
+import com.dolibarrmaroc.com.business.FactureManager;
+import com.dolibarrmaroc.com.business.TechnicienManager;
+import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.models.BordereauGps;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.FactureGps;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.utils.FactureManagerFactory;
+import com.dolibarrmaroc.com.utils.JSONParser;
+import com.dolibarrmaroc.com.utils.MyLocationListener;
+import com.dolibarrmaroc.com.utils.TechnicienManagerFactory;
+import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 
 
 @SuppressLint("NewApi")
@@ -243,7 +260,7 @@ OnMyLocationButtonClickListener,OnClickListener ,DCACallBack{
 
 		local
 		.setTitle("Network Alert")
-		.setMessage("SVP vï¿½rifier votre connexion")
+		.setMessage("SVP vérifier votre connexion")
 		.setCancelable(false)
 		.setPositiveButton("Annuler",new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface paramDialogInterface, int paramInt) {

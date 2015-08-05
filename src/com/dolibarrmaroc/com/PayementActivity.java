@@ -1,5 +1,9 @@
 package com.dolibarrmaroc.com;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -7,19 +11,49 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import android.annotation.SuppressLint;
+import com.karouani.cicin.widget.AutocompleteCustomArrayAdapter;
+import com.karouani.cicin.widget.CustomAutoCompleteTextChangedListener;
+import com.karouani.cicin.widget.CustomAutoCompleteView;
+import com.dolibarrmaroc.com.PayementActivity.ConnexionTask;
+import com.dolibarrmaroc.com.VendeurActivity.ServerSideTask;
+import com.dolibarrmaroc.com.business.CommercialManager;
+import com.dolibarrmaroc.com.business.PayementManager;
+import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.Dictionnaire;
+import com.dolibarrmaroc.com.models.FileData;
+import com.dolibarrmaroc.com.models.MyGpsInvoice;
+import com.dolibarrmaroc.com.models.MyTicketWitouhtProduct;
+import com.dolibarrmaroc.com.models.Myinvoice;
+import com.dolibarrmaroc.com.models.Payement;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.Prospection;
+import com.dolibarrmaroc.com.models.Reglement;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
+import com.dolibarrmaroc.com.utils.PayementManagerFactory;
+import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
+import com.dolibarrmaroc.com.database.DatabaseHandler;
+import com.dolibarrmaroc.com.database.StockVirtual;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
+import android.os.PowerManager.WakeLock;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -27,38 +61,20 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnKeyListener;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.business.CommercialManager;
-import com.dolibarrmaroc.com.business.PayementManager;
-import com.dolibarrmaroc.com.business.VendeurManager;
-import com.dolibarrmaroc.com.database.DataErreur.DatabaseHandler;
-import com.dolibarrmaroc.com.database.DataErreur.StockVirtual;
-import com.dolibarrmaroc.com.models.Client;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.Dictionnaire;
-import com.dolibarrmaroc.com.models.FileData;
-import com.dolibarrmaroc.com.models.Payement;
-import com.dolibarrmaroc.com.models.Produit;
-import com.dolibarrmaroc.com.models.Reglement;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
-import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
-import com.dolibarrmaroc.com.utils.PayementManagerFactory;
-import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
-import com.karouani.cicin.widget.AutocompleteCustomArrayAdapter;
-import com.karouani.cicin.widget.CustomAutoCompleteTextChangedListener;
-import com.karouani.cicin.widget.CustomAutoCompleteView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 
 
@@ -184,7 +200,7 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 	
 	*/
 	
-	@SuppressLint("NewApi") @Override
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_payement);
@@ -348,8 +364,8 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 			
 			/*
 			new AlertDialog.Builder(this)
-			.setTitle("Vraiment dï¿½connecter?")
-			.setMessage("Vous voulez vraiment dï¿½connecter?")
+			.setTitle("Vraiment dŽconnecter?")
+			.setMessage("Vous voulez vraiment dŽconnecter?")
 			.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
 
 				@Override
@@ -495,9 +511,9 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 
 						products = vendeurManager.selectAllProduct(compte);
 						for (int i = 0; i < products.size(); i++) {
-							for (int j = 0; j < sv.getAllProduits().size(); j++) {
-								if(sv.getAllProduits().get(j).getRef().equals(products.get(i).getRef())){
-									products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits().get(j).getQteDispo());
+							for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+								if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getRef())){
+									products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
 								}
 							}
 						}
@@ -806,7 +822,7 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 		AlertDialog.Builder alert = new AlertDialog.Builder(PayementActivity.this);
 		alert.setTitle("Information !!");
 		alert.setMessage(
-				String.format("Cette facture est dï¿½ja cloturer"
+				String.format("Cette facture est déja cloturer"
 						));
 		alert.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
 
@@ -860,7 +876,7 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 		AlertDialog.Builder alert = new AlertDialog.Builder(PayementActivity.this);
 		alert.setTitle("Erreur d'enregistrement");
 		alert.setMessage(
-				String.format("Veuillez vï¿½rifier votre enregistrement"
+				String.format("Veuillez vérifier votre enregistrement"
 						));
 		alert.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
 
@@ -1265,9 +1281,9 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 
 					products = vendeurManager.selectAllProduct(compte);
 					for (int i = 0; i < products.size(); i++) {
-						for (int j = 0; j < sv.getAllProduits().size(); j++) {
-							if(sv.getAllProduits().get(j).getRef().equals(products.get(i).getId())){
-								products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits().get(j).getQteDispo());
+						for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+							if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId())){
+								products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
 							}
 						}
 					}

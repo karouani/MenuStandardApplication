@@ -3,7 +3,11 @@ package com.dolibarrmaroc.com.offline;
 import java.util.HashMap;
 import java.util.List;
 
-import com.dolibarrmaroc.com.database.DataErreur.DataErreur;
+import android.view.animation.BounceInterpolator;
+
+import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
+import com.dolibarrmaroc.com.database.DataErreur;
+import com.dolibarrmaroc.com.models.BordereauGps;
 import com.dolibarrmaroc.com.models.BordreauIntervention;
 import com.dolibarrmaroc.com.models.Categorie;
 import com.dolibarrmaroc.com.models.Client;
@@ -11,7 +15,9 @@ import com.dolibarrmaroc.com.models.Commande;
 import com.dolibarrmaroc.com.models.Commandeview;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Dictionnaire;
+import com.dolibarrmaroc.com.models.FileData;
 import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.Mouvement;
 import com.dolibarrmaroc.com.models.MouvementGrabage;
 import com.dolibarrmaroc.com.models.MyGpsInvoice;
 import com.dolibarrmaroc.com.models.MyProdRemise;
@@ -28,6 +34,7 @@ import com.dolibarrmaroc.com.models.Reglement;
 import com.dolibarrmaroc.com.models.Services;
 import com.dolibarrmaroc.com.models.TotauxTicket;
 import com.dolibarrmaroc.com.utils.GpsTrackingServiceDao;
+import com.dolibarrmaroc.com.utils.ServiceDao;
 
 public interface ioffline {
 

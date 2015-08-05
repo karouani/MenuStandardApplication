@@ -4,7 +4,27 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
+import com.dolibarrmaroc.com.models.Commandeview;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.FileData;
+import com.dolibarrmaroc.com.models.MyTicketBluetooth;
+import com.dolibarrmaroc.com.models.MyTicketWitouhtProduct;
+import com.dolibarrmaroc.com.models.Myinvoice;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.PromoTicket;
+import com.dolibarrmaroc.com.models.Remises;
+import com.dolibarrmaroc.com.models.TotauxTicket;
+import com.dolibarrmaroc.com.utils.MyTicket;
+import com.dolibarrmaroc.com.utils.ProduitTicket;
+import com.dolibarrmaroc.com.utils.TinyDB;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
+import android.R.integer;
+import android.support.v7.app.ActionBarActivity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -13,21 +33,12 @@ import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
-
-import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
-import com.dolibarrmaroc.com.models.Commandeview;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.MyTicketWitouhtProduct;
-import com.dolibarrmaroc.com.models.Produit;
-import com.dolibarrmaroc.com.models.PromoTicket;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
-import com.dolibarrmaroc.com.utils.MyTicket;
-import com.dolibarrmaroc.com.utils.ProduitTicket;
 
 public class CommandeViewTicketActivity extends Activity {
 
@@ -550,7 +561,7 @@ public class CommandeViewTicketActivity extends Activity {
 				}
 				BluetoothPrintDriver.ImportData(data6,true);
 
-				String dataX = "Rï¿½duction sur les produits :";
+				String dataX = "Réduction sur les produits :";
 				int espaceX = 33 - dataX.length();
 				for (int j = 0; j < espaceX; j++) {
 					dataX = dataX + " ";

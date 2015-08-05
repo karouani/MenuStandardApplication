@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -13,21 +15,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.util.Log;
 
 import com.dolibarrmaroc.com.models.Categorie;
 import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.FileData;
+import com.dolibarrmaroc.com.models.LoadStock;
 import com.dolibarrmaroc.com.models.Produit;
 import com.dolibarrmaroc.com.models.Promotion;
+import com.dolibarrmaroc.com.models.Remises;
 import com.dolibarrmaroc.com.utils.JSONParser;
 import com.dolibarrmaroc.com.utils.URL;
 import com.dolibarrmaroc.com.utils.UrlImage;
 
-@SuppressLint("NewApi") public class CategorieDaoMysql implements CategorieDao {
+public class CategorieDaoMysql implements CategorieDao {
 
 	private JSONParser jsonParser;
 	private static final String load = URL.URL+"seecategories2.php"; //categorieview.php seecategorie.php
@@ -296,7 +301,7 @@ import com.dolibarrmaroc.com.utils.UrlImage;
 					child.clear();
 					
 					
-					ls.add(new Categorie(0, 0, "Produits non classï¿½s", "Produits non classï¿½s", "", "", "", "", list, child));
+					ls.add(new Categorie(0, 0, "Produits non classés", "Produits non classés", "", "", "", "", list, child));
 					}
 					
 					

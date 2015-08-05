@@ -1,7 +1,35 @@
 package com.dolibarrmaroc.com;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.google.android.gms.internal.fa;
+import com.google.gson.Gson;
+import com.dolibarrmaroc.com.adapter.MyFactureAdapterView;
+import com.dolibarrmaroc.com.VendeurActivity.ConnexionTask;
+import com.dolibarrmaroc.com.VendeurActivity.OfflineTask;
+import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.Dictionnaire;
+import com.dolibarrmaroc.com.models.MyDicto;
+import com.dolibarrmaroc.com.models.MyProduitPromo;
+import com.dolibarrmaroc.com.models.MyTicketBluetooth;
+import com.dolibarrmaroc.com.models.MyfactureAdapter;
+import com.dolibarrmaroc.com.models.Myinvoice;
+import com.dolibarrmaroc.com.models.Payement;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.Promotion;
+import com.dolibarrmaroc.com.models.Prospection;
+import com.dolibarrmaroc.com.models.Reglement;
+import com.dolibarrmaroc.com.models.Remises;
+import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+import com.dolibarrmaroc.com.ticket.FactureTicketActivity;
+import com.dolibarrmaroc.com.ticket.ReglementTicketActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -14,10 +42,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -25,21 +57,21 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
-
-import com.dolibarrmaroc.com.adapter.MyFactureAdapterView;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.MyTicketBluetooth;
-import com.dolibarrmaroc.com.models.MyfactureAdapter;
-import com.dolibarrmaroc.com.models.Myinvoice;
-import com.dolibarrmaroc.com.models.Reglement;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.ticket.FactureTicketActivity;
-import com.dolibarrmaroc.com.ticket.ReglementTicketActivity;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.os.Build;
+import android.os.PowerManager.WakeLock;
 
 @SuppressLint("NewApi")
 public class OfflineActivity extends Activity implements OnItemClickListener,OnQueryTextListener{
@@ -230,7 +262,7 @@ public class OfflineActivity extends Activity implements OnItemClickListener,OnQ
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			OfflineActivity.this.finish();
-			Intent intent1 = new Intent(OfflineActivity.this, HomeActivity.class);
+			Intent intent1 = new Intent(OfflineActivity.this, VendeurActivity.class);
 			intent1.putExtra("user", compte);
 			startActivity(intent1);
 		}
@@ -388,7 +420,7 @@ public class OfflineActivity extends Activity implements OnItemClickListener,OnQ
 		/*
 		 Dialog dialog = new Dialog(OfflineActivity.this);
          dialog.setContentView(R.layout.detailfacture);
-         dialog.setTitle("Consulter dï¿½tails de facture");
+         dialog.setTitle("Consulter détails de facture");
          dialog.setCancelable(true);
          //there are a lot of settings, for dialog, check them all out!
 
@@ -420,7 +452,7 @@ public class OfflineActivity extends Activity implements OnItemClickListener,OnQ
          */
 		
 		new AlertDialog.Builder(this)
-	    .setTitle("Consulter dï¿½tails de facture")
+	    .setTitle("Consulter détails de facture")
 	    .setPositiveButton(R.string.movetoregls, new DialogInterface.OnClickListener() {
 	        public void onClick(DialogInterface dialog, int which) { 
 	        	 showReglements(selectedfact);

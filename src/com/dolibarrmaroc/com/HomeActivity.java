@@ -39,7 +39,7 @@ import com.dolibarrmaroc.com.business.CommercialManager;
 import com.dolibarrmaroc.com.business.PayementManager;
 import com.dolibarrmaroc.com.business.VendeurManager;
 import com.dolibarrmaroc.com.dashboard.DashboardActivity;
-import com.dolibarrmaroc.com.database.DataErreur.StockVirtual;
+import com.dolibarrmaroc.com.database.StockVirtual;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Dictionnaire;

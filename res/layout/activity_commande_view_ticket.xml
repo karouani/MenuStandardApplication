@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CommandeViewTicketActivity" >
+    tools:context="com.marocgeo.geodolidroid.CommandeViewTicketActivity" >
 
     <LinearLayout
         android:id="@+id/linearLayout1"

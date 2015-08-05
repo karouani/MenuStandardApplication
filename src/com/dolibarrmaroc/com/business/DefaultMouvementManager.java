@@ -3,6 +3,7 @@ package com.dolibarrmaroc.com.business;
 import java.util.List;
 
 import com.dolibarrmaroc.com.dao.MouvementDao;
+import com.dolibarrmaroc.com.dao.VendeurDao;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.LoadStock;
 import com.dolibarrmaroc.com.models.Mouvement;
@@ -29,9 +30,9 @@ public class DefaultMouvementManager implements MouvementManager {
 	}
 
 	@Override
-	public String makeechange(List<Mouvement> mvs, Compte cp, String label,String clt) {
+	public String makeechange(List<Mouvement> mvs, Compte cp, String label,String clt,int tpmv) {
 		// TODO Auto-generated method stub
-		return dao.makeechange(mvs, cp, label,clt);
+		return dao.makeechange(mvs, cp, label,clt,tpmv);
 	}
 
 }

@@ -8,15 +8,19 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
-import android.os.StrictMode;
-import android.util.Log;
-
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.GpsTracker;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
+import android.os.StrictMode;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 
-@SuppressLint("NewApi") public class ServiceDao {
+
+public class ServiceDao {
 
 	private JSONParser jsonParser;
 	public ServiceDao() {

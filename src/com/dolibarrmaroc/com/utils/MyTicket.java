@@ -162,7 +162,7 @@ public class MyTicket implements Serializable{
 	public Double getTotalTTC(){
 		double k = 0;
 		DecimalFormat df = new DecimalFormat ( ) ;
-		df.setMaximumFractionDigits ( 2 ) ; //arrondi ï¿½ 2 chiffres apres la virgules
+		df.setMaximumFractionDigits ( 2 ) ; //arrondi à 2 chiffres apres la virgules
 		df.setMinimumFractionDigits ( 2 ) ;
 		df.setDecimalSeparatorAlwaysShown ( true ) ;
 		
@@ -175,7 +175,7 @@ public class MyTicket implements Serializable{
 	public Double getTotalTaux(){
 		double k = 0;
 		DecimalFormat df = new DecimalFormat ( ) ;
-		df.setMaximumFractionDigits ( 2 ) ; //arrondi ï¿½ 2 chiffres apres la virgules
+		df.setMaximumFractionDigits ( 2 ) ; //arrondi à 2 chiffres apres la virgules
 		df.setMinimumFractionDigits ( 2 ) ;
 		df.setDecimalSeparatorAlwaysShown ( true ) ; 
 		

@@ -18,24 +18,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
+import android.os.storage.StorageManager;
 import android.util.Base64;
 import android.util.Log;
 
+import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
+import com.google.android.gms.internal.fo;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.dolibarrmaroc.com.database.DataErreur;
 import com.dolibarrmaroc.com.business.CommandeManager;
 import com.dolibarrmaroc.com.business.CommercialManager;
 import com.dolibarrmaroc.com.business.FactureManager;
 import com.dolibarrmaroc.com.business.MouvementManager;
 import com.dolibarrmaroc.com.business.PayementManager;
 import com.dolibarrmaroc.com.business.TechnicienManager;
-import com.dolibarrmaroc.com.database.DataErreur.DataErreur;
 import com.dolibarrmaroc.com.models.BordreauIntervention;
 import com.dolibarrmaroc.com.models.Categorie;
 import com.dolibarrmaroc.com.models.Client;
@@ -46,6 +54,7 @@ import com.dolibarrmaroc.com.models.ConfigGps;
 import com.dolibarrmaroc.com.models.Dictionnaire;
 import com.dolibarrmaroc.com.models.FileData;
 import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.Mouvement;
 import com.dolibarrmaroc.com.models.MouvementGrabage;
 import com.dolibarrmaroc.com.models.MyClientPromo;
 import com.dolibarrmaroc.com.models.MyDicto;
@@ -55,6 +64,7 @@ import com.dolibarrmaroc.com.models.MyProduitPromo;
 import com.dolibarrmaroc.com.models.MyTicketBluetooth;
 import com.dolibarrmaroc.com.models.MyTicketPayement;
 import com.dolibarrmaroc.com.models.MyTicketWitouhtProduct;
+import com.dolibarrmaroc.com.models.MyfactureAdapter;
 import com.dolibarrmaroc.com.models.Myinvoice;
 import com.dolibarrmaroc.com.models.Payement;
 import com.dolibarrmaroc.com.models.Produit;
@@ -73,9 +83,8 @@ import com.dolibarrmaroc.com.utils.MouvementManagerFactory;
 import com.dolibarrmaroc.com.utils.PayementManagerFactory;
 import com.dolibarrmaroc.com.utils.ServiceDao;
 import com.dolibarrmaroc.com.utils.TechnicienManagerFactory;
-import com.google.gson.Gson;
 
-@SuppressLint("NewApi") public class Offlineimpl implements ioffline {
+public class Offlineimpl implements ioffline {
 
 	private String  filestock;
 	private File file;
@@ -1001,7 +1010,7 @@ import com.google.gson.Gson;
 		HashMap<Integer, Promotion> map = this.LoadPromotion("").get(idprd);
 		
 		
-		Log.e("promotion >> ",map.toString()+"client "+list);
+		//Log.e("promotion >> ",map.toString()+"client "+list);
 		for (int i = 0; i < list.size(); i++) {
 			if(map.containsKey(list.get(i))){
 				lista.add(map.get(list.get(i)));
@@ -1107,7 +1116,7 @@ import com.google.gson.Gson;
 					}
 					
 				}
-				Log.e("my invoice >> ","["+gson.toJson(me,Myinvoice.class)+"]");
+				//Log.e("my invoice >> ","["+gson.toJson(me,Myinvoice.class)+"]");
 				//Log.e("my invoice",me+"");
 				pout.close();
 			}
@@ -1406,7 +1415,7 @@ import com.google.gson.Gson;
 					MyProdRemise rm = mex.get(j);
 					
 					if(rm.getRef().equals(prd.get(i).getRef()) && rm.getRemise().getType() == 1){
-						Log.e("qnt "+rm.getRemise().getQte(),"fabor "+rm.getRemise().getRemise());
+						//Log.e("qnt "+rm.getRemise().getQte(),"fabor "+rm.getRemise().getRemise());
 						//int x = 0;
 					//	x = prd.get(i).getQtedemander()/rm.getRemise().getQte();
 						prd.get(i).setQtedemander(prd.get(i).getQtedemander() + rm.getRemise().getQte());
@@ -1447,7 +1456,7 @@ import com.google.gson.Gson;
 					MyProdRemise rm = mex.get(j);
 					
 					if(rm.getRef().equals(prd.get(i).getRef()) && rm.getRemise().getType() == 1){
-						Log.e("qnt "+rm.getRemise().getQte(),"fabor "+rm.getRemise().getRemise());
+					//	Log.e("qnt "+rm.getRemise().getQte(),"fabor "+rm.getRemise().getRemise());
 						//int x = 0;
 					//	x = prd.get(i).getQtedemander()/rm.getRemise().getQte();
 						prd.get(i).setQtedemander(prd.get(i).getQtedemander() + rm.getRemise().getQte());
@@ -1461,7 +1470,7 @@ import com.google.gson.Gson;
 			for (int i = 0; i < pd.size(); i++) {
 				for (int j = 0; j < prd.size(); j++) {
 					if(pd.get(i).getId() == prd.get(j).getId()){
-						Log.e("por "+pd.get(i).getRef(),"qnt "+pd.get(i).getQteDispo()+" >> "+prd.get(j).getQtedemander());
+						//Log.e("por "+pd.get(i).getRef(),"qnt "+pd.get(i).getQteDispo()+" >> "+prd.get(j).getQtedemander());
 						pd.get(i).setQteDispo(pd.get(i).getQteDispo() + prd.get(j).getQtedemander());
 					}
 				}
@@ -1651,7 +1660,7 @@ import com.google.gson.Gson;
 	@Override
 	public String shynchronizeProspection(Prospection ps,Compte cp) {
 		// TODO Auto-generated method stub
-		String me = "Le Clients n'est pas ajouter rï¿½ssayer plus tard";
+		String me = "Le Clients n'est pas ajouter réssayer plus tard";
 		//CleanProspection();
 		try {
 			file = new File(path, "/prospectiondata.txt");
@@ -1685,13 +1694,13 @@ import com.google.gson.Gson;
 					String s1 = ps.getName();
 					ps.setName(cp.getLogin()+"-"+s1);
 					
-					Log.e("data "+ps.getName()," "+ps.getFirstname());
+					//Log.e("data "+ps.getName()," "+ps.getFirstname());
 					
 					pout.println("["+gson.toJson(ps,Prospection.class)+"]");
 					if(ps.getClient() == 1){
 						me = "Client ajouter avec success";
 					}else{
-						me = "Prospect ajoutï¿½ avec success";
+						me = "Prospect ajouté avec success";
 					}
 					
 				}
@@ -2282,7 +2291,7 @@ import com.google.gson.Gson;
 			for (int i = 0; i < cl.size(); i++) {
 				s = managerclient.insert(cp, cl.get(i));
 				if(s != null && s.equals("-1")){
-					//if(!s.startsWith("Client ajouter avec success") && !s.startsWith("Prospect ajoutï¿½ avec success") && !s.equals("")){
+					//if(!s.startsWith("Client ajouter avec success") && !s.startsWith("Prospect ajouté avec success") && !s.equals("")){
 						ps.add(cl.get(i));
 					//}
 				}
@@ -2350,11 +2359,11 @@ import com.google.gson.Gson;
 		List<Reglement> me = this.showServerside(0); //this.LoadReglement("");
 		List<Reglement> tmp = new ArrayList<>();
 		String st ="";
-		Log.e("szize ",me.size()+"");
+		//Log.e("szize ",me.size()+"");
 		if(me.size() > 0 && c != null){
 			for (int i = 0; i < me.size(); i++) {
 				st = managerpayement.insertPayement(me.get(i), c);
-				Log.e("str >> ",st);
+			//	Log.e("str >> ",st);
 				if(st != null){
 					if(!st.startsWith("Paiement ajouter avec success")){
 						tmp.add(me.get(i));
@@ -2400,7 +2409,7 @@ import com.google.gson.Gson;
 			}
 
 			encryptor = new StandardPBEStringEncryptor();encryptor.setPassword("cicinpassword");
-			Log.e("ticket ",bpd.toString());
+			//Log.e("ticket ",bpd.toString());
 			
 			if(file.exists()){
 				FileWriter fw = new FileWriter(file, true);
@@ -2602,7 +2611,7 @@ import com.google.gson.Gson;
 				PrintWriter pout = new PrintWriter(fw);
 				if(tp != null){
 						pout.println("["+gson.toJson(tp,MyTicketPayement.class)+"]");
-						Log.e("ticket p2","["+gson.toJson(tp,MyTicketPayement.class)+"]");
+					//	Log.e("ticket p2","["+gson.toJson(tp,MyTicketPayement.class)+"]");
 						ix = 1;
 				}
 				pout.close();
@@ -2720,7 +2729,7 @@ import com.google.gson.Gson;
 		
 		
 		for (int i = 0; i < ls.size(); i++) {
-			Log.e(">> "+ls.get(i).getMyreg().getPaiementcode(),ref+"");
+			//Log.e(">> "+ls.get(i).getMyreg().getPaiementcode(),ref+"");
 			if(ls.get(i).getMyreg().getIdreg() == ref){
 				m = ls.get(i);
 			}
@@ -2964,7 +2973,7 @@ import com.google.gson.Gson;
 		HashMap<Myinvoice, Prospection> myo = new HashMap<>();
 		
 		
-		Log.e("size invo ",me.size()+"");
+		//Log.e("size invo ",me.size()+"");
 		myc = new HashMap<>();
 		/*
 		HashMap<Prospection, List<Myinvoice>> res = new HashMap<>();
@@ -2996,10 +3005,10 @@ import com.google.gson.Gson;
 		if(me.size() > 0){
 			for (int i = 0; i < me.size(); i++) {
 				isit = false;
-				Log.e(">>> "+me.get(i).getIdclt(),"<<<");
+				//Log.e(">>> "+me.get(i).getIdclt(),"<<<");
 				for (int j = 0; j < tmp.size(); j++) {
 					
-					Log.e(">>> "+me.get(i).getIdclt(),"<<<"+tmp.get(j).getIdpros());
+				//	Log.e(">>> "+me.get(i).getIdclt(),"<<<"+tmp.get(j).getIdpros());
 					if(me.get(i).getIdclt().equals(tmp.get(j).getIdpros()+"")){
 						isit = true;
 						
@@ -3102,7 +3111,7 @@ import com.google.gson.Gson;
 					
 					 vl = managerfacture.insertoffline(ps, invo.getPrd(), invo.getIdclt(), invo.getNmb(), invo.getCommentaire(), invo.getCompte(), invo.getReglement(), invo.getAmount(), invo.getNumChek(), invo.getTypeImpriment(), rs, hstmp);
 					 
-					 Log.e("first one ",vl);
+					// Log.e("first one ",vl);
 					 
 					 try {
 						 JSONObject json = new JSONObject(vl);
@@ -3254,7 +3263,7 @@ import com.google.gson.Gson;
 							
 							st = managerfacture.insertcicin(m.getPrd(), m.getIdclt(), m.getNmb(), m.getCommentaire(), m.getCompte(), m.getReglement(), m.getAmount(), m.getNumChek(), m.getTypeImpriment(), rs,hstmp,m.getIdnew(),m.getType_invoice());
 							
-							Log.e("json cl invo ",st);
+						//	Log.e("json cl invo ",st);
 							String stfomat = st.substring(st.indexOf("{"),st.lastIndexOf("}")+1);
 							 JSONObject json = new JSONObject(stfomat);
 							 
@@ -3309,7 +3318,7 @@ import com.google.gson.Gson;
 														Reglement r = m.getLsregs().get(j);
 														r.setIdUser(s.split("#")[1]);
 														r.setId(Integer.parseInt(s.split("#")[0]));
-														Log.e("reg "+s,r.toString());
+													//	Log.e("reg "+s,r.toString());
 														//lsreg.add(r);
 														break;
 													}
@@ -3348,7 +3357,7 @@ import com.google.gson.Gson;
 							
 							MyGpsInvoice gp = checkGpsInvoice(ci.getInvoice());
 							mygps.add(gp);
-							Log.e("input reglement payement ",e.getMessage()  +" << ");
+						//	Log.e("input reglement payement ",e.getMessage()  +" << ");
 						}
 						
 				}
@@ -3357,7 +3366,7 @@ import com.google.gson.Gson;
 			if(cmd_cl.size() > 0){
 				for(Commande cm:cmd_cl.keySet()){
 					try {
-						Log.e("cmd >>> ",cm.toString()+"");
+					//	Log.e("cmd >>> ",cm.toString()+"");
 						Commande c = SendCommande(cm, cm.getCompte());
 						if(c != null){
 							lscmds.add(cm);
@@ -3567,7 +3576,7 @@ import com.google.gson.Gson;
 									String stfomat = fc.substring(fc.indexOf("{"),fc.lastIndexOf("}")+1);
 									 JSONObject json = new JSONObject(stfomat);
 									 
-									 Log.e("json invo ",fc);
+								//	 Log.e("json invo ",fc);
 									 
 										String inv =  json.getString("feedbackinvo");
 										String reg =  json.getString("feedbackreg");
@@ -3607,7 +3616,7 @@ import com.google.gson.Gson;
 																		Reglement r = invo.get(i).getLsregs().get(j);
 																		r.setIdUser(s.split("#")[1]);
 																		r.setId(Integer.parseInt(s.split("#")[0]));
-																		Log.e("reg "+s,r.toString());
+																	//	Log.e("reg "+s,r.toString());
 																		//lsreg.add(r);
 																		break;
 																	}
@@ -3664,7 +3673,7 @@ import com.google.gson.Gson;
 									MyGpsInvoice gp = checkGpsInvoice(ci.getInvoice());
 									mygps.add(gp);
 									
-									Log.e("in invoice add with reglement ",e.getMessage()  +" << ");
+								//	Log.e("in invoice add with reglement ",e.getMessage()  +" << ");
 									
 								}
 						}
@@ -3823,7 +3832,7 @@ import com.google.gson.Gson;
 			List<Commande> lscmd = new ArrayList<>();
 			List<Commandeview> lscmdv = new ArrayList<>();
 			
-			//synchronisation des payements pour des factures dï¿½ja existes
+			//synchronisation des payements pour des factures déja existes
 			List<Reglement> ls = synchronisationReglementOut(compte);
 			for (int i = 0; i < ls.size(); i++) {
 				lsreg.add(ls.get(i));
@@ -4043,7 +4052,7 @@ import com.google.gson.Gson;
 		long ix = -1;
 		try {
 			file = new File(path, "/interventionsdata.txt");
-			Log.e("filesavz",file.getPath());
+		//	Log.e("filesavz",file.getPath());
 			FileOutputStream outputStream;
 
 			if(!file.exists()){
@@ -4077,7 +4086,7 @@ import com.google.gson.Gson;
 		long ix = -1;
 		try {
 			file = new File(path, "/interventionshistodata.txt");
-			Log.e("filesavz",file.getPath());
+		//	Log.e("filesavz",file.getPath());
 			FileOutputStream outputStream;
 
 			if(!file.exists()){
@@ -4373,7 +4382,7 @@ import com.google.gson.Gson;
 				int me =-1;
 				
 				while ((line = r.readLine()) != null) {
-					Log.e("load update data ",line);
+				//	Log.e("load update data ",line);
 					me =0;
 					long out = Long.parseLong(line);
 					
@@ -4422,7 +4431,7 @@ import com.google.gson.Gson;
 		long ix = -1;
 		try {
 			
-			Log.e("in cmd view","opa");
+	//		Log.e("in cmd view","opa");
 			CleanCommandeList();
 			file = new File(path, "/cmdlistedata.txt");
 			FileOutputStream outputStream;
@@ -4531,7 +4540,7 @@ import com.google.gson.Gson;
 		long is =-1;
 		
 		for (int i = 0; i < rg.size(); i++) {
-			Log.e("insert >> "+in,"check >> "+rg.get(i).getIdnew());
+		//	Log.e("insert >> "+in,"check >> "+rg.get(i).getIdnew());
 			if(rg.get(i).getIdnew().equals(in)){
 				is = 0;
 			}
@@ -4667,7 +4676,7 @@ import com.google.gson.Gson;
 				file.mkdir();
 			}
 
-			Log.e(">> cmd ",cm.toString());
+		//	Log.e(">> cmd ",cm.toString());
 			if(file.exists()){
 				FileWriter fw = new FileWriter(file, true);
 				PrintWriter pout = new PrintWriter(fw);
@@ -4746,7 +4755,7 @@ import com.google.gson.Gson;
 		
 		try {
 			
-			Log.e("cmd cpt" ,cmd.getCompte().toString()+"");
+		//	Log.e("cmd cpt" ,cmd.getCompte().toString()+"");
 			String res = cmdmanager.insertCommande(cmd.getProds(), cmd.getClt(), cp, cmd.getRemises());
 			
 			if(!res.equals("ko")){
@@ -4903,7 +4912,7 @@ import com.google.gson.Gson;
 				file.mkdir();
 			}
 
-			Log.e(">> cmd ",cm.toString());
+		//	Log.e(">> cmd ",cm.toString());
 			if(file.exists()){
 				FileWriter fw = new FileWriter(file, true);
 				PrintWriter pout = new PrintWriter(fw);
@@ -5092,7 +5101,7 @@ import com.google.gson.Gson;
 			List<MouvementGrabage> tmp = new ArrayList<>();
 			
 			for (int i = 0; i < mvs.size(); i++) {
-				String res = stockManager.makeechange(mvs.get(i).getLsmvs(), cp, ts.getTime()+"", mvs.get(i).getClt());
+				String res = stockManager.makeechange(mvs.get(i).getLsmvs(), cp, ts.getTime()+"", mvs.get(i).getClt(),0);
 				
 				if(!res.equals("100")){
 					tmp = mvs;

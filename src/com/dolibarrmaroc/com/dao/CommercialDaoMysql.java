@@ -22,8 +22,8 @@ import com.dolibarrmaroc.com.utils.URL;
 public class CommercialDaoMysql implements CommercialDao{
 
 	private String urlData = URL.URL+"prospection.php";
-	private String url = URL.URL+"allclient.php";
 	private JSONParser parser ;
+	private String url = URL.URL+"allclient.php";
 
 	public CommercialDaoMysql() {
 		// TODO Auto-generated constructor stub
@@ -32,7 +32,7 @@ public class CommercialDaoMysql implements CommercialDao{
 
 	@Override
 	public String insert(Compte c,Prospection p) {
-		Log.e("Appel INSERTION", p.toString());
+		//Log.e("Appel INSERTION", p.toString());
 		
 		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		
@@ -50,9 +50,7 @@ public class CommercialDaoMysql implements CommercialDao{
         nameValuePairs.add(new BasicNameValuePair("particulier",p.getParticulier()+""));
         nameValuePairs.add(new BasicNameValuePair("client",p.getClient()+""));
         nameValuePairs.add(new BasicNameValuePair("address",p.getAddress()));
-        if(p.getZip() != null)
         nameValuePairs.add(new BasicNameValuePair("zip",p.getZip()));
-        
         nameValuePairs.add(new BasicNameValuePair("town",p.getTown()));
         nameValuePairs.add(new BasicNameValuePair("phone",p.getPhone()));
         nameValuePairs.add(new BasicNameValuePair("fax",p.getFax()));
@@ -73,22 +71,32 @@ public class CommercialDaoMysql implements CommercialDao{
         nameValuePairs.add(new BasicNameValuePair("latitude",p.getLatitude()+""));
         nameValuePairs.add(new BasicNameValuePair("longitude",p.getLangitude()+""));
 		
-		String json = parser.makeHttpRequest(urlData, "POST", nameValuePairs);
 		
-		Log.d("Insertion Message", json);
-		String retour = "";
+		String retour = "-1";
 		
 		try {
-			JSONObject obj = new JSONObject(json);
-			JSONArray arr = obj.getJSONArray("message");
-			int k =arr.length() - 1;
-			retour = arr.getString(k);
+			String json = parser.makeHttpRequest(urlData, "POST", nameValuePairs);
+			String stfomat = json.substring(json.indexOf("{"),json.lastIndexOf("}")+1);
+			
+			Log.e("Insertion Message old", json);
+			
+			JSONObject obj = new JSONObject(stfomat);
+			if(obj.has("message")){
+				JSONArray arr = obj.getJSONArray("message");
+				int k =arr.length() - 1;
+				//retour = arr.getString(k);
+			}
+			//$message['client']
+			retour = obj.getString("client");
+			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			retour ="-1";
+			Log.e("json insert prospect",e.getMessage() +" << ");
 		}
 		
-		Log.e("Retour ",retour);
+		Log.e("Retour >> 00",retour);
 		return retour;
 	}
 
@@ -103,7 +111,7 @@ public class CommercialDaoMysql implements CommercialDao{
 		nameValuePairs.add(new BasicNameValuePair("password",c.getPassword()));
 		
 		String json = parser.makeHttpRequest(urlData, "POST", nameValuePairs);
-		Log.e("RepondreMoi", json);
+		
 		
 		/*{
 			"town":[
@@ -112,16 +120,21 @@ public class CommercialDaoMysql implements CommercialDao{
 			                 {"code":"2121","nom":"Soci\u00e9t\u00e9 A R\u00e9sponsabilit\u00e9 Limit\u00e9e"}]
 	    }*/
 		
+		Log.e("RepondreMoi json", json);
 		try {
-			JSONObject obj = new JSONObject(json);
+			String stfomat = json.substring(json.indexOf("{"),json.lastIndexOf("}")+1);
+			Log.e("RepondreMoi cc", stfomat);
+			JSONObject obj = new JSONObject(stfomat);
 			JSONArray jarrayTown = obj.getJSONArray("town");
 			JSONArray jarrayForm = obj.getJSONArray("formJuridique");
 			JSONArray jarrayType = obj.getJSONArray("typent");
+			JSONArray jarrayreqfields = obj.getJSONArray("requiredfields");
 			
 			List<String> list = new ArrayList<>();
 			
 			List<String> juridique = new ArrayList<>();
 			List<String> typent = new ArrayList<>();
+			List<String> reqfield = new ArrayList<>();
 			
 			HashMap<String, String> juridique_code= new HashMap<>();
 			HashMap<String,String> typent_code= new HashMap<>();
@@ -145,12 +158,17 @@ public class CommercialDaoMysql implements CommercialDao{
 				typent_id.put(jarrayType.getJSONObject(i).getString("labelle"), jarrayType.getJSONObject(i).getString("id"));
 			}
 			
+			for (int i = 0; i < jarrayreqfields.length(); i++) {
+				reqfield.add(jarrayreqfields.getJSONObject(i).getString("libelle"));
+			}
+			
 			data.setJuridique(juridique);
 			data.setVilles(list);
 			data.setTypent(typent);
 			data.setJuridique_code(juridique_code);
 			data.setTypent_code(typent_code);
 			data.setTypent_id(typent_id);
+			data.setLsrequired(reqfield);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -161,44 +179,6 @@ public class CommercialDaoMysql implements CommercialDao{
 		return data;
 	}
 
-	@Override
-	public List<Societe> getAll(Compte c) {
-		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		List<Societe> list = new ArrayList<>();
-		
-		nameValuePairs.add(new BasicNameValuePair("username",c.getLogin()));
-		nameValuePairs.add(new BasicNameValuePair("password",c.getPassword()));
-		
-		String json = parser.makeHttpRequest(url, "POST", nameValuePairs);
-		Log.e("RepondreMoi", json);
-	
-		
-		try {
-			JSONArray jarray = new JSONArray(json);
-			for (int i = 0; i < jarray.length(); i++) {
-				JSONObject obj = jarray.getJSONObject(i);
-				Societe s = new Societe(obj.getInt("rowid"), 
-										obj.getString("name"), 
-										obj.getString("address"), 
-										obj.getString("town"), 
-										obj.getString("phone"), 
-										obj.getString("fax"), 
-										obj.getString("email"), 
-										obj.getInt("type"), 
-										obj.getInt("company"), 
-										obj.getDouble("latitude"), 
-										obj.getDouble("longitude"));
-				list.add(s);
-			}
-			
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return list;
-	}
-
-	
 	@Override
 	public String update(Compte c,Prospection p) {
 		Log.e("Appel INSERTION", p.toString());
@@ -260,5 +240,42 @@ public class CommercialDaoMysql implements CommercialDao{
 		
 		Log.e("Retour ",retour);
 		return retour;
+	}
+
+	@Override
+	public List<Societe> getAll(Compte c) {
+		ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+		List<Societe> list = new ArrayList<>();
+		
+		nameValuePairs.add(new BasicNameValuePair("username",c.getLogin()));
+		nameValuePairs.add(new BasicNameValuePair("password",c.getPassword()));
+		
+		String json = parser.makeHttpRequest(url, "POST", nameValuePairs);
+		Log.e("RepondreMoi", json);
+	
+		
+		try {
+			JSONArray jarray = new JSONArray(json);
+			for (int i = 0; i < jarray.length(); i++) {
+				JSONObject obj = jarray.getJSONObject(i);
+				Societe s = new Societe(obj.getInt("rowid"), 
+										obj.getString("name"), 
+										obj.getString("address"), 
+										obj.getString("town"), 
+										obj.getString("phone"), 
+										obj.getString("fax"), 
+										obj.getString("email"), 
+										obj.getInt("type"), 
+										obj.getInt("company"), 
+										obj.getDouble("latitude"), 
+										obj.getDouble("longitude"));
+				list.add(s);
+			}
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

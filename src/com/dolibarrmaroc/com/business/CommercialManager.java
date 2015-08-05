@@ -9,8 +9,7 @@ import com.dolibarrmaroc.com.models.Societe;
 
 public interface CommercialManager {
 	public String insert(Compte c,Prospection prospect);
-	public String update(Compte c,Prospection prospect);
 	public ProspectData getInfos(Compte c);
-	
 	public List<Societe> getAll(Compte c);
+	public String update(Compte c,Prospection p); 
 }

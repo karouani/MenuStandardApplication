@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.location.LocationManager;
 
+import com.google.android.gms.location.LocationListener;
 import com.dolibarrmaroc.com.models.GpsTracker;
 
 public class GpsTrackerLatLng extends Activity{

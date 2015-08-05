@@ -2,6 +2,7 @@ package com.dolibarrmaroc.com.dao;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -14,12 +15,19 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.ls.LSResourceResolver;
 
+import android.R.integer;
+import android.content.Context;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.ConfigGps;
 import com.dolibarrmaroc.com.models.FactureGps;
 import com.dolibarrmaroc.com.models.FileData;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.Myinvoice;
 import com.dolibarrmaroc.com.models.Produit;
 import com.dolibarrmaroc.com.models.Prospection;
 import com.dolibarrmaroc.com.models.Reglement;

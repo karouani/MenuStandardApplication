@@ -177,10 +177,10 @@ public class UpdateApp extends AsyncTask<String,Void,Void>{
 			}
 			// close the output stream when complete //
 			fileOutput.close();
-			Toast.makeText(context, "Tï¿½lï¿½chargement tï¿½rminer. Ouvrir PDF par Application installer dans le device.", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "Téléchargement términer. Ouvrir PDF par Application installer dans le device.", Toast.LENGTH_LONG).show();
 
 		} catch (final Exception e) {
-			Toast.makeText(context, "Quelques erreurs. Cliquez sur retour puis rï¿½ssayer.", Toast.LENGTH_LONG).show();
+			Toast.makeText(context, "Quelques erreurs. Cliquez sur retour puis réssayer.", Toast.LENGTH_LONG).show();
 
 		}
 		return file;

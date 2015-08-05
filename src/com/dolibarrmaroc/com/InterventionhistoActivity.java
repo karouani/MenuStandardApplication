@@ -3,22 +3,36 @@ package com.dolibarrmaroc.com;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.annotation.SuppressLint;
+import org.joda.time.Duration;
+import org.joda.time.Hours;
+
+import com.dolibarrmaroc.com.adapter.InterventionAdapterView;
+import com.dolibarrmaroc.com.adapter.MyFactureAdapterView;
+import com.dolibarrmaroc.com.ReglementOfflineActivity.offlineTask;
+import com.dolibarrmaroc.com.models.BordereauGps;
+import com.dolibarrmaroc.com.models.BordreauIntervention;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.MyTicketPayement;
+import com.dolibarrmaroc.com.models.MyfactureAdapter;
+import com.dolibarrmaroc.com.models.Myinvoice;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+
+import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
-import android.text.TextUtils;
-import android.util.Log;
+import android.os.PowerManager.WakeLock;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,17 +42,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.SearchView.OnQueryTextListener;
 
-import com.dolibarrmaroc.com.adapter.InterventionAdapterView;
-import com.dolibarrmaroc.com.models.BordreauIntervention;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.MyfactureAdapter;
-import com.dolibarrmaroc.com.models.Myinvoice;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-
-@SuppressLint("NewApi")
 public class InterventionhistoActivity extends Activity  implements OnQueryTextListener {
 
 	private Compte compte;

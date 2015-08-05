@@ -1,12 +1,10 @@
 package com.dolibarrmaroc.com;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.utils.GpsTrackingServiceDao;
-import com.dolibarrmaroc.com.utils.JSONParser;
-import com.dolibarrmaroc.com.utils.URL;
 
 import android.app.Service;
 import android.content.Context;
@@ -16,12 +14,22 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.StrictMode;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.GpsTrackingServiceDao;
+import com.dolibarrmaroc.com.utils.JSONParser;
+import com.dolibarrmaroc.com.utils.URL;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
 
 public class ShowLocationActivity extends Service{
 
@@ -57,6 +65,8 @@ public class ShowLocationActivity extends Service{
 	private float LOCATION_DISTANCE = 16;
 
 	private int firstExecute = 0;
+	
+	private ioffline myoffline;
 
 	private LocationListener		onLocationChange	= new LocationListener()
 	{
@@ -78,36 +88,58 @@ public class ShowLocationActivity extends Service{
 		@Override
 		public void onLocationChanged(Location location)
 		{
+			if(compte != null){
+				if(Float.parseFloat(compte.getLevel()) <= batteryPct){
+					//Toast.makeText(this, location.toString(), Toast.LENGTH_LONG).show();
 
-			if(Float.parseFloat(compte.getLevel()) <= batteryPct){
-				//Toast.makeText(this, location.toString(), Toast.LENGTH_LONG).show();
-
-				Log.d("Je suis dans onLocationChanged()",location.toString());
-				
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:m:s");
-				String dateString = format.format( new Date(location.getTime()));
-				
-				Double latitude = location.getLatitude();
-				Double longitude = location.getLongitude();
-				float speed = location.getSpeed();
-				double altitude = location.getAltitude();
-				float direction = location.getBearing();
-				String satellite = location.getProvider()+"/"+dateString;
+					Log.d("Je suis dans onLocationChanged()",location.toString());
+					
+					SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:m:s");
+					String dateString = format.format( new Date(location.getTime()));
+					
+					Double latitude = location.getLatitude();
+					Double longitude = location.getLongitude();
+					float speed = location.getSpeed();
+					double altitude = location.getAltitude();
+					float direction = location.getBearing();
+					String satellite = location.getProvider()+"/"+dateString;
 
 
-				new GpsTrackingServiceDao(num, (int) batteryPct, latitude, longitude, speed, altitude, direction, satellite, dateString, compte);
-			}
-			else{
-				Log.e(TAG, "onDestroy");
-				if (mLocationManager != null) {
-						try {
-							mLocationManager.removeUpdates(this);
-							Log.i(TAG, "Remove location listners,");
-						} catch (Exception ex) {
-							Log.i(TAG, "fail to remove location listners, ignore", ex);
-						}
+					if(CheckOutNet.isNetworkConnected(getApplicationContext())){
+						new GpsTrackingServiceDao(num, (int) batteryPct, latitude, longitude, speed, altitude, direction, satellite, dateString, compte);
+					}else{
+						GpsTrackingServiceDao me = new GpsTrackingServiceDao();
+						me.setNum(num);
+						me.setLevel((int)batteryPct);
+						me.setLatitude(latitude);
+						me.setLongitude(longitude);
+						me.setSpeed(speed);
+						me.setAltitude(altitude);
+						me.setDirection(direction);
+						me.setSatellite(satellite);
+						me.setDateGps(dateString);
+						me.setCompte(compte);
+						
+						myoffline = new Offlineimpl(getApplicationContext());
+						//myoffline.shynchronizeGpsTracker(me);
+					}
+					
+					
+				}
+				else{
+					Log.e(TAG, "onDestroy");
+					if (mLocationManager != null) {
+							try {
+								mLocationManager.removeUpdates(this);
+								Log.i(TAG, "Remove location listners,");
+							} catch (Exception ex) {
+								Log.i(TAG, "fail to remove location listners, ignore", ex);
+							}
+					}
 				}
 			}
+
+			
 		}
 	};
 	
@@ -119,6 +151,10 @@ public class ShowLocationActivity extends Service{
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId)
 	{
+		if (android.os.Build.VERSION.SDK_INT > 9) {
+		    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		    StrictMode.setThreadPolicy(policy);
+		}
 		if(intent == null) {
 			stopService(new Intent(this,ShowLocationActivity.class));
 		}else{
@@ -174,4 +210,8 @@ public class ShowLocationActivity extends Service{
 			mLocationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
 		}
 	}
+
+	
+	 
+
 }

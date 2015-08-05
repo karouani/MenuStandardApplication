@@ -1,17 +1,45 @@
 package com.dolibarrmaroc.com;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import com.dolibarrmaroc.com.models.Compte;
+
+
 import android.app.Activity;
+import android.app.ActionBar;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.TabActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.text.InputFilter;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import com.dolibarrmaroc.com.models.Compte;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TabHost;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.TabHost.TabSpec;
+import android.os.Build;
+import android.os.PowerManager.WakeLock;
 
 @SuppressWarnings("deprecation")
 public class VendeurTabActivity extends Activity{

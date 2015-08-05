@@ -1,11 +1,22 @@
 package com.dolibarrmaroc.com;
 
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.Menu;
-
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Prospection;
+
+
+import android.app.Activity;
+import android.app.ActionBar;
+import android.app.Fragment;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+import android.os.Build;
 
 public class PersonnePhysiqueActivity extends Activity {
 	

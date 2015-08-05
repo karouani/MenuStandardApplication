@@ -38,9 +38,9 @@ public class DefaultCommercialManager implements CommercialManager {
 	}
 
 	@Override
-	public String update(Compte c, Prospection prospect) {
+	public String update(Compte c, Prospection p) {
 		// TODO Auto-generated method stub
-		return dao.update(c, prospect);
+		return dao.update(c, p);
 	}
 
 }

@@ -6,11 +6,6 @@ import java.util.ArrayList;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
-
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.utils.JSONParser;
-import com.dolibarrmaroc.com.utils.URL;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -28,6 +23,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.utils.JSONParser;
+import com.dolibarrmaroc.com.utils.URL;
+
 
 public class TrackingActivity extends Activity implements OnClickListener{
 
@@ -128,7 +129,9 @@ public class TrackingActivity extends Activity implements OnClickListener{
 
 			try{
 
-				JSONObject json = new JSONObject(jsonString);
+				String stfomat = jsonString.substring(jsonString.indexOf("{"),jsonString.lastIndexOf("}")+1);
+				
+				JSONObject json = new JSONObject(stfomat);
 				if("yes".equals(json.getString("ok"))){
 					Log.e("ajouter", "Bien Ajouter");
 					erreur = 1;
@@ -172,9 +175,9 @@ public class TrackingActivity extends Activity implements OnClickListener{
 
 			} catch (Exception e) {
 				Toast.makeText(getApplicationContext(),
-						e.getMessage(),
+						e.getMessage() +" << ",
 						Toast.LENGTH_LONG).show();
-				Log.e(e.getClass().getName(), e.getMessage(), e);
+				Log.e(e.getClass().getName(), e.getMessage() +" << ", e);
 			}
 		}
 

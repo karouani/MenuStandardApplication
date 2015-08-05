@@ -1,11 +1,22 @@
 package com.dolibarrmaroc.com.business;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.util.Log;
 
 import com.dolibarrmaroc.com.dao.PayementDao;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Payement;
 import com.dolibarrmaroc.com.models.Reglement;
+import com.dolibarrmaroc.com.utils.JSONParser;
+import com.dolibarrmaroc.com.utils.URL;
 
 public class DefaultPayementManager implements PayementManager{
 	

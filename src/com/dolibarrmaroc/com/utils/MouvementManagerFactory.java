@@ -1,5 +1,7 @@
 package com.dolibarrmaroc.com.utils;
 
+import javax.net.ssl.ManagerFactoryParameters;
+
 import com.dolibarrmaroc.com.business.DefaultMouvementManager;
 import com.dolibarrmaroc.com.business.MouvementManager;
 import com.dolibarrmaroc.com.dao.MouvementDao;

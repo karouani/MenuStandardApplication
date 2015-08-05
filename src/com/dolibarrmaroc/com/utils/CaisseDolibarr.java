@@ -5,15 +5,16 @@ import java.util.ArrayList;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.dolibarrmaroc.com.VendeurActivity;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.Produit;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.models.Client;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.Produit;
 
 public class CaisseDolibarr extends AsyncTask<Void, Void, String> {
 
@@ -30,7 +31,7 @@ public class CaisseDolibarr extends AsyncTask<Void, Void, String> {
 	public CaisseDolibarr() {
 		super();
 		// TODO Auto-generated constructor stub
-		dialog2 = ProgressDialog.show(this.context, "Enregistrement des donnï¿½es Donnï¿½es",
+		dialog2 = ProgressDialog.show(this.context, "Enregistrement des données Données",
 				"Attendez SVP...", true);
 	}
 

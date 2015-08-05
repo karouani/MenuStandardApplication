@@ -4,6 +4,15 @@ package com.dolibarrmaroc.com;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dolibarrmaroc.com.business.CommercialManager;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.ProspectData;
+import com.dolibarrmaroc.com.models.Prospection;
+import com.dolibarrmaroc.com.models.Societe;
+import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,32 +26,27 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
+import android.os.PowerManager.WakeLock;
 import android.text.InputFilter;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.business.CommercialManager;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.GpsTracker;
-import com.dolibarrmaroc.com.models.ProspectData;
-import com.dolibarrmaroc.com.models.Prospection;
-import com.dolibarrmaroc.com.models.Societe;
-import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class UpdateClientActivity extends Activity implements OnClickListener,OnItemSelectedListener,LocationListener{
 
@@ -133,8 +137,8 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 
 		scroll.setVisibility(LinearLayout.INVISIBLE);
 
-		dialog = ProgressDialog.show(UpdateClientActivity.this, "Récuperation Données",
-				"Attendez SVP...", true);
+		dialog = ProgressDialog.show(UpdateClientActivity.this, getResources().getString(R.string.map_data),
+				getResources().getString(R.string.msg_wait), true);
 		new ConnexionTask().execute();
 
 		super.onStart();
@@ -354,7 +358,7 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 				firstname.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
 
 				EditText lastname = new EditText(UpdateClientActivity.this);
-				lastname.setHint("Le Prénom");
+				lastname.setHint("Le Prenom");
 				lastname.setTag("comm_lasttname");
 
 				lastname.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -378,7 +382,7 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 			}else{
 				//name.setHint("Nom soci�t�");
 				EditText name = new EditText(UpdateClientActivity.this);
-				name.setHint("Nom société");
+				name.setHint("Nom societe");
 				name.setTag("comm_nome");
 				name.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -461,7 +465,7 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 		@Override
 		protected String doInBackground(Void... arg0) {
 			resu = manager.update(compte, client);
-			resu = "Ce client est mise à jour avec succées";
+			resu = "Ce client est mise � jour avec succ�es";
 			wakelock.acquire();
 			return null;
 		}
@@ -482,7 +486,8 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 					AlertDialog.Builder localBuilder = new AlertDialog.Builder(UpdateClientActivity.this);
 					localBuilder
 					.setMessage(resu)
-					.setCancelable(false)
+					.setCancelable(false);
+					/*
 					.setPositiveButton("Retour",
 							new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface paramDialogInterface, int paramInt) {
@@ -508,6 +513,7 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 							}
 						}
 					});
+					*/
 					localBuilder.setNegativeButton("Quitter ",
 							new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface paramDialogInterface, int paramInt) {

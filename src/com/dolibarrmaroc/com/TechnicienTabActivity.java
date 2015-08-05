@@ -1,16 +1,33 @@
 package com.dolibarrmaroc.com;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
+
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
+
+import android.app.Activity;
+import android.app.ActionBar;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.app.TabActivity;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.util.Log;
@@ -18,16 +35,16 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TabHost;
-import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
+import android.widget.TabHost.OnTabChangeListener;
+import android.widget.TabHost.TabSpec;
+import android.os.Build;
 
 public class TechnicienTabActivity extends TabActivity {
 

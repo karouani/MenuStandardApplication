@@ -3,8 +3,14 @@ package com.dolibarrmaroc.com;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -12,6 +18,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,9 +27,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.models.Client;
-import com.dolibarrmaroc.com.models.Compte;
 
 public class SecondStepTechnActivity extends Activity implements
 OnClickListener{
@@ -264,7 +268,7 @@ OnClickListener{
 						
 					startActivity(intent);
 				}else{
-					Toast.makeText(SecondStepTechnActivity.this, "Vï¿½rifiï¿½ l'heur de fin", Toast.LENGTH_LONG).show();
+					Toast.makeText(SecondStepTechnActivity.this, "Vérifié l'heur de fin", Toast.LENGTH_LONG).show();
 				}
 				
 				

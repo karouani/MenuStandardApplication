@@ -9,5 +9,5 @@ import com.dolibarrmaroc.com.models.Mouvement;
 public interface MouvementManager {
 	public LoadStock laodStock(Compte cp);
 	public String makemouvement(List<Mouvement> mvs,Compte cp,String label);
-	public String makeechange(List<Mouvement> mvs, Compte cp, String label,String clt);
+	public String makeechange(List<Mouvement> mvs, Compte cp, String label,String clt,int tpmv);
 }

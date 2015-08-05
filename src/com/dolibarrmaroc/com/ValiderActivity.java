@@ -5,13 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.FileData;
@@ -25,11 +18,22 @@ import com.dolibarrmaroc.com.models.PromoTicket;
 import com.dolibarrmaroc.com.models.Reglement;
 import com.dolibarrmaroc.com.models.Remises;
 import com.dolibarrmaroc.com.models.TotauxTicket;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
 import com.dolibarrmaroc.com.utils.MyTicket;
 import com.dolibarrmaroc.com.utils.ProduitTicket;
 import com.dolibarrmaroc.com.utils.TinyDB;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
+import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class ValiderActivity extends Activity {
 

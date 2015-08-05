@@ -2,9 +2,12 @@ package com.dolibarrmaroc.com;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -15,7 +18,22 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+
+
+
+
+
+
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.utils.Base64;
+import com.dolibarrmaroc.com.utils.URL;
+
+
 import android.app.Activity;
+import android.app.ActionBar;
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.gesture.GestureOverlayView;
@@ -26,15 +44,16 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.utils.Base64;
-import com.dolibarrmaroc.com.utils.URL;
+import android.os.Build;
 
 
 public class SignatureActivity extends Activity {
@@ -221,7 +240,7 @@ public class SignatureActivity extends Activity {
 			try {
 				if (dialog.isShowing()){
 					dialog.dismiss();
-					Toast.makeText(SignatureActivity.this, "Opï¿½ration effectuer avec success !! ", Toast.LENGTH_LONG).show();
+					Toast.makeText(SignatureActivity.this, "Opération effectuer avec success !! ", Toast.LENGTH_LONG).show();
 					Intent intent = new Intent(SignatureActivity.this,VendeurActivity.class);
 					intent.putExtra("user", compte);
 					startActivity(intent);

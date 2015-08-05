@@ -7,7 +7,7 @@ public class DateString {
 	 public static String getFileName() {
 		        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		         String date = format.format(new Date(System.currentTimeMillis()));
-		        return date;// 2012ï¿½ï¿½10ï¿½ï¿½03ï¿½ï¿½ 23:41:31
+		        return date;// 2012Äê10ÔÂ03ÈÕ 23:41:31
 		    }
 
 		     public static String getDateEN() {

@@ -39,7 +39,7 @@ public class MyService extends Service {
 			Double longitude = location.getLongitude();
 
 			Toast.makeText(getBaseContext(),
-					"Voici les coordonnï¿½es de votre tï¿½lï¿½phone : " + latitude + " " + longitude,
+					"Voici les coordonnées de votre téléphone : " + latitude + " " + longitude,
 					Toast.LENGTH_LONG).show();
 		}
 	};

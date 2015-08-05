@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.ConfigGps;
 import com.dolibarrmaroc.com.models.FactureGps;
 import com.dolibarrmaroc.com.models.FileData;
 import com.dolibarrmaroc.com.models.Produit;

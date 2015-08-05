@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 public class Utils {
 	/**
-	 * ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢ï¿½ï¿½
+	 * ÏÔÊ¾ÏûÏ¢¿ò
 	 */
 	public static void ShowMessage(Context context, String msg){
 		Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
@@ -37,11 +37,11 @@ public class Utils {
 		}
 	}
 
-	 /**ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ ï¿½ï¿½È¡ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½**/
+	 /**½âÎöÍ¼Æ¬ »ñÈ¡´òÓ¡Êý¾Ý**/
 	 public static byte[] getReadBitMapBytes(Bitmap bitmap) {
-	     /***Í¼Æ¬ï¿½ï¿½ï¿½Ë®Ó¡**/
+	     /***Í¼Æ¬Ìí¼ÓË®Ó¡**/
 	     //bitmap = createBitmap(bitmap);
-	     byte[] bytes = null;  //ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½
+	     byte[] bytes = null;  //´òÓ¡Êý¾Ý
 	     int width = bitmap.getWidth();
 	     int height = bitmap.getHeight();
 	     System.out.println("width=" + width + ", height=" + height);
@@ -50,13 +50,13 @@ public class Utils {
 	     int m1, n1;
 	     byte[] maparray = new byte[bufsize];
 	     byte[] rgb = new byte[3];
-	     int []pixels = new int[width * height]; //Í¨ï¿½ï¿½Î»Í¼ï¿½Ä´ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
+	     int []pixels = new int[width * height]; //Í¨¹ýÎ»Í¼µÄ´óÐ¡´´½¨ÏñËØµãÊý×é
 
 	     bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
-	       /**ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ ï¿½ï¿½È¡Î»Í¼ï¿½ï¿½ï¿½ï¿½**/
+	       /**½âÎöÍ¼Æ¬ »ñÈ¡Î»Í¼Êý¾Ý**/
 	     for (int j = 0;j < height; j++) {
 	       for (int i = 0; i < width; i++) {
-	            int pixel = pixels[width * j + i]; /**ï¿½ï¿½È¡ï¿½Ò£Ç£ï¿½Öµ**/
+	            int pixel = pixels[width * j + i]; /**»ñÈ¡£Ò£Ç£ÂÖµ**/
 	            int r = Color.red(pixel);
 	             int g = Color.green(pixel);
 	           int b = Color.blue(pixel);
@@ -64,7 +64,7 @@ public class Utils {
 	           	rgb[0] = (byte)r;
 	            rgb[1] = (byte)g;
 	            rgb[2] = (byte)b;
-	            if (r != 255 || g != 255 || b != 255){//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¿Õ°×µÄ»ï¿½ï¿½Ãºï¿½É«ï¿½ï¿½ï¿½    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¯Ð¬Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï´¦ï¿½ï¿½
+	            if (r != 255 || g != 255 || b != 255){//Èç¹û²»ÊÇ¿Õ°×µÄ»°ÓÃºÚÉ«Ìî³ä    ÕâÀïÈç¹ûÍ¯Ð¬Òª¹ýÂËÑÕÉ«ÔÚÕâÀï´¦Àí
 	                   m1 = (j / 8) * width + i;
 	                    n1 = j - (j / 8) * 8;
 	                    maparray[m1] |= (byte)(1 << 7 - ((byte)n1));
@@ -76,23 +76,23 @@ public class Utils {
 	     int j = 0;
 	     ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-	     /**ï¿½ï¿½Î»Í¼ï¿½ï¿½ï¿½Ý½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½**/
+	     /**¶ÔÎ»Í¼Êý¾Ý½øÐÐ´¦Àí**/
 	     for (int i = 0; i < maparray.length; i++) {
 	         b[j] = maparray[i];
 	         j++;
-	       if (j == 322) {  /**  322Í¼Æ¬ï¿½Ä¿ï¿½ **/
+	       if (j == 322) {  /**  322Í¼Æ¬µÄ¿í **/
 	            if (line < ((322 - 1) / 8)) {
 	                byte[] lineByte = new byte[329];
 	                 byte nL = (byte) 322;
 	                byte nH = (byte) (322 >> 8);
 	                 int index = 5;
-	                 /**ï¿½ï¿½Ó´ï¿½Ó¡Í¼Æ¬Ç°ï¿½ï¿½ï¿½Ö·ï¿½  Ã¿ï¿½Ðµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½8Î»**/
+	                 /**Ìí¼Ó´òÓ¡Í¼Æ¬Ç°µ¼×Ö·û  Ã¿ÐÐµÄ ÕâÀïÊÇ8Î»**/
 	                lineByte[0] = 0x1B;
 	               lineByte[1] = 0x2A;
 	                lineByte[2] = 1;
 	                lineByte[3] = nL;
 	                lineByte[4] = nH;
-	                /**copy ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½**/
+	                /**copy Êý×éÊý¾Ý**/
 	                System.arraycopy(b, 0, lineByte, index, b.length);
 
 	                lineByte[lineByte.length - 2] = 0x0D;
@@ -112,17 +112,17 @@ public class Utils {
 	     return bytes;
 	 }
 
-	 // ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½Ë®Ó¡
+	 // ¸øÍ¼Æ¬Ìí¼ÓË®Ó¡
 	    public static Bitmap createBitmap(Bitmap src) {
 	        Time t = new Time();
 	        t.setToNow();
 	        int w = src.getWidth();
 	        int h = src.getHeight();
-	        String mstrTitle = t.year + " ï¿½ï¿½ " + (t.month +1) + " ï¿½ï¿½ " + t.monthDay+" ï¿½ï¿½";
+	        String mstrTitle = t.year + " Äê " + (t.month +1) + " ÔÂ " + t.monthDay+" ÈÕ";
 	        Bitmap bmpTemp = Bitmap.createBitmap(w, h, Config.ARGB_8888);
 	        Canvas canvas = new Canvas(bmpTemp);
 	        Paint p = new Paint();
-	        String familyName = "ï¿½ï¿½ï¿½ï¿½";
+	        String familyName = "ËÎÌå";
 	        Typeface font = Typeface.create(familyName, Typeface.BOLD);
 	        p.setColor(Color.BLACK);
 	        p.setTypeface(font);
@@ -135,43 +135,43 @@ public class Utils {
 	   }
 
 	    /**
-	     * ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½,Í¨ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½Ä·ï¿½ï¿½Å·Ö¸ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+	     * ×Ö·û´®·Ö¸î,Í¨¹ýÖ¸¶¨µÄ·ûºÅ·Ö¸î×Ö·û´®
 	     */
 	    public static String[] StringSplit(String original, String regex){
-	        // È¡ï¿½Ó´ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½Ã¡ï¿½
+	        // È¡×Ó´®µÄÆðÊ¼Î»ÖÃ¡¡
 	        int startIndex = 0;
-	        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½ï¿½Vectorï¿½Ð¡ï¿½
+	        // ½«½á¹ûÊý¾ÝÏÈ·ÅÈëVectorÖÐ¡¡
 	        Vector v = new Vector();
-	        // ï¿½ï¿½ï¿½ØµÄ½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¡¡
+	        // ·µ»ØµÄ½á¹û×Ö·û´®Êý×é¡¡
 	        String[] str = null;
-	        // ï¿½æ´¢È¡ï¿½Ó´ï¿½Ê±ï¿½ï¿½Ê¼Î»ï¿½Ã¡ï¿½
+	        // ´æ´¢È¡×Ó´®Ê±ÆðÊ¼Î»ÖÃ¡¡
 	        int index = 0;
-	        // ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½ï¿½Ó´ï¿½ï¿½ï¿½Î»ï¿½Ã¡ï¿½
+	        // »ñµÃÆ¥Åä×Ó´®µÄÎ»ÖÃ¡¡
 	        startIndex = original.indexOf(regex);
 	        //
 	        System.out.println("0" + startIndex);
-	        // ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½È£ï¿½ï¿½ï¿½Ö¤ï¿½ï¿½Ã»ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½Ä©Î²ï¿½ï¿½ï¿½ï¿½
-	        // -1ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä©Î²ï¿½ï¿½
+	        // Èç¹ûÆðÊ¼×Ö·û´®µÄÎ»ÖÃÐ¡ÓÚ×Ö·û´®µÄ³¤¶È£¬ÔòÖ¤Ã÷Ã»ÓÐÈ¡µ½×Ö·û´®Ä©Î²¡£¡¡
+	        // -1´ú±íÈ¡µ½ÁËÄ©Î²¡¡
 	        while (startIndex < original.length() && startIndex != -1)
 	        {
 	            String temp = original.substring(index, startIndex);
 	            System.out.println(" " + startIndex);
-	            // È¡ï¿½Ó´ï¿½ï¿½ï¿½ï¿½ï¿½
+	            // È¡×Ó´®¡¡¡¡
 	            v.addElement(temp);
-	            // ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ó´ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½Ã¡ï¿½ï¿½ï¿½
+	            // ÉèÖÃÈ¡×Ó´®µÄÆðÊ¼Î»ÖÃ¡¡¡¡
 	            index = startIndex + regex.length();
-	            // ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½ï¿½Ó´ï¿½ï¿½ï¿½Î»ï¿½Ã¡ï¿½ï¿½ï¿½
+	            // »ñµÃÆ¥Åä×Ó´®µÄÎ»ÖÃ¡¡¡¡
 	            startIndex = original.indexOf(regex, startIndex + regex.length());
 	        }
-	        // È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó´ï¿½ï¿½ï¿½
+	        // È¡½áÊøµÄ×Ó´®¡¡
 	        v.addElement(original.substring(index + 1 - regex.length()));
-	        // ï¿½ï¿½Vectorï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½é¡¡
+	        // ½«Vector¶ÔÏó×ª»»³ÉÊý×é¡¡
 	        str = new String[v.size()];
 	        for (int i = 0; i < v.size(); i++)
 	        {
 	            str[i] = (String) v.elementAt(i);
 	        }
-	        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½ï¿½ï¿½ï¿½é¡¡
+	        // ·µ»ØÉú³ÉµÄÊý×é¡¡
 	        return str;
 	    }
 }

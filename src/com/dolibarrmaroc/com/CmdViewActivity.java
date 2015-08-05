@@ -1,47 +1,76 @@
 package com.dolibarrmaroc.com;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.annotation.SuppressLint;
+import com.dolibarrmaroc.com.adapter.MyCmdAdapter;
+import com.dolibarrmaroc.com.adapter.MyFactureAdapterView;
+import com.dolibarrmaroc.com.PayementActivity.ConnexionTask;
+import com.dolibarrmaroc.com.PayementActivity.OfflineTask;
+import com.dolibarrmaroc.com.PayementActivity.ServerSideTask;
+import com.dolibarrmaroc.com.business.CommandeManager;
+import com.dolibarrmaroc.com.models.Commandeview;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.MyTicketBluetooth;
+import com.dolibarrmaroc.com.models.MyfactureAdapter;
+import com.dolibarrmaroc.com.models.Myinvoice;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.Reglement;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+import com.dolibarrmaroc.com.ticket.FactureTicketActivity;
+import com.dolibarrmaroc.com.ticket.ReglementTicketActivity;
+
+import android.support.v7.app.ActionBarActivity;
+import android.text.InputFilter;
+import android.text.TextUtils;
+import android.util.Log;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SearchView.OnQueryTextListener;
+import android.widget.SimpleAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
-import com.dolibarrmaroc.com.adapter.MyCmdAdapter;
-import com.dolibarrmaroc.com.business.CommandeManager;
-import com.dolibarrmaroc.com.models.Commandeview;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.MyfactureAdapter;
-import com.dolibarrmaroc.com.models.Myinvoice;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
-import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
-
-@SuppressLint("NewApi") 
 public class CmdViewActivity extends Activity implements OnItemClickListener,OnQueryTextListener{
 
 	private Compte compte;
@@ -202,9 +231,9 @@ public class CmdViewActivity extends Activity implements OnItemClickListener,OnQ
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			CmdViewActivity.this.finish();
-			Intent intent1 = new Intent(CmdViewActivity.this, VendeurActivity.class);
+			Intent intent1 = new Intent(CmdViewActivity.this, CatalogeActivity.class);
 			intent1.putExtra("user", compte);
-			intent1.putExtra("cmd", "0");
+			intent1.putExtra("cmd", "1");
 			startActivity(intent1);
 		}
 		return false;

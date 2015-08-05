@@ -4,31 +4,68 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
+import com.google.android.gms.analytics.HitBuilders.SocialBuilder;
+import com.google.gson.Gson;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.Dictionnaire;
+import com.dolibarrmaroc.com.models.FileData;
+import com.dolibarrmaroc.com.models.MyTicketBluetooth;
+import com.dolibarrmaroc.com.models.MyTicketPayement;
+import com.dolibarrmaroc.com.models.MyTicketWitouhtProduct;
+import com.dolibarrmaroc.com.models.Myinvoice;
+import com.dolibarrmaroc.com.models.Payement;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.PromoTicket;
+import com.dolibarrmaroc.com.models.Reglement;
+import com.dolibarrmaroc.com.models.Remises;
+import com.dolibarrmaroc.com.models.TotauxTicket;
+import com.dolibarrmaroc.com.utils.MyTicket;
+import com.dolibarrmaroc.com.utils.ProduitTicket;
+import com.dolibarrmaroc.com.utils.TinyDB;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v4.app.Fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
-import com.dolibarrmaroc.com.models.Client;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.MyTicketPayement;
-import com.dolibarrmaroc.com.models.MyTicketWitouhtProduct;
-import com.dolibarrmaroc.com.models.Payement;
-import com.dolibarrmaroc.com.models.Reglement;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
-import com.dolibarrmaroc.com.utils.MyTicket;
-import com.google.gson.Gson;
+import android.os.Build;
 
 public class TicketOfflineActivity extends Activity {
 
@@ -38,7 +75,7 @@ public class TicketOfflineActivity extends Activity {
 	private double ttc_remise = 0;
 
 	private ioffline myoffline;
-
+	
 	// Message types sent from the BluetoothChatService Handler
 	public static final int MESSAGE_STATE_CHANGE = 1;
 	public static final int MESSAGE_READ = 2;
@@ -80,7 +117,7 @@ public class TicketOfflineActivity extends Activity {
 	private Button autre,quitter;
 	private List<Reglement> lsreg;
 	private ArrayList<HashMap<String, String>> dico;
-
+	
 	private int okey = 0;
 	private int msrg =0;
 
@@ -94,7 +131,7 @@ public class TicketOfflineActivity extends Activity {
 			Bundle objetbunble  = this.getIntent().getExtras();
 
 			ticket = new MyTicket();
-
+			
 			myoffline = new Offlineimpl(getApplicationContext());
 
 			if (objetbunble != null) {
@@ -105,12 +142,12 @@ public class TicketOfflineActivity extends Activity {
 				clt = (Client)getIntent().getSerializableExtra("clt");
 				dico = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("dico");
 				lsreg = new ArrayList<>();
-
-
-
-
+				
+				
+				
+				
 				msrg = (Integer)getIntent().getSerializableExtra("lsreg");
-
+			
 				if(msrg > 0){
 					for (int i = 0; i < msrg; i++) {
 						Reglement r = (Reglement)getIntent().getSerializableExtra("reg"+i);
@@ -119,7 +156,7 @@ public class TicketOfflineActivity extends Activity {
 					}
 				}
 			}
-
+			
 			SelectedBDAddress = "";
 			if((myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter())==null)
 			{
@@ -131,7 +168,7 @@ public class TicketOfflineActivity extends Activity {
 				startActivityForResult(enableBtIntent, 2);
 			}
 
-
+			
 
 			/******************* REMPLIR TICKET ************************************/
 			ticket.setAddresse(removeDiacritic(offlineticket.getAddresse()));
@@ -151,14 +188,14 @@ public class TicketOfflineActivity extends Activity {
 
 
 			myoffline.shynchronizePayemntTicket(new MyTicketPayement(compte, ticket, offlineticket, clt, mypay, myreg, lsreg));
-
-
+			
+			
 			autre = (Button) findViewById(R.id.geocom);
 			autre.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
-
+					
 					SelectedBDAddress = "";
 					if((myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter())==null)
 					{
@@ -180,8 +217,8 @@ public class TicketOfflineActivity extends Activity {
 						Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);    
 						startActivityForResult(enableBtIntent, 2);
 					}
-
-
+					
+					
 					createTicket(ticket);
 				}
 			});
@@ -280,16 +317,16 @@ public class TicketOfflineActivity extends Activity {
 			Log.e("data nulled","walo walo");
 			onStart();
 		}
-
+	
 	}
-
+	
 	private void createTicket2(MyTicket ticket) {
 		DecimalFormat df = new DecimalFormat("0.00");
 		double ht = (mypay.getTotal()*100)/120D;
 		double ttc = mypay.getTotal();
 		double regle = myreg.getAmount();
 		double cpt =  mypay.getTotal() - (mypay.getAmount()+myreg.getAmount());
-
+		
 		Log.e("MyTicket",ticket.toString()+ "ht# "+ht+" ttc# "+ttc+" regl#  "+regle+" cpt# "+cpt+" tva# "+df.format(mypay.getTotal() - ht));
 	}
 
@@ -298,7 +335,7 @@ public class TicketOfflineActivity extends Activity {
 	private void createTicket(MyTicket ticket) {
 		if(!BluetoothPrintDriver.IsNoConnection()){
 			BluetoothPrintDriver.Begin();
-
+			
 			Gson gson = new Gson();
 
 			/******************* ENVOYER TICKET ************************************/
@@ -395,7 +432,7 @@ public class TicketOfflineActivity extends Activity {
 			BluetoothPrintDriver.excute();
 			BluetoothPrintDriver.ClearData();
 
-			 */
+			*/
 			DecimalFormat df = new DecimalFormat("0.00");
 
 			/************************** LEs tautaux ********************************************/
@@ -413,7 +450,7 @@ public class TicketOfflineActivity extends Activity {
 			BluetoothPrintDriver.excute();
 			BluetoothPrintDriver.ClearData();
 
-			 */
+			*/
 			/*------------------------ HT---------------------------*/
 
 			String data = getResources().getString(R.string.total_ht);
@@ -523,11 +560,11 @@ public class TicketOfflineActivity extends Activity {
 			BluetoothPrintDriver.excute();
 			BluetoothPrintDriver.ClearData();
 
-
+			
 			BluetoothPrintDriver.LF();
 			BluetoothPrintDriver.excute();
 			BluetoothPrintDriver.ClearData();
-
+			
 
 			/************************ BAR CODE **************************************************/
 			BluetoothPrintDriver.SetCharacterFont((byte) 0x00);
@@ -546,8 +583,8 @@ public class TicketOfflineActivity extends Activity {
 				print1DBarcodeStr = ticket.getNumFacture().substring(2);
 			}
 
-			 */
-
+			*/
+			
 			if (ticket.getNumFacture().substring(2).length() > 7) {
 				int p = ticket.getNumFacture().indexOf("-");
 				tmp = ticket.getNumFacture().substring(p);
@@ -700,13 +737,13 @@ public class TicketOfflineActivity extends Activity {
 			BluetoothPrintDriver.LF();
 			BluetoothPrintDriver.excute();
 			BluetoothPrintDriver.ClearData();
-			 */
+			*/
 		}else{
 			onStart();
 		}
-
-
-
+		
+		
+		
 	}
 
 
@@ -766,7 +803,7 @@ public class TicketOfflineActivity extends Activity {
 		}
 		return new String(vysl);
 	}
-
+	
 	public double offlineregl(){
 		double res =0;
 		if(this.lsreg.size() > 0){
@@ -777,7 +814,7 @@ public class TicketOfflineActivity extends Activity {
 		Log.e("ttamont",res+"");
 		return res;
 	}
-
+	
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		Log.e("data keyup","is in");

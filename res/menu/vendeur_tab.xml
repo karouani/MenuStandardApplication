@@ -24,6 +24,12 @@
         android:showAsAction="ifRoom"
         android:title="Ajouter Client"/>
 	
+	<item android:id="@+id/updateUserMenu" 
+	    android:icon="@drawable/app_textboxdude" 
+	    android:orderInCategory="0" 
+	    android:showAsAction="ifRoom|withText" 
+	    android:title="MAJ Client" /> 
+	
 	<item
         android:id="@+id/createofflineticket"
         android:icon="@drawable/sys_clipboard"
@@ -48,5 +54,12 @@
         android:orderInCategory="0"
         android:showAsAction="ifRoom"
         android:title="Passer des commandes"/>
+	
+	<item
+        android:id="@+id/clsv"
+        android:icon="@drawable/sys_grid"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom"
+        android:title="Vider rendus et echanges"/>
 	
 </menu>

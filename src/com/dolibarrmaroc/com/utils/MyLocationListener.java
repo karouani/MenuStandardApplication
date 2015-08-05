@@ -3,6 +3,8 @@ package com.dolibarrmaroc.com.utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.dolibarrmaroc.com.models.GpsTracker;
+
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;

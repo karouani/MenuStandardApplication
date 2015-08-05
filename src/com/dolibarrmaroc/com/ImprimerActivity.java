@@ -143,22 +143,22 @@ public class ImprimerActivity extends Activity {
 				per = ((float) downloadedSize / totalsize) * 100;
 				setText("La taille total de fichiers  : "
 						+ (totalsize / 1024)
-						+ " KB\n\nTï¿½lï¿½chargement du PDF " + (int) per
+						+ " KB\n\nTéléchargement du PDF " + (int) per
 						+ "% complete");
 			}
 			// close the output stream when complete //
 			fileOutput.close();
-			setText("Tï¿½lï¿½chargement Tï¿½rminï¿½. Ouvrir PDF par Application installer dans le device.");
+			setText("Téléchargement Términé. Ouvrir PDF par Application installer dans le device.");
 
 		} catch (final MalformedURLException e) {
-			setTextError("Quelques erreurs. Cliquez sur retour puis rï¿½ssayer.",
+			setTextError("Quelques erreurs. Cliquez sur retour puis réssayer.",
 					Color.RED);
 		} catch (final IOException e) {
-			setTextError("Quelques erreurs. Cliquez sur retour puis rï¿½ssayer.",
+			setTextError("Quelques erreurs. Cliquez sur retour puis réssayer.",
 					Color.RED);
 		} catch (final Exception e) {
 			setTextError(
-					"Erreur dans le tï¿½lï¿½chargement SVP vï¿½rifiez votre connexion.",
+					"Erreur dans le téléchargement SVP vérifiez votre connexion.",
 					Color.RED);
 		}
 		return file;

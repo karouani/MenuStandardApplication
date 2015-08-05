@@ -1,9 +1,42 @@
 package com.dolibarrmaroc.com;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TimeZone;
 
+import com.dolibarrmaroc.com.business.CommercialManager;
+import com.dolibarrmaroc.com.business.MouvementManager;
+import com.dolibarrmaroc.com.business.PayementManager;
+import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.dao.MouvementDao;
+import com.dolibarrmaroc.com.dao.MouvementDaoMysql;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.Dictionnaire;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.LoadStock;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.Promotion;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
+import com.dolibarrmaroc.com.utils.JSONParser;
+import com.dolibarrmaroc.com.utils.MouvementManagerFactory;
+import com.dolibarrmaroc.com.utils.PayementManagerFactory;
+import com.dolibarrmaroc.com.utils.TinyDB;
+import com.dolibarrmaroc.com.database.StockVirtual;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+
+import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -11,14 +44,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextWatcher;
+import android.os.PowerManager.WakeLock;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -27,8 +59,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -36,15 +66,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.business.MouvementManager;
-import com.dolibarrmaroc.com.database.DataErreur.StockVirtual;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.LoadStock;
-import com.dolibarrmaroc.com.models.Produit;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
-import com.dolibarrmaroc.com.utils.MouvementManagerFactory;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class TransfertstockActivity extends Activity implements OnClickListener,OnItemSelectedListener{
 	
@@ -256,9 +279,9 @@ public class TransfertstockActivity extends Activity implements OnClickListener,
 			mystock = stockManager.laodStock(compte);
 			
 			for (int i = 0; i < mystock.getLsprod().size(); i++) {
-				for (int j = 0; j < sv.getAllProduits().size(); j++) {
-					if(mystock.getLsprod().get(i).getRef().equals(sv.getAllProduits().get(j).getId())){
-						mystock.getLsprod().get(i).setQteDispo(mystock.getLsprod().get(i).getQteDispo() - sv.getAllProduits().get(j).getQteDispo());
+				for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+					if(mystock.getLsprod().get(i).getRef().equals(sv.getAllProduits(-1).get(j).getId())){
+						mystock.getLsprod().get(i).setQteDispo(mystock.getLsprod().get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
 					}
 				}
 			}
@@ -518,7 +541,7 @@ public class TransfertstockActivity extends Activity implements OnClickListener,
 		AlertDialog.Builder alert = new AlertDialog.Builder(TransfertstockActivity.this);
 		alert.setTitle(getResources().getString(R.string.error));
 		alert.setMessage(msg);
-		alert.setNegativeButton("Lancer ï¿½ nouveau", new DialogInterface.OnClickListener() {
+		alert.setNegativeButton("Lancer à nouveau", new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface d, int which) {

@@ -41,15 +41,6 @@ import android.widget.Toast;
 import com.android2ee.formation.librairies.google.map.utils.direction.DCACallBack;
 import com.android2ee.formation.librairies.google.map.utils.direction.GDirectionsApiUtils;
 import com.android2ee.formation.librairies.google.map.utils.direction.model.GDirection;
-import com.dolibarrmaroc.com.business.FactureManager;
-import com.dolibarrmaroc.com.business.VendeurManager;
-import com.dolibarrmaroc.com.models.Client;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.FactureGps;
-import com.dolibarrmaroc.com.utils.FactureManagerFactory;
-import com.dolibarrmaroc.com.utils.ForcerActivationGps;
-import com.dolibarrmaroc.com.utils.MyLocationListener;
-import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
 import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
@@ -67,6 +58,16 @@ import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import com.dolibarrmaroc.com.business.FactureManager;
+import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.FactureGps;
+import com.dolibarrmaroc.com.utils.FactureManagerFactory;
+import com.dolibarrmaroc.com.utils.ForcerActivationGps;
+import com.dolibarrmaroc.com.utils.MyLocationListener;
+import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 
 
 @SuppressLint("NewApi")
@@ -261,7 +262,7 @@ OnMyLocationButtonClickListener,DCACallBack{
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface paramDialogInterface, int paramInt) {
 				MainActivity.this.showGpsOptions();
-				//forcer.turnGPSOn();
+				forcer.turnGPSOn();
 			}
 		}
 				);

@@ -3,24 +3,41 @@ package com.dolibarrmaroc.com;
 
 import java.util.ArrayList;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
+
+import com.dolibarrmaroc.com.ConnexionActivity.ConnexionTask;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.utils.JSONParser;
+
+
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.utils.JSONParser;
+import android.os.Build;
 
 public class GpsTrackerActivity extends Activity implements OnClickListener{
 

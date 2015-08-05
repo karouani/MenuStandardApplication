@@ -1,9 +1,23 @@
 package com.dolibarrmaroc.com;
 
 import java.io.File;
+import java.util.ArrayList;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.utils.JSONParser;
+
 
 import android.app.Activity;
+import android.app.ActionBar;
 import android.app.Dialog;
+import android.app.Fragment;
+import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -11,20 +25,22 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.webkit.WebSettings.PluginState;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.utils.JSONParser;
+import android.os.Build;
+import android.provider.MediaStore;
 
 public class ReadPDFActivity extends Activity {
 

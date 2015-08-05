@@ -5,12 +5,50 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.annotation.SuppressLint;
+import com.karouani.cicin.widget.AutocompleteCustomArrayAdapter;
+import com.karouani.cicin.widget.CustomAutoCompleteTextChangedListener;
+import com.karouani.cicin.widget.CustomAutoCompleteView;
+import com.dolibarrmaroc.com.adapter.ExpandListAdapter;
+import com.dolibarrmaroc.com.adapter.InterventionAdapterView;
+import com.dolibarrmaroc.com.VendeurActivity.ConnexionTask;
+import com.dolibarrmaroc.com.business.CommercialManager;
+import com.dolibarrmaroc.com.business.PayementManager;
+import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.dao.CategorieDao;
+import com.dolibarrmaroc.com.dao.CategorieDaoMysql;
+import com.dolibarrmaroc.com.models.Categorie;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.Dictionnaire;
+import com.dolibarrmaroc.com.models.FileData;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.MyfactureAdapter;
+import com.dolibarrmaroc.com.models.Myinvoice;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.Promotion;
+import com.dolibarrmaroc.com.models.Prospection;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
+import com.dolibarrmaroc.com.utils.JSONParser;
+import com.dolibarrmaroc.com.utils.MyLocationListener;
+import com.dolibarrmaroc.com.utils.PayementManagerFactory;
+import com.dolibarrmaroc.com.utils.TinyDB;
+import com.dolibarrmaroc.com.utils.UrlImage;
+import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
+
+import com.dolibarrmaroc.com.database.DatabaseHandler;
+import com.dolibarrmaroc.com.database.StockVirtual;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+
+import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,13 +57,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
-import android.text.Editable;
-import android.text.TextUtils;
-import android.text.TextWatcher;
+import android.os.PowerManager.WakeLock;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,6 +69,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -41,38 +78,17 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.SearchView;
-import android.widget.SearchView.OnQueryTextListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.SearchView.OnQueryTextListener;
+import android.text.TextWatcher;
 
-import com.dolibarrmaroc.com.adapter.ExpandListAdapter;
-import com.dolibarrmaroc.com.business.VendeurManager;
-import com.dolibarrmaroc.com.dao.CategorieDao;
-import com.dolibarrmaroc.com.dao.CategorieDaoMysql;
-import com.dolibarrmaroc.com.database.DataErreur.StockVirtual;
-import com.dolibarrmaroc.com.models.Categorie;
-import com.dolibarrmaroc.com.models.Client;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.Dictionnaire;
-import com.dolibarrmaroc.com.models.GpsTracker;
-import com.dolibarrmaroc.com.models.Produit;
-import com.dolibarrmaroc.com.models.Promotion;
-import com.dolibarrmaroc.com.models.Prospection;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
-import com.dolibarrmaroc.com.utils.JSONParser;
-import com.dolibarrmaroc.com.utils.MyLocationListener;
-import com.dolibarrmaroc.com.utils.TinyDB;
-import com.dolibarrmaroc.com.utils.UrlImage;
-import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
-import com.karouani.cicin.widget.AutocompleteCustomArrayAdapter;
-import com.karouani.cicin.widget.CustomAutoCompleteTextChangedListener;
-import com.karouani.cicin.widget.CustomAutoCompleteView;
-
-@SuppressLint("NewApi") public class CatalogeActivity extends Activity implements OnQueryTextListener,OnItemSelectedListener ,TextWatcher,OnItemClickListener{
+public class CatalogeActivity extends Activity implements OnQueryTextListener,OnItemSelectedListener ,TextWatcher,OnItemClickListener{
 	
 	private Compte compte;
 	private CategorieDao categorie;
@@ -329,7 +345,7 @@ import com.karouani.cicin.widget.CustomAutoCompleteView;
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		 
-		/*
+		
 		switch (id) {
 		case R.id.viewcmdpr:
 			Intent intent8 = new Intent(CatalogeActivity.this, CmdViewActivity.class);
@@ -339,8 +355,8 @@ import com.karouani.cicin.widget.CustomAutoCompleteView;
 			break;
 		}
 		
-		*/
-		return super.onOptionsItemSelected(item);
+		
+		return true; //super.onOptionsItemSelected(item);
 	}
 	
 	public void alertPutQty(){
@@ -541,7 +557,7 @@ import com.karouani.cicin.widget.CustomAutoCompleteView;
 		searchView.setOnQueryTextListener(this);
 
 		
-		menu.removeItem(R.id.viewcmdpr);
+		//menu.removeItem(R.id.viewcmdpr);
 		if(compte != null){
 			if(compte.getPermissionbl() == 0){
 				menu.removeItem(R.id.viewcmdpr);
@@ -765,16 +781,22 @@ import com.karouani.cicin.widget.CustomAutoCompleteView;
 			}
 			*/
 			
+			myoffline = new Offlineimpl(getApplicationContext());
+			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
+				myoffline.SendOutData(compte);
+			}
+			
+			
 			lscats = categorie.LoadCategories(compte);
 			
 			products = vendeurManager.selectAllProduct(compte);
 			
 			for (int i = 0; i < products.size(); i++) {
-				for (int j = 0; j < sv.getAllProduits().size(); j++) {
+				for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
 					//Log.e(products.get(i).getId()+"",sv.getAllProduits().get(j).getRef());
-					if(Integer.parseInt(sv.getAllProduits().get(j).getRef()) == products.get(i).getId()){
+					if(Integer.parseInt(sv.getAllProduits(-1).get(j).getRef()) == products.get(i).getId()){
 						Log.e("qte1 "+products.get(i).getId(),products.get(i).getQteDispo()+"");
-						products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits().get(j).getQteDispo());
+						products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
 						Log.e("qte2 "+products.get(i).getId(),products.get(i).getQteDispo()+"");
 					}
 				}
@@ -875,12 +897,37 @@ import com.karouani.cicin.widget.CustomAutoCompleteView;
 			        
 					addItemsOnSpinner(clientspinner,1);
 					firstexecution = 1989;
+					
+					String msg ="";
+
+					if(nprod == 0){
+						msg += getResources().getString(R.string.caus26)+"\n";
+					}
+
+					if(nclt == 0){
+						msg += getResources().getString(R.string.caus27)+"\n";
+					}
+
+					int k =0;
+					if(nclt == 0 || nprod == 0 ){
+						alertPrdClt(msg);
+						k=-1;
+					}
+					
+					/*
 					if(!myoffline.checkFolderexsiste() || (sysnbr == -7)){
 						showmessageOffline();
 					}
 					
 					if(myoffline.LoadClients("").size() != nclt || myoffline.LoadProduits("").size() != nprod){
 						showmessageOffline();
+					}
+					*/
+					
+					if(k == 0) {
+						if(myoffline.LoadClients("").size() != nclt || myoffline.LoadProduits("").size() != nprod){
+							showmessageOffline();
+						}
 					}
 					Log.e("end ","end cnx task");
 				}
@@ -1110,7 +1157,7 @@ import com.karouani.cicin.widget.CustomAutoCompleteView;
 		}
 	}
 
-
+	 
 
 	/*********************************************************************************************
 	 * 							AutoComplate
@@ -1137,5 +1184,19 @@ import com.karouani.cicin.widget.CustomAutoCompleteView;
 
 	}
 
-	
+	public void alertPrdClt(String msg){
+		AlertDialog.Builder alert = new AlertDialog.Builder(CatalogeActivity.this);
+		alert.setTitle(getResources().getString(R.string.cmdtofc10));
+		alert.setMessage(msg);
+		alert.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				return;
+			}
+		});
+		alert.setCancelable(true);
+		alert.create().show();
+	}
 }

@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    
+    android:padding="20dp"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -104,7 +106,9 @@
      <RelativeLayout
         android:id="@+id/limg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center" >
 
        <ImageView
         android:id="@+id/imageView1cat"

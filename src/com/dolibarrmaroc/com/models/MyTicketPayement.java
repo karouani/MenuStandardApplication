@@ -3,6 +3,8 @@ package com.dolibarrmaroc.com.models;
 import java.io.Serializable;
 import java.util.List;
 
+import android.widget.Button;
+
 import com.dolibarrmaroc.com.utils.MyTicket;
 
 public class MyTicketPayement implements Serializable{

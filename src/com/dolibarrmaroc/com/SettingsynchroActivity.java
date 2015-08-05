@@ -1,20 +1,34 @@
 package com.dolibarrmaroc.com;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.zip.Inflater;
 
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.MyTicketBluetooth;
+import com.dolibarrmaroc.com.models.MyfactureAdapter;
+import com.dolibarrmaroc.com.models.Myinvoice;
+import com.dolibarrmaroc.com.models.Prospection;
+import com.dolibarrmaroc.com.models.Reglement;
+import com.dolibarrmaroc.com.database.DatabaseHandler;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v4.app.Fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -22,15 +36,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.database.DataErreur.DatabaseHandler;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.Myinvoice;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
+import android.os.Build;
+import android.os.PowerManager.WakeLock;
 
 public class SettingsynchroActivity extends Activity {
 

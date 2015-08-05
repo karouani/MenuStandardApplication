@@ -3,9 +3,24 @@ package com.dolibarrmaroc.com;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dolibarrmaroc.com.adapter.MyFactureAdapterView;
+import com.dolibarrmaroc.com.OfflineActivity.offlineTask;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.MyTicketBluetooth;
+import com.dolibarrmaroc.com.models.MyTicketPayement;
+import com.dolibarrmaroc.com.models.MyfactureAdapter;
+import com.dolibarrmaroc.com.models.Myinvoice;
+import com.dolibarrmaroc.com.models.Reglement;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.ticket.FactureTicketActivity;
+import com.dolibarrmaroc.com.ticket.ReglementTicketActivity;
+
+import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
@@ -14,28 +29,20 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
-import android.text.TextUtils;
+import android.os.PowerManager.WakeLock;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SearchView.OnQueryTextListener;
-
-import com.dolibarrmaroc.com.adapter.MyFactureAdapterView;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.MyTicketPayement;
-import com.dolibarrmaroc.com.models.MyfactureAdapter;
-import com.dolibarrmaroc.com.models.Myinvoice;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.ticket.ReglementTicketActivity;
 
 @SuppressLint("NewApi")
 public class ReglementOfflineActivity extends Activity implements OnItemClickListener,OnQueryTextListener {
@@ -258,7 +265,7 @@ public class ReglementOfflineActivity extends Activity implements OnItemClickLis
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			ReglementOfflineActivity.this.finish();
-			Intent intent1 = new Intent(ReglementOfflineActivity.this, HomeActivity.class);
+			Intent intent1 = new Intent(ReglementOfflineActivity.this, VendeurActivity.class);
 			intent1.putExtra("user", compte);
 			startActivity(intent1);
 			

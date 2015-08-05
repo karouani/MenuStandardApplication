@@ -1,5 +1,7 @@
 package com.dolibarrmaroc.com.utils;
 
+import javax.net.ssl.ManagerFactoryParameters;
+
 import com.dolibarrmaroc.com.business.CommandeManager;
 import com.dolibarrmaroc.com.business.DefaultCommandeManager;
 import com.dolibarrmaroc.com.dao.CommandeDao;

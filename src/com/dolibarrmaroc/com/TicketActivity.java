@@ -6,19 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
-import android.content.res.Resources.NotFoundException;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.Toast;
-
 import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.FileData;
@@ -28,11 +15,36 @@ import com.dolibarrmaroc.com.models.Produit;
 import com.dolibarrmaroc.com.models.PromoTicket;
 import com.dolibarrmaroc.com.models.Remises;
 import com.dolibarrmaroc.com.models.TotauxTicket;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
 import com.dolibarrmaroc.com.utils.MyTicket;
 import com.dolibarrmaroc.com.utils.ProduitTicket;
 import com.dolibarrmaroc.com.utils.TinyDB;
+
+
+
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v4.app.Fragment;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
+import android.content.res.Resources.NotFoundException;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Toast;
+import android.os.Build;
 
 public class TicketActivity extends Activity {
 

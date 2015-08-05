@@ -4,7 +4,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.annotation.SuppressLint;
+import com.dolibarrmaroc.com.FactureActivity.ValidationOfflineTask;
+import com.dolibarrmaroc.com.FactureActivity.ValidationTask;
+import com.dolibarrmaroc.com.ViewcommandeActivity.ConnexionTask;
+import com.dolibarrmaroc.com.ViewcommandeActivity.OfflineTask;
+import com.dolibarrmaroc.com.business.CommandeManager;
+import com.dolibarrmaroc.com.models.Commandeview;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.MyfactureAdapter;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.Remises;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
+import android.support.v7.app.ActionBarActivity;
+import android.text.InputFilter;
+import android.util.Log;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -15,31 +32,25 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
-import com.dolibarrmaroc.com.business.CommandeManager;
-import com.dolibarrmaroc.com.models.Commandeview;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.Produit;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
-import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
-import com.dolibarrmaroc.com.utils.URL;
-
-@SuppressLint("NewApi") public class CmdDetailActivity extends Activity {
+public class CmdDetailActivity extends Activity {
 
 	private ioffline myoffline;
 	private PowerManager.WakeLock wakelock;
@@ -119,8 +130,8 @@ import com.dolibarrmaroc.com.utils.URL;
 						Log.e(">>> pdf", v.getRef());
 						Intent intent = new Intent(CmdDetailActivity.this,ImprimerActivity.class);
 						intent.putExtra("compte", compte);
-						intent.putExtra("pdf", URL.URL+"test_uploads/"+v.getRef()+".pdf");
-						intent.putExtra("fichier", URL.URL+"test_uploads/"+v.getRef()+".pdf");
+						intent.putExtra("pdf", com.dolibarrmaroc.com.utils.URL.URL+"test_uploads/"+v.getRef()+".pdf");
+						intent.putExtra("fichier", com.dolibarrmaroc.com.utils.URL.URL+"test_uploads/"+v.getRef()+".pdf");
 						startActivity(intent);
 					}else{
 						showMsgPDF(0);
@@ -377,6 +388,12 @@ import com.dolibarrmaroc.com.utils.URL;
 				new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface paramDialogInterface, int paramInt) {
 				paramDialogInterface.dismiss();
+				
+				Intent intent1 = new Intent(CmdDetailActivity.this, CmdViewActivity.class);
+				intent1.putExtra("user", compte);
+				intent1.putExtra("cmd", "0");
+				intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+				startActivity(intent1);
 			}
 		});
 		

@@ -1,49 +1,60 @@
 package com.dolibarrmaroc.com;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import android.annotation.SuppressLint;
+import com.dolibarrmaroc.com.PayementActivity.ConnexionTask;
+import com.dolibarrmaroc.com.PayementActivity.OfflineTask;
+import com.dolibarrmaroc.com.PayementActivity.ServerSideTask;
+import com.dolibarrmaroc.com.business.CommandeManager;
+import com.dolibarrmaroc.com.models.Commandeview;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
+import android.support.v7.app.ActionBarActivity;
+import android.text.InputFilter;
+import android.util.Log;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.StrictMode;
-import android.text.InputFilter;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.business.CommandeManager;
-import com.dolibarrmaroc.com.models.Commandeview;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.Produit;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
-import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
-import com.dolibarrmaroc.com.utils.URL;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ViewcommandeActivity extends Activity {
 
@@ -73,7 +84,7 @@ public class ViewcommandeActivity extends Activity {
 
 	private SimpleAdapter adapter;
 
-	@SuppressLint("NewApi") @Override
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_viewcommande);
@@ -125,8 +136,8 @@ public class ViewcommandeActivity extends Activity {
 						Log.e(">>> pdf", v.getRef());
 						Intent intent = new Intent(ViewcommandeActivity.this,ImprimerActivity.class);
 						intent.putExtra("compte", compte);
-						intent.putExtra("pdf", URL.URL+"test_uploads/"+v.getRef()+".pdf");
-						intent.putExtra("fichier", URL.URL+"test_uploads/"+v.getRef()+".pdf");
+						intent.putExtra("pdf", com.dolibarrmaroc.com.utils.URL.URL+"test_uploads/"+v.getRef()+".pdf");
+						intent.putExtra("fichier", com.dolibarrmaroc.com.utils.URL.URL+"test_uploads/"+v.getRef()+".pdf");
 						startActivity(intent);
 					}else{
 						showMsgPDF(0);
@@ -482,9 +493,9 @@ public class ViewcommandeActivity extends Activity {
 		});
 		
 		if(n == 0){
-			localBuilder.setMessage("Cette option n'est pas disponible pour le moment. \n Veuillez vous connecter ï¿½ Internet");
+			localBuilder.setMessage("Cette option n'est pas disponible pour le moment. \n Veuillez vous connecter à Internet");
 		}else{
-			localBuilder.setMessage("Veuillez selectionner un numï¿½ro de commande valide avant de commencer votre traitement");
+			localBuilder.setMessage("Veuillez selectionner un numéro de commande valide avant de commencer votre traitement");
 		}
 		
 		

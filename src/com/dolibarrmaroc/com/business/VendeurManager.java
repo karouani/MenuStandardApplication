@@ -11,15 +11,15 @@ import com.dolibarrmaroc.com.models.Produit;
 import com.dolibarrmaroc.com.models.Promotion;
 
 public interface VendeurManager {
-
-	public int insertFacture(Facture fac);
-
+	
+public int insertFacture(Facture fac);
+	
 	public List<Produit> selectAllProduct(Compte c);
 	public Produit selectProduct(String id,Compte c);
 	public Dictionnaire getDictionnaire();
 	public List<Client> selectAllClient(Compte c);
 	List<Promotion> getPromotions(int idclt,int idprd);
-
+	
 	public HashMap<Integer, HashMap<Integer, Promotion>> getPromotionProduits();
 	public HashMap<Integer, List<Integer>> getPromotionClients();
 }

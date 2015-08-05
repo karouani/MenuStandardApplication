@@ -1,5 +1,12 @@
 package com.dolibarrmaroc.com;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.AllPermission;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -9,7 +16,47 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import android.annotation.SuppressLint;
+import org.apache.http.message.BasicNameValuePair;
+
+import com.google.android.gms.internal.dv;
+import com.google.android.gms.internal.hs;
+import com.google.gson.Gson;
+import com.dolibarrmaroc.com.VendeurActivity.ConnexionTask;
+import com.dolibarrmaroc.com.business.CommercialManager;
+import com.dolibarrmaroc.com.business.FactureManager;
+import com.dolibarrmaroc.com.business.PayementManager;
+import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.Dictionnaire;
+import com.dolibarrmaroc.com.models.FileData;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.MyGpsInvoice;
+import com.dolibarrmaroc.com.models.MyProdRemise;
+import com.dolibarrmaroc.com.models.MyTicketBluetooth;
+import com.dolibarrmaroc.com.models.MyTicketWitouhtProduct;
+import com.dolibarrmaroc.com.models.Myinvoice;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.utils.ProduitTicket;
+import com.dolibarrmaroc.com.models.PromoTicket;
+import com.dolibarrmaroc.com.models.Remises;
+import com.dolibarrmaroc.com.models.TotauxTicket;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
+import com.dolibarrmaroc.com.utils.FactureManagerFactory;
+import com.dolibarrmaroc.com.utils.MyLocationListener;
+import com.dolibarrmaroc.com.utils.MyTicket;
+import com.dolibarrmaroc.com.utils.PayementManagerFactory;
+import com.dolibarrmaroc.com.utils.ServiceDao;
+import com.dolibarrmaroc.com.utils.TinyDB;
+import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
+import com.dolibarrmaroc.com.database.DatabaseHandler;
+import com.dolibarrmaroc.com.database.StockVirtual;
+
+
+
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -18,14 +65,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
+import android.os.PowerManager.WakeLock;
 import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,34 +92,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dolibarrmaroc.com.business.CommercialManager;
-import com.dolibarrmaroc.com.business.FactureManager;
-import com.dolibarrmaroc.com.business.PayementManager;
-import com.dolibarrmaroc.com.business.VendeurManager;
-import com.dolibarrmaroc.com.database.DataErreur.DatabaseHandler;
-import com.dolibarrmaroc.com.database.DataErreur.StockVirtual;
-import com.dolibarrmaroc.com.models.Client;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.Dictionnaire;
-import com.dolibarrmaroc.com.models.FileData;
-import com.dolibarrmaroc.com.models.GpsTracker;
-import com.dolibarrmaroc.com.models.MyGpsInvoice;
-import com.dolibarrmaroc.com.models.MyProdRemise;
-import com.dolibarrmaroc.com.models.Myinvoice;
-import com.dolibarrmaroc.com.models.Produit;
-import com.dolibarrmaroc.com.models.Remises;
-import com.dolibarrmaroc.com.models.TotauxTicket;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
-import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
-import com.dolibarrmaroc.com.utils.FactureManagerFactory;
-import com.dolibarrmaroc.com.utils.MyLocationListener;
-import com.dolibarrmaroc.com.utils.PayementManagerFactory;
-import com.dolibarrmaroc.com.utils.ServiceDao;
-import com.dolibarrmaroc.com.utils.TinyDB;
-import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
-
-@SuppressLint("NewApi") public class NextEtapeActivity extends Activity implements OnClickListener,OnItemSelectedListener{
+public class NextEtapeActivity extends Activity implements OnClickListener,OnItemSelectedListener{
 
 	//BD et Synchronisation
 	private FactureManager manager;
@@ -364,6 +387,9 @@ import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 		}
 		*/
 	}
+	
+	
+	
 	public void addItemsOnSpinner() {
 
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
@@ -574,6 +600,8 @@ import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 			
 			myofline = new Offlineimpl(getApplicationContext());
 			
+			sv = new StockVirtual(NextEtapeActivity.this);
+			
 			
 			
 
@@ -607,7 +635,7 @@ import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 							myofline.updateProduits(meinvo);
 						}else {
 							for (int i = 0; i < produitsFacture.size(); i++) {
-								sv.addrow("", produitsFacture.get(i).getId(), produitsFacture.get(i).getQtedemander(), type_invoice+"");
+								sv.addrow("", produitsFacture.get(i).getId(), produitsFacture.get(i).getQtedemander(), type_invoice+"",produitsFacture.get(i).getDesig(),idclt);
 							}
 						}
 					}
@@ -680,6 +708,7 @@ import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 		protected String doInBackground(Void... arg0) {
 			myofline = new Offlineimpl(getApplicationContext());
 			database = new DatabaseHandler(getApplicationContext());
+			sv = new StockVirtual(NextEtapeActivity.this);
 			
 			numChek = numchek.getText().toString();
 			
@@ -694,7 +723,7 @@ import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 					myofline.updateProduits(meinvo);
 				}else {
 					for (int i = 0; i < produitsFacture.size(); i++) {
-						sv.addrow("", produitsFacture.get(i).getId(), produitsFacture.get(i).getQtedemander(), type_invoice+"");
+						sv.addrow("", produitsFacture.get(i).getId(), produitsFacture.get(i).getQtedemander(), type_invoice+"",produitsFacture.get(i).getDesig(),idclt);
 					}
 				}
 				
@@ -746,6 +775,7 @@ import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 		protected String doInBackground(Void... arg0) {
 			numChek = numchek.getText().toString();
 			
+			sv = new StockVirtual(NextEtapeActivity.this);
 			
 			myofline = new Offlineimpl(getApplicationContext());
 
@@ -774,7 +804,7 @@ import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 							myofline.updateProduits(meinvo);
 						}else {
 							for (int i = 0; i < produitsFacture.size(); i++) {
-								sv.addrow("", produitsFacture.get(i).getId(), produitsFacture.get(i).getQtedemander(), type_invoice+"");
+								sv.addrow("", produitsFacture.get(i).getId(), produitsFacture.get(i).getQtedemander(), type_invoice+"",produitsFacture.get(i).getDesig(),idclt);
 							}
 						}
 						
@@ -837,6 +867,8 @@ import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 			database = new DatabaseHandler(getApplicationContext());
 
 			numChek = numchek.getText().toString();
+			
+			sv = new StockVirtual(NextEtapeActivity.this);
 
 
 			meinvo = myofline.shynchronizeInvoice(database.addrow("fc")+"", produitsFacture, idclt, nmb, commentaire, compte, reglement , amount , numChek , 1 ,prepaRemise(allremises),gps,imei,num,battery,total_ticket,type_invoice);
@@ -854,7 +886,7 @@ import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 					myofline.updateProduits(meinvo);
 				}else {
 					for (int i = 0; i < produitsFacture.size(); i++) {
-						sv.addrow("", produitsFacture.get(i).getId(), produitsFacture.get(i).getQtedemander(), type_invoice+"");
+						sv.addrow("", produitsFacture.get(i).getId(), produitsFacture.get(i).getQtedemander(), type_invoice+"",produitsFacture.get(i).getDesig(),idclt);
 					}
 				}
 			}
@@ -906,6 +938,7 @@ import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 			
 			try {
 				myofline = new Offlineimpl(getApplicationContext());
+				sv = new StockVirtual(NextEtapeActivity.this);
 				
 				List<Produit> products = new ArrayList<>();
 				List<Client> clients = new ArrayList<>();
@@ -930,9 +963,9 @@ import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 
 						products = vendeurManager.selectAllProduct(compte);
 						for (int i = 0; i < products.size(); i++) {
-							for (int j = 0; j < sv.getAllProduits().size(); j++) {
-								if(sv.getAllProduits().get(j).getRef().equals(products.get(i).getId())){
-									products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits().get(j).getQteDispo());
+							for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+								if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId())){
+									products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
 								}
 							}
 						}

@@ -1,14 +1,44 @@
 package com.dolibarrmaroc.com;
 
 
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.dolibarrmaroc.com.PayementActivity.ServerSideTask;
+import com.dolibarrmaroc.com.VendeurActivity.ConnexionTask;
+import com.dolibarrmaroc.com.business.CommercialManager;
+import com.dolibarrmaroc.com.business.PayementManager;
+import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.Dictionnaire;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.ProspectData;
+import com.dolibarrmaroc.com.models.Prospection;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
+import com.dolibarrmaroc.com.utils.GpsTrackingServiceDao;
+import com.dolibarrmaroc.com.utils.MyLocationListener;
+import com.dolibarrmaroc.com.utils.PayementManagerFactory;
+import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
+import com.dolibarrmaroc.com.database.DatabaseHandler;
+import com.dolibarrmaroc.com.database.StockVirtual;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,14 +46,18 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
-import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -35,25 +69,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.business.CommercialManager;
-import com.dolibarrmaroc.com.business.PayementManager;
-import com.dolibarrmaroc.com.business.VendeurManager;
-import com.dolibarrmaroc.com.database.DataErreur.DatabaseHandler;
-import com.dolibarrmaroc.com.database.DataErreur.StockVirtual;
-import com.dolibarrmaroc.com.models.Client;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.Dictionnaire;
-import com.dolibarrmaroc.com.models.GpsTracker;
-import com.dolibarrmaroc.com.models.Produit;
-import com.dolibarrmaroc.com.models.ProspectData;
-import com.dolibarrmaroc.com.models.Prospection;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
-import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
-import com.dolibarrmaroc.com.utils.PayementManagerFactory;
-import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
+import android.os.Build;
+import android.os.PowerManager.WakeLock;
 
 @SuppressLint("NewApi")
 public class CommercialActivity extends Activity implements OnClickListener,OnItemSelectedListener{
@@ -229,7 +246,7 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 			}
 			
 			/*
-			Class squareClass = Class.forName("com.marocgeo.als.models.Prospection");
+			Class squareClass = Class.forName("com.dolibarrmaroc.com.models.Prospection");
 	        
 	        Field[] fields = squareClass.getDeclaredFields(); 
 	        for (Field f : fields) {
@@ -359,7 +376,7 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 				firstname.setHeight(35);
 
 				EditText lastname = new EditText(CommercialActivity.this);
-				lastname.setHint("Le Prï¿½nom");
+				lastname.setHint("Le Prénom");
 				lastname.setTag("comm_lasttname");
 				
 				
@@ -384,7 +401,7 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 			}else{
 				//name.setHint("Nom sociï¿½tï¿½");
 				EditText name = new EditText(CommercialActivity.this);
-				name.setHint("Nom sociï¿½tï¿½");
+				name.setHint("Nom société");
 				name.setTag("comm_nome");
 				name.setHeight(40);
 
@@ -801,9 +818,9 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 						products = vendeurManager.selectAllProduct(compte);
 						
 						for (int i = 0; i < products.size(); i++) {
-							for (int j = 0; j < sv.getAllProduits().size(); j++) {
-								if(sv.getAllProduits().get(j).getRef().equals(products.get(i).getId())){
-									products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits().get(j).getQteDispo());
+							for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+								if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId())){
+									products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
 								}
 							}
 						}

@@ -1,9 +1,40 @@
 package com.dolibarrmaroc.com;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import com.dolibarrmaroc.com.business.TechnicienManager;
+import com.dolibarrmaroc.com.models.BordreauIntervention;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.ImageTechnicien;
+import com.dolibarrmaroc.com.utils.Base64;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.TechnicienManagerFactory;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+import com.dolibarrmaroc.com.ticket.FactureTicketActivity;
+
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,6 +48,8 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,17 +67,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.dolibarrmaroc.com.business.TechnicienManager;
-import com.dolibarrmaroc.com.models.BordreauIntervention;
-import com.dolibarrmaroc.com.models.Client;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.ImageTechnicien;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
-import com.dolibarrmaroc.com.utils.Base64;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
-import com.dolibarrmaroc.com.utils.TechnicienManagerFactory;
 
 @SuppressLint("NewApi")
 public class CameraActivity extends Activity {
@@ -171,7 +193,7 @@ public class CameraActivity extends Activity {
 							Log.i("Nombre Click avant",type+" Size Images : "+images.size());
 							//Log.e("name >> ", name.getText().toString().split("_")[0]);
 							images.add(new ImageTechnicien(images.size(), "fiche_"+fiche+".jpg", ba1));
-							Log.i("Nombre Click aprés",type+" Size Images : "+images.size());
+							Log.i("Nombre Click apr�s",type+" Size Images : "+images.size());
 
 							Toast.makeText(getApplicationContext(),
 									"Image de la fiche ajouter avec success ", Toast.LENGTH_SHORT).show();
@@ -199,7 +221,7 @@ public class CameraActivity extends Activity {
 						else if(type == 1){
 							Log.i("Nombre Click avant",type+" Size Images : "+images.size());
 							images.add(new ImageTechnicien(images.size(), "etat_objet_avant"+".jpg", ba1));//name.getText().toString()
-							Log.i("Nombre Click aprés",type+" Size Images : "+images.size());
+							Log.i("Nombre Click apr�s",type+" Size Images : "+images.size());
 
 							name.setText(getResources().getString(R.string.tecv29));
 							imgView.setImageResource(R.drawable.logo);
@@ -212,7 +234,7 @@ public class CameraActivity extends Activity {
 						}else if(type==2){
 							Log.i("Nombre Click avant",type+" Size Images : "+images.size());
 							images.add(new ImageTechnicien(images.size(), "etat_objet_apres"+".jpg", ba1));
-							Log.i("Nombre Click aprés",type+" Size Images : "+images.size());
+							Log.i("Nombre Click apr�s",type+" Size Images : "+images.size());
 
 							Toast.makeText(getApplicationContext(),
 									"Image de l'etat apres "+objet, Toast.LENGTH_SHORT).show();

@@ -1,11 +1,18 @@
 package com.dolibarrmaroc.com;
 
 
+import com.dolibarrmaroc.com.VendeurActivity.ConnexionTask;
+
+
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class WebViewActivity extends Activity {
 

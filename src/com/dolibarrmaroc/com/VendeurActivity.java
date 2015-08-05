@@ -1,24 +1,45 @@
 package com.dolibarrmaroc.com;
 
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -28,22 +49,33 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 
+import com.google.android.gms.common.annotation.KeepName;
+import com.google.android.gms.location.LocationListener;
+import com.karouani.cicin.widget.AutocompleteCustomArrayAdapter;
+import com.karouani.cicin.widget.CustomAutoCompleteTextChangedListener;
+import com.karouani.cicin.widget.CustomAutoCompleteView;
 import com.dolibarrmaroc.com.business.CommercialManager;
 import com.dolibarrmaroc.com.business.PayementManager;
 import com.dolibarrmaroc.com.business.VendeurManager;
-import com.dolibarrmaroc.com.database.DataErreur.StockVirtual;
+import com.dolibarrmaroc.com.dao.VendeurDaoMysql;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Dictionnaire;
@@ -51,7 +83,8 @@ import com.dolibarrmaroc.com.models.GpsTracker;
 import com.dolibarrmaroc.com.models.Produit;
 import com.dolibarrmaroc.com.models.Promotion;
 import com.dolibarrmaroc.com.models.Prospection;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.models.TotauxTicket;
+import com.dolibarrmaroc.com.utils.CaisseDolibarr;
 import com.dolibarrmaroc.com.utils.CheckOutNet;
 import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
 import com.dolibarrmaroc.com.utils.JSONParser;
@@ -59,9 +92,9 @@ import com.dolibarrmaroc.com.utils.MyLocationListener;
 import com.dolibarrmaroc.com.utils.PayementManagerFactory;
 import com.dolibarrmaroc.com.utils.TinyDB;
 import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
-import com.karouani.cicin.widget.AutocompleteCustomArrayAdapter;
-import com.karouani.cicin.widget.CustomAutoCompleteTextChangedListener;
-import com.karouani.cicin.widget.CustomAutoCompleteView;
+import com.dolibarrmaroc.com.database.StockVirtual;
+ 
+import com.dolibarrmaroc.com.offline.Offlineimpl;
 
 
 public class VendeurActivity extends android.support.v4.app.FragmentActivity implements OnClickListener,OnItemSelectedListener{
@@ -638,8 +671,8 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 			}
 		}else if (keyCode == KeyEvent.KEYCODE_BACK) {
 			new AlertDialog.Builder(this)
-			.setTitle("Vraiment dï¿½connecter?")
-			.setMessage("Vous voulez vraiment dï¿½connecter?")
+			.setTitle("Vraiment déconnecter?")
+			.setMessage("Vous voulez vraiment déconnecter?")
 			.setNegativeButton(android.R.string.no, null)
 			.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
@@ -760,10 +793,10 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 				listprd.add(p.getDesig());
 
 				//Log.d("Produit "+i,p.toString());qq
-				for (int j = 0; j < sv.getAllProduits().size(); j++) {
-					if(sv.getAllProduits().get(j).getRef().equals(products.get(i).getId()+"")){
-						Log.e("is me ",sv.getAllProduits().get(j).getRef()+" ## "+products.get(i).getRef());
-						products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits().get(j).getQteDispo());
+				for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+					if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId()+"")){
+						Log.e("is me ",sv.getAllProduits(-1).get(j).getRef()+" ## "+products.get(i).getRef());
+						products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
 					}
 				}
 			}
@@ -949,6 +982,8 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 			myoffline = new Offlineimpl(getBaseContext());
 			products = myoffline.LoadProduits("");
 			
+			
+			sv = new StockVirtual(VendeurActivity.this);
 		
 			
 			dico = myoffline.LoadDeco("");
@@ -961,9 +996,9 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 				p = products.get(i);
 				listprd.add(p.getDesig());
 
-				for (int j = 0; j < sv.getAllProduits().size(); j++) {
-					if(sv.getAllProduits().get(j).getRef().equals(products.get(i).getRef())){
-						products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits().get(j).getQteDispo());
+				for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+					if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getRef())){
+						products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
 					}
 				}
 				//Log.d("Produit "+i,p.toString());
@@ -1206,11 +1241,16 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 		if(compte != null){
 			if(compte.getPermission() == 0){
 				menu.removeItem(R.id.createUserMenu);
+				menu.removeItem(R.id.updateUserMenu);
 			}
 			
 			if(compte.getPermissionbl() == 0){
 				menu.removeItem(R.id.viewcmd);
 				menu.removeItem(R.id.addcmd);
+			}
+			
+			if(!CheckOutNet.isNetworkConnected(VendeurActivity.this)){
+				menu.removeItem(R.id.updateUserMenu);
 			}
 		}
 		
@@ -1263,6 +1303,17 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 			intent8.putExtra("user", compte);
 			intent8.putExtra("cmd", "1");
 			startActivity(intent8);
+			break;
+		case R.id.clsv:
+			Intent intent9 = new Intent(VendeurActivity.this, TransfertvirtualstockActivity.class);
+			intent9.putExtra("user", compte);
+			intent9.putExtra("cmd", "0");
+			startActivity(intent9);
+			break;
+		case R.id.updateUserMenu:
+			Intent intent10 = new Intent(VendeurActivity.this, UpdateClientActivity.class);
+			intent10.putExtra("user", compte);
+			startActivity(intent10);
 			break;
 		}
 		

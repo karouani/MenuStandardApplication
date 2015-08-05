@@ -13,7 +13,7 @@ public class Promotion implements Serializable{
 	
 	/*
 	 * 0 = Remise
-	 * 1 = Gratuitï¿½
+	 * 1 = Gratuité
 	 */
 	private int type;
 	

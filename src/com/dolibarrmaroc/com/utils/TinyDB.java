@@ -11,13 +11,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.dolibarrmaroc.com.models.Promotion;
-import com.dolibarrmaroc.com.models.Remises;
-import com.dolibarrmaroc.com.models.TotauxTicket;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.Promotion;
+import com.dolibarrmaroc.com.models.Remises;
+import com.dolibarrmaroc.com.models.TotauxTicket;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -1,17 +1,30 @@
 package com.dolibarrmaroc.com.business;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.content.Context;
+import android.telephony.TelephonyManager;
+import android.util.Log;
+
 import com.dolibarrmaroc.com.dao.FactureDao;
 import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.ConfigGps;
 import com.dolibarrmaroc.com.models.FactureGps;
 import com.dolibarrmaroc.com.models.FileData;
+import com.dolibarrmaroc.com.models.GpsTracker;
 import com.dolibarrmaroc.com.models.Produit;
 import com.dolibarrmaroc.com.models.Prospection;
 import com.dolibarrmaroc.com.models.Reglement;
 import com.dolibarrmaroc.com.models.Remises;
+import com.dolibarrmaroc.com.utils.JSONParser;
 
 
 
