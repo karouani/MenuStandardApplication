@@ -1030,7 +1030,7 @@ int string auth_client_using_bad_version_title 0x7f070014
 int string bluetooth_connect_fail 0x7f0700ed
 int string bluetooth_connect_sucess 0x7f0700ee
 int string bluetooth_unconnected 0x7f0700ec
-int string btn_add_Customer 0x7f0701a4
+int string btn_add_Customer 0x7f0701a5
 int string btn_add_client 0x7f0700a3
 int string btn_cancel 0x7f070061
 int string btn_decon 0x7f070063
@@ -1038,7 +1038,7 @@ int string btn_delete 0x7f07005f
 int string btn_facture 0x7f0700a1
 int string btn_gps_activer 0x7f070066
 int string btn_gps_deactiver 0x7f070067
-int string btn_map_Customer 0x7f0701a7
+int string btn_map_Customer 0x7f0701a8
 int string btn_map_client 0x7f0700d2
 int string btn_map_facture 0x7f0700d3
 int string btn_map_itiniraire 0x7f0700d4
@@ -1308,10 +1308,10 @@ int string tecv14 0x7f070131
 int string tecv15 0x7f070132
 int string tecv16 0x7f070133
 int string tecv17 0x7f070134
-int string tecv18 0x7f07019f
-int string tecv19 0x7f0701a0
+int string tecv18 0x7f0701a0
+int string tecv19 0x7f0701a1
 int string tecv2 0x7f070125
-int string tecv20 0x7f0701a1
+int string tecv20 0x7f0701a2
 int string tecv21 0x7f070135
 int string tecv22 0x7f070136
 int string tecv23 0x7f070137
@@ -1339,7 +1339,7 @@ int string tecv42 0x7f07014a
 int string tecv43 0x7f07014b
 int string tecv44 0x7f07014c
 int string tecv45 0x7f07014d
-int string tecv46 0x7f0701a2
+int string tecv46 0x7f0701a3
 int string tecv47 0x7f07014e
 int string tecv48 0x7f07014f
 int string tecv49 0x7f070150
@@ -1350,8 +1350,8 @@ int string tecv7 0x7f07012b
 int string tecv8 0x7f07012c
 int string tecv9 0x7f07012d
 int string title_about 0x7f07003b
-int string title_activity_Customer 0x7f0701a5
-int string title_activity_Sales_commercial 0x7f0701a3
+int string title_activity_Customer 0x7f0701a6
+int string title_activity_Sales_commercial 0x7f0701a4
 int string title_activity_ad 0x7f0700aa
 int string title_activity_admin 0x7f0700c7
 int string title_activity_camera 0x7f0700db
@@ -1385,7 +1385,7 @@ int string title_activity_read_pdf 0x7f0700c6
 int string title_activity_reglement_offline 0x7f070101
 int string title_activity_reglement_ticket 0x7f0700cd
 int string title_activity_second_step_techn 0x7f0700d8
-int string title_activity_seconde_etape_Sales_commercial 0x7f0701a8
+int string title_activity_seconde_etape_Sales_commercial 0x7f0701a9
 int string title_activity_seconde_etape_commercial 0x7f0700ea
 int string title_activity_service 0x7f0700c0
 int string title_activity_service_gps 0x7f0700ca
@@ -1400,7 +1400,8 @@ int string title_activity_ticket 0x7f0700d0
 int string title_activity_ticket_offline 0x7f0700cf
 int string title_activity_tracking 0x7f070096
 int string title_activity_transfertstock 0x7f070155
-int string title_activity_update_Customer 0x7f0701a6
+int string title_activity_transfertvirtualstock 0x7f07019f
+int string title_activity_update_Customer 0x7f0701a7
 int string title_activity_update_client 0x7f0700b5
 int string title_activity_valider 0x7f070120
 int string title_activity_vendeur 0x7f0700ba

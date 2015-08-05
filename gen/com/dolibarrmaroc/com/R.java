@@ -2168,7 +2168,7 @@ containing a value of this type.
         public static final int bluetooth_connect_fail=0x7f0700ed;
         public static final int bluetooth_connect_sucess=0x7f0700ee;
         public static final int bluetooth_unconnected=0x7f0700ec;
-        public static final int btn_add_Customer=0x7f0701a4;
+        public static final int btn_add_Customer=0x7f0701a5;
         public static final int btn_add_client=0x7f0700a3;
         public static final int btn_cancel=0x7f070061;
         public static final int btn_decon=0x7f070063;
@@ -2182,7 +2182,7 @@ containing a value of this type.
         public static final int btn_gps_deactiver=0x7f070067;
         /**  Chercher Map 
          */
-        public static final int btn_map_Customer=0x7f0701a7;
+        public static final int btn_map_Customer=0x7f0701a8;
         /**  Chercher Map 
  Chercher Map 
          */
@@ -2567,10 +2567,10 @@ containing a value of this type.
         public static final int tecv15=0x7f070132;
         public static final int tecv16=0x7f070133;
         public static final int tecv17=0x7f070134;
-        public static final int tecv18=0x7f07019f;
-        public static final int tecv19=0x7f0701a0;
+        public static final int tecv18=0x7f0701a0;
+        public static final int tecv19=0x7f0701a1;
         public static final int tecv2=0x7f070125;
-        public static final int tecv20=0x7f0701a1;
+        public static final int tecv20=0x7f0701a2;
         public static final int tecv21=0x7f070135;
         public static final int tecv22=0x7f070136;
         public static final int tecv23=0x7f070137;
@@ -2598,7 +2598,7 @@ containing a value of this type.
         public static final int tecv43=0x7f07014b;
         public static final int tecv44=0x7f07014c;
         public static final int tecv45=0x7f07014d;
-        public static final int tecv46=0x7f0701a2;
+        public static final int tecv46=0x7f0701a3;
         public static final int tecv47=0x7f07014e;
         public static final int tecv48=0x7f07014f;
         public static final int tecv49=0x7f070150;
@@ -2609,8 +2609,8 @@ containing a value of this type.
         public static final int tecv8=0x7f07012c;
         public static final int tecv9=0x7f07012d;
         public static final int title_about=0x7f07003b;
-        public static final int title_activity_Customer=0x7f0701a5;
-        public static final int title_activity_Sales_commercial=0x7f0701a3;
+        public static final int title_activity_Customer=0x7f0701a6;
+        public static final int title_activity_Sales_commercial=0x7f0701a4;
         public static final int title_activity_ad=0x7f0700aa;
         public static final int title_activity_admin=0x7f0700c7;
         public static final int title_activity_camera=0x7f0700db;
@@ -2649,7 +2649,7 @@ containing a value of this type.
         public static final int title_activity_reglement_offline=0x7f070101;
         public static final int title_activity_reglement_ticket=0x7f0700cd;
         public static final int title_activity_second_step_techn=0x7f0700d8;
-        public static final int title_activity_seconde_etape_Sales_commercial=0x7f0701a8;
+        public static final int title_activity_seconde_etape_Sales_commercial=0x7f0701a9;
         public static final int title_activity_seconde_etape_commercial=0x7f0700ea;
         public static final int title_activity_service=0x7f0700c0;
         public static final int title_activity_service_gps=0x7f0700ca;
@@ -2664,7 +2664,8 @@ containing a value of this type.
         public static final int title_activity_ticket_offline=0x7f0700cf;
         public static final int title_activity_tracking=0x7f070096;
         public static final int title_activity_transfertstock=0x7f070155;
-        public static final int title_activity_update_Customer=0x7f0701a6;
+        public static final int title_activity_transfertvirtualstock=0x7f07019f;
+        public static final int title_activity_update_Customer=0x7f0701a7;
         public static final int title_activity_update_client=0x7f0700b5;
         public static final int title_activity_valider=0x7f070120;
         public static final int title_activity_vendeur=0x7f0700ba;

@@ -461,6 +461,6 @@
 	<string name="cnxlab4">Veuillez saisire une valeur plus que zero</string>
 	<string name="cnxlab5">Le numéro de la facture choisi est introuvable</string>
 	
-	    <string name="cnxlab6">Veuillez verifier le type du transfert ou le nombre des produits</string>
-	
+	<string name="cnxlab6">Veuillez verifier le type du transfert ou le nombre des produits</string>
+	<string name="title_activity_transfertvirtualstock">Transfert des Rendus,Echanges</string>
 </resources>

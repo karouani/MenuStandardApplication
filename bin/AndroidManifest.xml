@@ -305,7 +305,7 @@
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name=".CmdViewActivity"
+            android:name=".ViewcommandeActivity"
             android:label="@string/title_activity_viewcommande"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
@@ -350,6 +350,19 @@
             android:name=".UpdateClientActivity"
             android:label="@string/title_activity_update_client" 
             android:theme="@style/Theme.D1">
+        </activity>
+        
+        <activity		
+            android:name=".CmdViewActivity"		
+            android:label="@string/title_activity_cmd_view"		
+            android:screenOrientation="portrait" 
+            android:theme="@style/Theme.D1">		
+        </activity>
+         <activity
+            android:name=".TransfertvirtualstockActivity"
+            android:label="@string/title_activity_transfertvirtualstock"
+            android:screenOrientation="portrait" 
+             android:theme="@style/Theme.D1">
         </activity>
     </application>
 
