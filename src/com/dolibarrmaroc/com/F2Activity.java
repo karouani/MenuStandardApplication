@@ -28,7 +28,7 @@ import android.os.Bundle;
 
 public class F2Activity extends DashboardActivity 
 {
-
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 /**
  * onCreate
  *
