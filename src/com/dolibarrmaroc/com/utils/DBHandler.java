@@ -29,8 +29,6 @@ public class DBHandler extends SQLiteOpenHelper{
 	public static final String CONTACTS_COLUMN_PROFILE = "profile";
 	private static final int DATABASE_VERSION = 5;
 
-	//[id=1, login=vendeur, password=1234, profile=vendeur, activer=0, message=null, iduser=null, emei=null, step=null, stop=null, level=null, permission=0, permissionPayement=0, permissionbl=0, souvenue=1, date=1438355302]
-
 	private HashMap hp;
 
 	public DBHandler(Context context)
