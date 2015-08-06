@@ -28,9 +28,9 @@ public class DBHandler extends SQLiteOpenHelper{
 	public static final String CONTACTS_COLUMN_IMEI = "imei";
 	public static final String CONTACTS_COLUMN_PROFILE = "profile";
 	private static final int DATABASE_VERSION = 5;
-	
+
 	//[id=1, login=vendeur, password=1234, profile=vendeur, activer=0, message=null, iduser=null, emei=null, step=null, stop=null, level=null, permission=0, permissionPayement=0, permissionbl=0, souvenue=1, date=1438355302]
-			 
+
 	private HashMap hp;
 
 	public DBHandler(Context context)
@@ -57,113 +57,132 @@ public class DBHandler extends SQLiteOpenHelper{
 	public boolean insertUser(String login, String password, long date, int souvenue,String imei,String profile,int id)
 	{
 		SQLiteDatabase db = this.getWritableDatabase();
-		ContentValues contentValues = new ContentValues();
+		try {
+			ContentValues contentValues = new ContentValues();
 
-		contentValues.put("login", login);
-		contentValues.put("password", password);
-		contentValues.put("date", (int) date);	
-		contentValues.put("souvenue", souvenue);
-		contentValues.put("imei", imei);
-		contentValues.put("profile", profile);
-		contentValues.put("id",(int) id);
-		
-		Log.e("imei ",imei);
-		
-		db.insert("utilisateurs", null, contentValues);
+			contentValues.put("login", login);
+			contentValues.put("password", password);
+			contentValues.put("date", (int) date);	
+			contentValues.put("souvenue", souvenue);
+			contentValues.put("imei", imei);
+			contentValues.put("profile", profile);
+			contentValues.put("id",(int) id);
+
+			Log.e("imei ",imei);
+
+			db.insert("utilisateurs", null, contentValues);
+		}finally{
+			db.close();
+		}
 		return true;
 	}
-	
+
 	public Compte getConnexion(String imei,long date){
 		SQLiteDatabase db = this.getReadableDatabase();
-		//Cursor res =  db.rawQuery( "select * from utilisateurs where date <= "+date+" AND imei = '"+imei+"' AND souvenue = 1", null,null );
-		int k = numberOfRows();
-		
-		Cursor res =
-				db.query(true,  
-						CONTACTS_TABLE_NAME,
-						new String[] {
-						CONTACTS_COLUMN_ID,
-						CONTACTS_COLUMN_LOGIN,
-						CONTACTS_COLUMN_PASSWORD,
-						CONTACTS_COLUMN_DATE,
-						CONTACTS_COLUMN_SOUVENIR,
-						CONTACTS_COLUMN_IMEI,
-						CONTACTS_COLUMN_PROFILE
-	                    }, 
-	                    CONTACTS_COLUMN_DATE + "<=" +date+ " AND " + CONTACTS_COLUMN_SOUVENIR + "="+ 1 + " AND " + CONTACTS_COLUMN_IMEI+ "=" +imei, 
-	                    null, 
-	                    null, 
-	                    null, 
-	                    null, 
-	                    null);
-		
-		//db.query(distinct, table, columns, selection, selectionArgs, groupBy, having, orderBy, limit)
-	    if (res != null) {
-	        res.moveToFirst();
-	    }
-	    
-		Log.d("Nombre enregistrement", k+"");
-		
-		Log.d("id",""+res.getInt(0));
-		Log.d("login",""+res.getString(1));
-		Log.d("password",""+res.getString(2));
-		Log.d("date",""+res.getLong(3));
-		Log.d("souvenir",""+res.getInt(4));
-		Log.d("imei",""+res.getString(5));
-		Log.d("profile",""+res.getString(6));
-		
-		if(k > 0){
-			Compte c =new Compte(
-					res.getInt(0), 
-					res.getString(1), 
-					res.getString(2), 
-					res.getInt(4), 
-					res.getLong(3),
-					res.getString(6)
-					);
-			c.setIduser(""+c.getId());
-			return c;
+		try{
+			//Cursor res =  db.rawQuery( "select * from utilisateurs where date <= "+date+" AND imei = '"+imei+"' AND souvenue = 1", null,null );
+			int k = numberOfRows();
+
+			Cursor res =
+					db.query(true,  
+							CONTACTS_TABLE_NAME,
+							new String[] {
+							CONTACTS_COLUMN_ID,
+							CONTACTS_COLUMN_LOGIN,
+							CONTACTS_COLUMN_PASSWORD,
+							CONTACTS_COLUMN_DATE,
+							CONTACTS_COLUMN_SOUVENIR,
+							CONTACTS_COLUMN_IMEI,
+							CONTACTS_COLUMN_PROFILE
+					}, 
+					CONTACTS_COLUMN_DATE + "<=" +date+ " AND " + CONTACTS_COLUMN_SOUVENIR + "="+ 1 + " AND " + CONTACTS_COLUMN_IMEI+ "=" +imei, 
+					null, 
+					null, 
+					null, 
+					null, 
+					null);
+
+			//db.query(distinct, table, columns, selection, selectionArgs, groupBy, having, orderBy, limit)
+			if (res != null) {
+				res.moveToFirst();
+			}
+
+			Log.d("Nombre enregistrement", k+"");
+
+			Log.d("id",""+res.getInt(0));
+			Log.d("login",""+res.getString(1));
+			Log.d("password",""+res.getString(2));
+			Log.d("date",""+res.getLong(3));
+			Log.d("souvenir",""+res.getInt(4));
+			Log.d("imei",""+res.getString(5));
+			Log.d("profile",""+res.getString(6));
+
+			if(k > 0){
+				Compte c =new Compte(
+						res.getInt(0), 
+						res.getString(1), 
+						res.getString(2), 
+						res.getInt(4), 
+						res.getLong(3),
+						res.getString(6)
+						);
+				c.setIduser(""+c.getId());
+				return c;
+			}
+
+		}finally{
+			db.close();
 		}
-		
-		
 		return null;
 	}
-	
+
 	public int numberOfRows(){
 		SQLiteDatabase db = this.getReadableDatabase();
-		int numRows = (int) DatabaseUtils.queryNumEntries(db, CONTACTS_TABLE_NAME);
-		return numRows;
+		try{
+			int numRows = (int) DatabaseUtils.queryNumEntries(db, CONTACTS_TABLE_NAME);
+			return numRows;
+		}finally{
+			db.close();
+		}
 	}
-	
+
 
 	public Integer deleteUser(String imei)
 	{
 		SQLiteDatabase db = this.getWritableDatabase();
-		return db.delete("utilisateurs", 
-				"imei = ? ", 
-				new String[] { imei });
+		try{
+			return db.delete("utilisateurs", 
+					"imei = ? ", 
+					new String[] { imei });
+		}finally{
+			db.close();
+		}
 	}
-	
+
 	public Compte getAll()
 	{
 		List<Compte> compte = new ArrayList<>();
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor res =  db.rawQuery( "select * from utilisateurs", null );
-		res.moveToFirst();
-		while(res.isAfterLast() == false){
-			Compte c =new Compte(
-					res.getInt(0), 
-					res.getString(1), 
-					res.getString(2), 
-					res.getInt(4), 
-					new Long(res.getInt(3)),
-					res.getString(6)
-					);
-			
-			compte.add(c);
-			res.moveToNext();
+		try{
+			Cursor res =  db.rawQuery( "select * from utilisateurs", null );
+			res.moveToFirst();
+			while(res.isAfterLast() == false){
+				Compte c =new Compte(
+						res.getInt(0), 
+						res.getString(1), 
+						res.getString(2), 
+						res.getInt(4), 
+						new Long(res.getInt(3)),
+						res.getString(6)
+						);
+
+				compte.add(c);
+				res.moveToNext();
+			}
+			return compte.get(0);
+		}finally{
+			db.close();
 		}
-		return compte.get(0);
 	}
 
 }
