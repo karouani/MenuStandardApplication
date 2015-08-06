@@ -18,7 +18,6 @@ import com.dolibarrmaroc.com.models.Compte;
 @SuppressLint("NewApi")
 public class DBHandler extends SQLiteOpenHelper{
 
-	/* test commit */
 	public static final String DATABASE_NAME = "MyDBName.db";
 	public static final String CONTACTS_TABLE_NAME = "utilisateurs";
 	public static final String CONTACTS_COLUMN_ID = "id";
