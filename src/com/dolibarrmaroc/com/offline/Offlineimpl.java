@@ -46,6 +46,7 @@ import com.dolibarrmaroc.com.business.PayementManager;
 import com.dolibarrmaroc.com.business.TechnicienManager;
 import com.dolibarrmaroc.com.models.BordreauIntervention;
 import com.dolibarrmaroc.com.models.Categorie;
+import com.dolibarrmaroc.com.models.CategorieCustomer;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Commande;
 import com.dolibarrmaroc.com.models.Commandeview;
@@ -5119,6 +5120,91 @@ public class Offlineimpl implements ioffline {
 			// TODO: handle exception
 		}
 		return 0;
+	}
+
+	@Override
+	public long shnchronizeCategorieClients(CategorieCustomer ct, Compte cp) {
+		// TODO Auto-generated method stub
+		long ix = -1;
+		try {
+			//CleanCmdList();
+			file = new File(path, "/catcustomerdata.txt");
+			FileOutputStream outputStream;
+
+			if(!file.exists()){
+				file.createNewFile();
+				file.mkdir();
+			}
+
+			if(file.exists()){
+				FileWriter fw = new FileWriter(file, true);
+				PrintWriter pout = new PrintWriter(fw);
+				pout.println("["+gson.toJson(ct,CategorieCustomer.class)+"]");
+				ix =1;
+				pout.close();
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e("save cat clt ",e.getMessage()  +" << ");
+			ix =-1;
+		}
+		return ix;
+	}
+
+	@Override
+	public List<CategorieCustomer> LoadCategorieClients(String fl) {
+		// TODO Auto-generated method stub
+		List<CategorieCustomer> list = new ArrayList<CategorieCustomer>();
+
+		try{
+			int n;
+
+			File file = new File(path, "/catcustomerdata.txt");
+			if(file.exists()){
+				//Log.e("data loaded exist  ",file.getAbsolutePath());
+				File secondInputFile = new File(file.getAbsolutePath());
+				InputStream secondInputStream = new BufferedInputStream(new FileInputStream(secondInputFile));
+				BufferedReader r = new BufferedReader(new InputStreamReader(secondInputStream));
+				StringBuilder total = new StringBuilder();
+				String line;
+				
+				while ((line = r.readLine()) != null) {
+					
+					JSONArray jr = new JSONArray(line);
+					for (int i = 0; i < jr.length(); i++) {
+						JSONObject json = jr.getJSONObject(i);
+						CategorieCustomer c = new CategorieCustomer();
+
+						c = gson.fromJson(json.toString(), CategorieCustomer.class);
+
+						list.add(c);
+					}
+
+
+					}
+				}
+
+		}catch(Exception e){
+			Log.e("load catcutomerdata",e.getMessage()  +" << ");
+		}
+		return list;
+	}
+
+	@Override
+	public void CleanCategorieClients() {
+		// TODO Auto-generated method stub
+		try {
+			File file = new File(path, "/catcustomerdata.txt");
+			if(file.exists()){
+				FileWriter fw = new FileWriter(file,false);
+				PrintWriter pout = new PrintWriter(fw);
+				pout.print("");
+				pout.close();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 }

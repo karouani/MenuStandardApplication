@@ -1536,4 +1536,11 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 		alert.create().show();
 	}
 	
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
+	}
 }

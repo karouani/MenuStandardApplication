@@ -463,4 +463,6 @@
 	
 	<string name="cnxlab6">Veuillez verifier le type du transfert ou le nombre des produits</string>
 	<string name="title_activity_transfertvirtualstock">Transfert des Rendus,Echanges</string>
+	
+	<string name="vendcat1">Categorie par defaut</string>
 </resources>

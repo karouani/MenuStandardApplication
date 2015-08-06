@@ -16,8 +16,9 @@ import android.util.Log;
 import com.dolibarrmaroc.com.models.Compte;
 
 @SuppressLint("NewApi")
-public class DBHandler extends SQLiteOpenHelper{
+public class DBHandler extends SQLiteOpenHelper {
 
+	/* data base handler */
 	public static final String DATABASE_NAME = "MyDBName.db";
 	public static final String CONTACTS_TABLE_NAME = "utilisateurs";
 	public static final String CONTACTS_COLUMN_ID = "id";

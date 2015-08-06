@@ -10,6 +10,7 @@ import com.dolibarrmaroc.com.database.DataErreur;
 import com.dolibarrmaroc.com.models.BordereauGps;
 import com.dolibarrmaroc.com.models.BordreauIntervention;
 import com.dolibarrmaroc.com.models.Categorie;
+import com.dolibarrmaroc.com.models.CategorieCustomer;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Commande;
 import com.dolibarrmaroc.com.models.Commandeview;
@@ -69,6 +70,7 @@ public interface ioffline {
 	public long shynchornizeCmd(Commande cm); 
 	public long shynchornizeCmdToFact(Commandeview cm); 
 	public long shnchronizeMouvement(MouvementGrabage mv,Compte cp);
+	public long shnchronizeCategorieClients(CategorieCustomer ct,Compte cp);
 
 	
 	/* Load data from offline */
@@ -95,6 +97,7 @@ public interface ioffline {
 	public List<Commande> LoadCmdList(String fl);
 	public List<Commandeview> LoadCmdToFact(String fl);
 	public List<MouvementGrabage> LoadMouvement(String fl);
+	public List<CategorieCustomer> LoadCategorieClients(String fl);
 	
 	public Compte LoadCompte(String log,String pwd);
 	
@@ -124,6 +127,7 @@ public interface ioffline {
 	public void CleanCmdList();
 	public void CleanCmdToFactList();
 	public void CleanMouvement();
+	public void CleanCategorieClients();
 	
 	public List<Promotion> getPromotions(int idclt, int idprd);
 	public Client seeClient(List<Client> ls,String id);

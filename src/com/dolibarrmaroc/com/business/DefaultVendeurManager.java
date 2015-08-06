@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.dolibarrmaroc.com.dao.VendeurDao;
+import com.dolibarrmaroc.com.models.CategorieCustomer;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Dictionnaire;
@@ -82,6 +83,13 @@ public class DefaultVendeurManager implements VendeurManager {
 	public HashMap<Integer, List<Integer>> getPromotionClients() {
 		// TODO Auto-generated method stub
 		return dao.getPromotionClients();
+	}
+
+
+	@Override
+	public List<CategorieCustomer> getAllCategorieCustomer(Compte c) {
+		// TODO Auto-generated method stub
+		return dao.getAllCategorieCustomer(c);
 	}
 
 }

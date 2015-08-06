@@ -3,6 +3,7 @@ package com.dolibarrmaroc.com.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import com.dolibarrmaroc.com.models.CategorieCustomer;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Dictionnaire;
@@ -20,6 +21,8 @@ public interface VendeurDao {
 	
 	public List<Client> selectAllClient(Compte c);
 	public List<Promotion> getPromotions(int idclt,int idprd);
+	
+	public List<CategorieCustomer> getAllCategorieCustomer(Compte c);
 	
 	public HashMap<Integer, HashMap<Integer, Promotion>> getPromotionProduits();
 	public HashMap<Integer, List<Integer>> getPromotionClients();
