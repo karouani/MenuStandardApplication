@@ -2,6 +2,7 @@ package com.dolibarrmaroc.com.models;
 
 public class Addresse {
 
+	/* test */
 	private int id;
 	private String adress;
 	
