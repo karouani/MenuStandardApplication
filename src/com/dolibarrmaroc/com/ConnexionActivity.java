@@ -440,7 +440,7 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 						Intent intent1 = new Intent(ConnexionActivity.this, HomeActivity.class);
 						intent1.putExtra("user", compte);
 						startActivity(intent1);
-						
+						ConnexionActivity.this.finish();
 						break;
 					}
 

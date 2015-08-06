@@ -1,44 +1,14 @@
 package com.dolibarrmaroc.com;
 
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import com.dolibarrmaroc.com.PayementActivity.ServerSideTask;
-import com.dolibarrmaroc.com.VendeurActivity.ConnexionTask;
-import com.dolibarrmaroc.com.business.CommercialManager;
-import com.dolibarrmaroc.com.business.PayementManager;
-import com.dolibarrmaroc.com.business.VendeurManager;
-import com.dolibarrmaroc.com.models.Client;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.Dictionnaire;
-import com.dolibarrmaroc.com.models.GpsTracker;
-import com.dolibarrmaroc.com.models.Produit;
-import com.dolibarrmaroc.com.models.ProspectData;
-import com.dolibarrmaroc.com.models.Prospection;
-import com.dolibarrmaroc.com.utils.CheckOutNet;
-import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
-import com.dolibarrmaroc.com.utils.GpsTrackingServiceDao;
-import com.dolibarrmaroc.com.utils.MyLocationListener;
-import com.dolibarrmaroc.com.utils.PayementManagerFactory;
-import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
-import com.dolibarrmaroc.com.database.DatabaseHandler;
-import com.dolibarrmaroc.com.database.StockVirtual;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -46,18 +16,14 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -68,9 +34,28 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.os.Build;
-import android.os.PowerManager.WakeLock;
+
+import com.dolibarrmaroc.com.business.CommercialManager;
+import com.dolibarrmaroc.com.business.PayementManager;
+import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.dashboard.DashboardActivity;
+import com.dolibarrmaroc.com.database.DatabaseHandler;
+import com.dolibarrmaroc.com.database.StockVirtual;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.Dictionnaire;
+import com.dolibarrmaroc.com.models.GpsTracker;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.ProspectData;
+import com.dolibarrmaroc.com.models.Prospection;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
+import com.dolibarrmaroc.com.utils.PayementManagerFactory;
+import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 
 @SuppressLint("NewApi")
 public class CommercialActivity extends Activity implements OnClickListener,OnItemSelectedListener{
@@ -158,8 +143,6 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_commercial);
-
-
 		
         
 		try {
@@ -213,15 +196,12 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 				StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 				StrictMode.setThreadPolicy(policy);
 			}
-
+			
+			/*
 			PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 			wakelock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "no sleep");
 			wakelock.acquire();
-
-			
-			
-			
-			
+			*/
 			
 			myoffline = new Offlineimpl(getApplicationContext());
 			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
@@ -246,7 +226,7 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 			}
 			
 			/*
-			Class squareClass = Class.forName("com.dolibarrmaroc.com.models.Prospection");
+			Class squareClass = Class.forName("com.marocgeo.als.models.Prospection");
 	        
 	        Field[] fields = squareClass.getDeclaredFields(); 
 	        for (Field f : fields) {
@@ -376,7 +356,7 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 				firstname.setHeight(35);
 
 				EditText lastname = new EditText(CommercialActivity.this);
-				lastname.setHint("Le Prénom");
+				lastname.setHint("Le Prï¿½nom");
 				lastname.setTag("comm_lasttname");
 				
 				
@@ -401,7 +381,7 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 			}else{
 				//name.setHint("Nom sociï¿½tï¿½");
 				EditText name = new EditText(CommercialActivity.this);
-				name.setHint("Nom société");
+				name.setHint("Nom sociï¿½tï¿½");
 				name.setTag("comm_nome");
 				name.setHeight(40);
 
@@ -1015,5 +995,19 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 		});
 		alert.setCancelable(true);
 		alert.create().show();
+	}
+	
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
+	}
+	
+	public void onClickAbout (View v)
+	{
+		startActivity (new Intent(getApplicationContext(), AboutActivity.class));
+		this.finish();
 	}
 }

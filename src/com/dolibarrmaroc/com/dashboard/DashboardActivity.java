@@ -17,15 +17,21 @@
 package com.dolibarrmaroc.com.dashboard;
 
 import com.dolibarrmaroc.com.AboutActivity;
+import com.dolibarrmaroc.com.ConnexionActivity;
 import com.dolibarrmaroc.com.HomeActivity;
+import com.dolibarrmaroc.com.R;
 import com.dolibarrmaroc.com.SearchActivity;
+import com.dolibarrmaroc.com.utils.DBHandler;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -54,12 +60,13 @@ public abstract class DashboardActivity extends Activity
 	 * Always followed by onStart().
 	 *
 	 */
-	
 
+	private DBHandler mydb ;
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		//setContentView(R.layout.activity_default);
+		mydb = new DBHandler(this);
 	}
 
 	/**
@@ -219,7 +226,7 @@ public abstract class DashboardActivity extends Activity
 		default: 
 			break;
 		}
-		*/
+		 */
 	}
 
 	/**
@@ -278,5 +285,39 @@ public abstract class DashboardActivity extends Activity
 		toast (msg);
 	}
 
-	
+	public AlertDialog.Builder deconnecter(final Context context){
+		AlertDialog.Builder alert = new AlertDialog.Builder(context);
+		alert.setTitle(context.getResources().getString(R.string.btn_decon));
+		alert.setMessage(context.getResources().getString(R.string.tecv47));
+		alert.setNegativeButton(context.getResources().getString(R.string.description_logout), new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//startActivity (new Intent(getApplicationContext(), F2Activity.class));
+				TelephonyManager tManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+				String imei = tManager.getDeviceId();
+				if(mydb.numberOfRows() > 0){
+					Log.e(">>"+imei," >> "+mydb.numberOfRows());
+					mydb.deleteUser(imei);
+					//Log.e("All Compte",mydb.getAll().toString());
+				}
+
+				Intent intent = new Intent(context,ConnexionActivity.class);
+				startActivity(intent);
+				finish();
+				return;
+			}
+		});
+
+		alert.setPositiveButton(context.getResources().getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				return;
+			}
+		});
+		alert.setCancelable(true);
+		return alert;
+	}
+
 } // end class

@@ -199,7 +199,6 @@ public class HomeActivity extends DashboardActivity
 
 	/**
 	 */
-	// Click Methods
 	@Override
 	public void onClickFeature(View v) {
 		// TODO Auto-generated method stub
@@ -207,6 +206,9 @@ public class HomeActivity extends DashboardActivity
 
 		int id = v.getId ();
 		switch (id) {
+		case R.id.home_btn_logout :
+			deconnecter(this).create().show();
+			break;
 		case R.id.home_btn_synchronisation :
 			//startActivity (new Intent(getApplicationContext(), F1Activity.class));
 			//PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -214,9 +216,6 @@ public class HomeActivity extends DashboardActivity
 			//wakelock.acquire();
 			
 			synchronisation();
-			break;
-		case R.id.home_btn_logout :
-			deconnecter();
 			break;
 		case R.id.home_btn_statistque :
 			startActivity (new Intent(getApplicationContext(), F3Activity.class));
@@ -475,38 +474,9 @@ public class HomeActivity extends DashboardActivity
 		alert.create().show();
 	}
 
-	public void deconnecter(){
-		AlertDialog.Builder alert = new AlertDialog.Builder(HomeActivity.this);
-		alert.setTitle(getResources().getString(R.string.btn_decon));
-		alert.setMessage(getResources().getString(R.string.tecv47));
-		alert.setNegativeButton(getResources().getString(R.string.description_logout), new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				//startActivity (new Intent(getApplicationContext(), F2Activity.class));
-				TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-				String imei = tManager.getDeviceId();
-				if(mydb.numberOfRows() > 0){
-					Log.e(">>"+imei," >> "+mydb.numberOfRows());
-					mydb.deleteUser(imei);
-					//Log.e("All Compte",mydb.getAll().toString());
-				}
-
-				Intent intent = new Intent(HomeActivity.this,ConnexionActivity.class);
-				startActivity(intent);
-				HomeActivity.this.finish();
-				return;
-			}
-		});
-
-		alert.setPositiveButton(getResources().getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				return;
-			}
-		});
-		alert.setCancelable(true);
-		alert.create().show();
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		deconnecter(this).create().show();
 	}
 } // end class
