@@ -30,6 +30,7 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -475,8 +476,11 @@ public class HomeActivity extends DashboardActivity
 	}
 
 	@Override
-	public void onBackPressed() {
-		super.onBackPressed();
-		deconnecter(this).create().show();
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			deconnecter(this).create().show();
+			return true;
+		}
+		return false;
 	}
 } // end class

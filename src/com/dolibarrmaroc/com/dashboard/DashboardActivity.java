@@ -285,7 +285,7 @@ public abstract class DashboardActivity extends Activity
 		toast (msg);
 	}
 
-	public AlertDialog.Builder deconnecter(final Context context){
+	public AlertDialog.Builder deconnecter(final Activity context){
 		AlertDialog.Builder alert = new AlertDialog.Builder(context);
 		alert.setTitle(context.getResources().getString(R.string.btn_decon));
 		alert.setMessage(context.getResources().getString(R.string.tecv47));
@@ -303,7 +303,7 @@ public abstract class DashboardActivity extends Activity
 
 				Intent intent = new Intent(context,ConnexionActivity.class);
 				startActivity(intent);
-				finish();
+				context.finish();
 				return;
 			}
 		});
