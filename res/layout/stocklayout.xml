@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFBCC2BE"
+    android:gravity="center_vertical"
+    >
+     
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="70dp" >
+
+        <EditText
+            android:id="@+id/qtysec"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/field_qte"
+            android:inputType="phone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginTop="22dp" >
+
+        <Button
+            android:id="@+id/addsec"
+            android:layout_width="94dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/mybuttonbottom"
+            android:text="@string/btn_produit"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/savesec"
+            android:layout_width="98dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="31dp"
+            android:layout_weight="1"
+            android:background="@drawable/mybuttonbottom"
+            android:text="Retour"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <AutoCompleteTextView
+        android:id="@+id/secprod"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_weight="0.00"
+        android:completionThreshold="1"
+        android:dropDownHeight="150dp"
+        android:dropDownVerticalOffset="5dp"
+        android:dropDownWidth="wrap_content"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/product_spinner"
+        android:imeOptions="actionNext"
+        android:inputType="textAutoComplete|textAutoCorrect"
+        android:singleLine="true"
+        android:windowSoftInputMode="stateHidden|adjustPan" />
+
+</RelativeLayout>

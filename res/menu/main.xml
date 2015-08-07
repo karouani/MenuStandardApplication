@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sig.google.maps.MainActivity" >
+
+    <item
+        android:id="@+id/pointerFact"
+        android:icon="@drawable/sys_clipboard"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom|withText"
+        android:title="Facture Opération"/>
+
+	<item
+        android:id="@+id/pointerClt"
+        android:icon="@drawable/sys_local"
+        android:orderInCategory="1"
+        android:showAsAction="ifRoom|withText"
+        android:title="Client Opération"/>
+</menu>

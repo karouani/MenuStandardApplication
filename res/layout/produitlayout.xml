@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFBCC2BE"
+    android:gravity="center_vertical"
+    tools:context=".CommercialActivity" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/produitpointer"
+        android:layout_marginTop="15dp" >
+
+        <EditText
+            android:id="@+id/qtedialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/field_qte"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/pudialog"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.39"
+            android:editable="false"
+            android:ems="10"
+            android:hint="@string/field_pu" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/labelsignature"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/totaltextdialog"
+        android:layout_alignBottom="@+id/totaltextdialog"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_weight="1"
+        android:text="@string/field_total"
+        android:textColor="#ffff0000"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/totaltextdialog"
+        android:layout_marginTop="22dp" >
+
+        <Button
+            android:id="@+id/factshowme"
+            android:layout_width="94dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/mybuttonbottom"
+            android:text="@string/btn_produit"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/itenermoifact"
+            android:layout_width="98dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="31dp"
+            android:layout_weight="1"
+            android:text="@string/facture"
+            android:background="@drawable/mybuttonbottom"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/produitpointer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="18dp" />
+
+    <EditText
+        android:id="@+id/totaltextdialog"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/linearLayout1"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginTop="24dp"
+        android:layout_weight="2.11"
+        android:editable="false"
+        android:ems="10"
+        android:hint="@string/total_ht" />
+
+    <Button
+        android:id="@+id/annulershowme"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="1"
+        android:background="@drawable/mybuttonbottom"
+        android:text="@string/btn_cancel"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>

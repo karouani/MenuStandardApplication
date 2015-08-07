@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <LinearLayout
+        android:id="@+id/avertisement1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/lbl_car_model74"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/caus9"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+     <LinearLayout
+            android:id="@+id/avertisement2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/avertisement1"
+            android:orientation="horizontal" 
+            android:layout_marginTop="30dp">
+ 
+            <TextView
+                android:id="@+id/lbl_car_model47"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/caus3"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+ 
+     </LinearLayout>
+     
+     <LinearLayout
+            android:id="@+id/avertisement4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/avertisement2"
+            android:orientation="horizontal" 
+            android:layout_marginTop="10dp">
+ 
+            <TextView
+                android:id="@+id/lbl_car_modelbv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/caus5"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+ 
+     </LinearLayout>
+     <LinearLayout
+            android:id="@+id/avertisement5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/avertisement4"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp" >
+ 
+            <TextView
+                android:id="@+id/lbl_car_modeliu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/caus6"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+ 
+     </LinearLayout>
+     
+     <LinearLayout
+            android:id="@+id/avertisement6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/avertisement5"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp" >
+ 
+            <TextView
+                android:id="@+id/lbl_car_modeliukl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/caus10"
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+ 
+     </LinearLayout>
+
+</RelativeLayout>

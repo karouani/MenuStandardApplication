@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sig.google.maps.TechnicienTabActivity" >
+
+       <item
+        android:id="@+id/cleanitervention"
+        android:icon="@drawable/sys_minus"
+        android:orderInCategory="0"
+        android:showAsAction="ifRoom"
+        android:title="@string/tecv34"/>
+       
+       <item
+        android:id="@+id/hisinterv"
+        android:icon="@drawable/sys_clipboard"
+        android:orderInCategory="1"
+        android:showAsAction="ifRoom"
+        android:title="@string/title_activity_interventionhisto"/>
+
+</menu>

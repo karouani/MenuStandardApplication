@@ -1,0 +1,92 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="0dp" >
+
+    <!-- This is the title label -->
+    
+    <LinearLayout
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout3"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical" >
+
+            <com.karouani.cicin.widget.CustomAutoCompleteView
+                    android:id="@+id/autoclt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="5px"
+                    android:layout_marginRight="5px"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="0.00"
+                    android:completionThreshold="1"
+                    android:dropDownHeight="150dp"
+                    android:dropDownVerticalOffset="5dp"
+                    android:dropDownWidth="wrap_content"
+                    android:ems="10"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:hint="--Liste Clients--"
+                    android:imeOptions="actionNext"
+                    android:inputType="textAutoComplete|textAutoCorrect"
+                    android:singleLine="true"
+                    android:windowSoftInputMode="stateHidden|adjustPan" >
+                </com.karouani.cicin.widget.CustomAutoCompleteView>
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="52dp"
+                android:orientation="vertical" >
+                
+               <ExpandableListView
+	              android:id="@+id/exp_list"
+	              android:layout_width="match_parent"
+	              android:layout_height="wrap_content"
+	              android:background="#f4f4f4"
+	              android:cacheColorHint="#00000000"
+	              android:childDivider="#00000000"
+	              android:divider="#00000000"
+	              android:dividerHeight="2dp"
+	              android:groupIndicator="@drawable/togglearrow" >
+              </ExpandableListView>
+                
+            </LinearLayout>
+
+                
+                
+               
+            
+    </LinearLayout>
+    
+    
+    
+    
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+
+
+        <Button
+            android:id="@+id/seesala"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/mybuttontop"
+            android:text="Consulter panier"
+            android:textColor="@android:color/white" />
+
+       
+    </LinearLayout>
+
+</RelativeLayout>

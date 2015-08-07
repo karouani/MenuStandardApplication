@@ -1,0 +1,65 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFBCC2BE"
+    android:gravity="center_vertical"
+    tools:context=".CommercialActivity" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/autocomplate"
+        android:layout_below="@+id/autocomplate"
+        android:layout_marginTop="22dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/factshowme"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/mybuttonbottom"
+            android:text="@string/btn_map_facture"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/annulershowme"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/mybuttonbottom"
+            android:text="@string/btn_cancel"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/itenermoifact"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/mybuttonbottom"
+            android:text="@string/btn_map_itiniraire"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <AutoCompleteTextView
+        android:id="@+id/autocomplate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="18dp"
+        android:completionThreshold="1"
+        android:dropDownHeight="150dp"
+        android:dropDownVerticalOffset="5dp"
+        android:dropDownWidth="wrap_content"
+        android:gravity="center"
+        android:hint="--Select Facture--"
+        android:inputType="textAutoComplete|textAutoCorrect" >
+
+        <requestFocus />
+    </AutoCompleteTextView>
+
+</RelativeLayout>

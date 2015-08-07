@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TicketActivity" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+
+        <Button
+            android:id="@+id/btn_quit"
+            android:layout_width="155dp"
+            android:layout_height="50dp"
+            android:layout_margin="5px"
+            android:layout_weight="0.03"
+            android:background="@drawable/mybuttontop"
+            android:padding="10dp"
+            android:text="@string/btn_decon"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/geocom"
+            android:layout_width="155dp"
+            android:layout_height="50dp"
+            android:layout_margin="5px"
+            android:layout_weight="0.03"
+            android:background="@drawable/mybuttontop"
+            android:padding="10dp"
+            android:text="@string/btn_print"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/logo" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_below="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/impriment" />
+
+</RelativeLayout>

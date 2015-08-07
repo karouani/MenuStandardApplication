@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/layout_item_car"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="20dp" >
+ 
+        <LinearLayout
+            android:id="@+id/layout_car_model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal" >
+ 
+            <TextView
+                android:id="@+id/lbl_car_model"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tecv40"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+ 
+            <TextView
+                android:id="@+id/orefclt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginLeft="20dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="normal"
+                android:textDirection="anyRtl"
+            android:layoutDirection="locale" />
+        </LinearLayout>
+ 
+        <LinearLayout
+            android:id="@+id/layout_car_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_car_model"
+            android:orientation="horizontal" >
+ 
+            <TextView
+                android:id="@+id/lbl_car_color"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tecv43"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+ 
+            <TextView
+                android:id="@+id/oreffact"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginLeft="20dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="normal"
+                android:textDirection="anyRtl"
+            android:layoutDirection="locale" />
+        </LinearLayout>
+ 
+        <LinearLayout
+            android:id="@+id/layout_car_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_car_color"
+            android:orientation="horizontal" >
+ 
+            <TextView
+                android:id="@+id/lbl_car_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tecv41"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+ 
+            <TextView
+                android:id="@+id/omtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginLeft="20dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="normal"
+                android:textDirection="anyRtl"
+            android:layoutDirection="locale" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/layout_reste_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_car_price"
+            android:orientation="horizontal" >
+ 
+            <TextView
+                android:id="@+id/lbl_reste_price"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tecv42"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="bold" />
+ 
+            <TextView
+                android:id="@+id/opayermtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_marginLeft="20dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="normal"
+                android:textDirection="anyRtl"
+            android:layoutDirection="locale" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/layout_cid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_reste_price"
+            android:orientation="horizontal" >
+ 
+            <TextView
+                android:id="@+id/oidfact"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textStyle="normal"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

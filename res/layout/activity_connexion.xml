@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    tools:context=".ConnexionActivity" >
+
+    <Button
+        android:id="@+id/connecter"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/mybuttontop"
+        android:text="@string/connexion"
+        android:layout_margin="5px"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/connecter"
+        android:layout_alignLeft="@+id/connecter"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:layout_marginLeft="5px"
+        android:layout_marginRight="5px"
+        android:hint="@string/password"
+        android:text="1234"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/password"
+        android:layout_alignLeft="@+id/password"
+        android:ems="10"
+        android:layout_margin="5px"
+        android:text="vendeur"
+        android:hint="@string/login"
+        android:inputType="text" >
+
+        <requestFocus />
+    </EditText>
+
+    <CheckBox
+        android:id="@+id/souvenir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/connecter"
+        android:layout_alignLeft="@+id/login"
+        android:text="@string/action_save" />
+</RelativeLayout>
