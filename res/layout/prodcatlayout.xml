@@ -32,18 +32,33 @@
             android:ems="10"
             android:hint="@string/field_pu" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/labelsignature"
-        android:layout_width="50dp"
+    
+    
+<LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/totaltextdialog"
-        android:layout_alignBottom="@+id/totaltextdialog"
-        android:layout_alignLeft="@+id/linearLayout2"
-        android:layout_weight="1"
+        android:layout_below="@+id/linearLayout1"
+       >
+
+       <TextView
+        android:id="@+id/labelsignature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/field_total"
         android:textColor="#ffff0000"
         android:textStyle="bold" />
+
+        <EditText
+        android:id="@+id/totaltextdialog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:layout_marginLeft="100dp"
+        android:ems="10"
+        android:hint="@string/total_ht" />
+    </LinearLayout>
+    
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -51,8 +66,8 @@
         android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/totaltextdialog"
-        android:layout_marginTop="20dp" >
+        android:layout_below="@+id/l1w"
+       >
 
         <Button
             android:id="@+id/factshowme"
@@ -93,17 +108,7 @@
         android:singleLine="true"
         android:windowSoftInputMode="stateHidden|adjustPan" />
 
-    <EditText
-        android:id="@+id/totaltextdialog"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/linearLayout1"
-        android:layout_below="@+id/linearLayout1"
-        android:layout_marginTop="24dp"
-        android:layout_weight="2.11"
-        android:editable="false"
-        android:ems="10"
-        android:hint="@string/total_ht" />
+    
 
     <Button
         android:id="@+id/annulershowme"
@@ -119,29 +124,33 @@
     
     
     
-    <RelativeLayout
-        android:id="@+id/l1w"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout1"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="15dp" >
-
-    <TextView
-        android:id="@+id/tx1w"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:text="Qte Disponible" />
-
-    <TextView
-        android:id="@+id/textView1ww"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/tx1"
-        android:textAlignment="textEnd"
-        android:text="0" />
     
-    </RelativeLayout>
+    
+    <LinearLayout
+                android:id="@+id/l1w"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                 android:layout_below="@+id/linearLayout11"
+                android:layout_marginBottom="5dp" >
+
+                <TextView
+                    android:id="@+id/tx1w"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="47dp"
+                    android:layout_weight="0.21"
+                    android:text="@string/field_qntdsp"
+                    android:textColor="#4280DC"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView1ww"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.21"
+                    android:text="@string/field_total"
+                    android:textColor="#4280DC"
+                    android:textAlignment="textEnd"
+                    android:textStyle="bold" />
+            </LinearLayout>
 </RelativeLayout>

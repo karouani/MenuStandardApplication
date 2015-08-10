@@ -80,7 +80,7 @@
             android:ems="10"
             android:focusable="true"
             android:gravity="center"
-            android:hint="--Select Client--"
+            android:hint="--Select Secteur--"
             android:imeOptions="actionNext"
             android:inputType="textAutoComplete|textAutoCorrect"
             android:singleLine="true"

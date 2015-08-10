@@ -76,6 +76,7 @@ import com.dolibarrmaroc.com.business.CommercialManager;
 import com.dolibarrmaroc.com.business.PayementManager;
 import com.dolibarrmaroc.com.business.VendeurManager;
 import com.dolibarrmaroc.com.dao.VendeurDaoMysql;
+import com.dolibarrmaroc.com.models.CategorieCustomer;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Dictionnaire;
@@ -105,8 +106,9 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 	public ArrayAdapter<String> myAdapter;
 	public String[] values,value2 ;
 	
+	public CustomAutoCompleteView categoriepinner;
 	
-	private List<String> list1 = new ArrayList<String>(),list2 = new ArrayList<String>();
+	private List<String> list1 = new ArrayList<String>(),list2 = new ArrayList<String>(),list3 = new ArrayList<String>();
 	
 	private WakeLock wakelock;
 	private TinyDB db;
@@ -125,6 +127,7 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 	//Spinner Remplissage
 	private List<String> listclt;
 	private List<String> listprd;
+	private List<String> listcat;
 
 	//Asynchrone avec connexion 
 	private ProgressDialog dialog;
@@ -151,6 +154,7 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 	//Autre Variable
 	private List<Produit> products,produitsFacture;
 	private List<Client> clients;
+	private List<CategorieCustomer> lscat;
 	private int firstinstance;
 	private String prix;
 	
@@ -421,6 +425,70 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 				public void afterTextChanged(Editable s) {
 					// TODO Auto-generated method stub
 					
+				}
+			});
+			
+			categoriepinner =  (CustomAutoCompleteView) findViewById(R.id.categoriespinner);
+			categoriepinner.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
+					// TODO Auto-generated method stub
+					String selected = categoriepinner.getSelected(parent, view, position, id);
+					Log.e("categorie sel ",selected);
+					
+					CategorieCustomer cc = null;
+					
+					for (int i = 0; i < lscat.size(); i++) {
+						if(selected.equals(lscat.get(i).getLibelle())){
+							cc = lscat.get(i);
+						}
+					}
+					
+					if(cc != null){
+						listclt = new ArrayList<>();
+						for (int j = 0; j < cc.getLsclt().size(); j++) {
+							for (int i = 0; i < clients.size(); i++) {
+								if(cc.getLsclt().get(j) == clients.get(i).getId()){
+									listclt.add(clients.get(i).getName());
+								}
+							}
+						}
+						
+						if(listclt.size() == 0){
+							for (int i = 0; i < clients.size(); i++) {
+								listclt.add(clients.get(i).getName());
+							}
+						}
+						addItemsOnSpinnerCustom(clientspinner, 1);
+					}
+					
+				}
+			});
+			categoriepinner.addTextChangedListener(new TextWatcher() {
+				
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+					// TODO Auto-generated method stub
+					CustomAutoCompleteTextChangedListener txt = new CustomAutoCompleteTextChangedListener(VendeurActivity.this,R.layout.list_view_row,list3);
+
+					myAdapter = txt.onTextChanged(s, start, before, count);
+					myAdapter.notifyDataSetChanged();
+					categoriepinner.setAdapter(myAdapter);
+				//	Log.e("chnaged ",s.toString());
+				}
+				
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count,
+						int after) {
+					// TODO Auto-generated method stub
+					//Log.e("before ",s.toString());
+				}
+				
+				@Override
+				public void afterTextChanged(Editable s) {
+					// TODO Auto-generated method stub
+					//Log.e("editable ",s.toString());
 				}
 			});
 
@@ -743,6 +811,24 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 			myAdapter = new AutocompleteCustomArrayAdapter(VendeurActivity.this, R.layout.list_view_row, values);
 			s.setAdapter(myAdapter);
 
+		}else if(type == -1){
+			
+			/*
+			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_spinner_item, listclt);
+			dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			s.setAdapter(dataAdapter);
+			*/
+			list3 = listcat;
+			values= new String[listcat.size()];
+			for (int i = 0; i < listcat.size(); i++) {
+				values[i] = listcat.get(i);
+			}
+			
+			
+			myAdapter = new AutocompleteCustomArrayAdapter(VendeurActivity.this, R.layout.list_view_row, values);
+			s.setAdapter(myAdapter);
+
 		}else{		
 			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
 					android.R.layout.simple_spinner_item, listprd);
@@ -853,6 +939,20 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 			
 			Log.e("start ","start cnx task");
 			
+			lscat = new ArrayList<>();
+			listcat = new ArrayList<>();
+			lscat = vendeurManager.getAllCategorieCustomer(compte);
+			if(lscat.size() > 0){
+				myoffline.CleanCategorieClients();
+				for (int i = 0; i < lscat.size(); i++) {
+					myoffline.shnchronizeCategorieClients(lscat.get(i), compte);
+				}
+			}
+		//	Log.e(">cat ",lscat.toString());
+			for (int i = 0; i < lscat.size(); i++) {
+				listcat.add(lscat.get(i).getLibelle()+"");
+			}
+			
 			
 			
 			
@@ -871,6 +971,7 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 					dialog.dismiss();
 					addItemsOnSpinnerCustom(proSpinner,2);
 					addItemsOnSpinnerCustom(clientspinner,1);
+					addItemsOnSpinnerCustom(categoriepinner,-1);
 					
 					
 					firstexecution = 1989;
@@ -1024,6 +1125,12 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 						}
 					}
 			
+					lscat = new ArrayList<>();
+					listcat = new ArrayList<>();
+					lscat = myoffline.LoadCategorieClients("");
+					for (int i = 0; i < lscat.size(); i++) {
+						listcat.add(lscat.get(i).getLibelle()+"");
+					}
 			
 			
 			return "success";
@@ -1041,6 +1148,7 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 					dialog.dismiss();
 					addItemsOnSpinnerCustom(proSpinner,2);
 					addItemsOnSpinnerCustom(clientspinner,1);
+					addItemsOnSpinnerCustom(categoriepinner	,-1);
 					firstexecution = 1989;
 				}
 
@@ -1543,4 +1651,6 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 		startActivity (intent);
 		this.finish();
 	}
+	
+	
 }

@@ -71,6 +71,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
@@ -102,7 +103,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 	private Dialog dialog;
 	private AutoCompleteTextView spinnere;
 	private Button facturePop,cancel,addprd;
-	private RelativeLayout qntlayout;
+	private LinearLayout qntlayout;
 	private TextView qntview;
 
 	//Recuperation
@@ -124,6 +125,9 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 	private Button retour;
 	
 	private TextView mtntotal;
+	
+	// head title
+	private TextView headtitle;
 	
 	private ArrayList<HashMap<String, String>> dico;
 	
@@ -308,6 +312,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 							int d = produit.getQteDispo() - qnt_disponible(produit.getId());
 							
 							qntview.setText(d+"");
+							qtep.setEnabled(true);
 							//selectionner.setEnabled(true);
 
 							break;
@@ -316,11 +321,18 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 				}
 			});
 			
-			qntlayout = (RelativeLayout)dialog.findViewById(R.id.l1w);
+			qntlayout = (LinearLayout)dialog.findViewById(R.id.l1w);
 			qntlayout.setVisibility(View.GONE);
 			
 			qntview = (TextView)dialog.findViewById(R.id.textView1ww);
 			
+			
+			headtitle = (TextView)findViewById(R.id.headtitleview);
+			if(type_invoice == 0){
+				headtitle.setText(getResources().getString(R.string.title_activity_vendeur));
+			}else if(type_invoice == 1){
+				headtitle.setText(getResources().getString(R.string.title_activity_vendeur));
+			}
 			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -452,6 +464,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 			pup.setEnabled(false);
 
 			qtep.setText("");
+			qtep.setEnabled(false);
 
 			qtep.addTextChangedListener(new TextWatcher() {
 				
@@ -634,7 +647,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 								//ajouterproduit.setEnabled(false);
 								qtep.setText("");
 								qtep.setHint(getResources().getString(R.string.field_qte));
-								pup.setText("0");
+								//pup.setText("0");
 								totalp.setText("0");
 								return;
 							}
@@ -1431,6 +1444,12 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 		alert.create().show();
 	}
 	
-	
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
+	}
 }
 

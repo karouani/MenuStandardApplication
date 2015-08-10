@@ -295,8 +295,8 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 				@Override
 				public void onTextChanged(CharSequence s, int start, int before, int count) {
 					
-					if(!s.toString().equals("-") && !s.toString().equals(".")){
-						
+					if(!s.toString().contains("-") && !s.toString().contains(".")){
+
 						if(!"".equals(encaisse.getText().toString())) m = Double.parseDouble(encaisse.getText().toString());
 						if(m > Double.parseDouble(du.getText().toString())){
 							m = 0D;
@@ -310,8 +310,23 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 							Double h = Double.parseDouble(du.getText().toString()) - m;
 							rendu.setText(h+"");
 						}
-						
-						
+
+
+					}else if(s.toString().charAt(s.toString().length()-1) != '.' && s.toString().contains(".")){
+						if(!"".equals(encaisse.getText().toString())) m = Double.parseDouble(encaisse.getText().toString());
+						Log.e("amount ",s.toString());
+						if(m > Double.parseDouble(du.getText().toString())){
+							m = 0D;
+							alertmontantdepasser();
+							rendu.setText("0");
+							amount = "0";
+						}else if("".equals(encaisse.getText().toString())) {
+							rendu.setText(du.getText().toString());
+							amount = "0";
+						}else{
+							Double h = Double.parseDouble(du.getText().toString()) - m;
+							rendu.setText(h+"");
+						}
 					}
 				
 					
@@ -1265,5 +1280,13 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 		});
 		alert.setCancelable(false);
 		alert.create().show();
+	}
+	
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
 	}
 }
