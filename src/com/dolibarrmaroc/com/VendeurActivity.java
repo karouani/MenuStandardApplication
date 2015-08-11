@@ -489,6 +489,42 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 				public void afterTextChanged(Editable s) {
 					// TODO Auto-generated method stub
 					//Log.e("editable ",s.toString());
+					String selected = s.toString();
+					Log.e("categorie after sel ",selected);
+					
+					CategorieCustomer cc = null;
+					
+					for (int i = 0; i < lscat.size(); i++) {
+						if(selected.equals(lscat.get(i).getLibelle())){
+							cc = lscat.get(i);
+						}
+					}
+					
+					if(cc != null){
+						listclt = new ArrayList<>();
+						for (int j = 0; j < cc.getLsclt().size(); j++) {
+							for (int i = 0; i < clients.size(); i++) {
+								if(cc.getLsclt().get(j) == clients.get(i).getId()){
+									listclt.add(clients.get(i).getName());
+								}
+							}
+						}
+						
+						if(listclt.size() == 0){
+							for (int i = 0; i < clients.size(); i++) {
+								listclt.add(clients.get(i).getName());
+							}
+						}
+						addItemsOnSpinnerCustom(clientspinner, 1);
+					}else{
+						listclt = new ArrayList<>();
+						
+							for (int i = 0; i < clients.size(); i++) {
+								listclt.add(clients.get(i).getName());
+							}
+						addItemsOnSpinnerCustom(clientspinner, 1);
+					}
+				
 				}
 			});
 

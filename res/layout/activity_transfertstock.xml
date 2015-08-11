@@ -5,19 +5,30 @@
     android:padding="0dp"
     android:scrollbarAlwaysDrawVerticalTrack="true" >
 
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_gravity="center"
-        android:src="@drawable/logo" />
-    
+    <LinearLayout
+            android:id="@+id/l1"
+            style="@style/TitleBar"
+            android:layout_width="match_parent" >
+
+            <ImageButton
+                style="@style/TitleBarAction"
+                android:contentDescription="@string/description_home"
+                android:onClick="onClickHome"
+                android:src="@drawable/title_home" />
+
+            <ImageView style="@style/TitleBarSeparator" />
+
+            <TextView style="@style/TitleBarText"
+                android:text="@string/title_activity_transfertstock" />
+
+        </LinearLayout>
+        
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/l1"
         android:id="@+id/lt1"
-        android:layout_below="@+id/imageView1"
          >
 
         <TextView
@@ -34,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:textAlignment="center"
+            android:textAlignment="textEnd"
             android:textStyle="bold"
             android:text="Nom vendeur" />
 
@@ -51,17 +62,13 @@
             android:id="@+id/trns3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="Entrepôt source" />
+            android:text="@string/cmdtofc32" />
 
         <TextView
             android:id="@+id/trns4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:textAlignment="center"
+            android:textAlignment="textEnd"
             android:textStyle="bold"
             android:text="Source" />
 
@@ -79,17 +86,13 @@
             android:id="@+id/trns5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="Entrepôt cible" />
+            android:text="@string/cmdtofc31" />
 
         <TextView
             android:id="@+id/trns6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:textAlignment="center"
+            android:textAlignment="textEnd"
             android:textStyle="bold"
             android:text="Cible" />
 
@@ -167,7 +170,7 @@
     <LinearLayout 
         android:id="@+id/linearLayout4sx"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
            	android:layout_below="@+id/linearLayout4" 
            	android:layout_alignParentBottom="true"
 		       android:layout_centerHorizontal="true" 
@@ -178,6 +181,8 @@
 		        android:layout_width="match_parent"
 		        android:layout_height="52dp"
 		        android:id="@+id/lt5"
+		        android:layout_alignParentBottom="true"
+		       android:layout_centerHorizontal="true" 
 		        >
 		
 		    <Button
@@ -197,6 +202,8 @@
 		        android:layout_height="52dp"
 		         android:id="@+id/lt6"
 		         android:layout_below="@+id/lt5"
+		         android:layout_alignParentBottom="true"
+		       android:layout_centerHorizontal="true" 
 		        >
 		
 		         <Button
@@ -205,8 +212,6 @@
 		            android:layout_height="50dp"
 		            android:layout_marginLeft="5px"
 		            android:layout_marginRight="5px"
-		            android:layout_alignParentBottom="true"
-		            android:layout_alignParentLeft="true"
 		            android:background="@drawable/round_corner_drawable"
 		            android:text="@string/btn_mvmstckgo" />
 		    </LinearLayout>
@@ -216,6 +221,8 @@
 		        android:layout_height="52dp"
 		         android:id="@+id/lt7"
 		         android:layout_below="@+id/lt6"
+		         android:layout_alignParentBottom="true"
+		       android:layout_centerHorizontal="true" 
 		        >
 		
 		         <Button
@@ -224,8 +231,6 @@
 		            android:layout_height="50dp"
 		            android:layout_marginLeft="5px"
 		            android:layout_marginRight="5px"
-		            android:layout_alignParentBottom="true"
-		            android:layout_alignParentLeft="true"
 		            android:background="@drawable/round_corner_drawable"
 		            android:text="@string/btn_mvmstckall" />
 		    </LinearLayout>

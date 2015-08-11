@@ -243,8 +243,10 @@ public class HomeActivity extends DashboardActivity
 			alerts.add(update);
 			new AlertDialogList(HomeActivity.this, alerts).show();
 			break;
-		case R.id.home_btn_feature2 :
-			startActivity (new Intent(getApplicationContext(), F6Activity.class));
+		case R.id.home_btn_stock :
+			Intent intent4 = new Intent(HomeActivity.this, TransfertstockActivity.class);
+			intent4.putExtra("user", compte);
+			startActivity(intent4);
 			break;
 		case R.id.home_btn_prise_cmd : 
 			Intent intent3 = new Intent(HomeActivity.this, CatalogeActivity.class);

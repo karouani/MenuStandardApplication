@@ -633,7 +633,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 						qtep.setHint(getResources().getString(R.string.field_qte));
 						totalp.setText("0");
 						spinnere.setText("");
-						pup.setText("0");
+						//pup.setText("0");
 						produit = new Produit();
 						//facture.setEnabled(true);
 					}else{
@@ -963,7 +963,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 			public void onClick(DialogInterface dialog, int which) {
 				//ajouterproduit.setEnabled(false);
 				qtep.setText("0");
-				pup.setText("0");
+			//	pup.setText("0");
 				totalp.setText("0");
 				
 				

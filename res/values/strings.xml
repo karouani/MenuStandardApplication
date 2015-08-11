@@ -435,6 +435,8 @@
 	<string name="cmdtofc25">Le type de votre transaction est inconnu (Vente,Echange,Retour)</string>
 	<string name="cmdtofc26">Mouvement stock</string>
 	<string name="cmdtofc27">Valider retour</string>
+	<string name="cmdtofc31">Entrepôt cible  </string>
+	<string name="cmdtofc32">Entrepôt source  </string>
 	<string name="cmdtofc28">Vous voulez enregistrer votre echanges des produits</string>
 	<string name="cmdtofc29">Assurez vous que vous êtes connecté à Internet (Wifi - 3G)</string>
 	<string name="cmdtofc30">Le client est encours dans état inactif. Veuillez synchronizer votre client avant de passer des transactions</string>

@@ -17,6 +17,7 @@ import com.dolibarrmaroc.com.business.VendeurManager;
 import com.dolibarrmaroc.com.dao.CategorieDao;
 import com.dolibarrmaroc.com.dao.CategorieDaoMysql;
 import com.dolibarrmaroc.com.models.Categorie;
+import com.dolibarrmaroc.com.models.CategorieCustomer;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Dictionnaire;
@@ -97,6 +98,9 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
     private List<Categorie> lscats;
     private ExpandableListView ExpandList;
     
+    private List<CategorieCustomer> lscat;
+    private List<String> listcat;
+    
     
     private Produit produit;
     private Client client;
@@ -127,9 +131,10 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 	
 	//private AutoCompleteTextView clientspinner;
 	public CustomAutoCompleteView clientspinner;
+	public CustomAutoCompleteView catspinner;
 	// adapter for auto-complete
 	public ArrayAdapter<String> myAdapter;
-	public String[] values ;
+	public String[] values,values2 ;
 	private List<String> listtmp = new ArrayList<String>();
 	
 	
@@ -237,6 +242,103 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 		clientspinner = (CustomAutoCompleteView) findViewById(R.id.autoclt);
 		clientspinner.setOnItemClickListener(this);
 		clientspinner.addTextChangedListener(this);
+		
+		
+		catspinner = (CustomAutoCompleteView) findViewById(R.id.autocltcat);
+		catspinner.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				String selected = catspinner.getSelected(parent, view, position, id);
+				Log.e("categorie sel ",selected);
+				
+				CategorieCustomer cc = null;
+				
+				for (int i = 0; i < lscat.size(); i++) {
+					if(selected.equals(lscat.get(i).getLibelle())){
+						cc = lscat.get(i);
+					}
+				}
+				
+				if(cc != null){
+					listclt = new ArrayList<>();
+					for (int j = 0; j < cc.getLsclt().size(); j++) {
+						for (int i = 0; i < clients.size(); i++) {
+							if(cc.getLsclt().get(j) == clients.get(i).getId()){
+								listclt.add(clients.get(i).getName());
+							}
+						}
+					}
+					
+					if(listclt.size() == 0){
+						for (int i = 0; i < clients.size(); i++) {
+							listclt.add(clients.get(i).getName());
+						}
+					}
+					addItemsOnSpinner(clientspinner, 1);
+				}
+			}
+		});
+		
+		catspinner.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				CustomAutoCompleteTextChangedListener txt = new CustomAutoCompleteTextChangedListener(CatalogeActivity.this,R.layout.list_view_row,listcat);
+
+				myAdapter = txt.onTextChanged(s, start, before, count);
+				myAdapter.notifyDataSetChanged();
+				catspinner.setAdapter(myAdapter);
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				String selected = s.toString();
+				Log.e("categorie after sel ",selected);
+				
+				CategorieCustomer cc = null;
+				
+				for (int i = 0; i < lscat.size(); i++) {
+					if(selected.equals(lscat.get(i).getLibelle())){
+						cc = lscat.get(i);
+					}
+				}
+				
+				if(cc != null){
+					listclt = new ArrayList<>();
+					for (int j = 0; j < cc.getLsclt().size(); j++) {
+						for (int i = 0; i < clients.size(); i++) {
+							if(cc.getLsclt().get(j) == clients.get(i).getId()){
+								listclt.add(clients.get(i).getName());
+							}
+						}
+					}
+					
+					if(listclt.size() == 0){
+						for (int i = 0; i < clients.size(); i++) {
+							listclt.add(clients.get(i).getName());
+						}
+					}
+					addItemsOnSpinner(clientspinner, 1);
+				}else{
+					listclt = new ArrayList<>();
+					
+						for (int i = 0; i < clients.size(); i++) {
+							listclt.add(clients.get(i).getName());
+						}
+					addItemsOnSpinner(clientspinner, 1);
+				}
+			}
+		});
 		/*
 		clientspinner =  (AutoCompleteTextView) findViewById(R.id.autoclt);
 		clientspinner.setOnItemClickListener(new OnItemClickListener() {
@@ -701,6 +803,17 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 			myAdapter = new AutocompleteCustomArrayAdapter(CatalogeActivity.this, R.layout.list_view_row, values);
 			clientspinner.setAdapter(myAdapter);
 
+		}if(type == -1){
+			
+			listtmp = listcat;
+			values2= new String[listcat.size()];
+			for (int i = 0; i < listcat.size(); i++) {
+				values2[i] = listcat.get(i);
+			}
+			
+			myAdapter = new AutocompleteCustomArrayAdapter(CatalogeActivity.this, R.layout.list_view_row, values2);
+			s.setAdapter(myAdapter);
+
 		}else{		
 			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
 					android.R.layout.simple_spinner_item, listprd);
@@ -824,7 +937,6 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 			
 			
 
-
 			clients = vendeurManager.selectAllClient(compte);
 			nclt = clients.size();
 			
@@ -832,7 +944,7 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 			for (int i = 0; i < clients.size(); i++) {
 				listclt.add(clients.get(i).getName());
 			}
-
+			
 			
 			/*********************** offline ****************************************/
 			Log.e("begin offline from network",">>start load");
@@ -871,8 +983,20 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 			
 			Log.e("start ","start cnx task");
 			
-			
-			
+			lscat = new ArrayList<>();
+			listcat = new ArrayList<>();
+			lscat = vendeurManager.getAllCategorieCustomer(compte);
+			if(lscat.size() > 0){
+				myoffline.CleanCategorieClients();
+				for (int i = 0; i < lscat.size(); i++) {
+					myoffline.shnchronizeCategorieClients(lscat.get(i), compte);
+				}
+			}
+		//	Log.e(">cat ",lscat.toString());
+			for (int i = 0; i < lscat.size(); i++) {
+				listcat.add(lscat.get(i).getLibelle()+"");
+			}
+			Log.e("lscatclient",listcat.toString());
 			
 			return "success";
 		}
@@ -896,6 +1020,7 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 			        ExpandList.setAdapter(ExpAdapter);
 			        
 					addItemsOnSpinner(clientspinner,1);
+					addItemsOnSpinner(catspinner,-1);
 					firstexecution = 1989;
 					
 					String msg ="";
@@ -995,7 +1120,12 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 					}
 			
 			
-			
+			lscat = new ArrayList<>();
+			listcat = new ArrayList<>();
+			lscat = myoffline.LoadCategorieClients("");
+			for (int i = 0; i < lscat.size(); i++) {
+					listcat.add(lscat.get(i).getLibelle()+"");
+				}
 			
 			
 			
@@ -1198,5 +1328,13 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 		});
 		alert.setCancelable(true);
 		alert.create().show();
+	}
+	
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
 	}
 }

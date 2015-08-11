@@ -513,7 +513,14 @@ public class TransfertstockActivity extends Activity implements OnClickListener,
 		return false;
 	}
 	
-	 
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
+	}
+	
 	
 	public void alert_network(){
 		AlertDialog.Builder alert = new AlertDialog.Builder(TransfertstockActivity.this);
