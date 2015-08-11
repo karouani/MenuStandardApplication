@@ -51,7 +51,7 @@ public interface ioffline {
 	public long shynchronizeProspect(ProspectData pd);
 	public long shynchronizePayement(List<Payement> ps);
 	public long shynchronizeSociete(MyTicketWitouhtProduct me);
-	
+	 
 	public Myinvoice shynchronizeInvoice(String invoice, List<Produit> prd, String idclt, int nmb,
 			String commentaire, Compte compte, String reglement, String amount,
 			String numChek, int typeImpriment, List<MyProdRemise> remises,
