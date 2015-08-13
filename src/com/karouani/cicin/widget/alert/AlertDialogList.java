@@ -34,6 +34,7 @@ public class AlertDialogList extends android.app.AlertDialog.Builder implements 
 		list = (ListView) dialogView.findViewById(R.id.alert_options);
 		list.setAdapter(adapter);
 		list.setOnItemClickListener(this);
+		
 	}
 
 	@Override
@@ -47,5 +48,6 @@ public class AlertDialogList extends android.app.AlertDialog.Builder implements 
 		}
 	}
 
+	
 	
 }

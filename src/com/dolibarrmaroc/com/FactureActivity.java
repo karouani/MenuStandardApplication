@@ -17,6 +17,8 @@ import com.dolibarrmaroc.com.SignatureActivity.ImageGalleryTask;
 import com.dolibarrmaroc.com.business.CommandeManager;
 import com.dolibarrmaroc.com.business.FactureManager;
 import com.dolibarrmaroc.com.business.MouvementManager;
+import com.dolibarrmaroc.com.business.PayementManager;
+import com.dolibarrmaroc.com.business.VendeurManager;
 import com.dolibarrmaroc.com.dao.CategorieDao;
 import com.dolibarrmaroc.com.dao.CategorieDaoMysql;
 import com.dolibarrmaroc.com.models.Commande;
@@ -33,10 +35,13 @@ import com.dolibarrmaroc.com.models.Promotion;
 import com.dolibarrmaroc.com.models.Prospection;
 import com.dolibarrmaroc.com.models.Remises;
 import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CheckOutSysc;
 import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
 import com.dolibarrmaroc.com.utils.FactureManagerFactory;
 import com.dolibarrmaroc.com.utils.MouvementManagerFactory;
+import com.dolibarrmaroc.com.utils.PayementManagerFactory;
 import com.dolibarrmaroc.com.utils.TinyDB;
+import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 import com.dolibarrmaroc.com.database.DatabaseHandler;
 import com.dolibarrmaroc.com.database.StockVirtual;
 import com.dolibarrmaroc.com.offline.Offlineimpl;
@@ -1050,10 +1055,6 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 		protected String doInBackground(Void... arg0) {
 			myofline = new Offlineimpl(getApplicationContext());
 
-			
-			
-			
-			
 			/*********************** offline ****************************************/
 			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
 				if(myofline.checkAvailableofflinestorage() > 0){
@@ -1061,6 +1062,14 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 				}
 				
 				data = cmdmanager.insertCommande(produitsFacture, idclt, compte, remise);
+				
+				
+				VendeurManager vendeurManager = VendeurManagerFactory.getClientManager();
+				PayementManager payemn = PayementManagerFactory.getPayementFactory();
+				CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
+				CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+				sv  = new StockVirtual(FactureActivity.this);
+				CheckOutSysc.ReloadProdClt(FactureActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 1);
 			}
 			
 			

@@ -1,7 +1,10 @@
 package com.karouani.cicin.widget;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import com.dolibarrmaroc.com.models.Categorie;
 
 
 import android.R;
@@ -42,6 +45,8 @@ public class CustomAutoCompleteTextChangedListener{
 			// update the adapater
 
 			// get suggestions from the database
+			
+			
 			int k = 0;
 			
             ArrayList<String> array = new ArrayList<String>();
@@ -56,9 +61,12 @@ public class CustomAutoCompleteTextChangedListener{
 				myObjs[i] = array.get(i);
 			}
 
+			Log.e("in adapter ",myObjs.length+"");
 			// update the adapter
 			myAdapter = new AutocompleteCustomArrayAdapter(context,layout, myObjs);
 			//myAutoComplete.setAdapter(myAdapter);
+			
+			
 
 		} catch (NullPointerException e) {
 			e.printStackTrace();

@@ -402,7 +402,7 @@
     <!-- catalogue produits -->
     <string name="title_activity_cataloge">Catalogue des produits</string>
     <string name="addpan">Ajouter au pannier</string>
-    <string name="title_activity_commande">CommandeActivity</string>
+    <string name="title_activity_commande">Mes commandes</string>
     <string name="title_activity_cmd_view">Consulter mes commandes</string>
     <string name="title_activity_cmd_detail">Détail commande</string>
     <string name="title_activity_cmd_pay">Facturer une commande</string>
@@ -440,6 +440,7 @@
 	<string name="cmdtofc28">Vous voulez enregistrer votre echanges des produits</string>
 	<string name="cmdtofc29">Assurez vous que vous êtes connecté à Internet (Wifi - 3G)</string>
 	<string name="cmdtofc30">Le client est encours dans état inactif. Veuillez synchronizer votre client avant de passer des transactions</string>
+	<string name="cmdtofc33">--Liste secteurs--</string>
 	
 	<string name="factlab1">Le montant n\'est pas valide</string>
 	<string name="factlab2">Le montant encaisser est supérieure au montant total</string>
@@ -462,6 +463,7 @@
 	<string name="cnxlab3">Echéc : le montant de la facture est depassé</string>
 	<string name="cnxlab4">Veuillez saisire une valeur plus que zero</string>
 	<string name="cnxlab5">Le numéro de la facture choisi est introuvable</string>
+	<string name="cnxlab7">Le montant encaisse est invalide</string>
 	
 	<string name="cnxlab6">Veuillez verifier le type du transfert ou le nombre des produits</string>
 	<string name="title_activity_transfertvirtualstock">Transfert des Rendus,Echanges</string>

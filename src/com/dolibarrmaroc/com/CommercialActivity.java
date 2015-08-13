@@ -356,7 +356,7 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 				firstname.setHeight(35);
 
 				EditText lastname = new EditText(CommercialActivity.this);
-				lastname.setHint("Le Pr�nom");
+				lastname.setHint("Le Prenom");
 				lastname.setTag("comm_lasttname");
 				
 				
@@ -381,7 +381,7 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 			}else{
 				//name.setHint("Nom soci�t�");
 				EditText name = new EditText(CommercialActivity.this);
-				name.setHint("Nom soci�t�");
+				name.setHint("Nom societe");
 				name.setTag("comm_nome");
 				name.setHeight(40);
 

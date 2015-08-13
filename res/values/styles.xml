@@ -17,7 +17,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-    <!-- Base application theme is the default theme. -->
+    <!-- Base application theme is the default theme.  android:Theme-->
     <style name="Theme" parent="android:Theme"></style>
 
     <!-- Variation on the Light theme that turns off the title -->

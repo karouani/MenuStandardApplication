@@ -104,7 +104,7 @@ public class Offlineimpl implements ioffline {
 	
 	private StandardPBEStringEncryptor encryptor;
 	
-	private static String path = Environment.getExternalStorageDirectory()+"/.datadolicache";//path
+	private static String path = Environment.getExternalStorageDirectory()+"/.datadolicachenew";//path
 	
 	private HashMap<Myinvoice, String> myc = new HashMap<>();
 
@@ -2775,6 +2775,8 @@ public class Offlineimpl implements ioffline {
 		CleanPayement();
 		cleanForUpdate();
 		CleanCategorieList();
+		CleanCategorieClients();
+		CleanCommandeList();
 		return vl;
 	}
 

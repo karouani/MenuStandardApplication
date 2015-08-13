@@ -18,8 +18,7 @@
         <LinearLayout
             android:id="@+id/l1"
             style="@style/TitleBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+             >
 
             <ImageButton
                 style="@style/TitleBarAction"
@@ -28,6 +27,14 @@
                 android:src="@drawable/title_home" />
 
             <ImageView style="@style/TitleBarSeparator" />
+            
+             <com.karouani.cicin.widget.searcheview.SearchView
+                android:id="@+id/searchView1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:icon="@drawable/title_search_default"
+                 >
+            </com.karouani.cicin.widget.searcheview.SearchView>
 
             <TextView style="@style/TitleBarText"
                 android:text="@string/title_activity_cataloge" />
@@ -46,7 +53,7 @@
                     android:ems="10"
                     android:focusable="true"
                     android:gravity="center"
-                    android:hint="--Liste Categories--"
+                    android:hint="@string/cmdtofc33"
                     android:imeOptions="actionNext"
                     android:inputType="textAutoComplete|textAutoCorrect"
                     android:singleLine="true"

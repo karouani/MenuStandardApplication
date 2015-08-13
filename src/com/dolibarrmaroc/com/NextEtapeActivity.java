@@ -22,6 +22,7 @@ import com.google.android.gms.internal.dv;
 import com.google.android.gms.internal.hs;
 import com.google.gson.Gson;
 import com.dolibarrmaroc.com.VendeurActivity.ConnexionTask;
+import com.dolibarrmaroc.com.business.CommandeManager;
 import com.dolibarrmaroc.com.business.CommercialManager;
 import com.dolibarrmaroc.com.business.FactureManager;
 import com.dolibarrmaroc.com.business.PayementManager;
@@ -42,6 +43,8 @@ import com.dolibarrmaroc.com.models.PromoTicket;
 import com.dolibarrmaroc.com.models.Remises;
 import com.dolibarrmaroc.com.models.TotauxTicket;
 import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CheckOutSysc;
+import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
 import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
 import com.dolibarrmaroc.com.utils.FactureManagerFactory;
 import com.dolibarrmaroc.com.utils.MyLocationListener;
@@ -50,6 +53,8 @@ import com.dolibarrmaroc.com.utils.PayementManagerFactory;
 import com.dolibarrmaroc.com.utils.ServiceDao;
 import com.dolibarrmaroc.com.utils.TinyDB;
 import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
+import com.dolibarrmaroc.com.dao.CategorieDao;
+import com.dolibarrmaroc.com.dao.CategorieDaoMysql;
 import com.dolibarrmaroc.com.database.DatabaseHandler;
 import com.dolibarrmaroc.com.database.StockVirtual;
 
@@ -616,6 +621,10 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 			myofline = new Offlineimpl(getApplicationContext());
 			
 			sv = new StockVirtual(NextEtapeActivity.this);
+			VendeurManager vendeurManager = VendeurManagerFactory.getClientManager();
+			PayementManager payemn = PayementManagerFactory.getPayementFactory();
+			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
+			CommandeManager managercmd =  new CommandeManagerFactory().getManager();
 			
 			
 			
@@ -625,7 +634,6 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 				if(myofline.checkAvailableofflinestorage() > 0){
 					myofline.SendOutData(compte);	
 				}
-				
 			}
 			
 			
@@ -656,6 +664,8 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 					}
 				}
 			}
+			
+			CheckOutSysc.ReloadProdClt(NextEtapeActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0);
 			
 			
 			return null;
@@ -793,6 +803,13 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 			sv = new StockVirtual(NextEtapeActivity.this);
 			
 			myofline = new Offlineimpl(getApplicationContext());
+			
+			
+			VendeurManager vendeurManager = VendeurManagerFactory.getClientManager();
+			PayementManager payemn = PayementManagerFactory.getPayementFactory();
+			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
+			CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+			
 
 			/*********************** offline ****************************************/
 			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
@@ -828,6 +845,8 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 				}
 				
 			}
+			
+			CheckOutSysc.ReloadProdClt(NextEtapeActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0);
 
 			
 			return null;

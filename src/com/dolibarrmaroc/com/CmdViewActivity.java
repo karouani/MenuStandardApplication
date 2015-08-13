@@ -27,6 +27,7 @@ import com.dolibarrmaroc.com.offline.Offlineimpl;
 import com.dolibarrmaroc.com.offline.ioffline;
 import com.dolibarrmaroc.com.ticket.FactureTicketActivity;
 import com.dolibarrmaroc.com.ticket.ReglementTicketActivity;
+import com.google.android.gms.drive.query.SearchableField;
 
 import android.support.v7.app.ActionBarActivity;
 import android.text.InputFilter;
@@ -71,11 +72,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class CmdViewActivity extends Activity implements OnItemClickListener,OnQueryTextListener{
+public class CmdViewActivity extends Activity implements OnItemClickListener{
 
 	private Compte compte;
 	private ListView lisview;
 	private ListView lisview2;
+	private SearchView search;
 	
 	private Offlineimpl myoffline;
 	private Myinvoice meinvo;
@@ -136,6 +138,44 @@ public class CmdViewActivity extends Activity implements OnItemClickListener,OnQ
 		mycmd = new HashMap<>();
 		cmddata = new ArrayList<>();
 		cicin = new Commandeview();
+		
+		search = (SearchView) findViewById(R.id.searchView1);
+		
+		search.setOnQueryTextListener(new OnQueryTextListener(){
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				// TODO Auto-generated method stub
+				Log.e("search data",""+newText);
+				Log.e("util", TextUtils.isEmpty(newText)+"");
+				if (TextUtils.isEmpty(newText))
+				{
+					lisview.clearTextFilter();
+					remplireListview(factdata, 0);
+				}
+				else
+				{
+					lisview.setFilterText(newText.toString());
+					factadapter.getFilter().filter(newText.toString());
+					
+					
+					//bindingData = new BinderData(WeatherActivity.this, bindingData.getMap());
+					factadapter.notifyDataSetChanged();
+					lisview.invalidateViews();
+					lisview.setAdapter(factadapter);
+					lisview.refreshDrawableState();
+				}
+
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// TODO Auto-generated method stub
+				Log.e("search data","is me submit");
+				return false;
+			}
+		});
 	}
 	
 	@Override
@@ -188,6 +228,7 @@ public class CmdViewActivity extends Activity implements OnItemClickListener,OnQ
 		wakelock.acquire();
 		
 		Log.e("on start","start");
+		/*
 		if(CheckOutNet.isNetworkConnected(getApplicationContext())){
 			dialog = ProgressDialog.show(CmdViewActivity.this, getResources().getString(R.string.map_data),
 					getResources().getString(R.string.msg_wait), true);
@@ -199,6 +240,11 @@ public class CmdViewActivity extends Activity implements OnItemClickListener,OnQ
 			
 				new OfflineTask().execute();
 		}
+		*/
+		dialog = ProgressDialog.show(CmdViewActivity.this, getResources().getString(R.string.map_data),
+				getResources().getString(R.string.msg_wait), true);
+		
+			new OfflineTask().execute();
 		
 		super.onStart();
 	}
@@ -206,22 +252,6 @@ public class CmdViewActivity extends Activity implements OnItemClickListener,OnQ
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
-		// Inflate the menu; this adds items to the action bar if it is present.
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.cmd_view, menu);
-		
-		// Associate searchable configuration with the SearchView
-		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-		SearchView searchView = (SearchView) menu.findItem(R.id.search)
-				.getActionView();
-		searchView.setSearchableInfo(searchManager
-				.getSearchableInfo(getComponentName()));
-
-		searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-		searchView.setSubmitButtonEnabled(true);
-		searchView.setOnQueryTextListener(this);
-
-		//handleIntent(getIntent());
 		return super.onCreateOptionsMenu(menu);
 		
 		
@@ -329,38 +359,7 @@ public class CmdViewActivity extends Activity implements OnItemClickListener,OnQ
 	}
 	
 
-	@Override
-	public boolean onQueryTextChange(String newText) {
-		// TODO Auto-generated method stub
-		Log.e("search data",""+newText);
-		Log.e("util", TextUtils.isEmpty(newText)+"");
-		if (TextUtils.isEmpty(newText))
-		{
-			lisview.clearTextFilter();
-			remplireListview(factdata, 0);
-		}
-		else
-		{
-			lisview.setFilterText(newText.toString());
-			factadapter.getFilter().filter(newText.toString());
-			
-			
-			//bindingData = new BinderData(WeatherActivity.this, bindingData.getMap());
-			factadapter.notifyDataSetChanged();
-			lisview.invalidateViews();
-			lisview.setAdapter(factadapter);
-			lisview.refreshDrawableState();
-		}
-
-		return true;
-	}
-
-	@Override
-	public boolean onQueryTextSubmit(String query) {
-		// TODO Auto-generated method stub
-		Log.e("search data","is me submit");
-		return false;
-	}
+	
 	
 	class OfflineTask extends AsyncTask<Void, Void, String> {
 
@@ -415,5 +414,13 @@ public class CmdViewActivity extends Activity implements OnItemClickListener,OnQ
 			}
 		}
 
+	}
+	
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
 	}
 }	

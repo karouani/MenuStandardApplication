@@ -237,6 +237,9 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 		if(firstexecution == 0){
 			//dialog = ProgressDialog.show(VendeurActivity.this, getResources().getString(R.string.map_data),
 				//	getResources().getString(R.string.msg_wait), true);
+			
+			
+			/*****************************  new update  
 			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
 				
 				myoffline = new Offlineimpl(getApplicationContext());
@@ -256,6 +259,11 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 						getResources().getString(R.string.msg_wait), true);
 				new OfflineTask().execute();
 			}
+			*/
+			
+			dialog = ProgressDialog.show(VendeurActivity.this, getResources().getString(R.string.map_data),
+					getResources().getString(R.string.msg_wait), true);
+			new OfflineTask().execute();
 		}
 
 		/******
@@ -900,7 +908,7 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 			
 			products = vendeurManager.selectAllProduct(compte);
 			sv  = new StockVirtual(VendeurActivity.this);
-			 
+			
 			nprod = products.size();
 		
 			

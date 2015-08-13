@@ -89,7 +89,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.SearchView.OnQueryTextListener;
 import android.text.TextWatcher;
 
-public class CatalogeActivity extends Activity implements OnQueryTextListener,OnItemSelectedListener ,TextWatcher,OnItemClickListener{
+public class CatalogeActivity extends Activity implements OnItemSelectedListener ,TextWatcher,OnItemClickListener{
 	
 	private Compte compte;
 	private CategorieDao categorie;
@@ -118,6 +118,7 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 	//Asynchrone avec connexion 
 	private ProgressDialog dialog;
 	private ProgressDialog dialog2;
+	private SearchView search;
 	
 	//Spinner Remplissage
 	private List<String> listclt;
@@ -193,11 +194,14 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 				getResources().getString(R.string.msg_wait), true);
 		
 		
+		/*
 		if(CheckOutNet.isNetworkConnected(getApplicationContext())){
 			new ConnexionTask().execute();
 		}else{
 			new OfflineTask().execute();
 		}
+		*/
+		new OfflineTask().execute();
 
 		
 		
@@ -436,6 +440,45 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 		
 		sv  = new StockVirtual(CatalogeActivity.this);
 		
+		search = (SearchView) findViewById(R.id.searchView1);
+		
+		search.setOnQueryTextListener(new OnQueryTextListener(){
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				// TODO Auto-generated method stub
+				Log.e("search data",""+newText);
+				Log.e("util", TextUtils.isEmpty(newText)+"");
+				if (TextUtils.isEmpty(newText))
+				{
+					ExpandList.clearTextFilter();
+					remplireListview(lscats);
+				}
+				else
+				{
+					ExpandList.setFilterText(newText.toString());
+
+					ExpAdapter.getFilter().filter(newText.toString());
+					
+					
+					//bindingData = new BinderData(WeatherActivity.this, bindingData.getMap());
+
+					ExpAdapter.notifyDataSetChanged();
+					ExpandList.invalidateViews();
+					ExpandList.setAdapter(ExpAdapter);
+					ExpandList.refreshDrawableState();
+				}
+
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextSubmit(String arg0) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		});
+		
 	}
 
 	
@@ -648,7 +691,8 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 		inflater.inflate(R.menu.searchcatalogue, menu);
 		
 		// Associate searchable configuration with the SearchView
-		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+/*
+		 SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 		SearchView searchView = (SearchView) menu.findItem(R.id.search)
 				.getActionView();
 		searchView.setSearchableInfo(searchManager
@@ -657,7 +701,7 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 		searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 		searchView.setSubmitButtonEnabled(true);
 		searchView.setOnQueryTextListener(this);
-
+*/
 		
 		//menu.removeItem(R.id.viewcmdpr);
 		if(compte != null){
@@ -669,39 +713,7 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	@Override
-	public boolean onQueryTextChange(String newText) {
-		// TODO Auto-generated method stub
-		Log.e("search data",""+newText);
-		Log.e("util", TextUtils.isEmpty(newText)+"");
-		if (TextUtils.isEmpty(newText))
-		{
-			ExpandList.clearTextFilter();
-			remplireListview(lscats);
-		}
-		else
-		{
-			ExpandList.setFilterText(newText.toString());
 
-			ExpAdapter.getFilter().filter(newText.toString());
-			
-			
-			//bindingData = new BinderData(WeatherActivity.this, bindingData.getMap());
-
-			ExpAdapter.notifyDataSetChanged();
-			ExpandList.invalidateViews();
-			ExpandList.setAdapter(ExpAdapter);
-			ExpandList.refreshDrawableState();
-		}
-
-		return true;
-	}
-
-	@Override
-	public boolean onQueryTextSubmit(String arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 	public void remplireListview(List<Categorie> fc ){
 			ExpAdapter = new ExpandListAdapter(CatalogeActivity.this, lscats);
@@ -901,6 +913,7 @@ public class CatalogeActivity extends Activity implements OnQueryTextListener,On
 			
 			
 			lscats = categorie.LoadCategories(compte);
+			
 			
 			products = vendeurManager.selectAllProduct(compte);
 			

@@ -274,6 +274,10 @@ public class SettingsynchroActivity extends Activity {
 								myoffline.CleanBluetooth();
 								myoffline.CleanGpsInvoice();
 								
+								myoffline.CleanCmdList(); // liste de prise de commandes
+								myoffline.CleanCmdToFactList(); 
+								myoffline.CleanMouvement();
+								
 								/*
 								myoffline.CleanProspection();
 								

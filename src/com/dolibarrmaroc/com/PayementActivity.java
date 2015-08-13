@@ -16,6 +16,7 @@ import com.karouani.cicin.widget.CustomAutoCompleteTextChangedListener;
 import com.karouani.cicin.widget.CustomAutoCompleteView;
 import com.dolibarrmaroc.com.PayementActivity.ConnexionTask;
 import com.dolibarrmaroc.com.VendeurActivity.ServerSideTask;
+import com.dolibarrmaroc.com.business.CommandeManager;
 import com.dolibarrmaroc.com.business.CommercialManager;
 import com.dolibarrmaroc.com.business.PayementManager;
 import com.dolibarrmaroc.com.business.VendeurManager;
@@ -31,9 +32,13 @@ import com.dolibarrmaroc.com.models.Produit;
 import com.dolibarrmaroc.com.models.Prospection;
 import com.dolibarrmaroc.com.models.Reglement;
 import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CheckOutSysc;
+import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
 import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
 import com.dolibarrmaroc.com.utils.PayementManagerFactory;
 import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
+import com.dolibarrmaroc.com.dao.CategorieDao;
+import com.dolibarrmaroc.com.dao.CategorieDaoMysql;
 import com.dolibarrmaroc.com.database.DatabaseHandler;
 import com.dolibarrmaroc.com.database.StockVirtual;
 import com.dolibarrmaroc.com.offline.Offlineimpl;
@@ -151,6 +156,7 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 	        	showmessageOffline();
 	        }
 		
+		 /*
 		if(CheckOutNet.isNetworkConnected(getApplicationContext())){
 			
 			if(myoffline.checkAvailableofflinestorage() > 0){
@@ -171,7 +177,13 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 					getResources().getString(R.string.msg_wait), true);
 			new OfflineTask().execute();
 		}
-
+		*/
+		 
+		dialog = ProgressDialog.show(PayementActivity.this, getResources().getString(R.string.map_data),
+				getResources().getString(R.string.msg_wait), true);
+		new OfflineTask().execute();
+		
+		
 		super.onStart();
 	}
 	/*
@@ -252,20 +264,45 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 				Double m = (double) 0;
 				@Override
 				public void onTextChanged(CharSequence s, int start, int before, int count) {
-					if(!"".equals(encaisse.getText().toString()) && (!".".equals(encaisse.getText().toString())) ) m = Double.parseDouble(encaisse.getText().toString());
-					double v = pay.getTotal() - pay.getAmount();
-					Double h = v - m;
+					//if(!"".equals(encaisse.getText().toString()) && (!".".equals(encaisse.getText().toString())) ) m = Double.parseDouble(encaisse.getText().toString());
+					
+					
+					if(!s.toString().contains(".")){
+						
+						if(!"".equals(encaisse.getText().toString())) m = Double.parseDouble(encaisse.getText().toString());
+					
+						double v = pay.getTotal() - pay.getAmount();
+						Double h = v - m;
 
-					if(h<0){
-						alert();
+						if(h<0){
+							alert();
 
+						}
+						/*else if(h == 0){
+							alert2();
+						}
+						*/else{
+							rendu.setText(h+"");
+						}
+						
+					}else if(s.toString().charAt(s.toString().length()-1) != '.' && s.toString().contains(".")){
+						m = Double.parseDouble(encaisse.getText().toString());
+						double v = pay.getTotal() - pay.getAmount();
+						Double h = v - m;
+
+						if(h<0){
+							alert();
+
+						}
+						/*else if(h == 0){
+							alert2();
+						}
+						*/else{
+							rendu.setText(h+"");
+						}
 					}
-					/*else if(h == 0){
-						alert2();
-					}
-					*/else{
-						rendu.setText(h+"");
-					}
+					
+					
 				}
 
 				@Override
@@ -457,7 +494,7 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 				if (dialog.isShowing()){
 					dialog.dismiss();
 
-					Log.e("List",list.size()+"");
+					Log.e("List data",list.size()+"");
 					listFact = new ArrayList<>();
 					for (int i = 0; i < list.size(); i++) {
 						listFact.add(list.get(i).getNum());
@@ -670,6 +707,29 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 			
 			reg.setIdreg((int)database.addrow("reg"));
 			//ix = myoffline.shynchronizeReglement(reg);
+		
+			
+			VendeurManager vendeurManager = VendeurManagerFactory.getClientManager();
+			PayementManager payemn = PayementManagerFactory.getPayementFactory();
+			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
+			CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+			sv  = new StockVirtual(PayementActivity.this);
+			
+			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
+				myoffline.SendOutData(compte);	
+			}
+			
+
+			
+			if(!myoffline.checkFolderexsiste()){
+				showmessageOffline();
+			}else{
+				/*********************** offline ****************************************/
+				if(CheckOutNet.isNetworkConnected(PayementActivity.this)){
+					CheckOutSysc.ReloadProdClt(PayementActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0);
+				}
+				
+			}
 			
 			return null;
 		}
@@ -853,6 +913,26 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 		alert.create().show();
 	}
 	
+
+	
+	public void alert5(){
+
+		AlertDialog.Builder alert = new AlertDialog.Builder(PayementActivity.this);
+		alert.setTitle(getResources().getString(R.string.cmdtofc10));
+		alert.setMessage(
+				String.format(getResources().getString(R.string.cnxlab7)
+						));
+		alert.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				encaisse.setText("0");
+				return;
+			}
+		});
+		alert.create().show();
+	}
+	
 	public void alertinvonan(){
 
 		AlertDialog.Builder alert = new AlertDialog.Builder(PayementActivity.this);
@@ -952,8 +1032,11 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 		
 		if(v.getId() == R.id.validation){
 			
+			
 			if(encaisse.getText().toString().equals("") || encaisse.getText().toString().equals("0")){
 				alert3();
+			}else if(encaisse.getText().toString().charAt(encaisse.getText().toString().length() -1) == '.'){
+				alert5();
 			}else{
 				
 				Payement pay2 = new Payement();
@@ -998,16 +1081,22 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 					alertinvonan();
 				}
 				
+				
 			}
 			
-			Log.e("hona vl","not tcc");
+			
+			Log.e("hona vl","not tcc "+encaisse.getText().toString());
 		}
 
 		if(v.getId() == R.id.validation2tc){
 			
+			
 			if(encaisse.getText().toString().equals("") || encaisse.getText().toString().equals("0")){
 				alert3();
+			}else if(encaisse.getText().toString().charAt(encaisse.getText().toString().length() -1) == '.'){
+				alert5();
 			}else{
+				
 				
 				Payement pay2 = new Payement();
 				
@@ -1050,9 +1139,11 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 					alertinvonan();
 				}
 				
+				
 			}
 			
-			Log.e("hona tc","tcc");
+			
+			Log.e("hona tc","tcc" +encaisse.getText().toString());
 		}
 		
 	}
@@ -1259,12 +1350,11 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 			reg.setIdreg((int)database.addrow("reg"));
 			//ix = myoffline.shynchronizeReglement(reg);
 			
-			List<Produit> products = new ArrayList<>();
-			List<Client> clients = new ArrayList<>();
-			
 			VendeurManager vendeurManager = VendeurManagerFactory.getClientManager();
-			
-			Dictionnaire dico  = new Dictionnaire();
+			PayementManager payemn = PayementManagerFactory.getPayementFactory();
+			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
+			CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+			sv  = new StockVirtual(PayementActivity.this);
 			
 			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
 				myoffline.SendOutData(compte);	
@@ -1276,60 +1366,10 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 				showmessageOffline();
 			}else{
 				/*********************** offline ****************************************/
-				Log.e("begin offline from network",">>start load");
-				if(CheckOutNet.isNetworkConnected(getApplicationContext())){
-
-					products = vendeurManager.selectAllProduct(compte);
-					for (int i = 0; i < products.size(); i++) {
-						for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
-							if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId())){
-								products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
-							}
-						}
-					}
-					if(products.size() > 0){
-						myoffline.CleanProduits();
-						myoffline.CleanPromotionProduit();
-						myoffline.shynchronizeProduits(products);
-						myoffline.shynchronizePromotion(vendeurManager.getPromotionProduits());	
-					}
+				if(CheckOutNet.isNetworkConnected(PayementActivity.this)){
+					CheckOutSysc.ReloadProdClt(PayementActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0);
 				}
-
-
-				if(CheckOutNet.isNetworkConnected(getApplicationContext())){
-					dico = vendeurManager.getDictionnaire();
-					if(dico.getDico().size() > 0){
-						myoffline.CleanDico();
-						myoffline.shynchronizeDico(dico);	
-					}
-				}
-
-
-				if(CheckOutNet.isNetworkConnected(getApplicationContext())){
-					clients = vendeurManager.selectAllClient(compte);
-					if(clients.size() > 0){
-						myoffline.CleanClients();
-						myoffline.CleanPromotionClient();
-						myoffline.shynchronizeClients(clients);
-						myoffline.shynchronizePromotionClient(vendeurManager.getPromotionClients());	
-					}
-
-				}
-
-
-				if(CheckOutNet.isNetworkConnected(getApplicationContext())){
-					CommercialManager manager = CommercialManagerFactory.getCommercialManager();
-					myoffline.CleanProspectData();
-					myoffline.shynchronizeProspect(manager.getInfos(compte));	
-				}
-
-
-				if(CheckOutNet.isNetworkConnected(getApplicationContext())){
-
-					PayementManager payemn = PayementManagerFactory.getPayementFactory();
-					myoffline.CleanPayement();
-					myoffline.shynchronizePayement(payemn.getFactures(compte));	
-				}
+				
 			}
 			
 			return null;
@@ -1378,6 +1418,7 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
 		CustomAutoCompleteTextChangedListener txt = new CustomAutoCompleteTextChangedListener(PayementActivity.this,R.layout.list_view_row,listfc);
 
+		Log.e("list in",listfc.size()+"");
 		myAdapter = txt.onTextChanged(s, start, before, count);
 		myAdapter.notifyDataSetChanged();
 		allfacturesdata.setAdapter(myAdapter);
@@ -1441,6 +1482,14 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 		});
 		alert.setCancelable(true);
 		alert.create().show();
+	}
+	
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
 	}
 
 }

@@ -124,7 +124,7 @@ public interface ioffline {
 	public void CleanHistoIntervention();
 	public void CleanCommandeList();
 	public void CleanCategorieList();
-	public void CleanCmdList();
+	public void CleanCmdList();  //clean prise de commande
 	public void CleanCmdToFactList();
 	public void CleanMouvement();
 	public void CleanCategorieClients();

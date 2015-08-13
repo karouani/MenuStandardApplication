@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.TimeZone;
 
 import android.annotation.SuppressLint;
@@ -26,6 +27,7 @@ import android.os.StrictMode;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
@@ -39,6 +41,7 @@ import com.dolibarrmaroc.com.business.AuthentificationManager;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.ConfigGps;
 import com.dolibarrmaroc.com.models.Services;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
 import com.dolibarrmaroc.com.utils.ConnexionManagerFactory;
 import com.dolibarrmaroc.com.utils.DBHandler;
 import com.dolibarrmaroc.com.utils.ForcerActivationGps;
@@ -59,6 +62,8 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 	private Button connexion;
 	private Button test;
 
+	private Offlineimpl myoffline;
+	
 	private AuthentificationManager auth;
 
 	private String log;
@@ -369,6 +374,26 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 			try {
 				compte = auth.login(log+"/karouaniYassine/"+imei, pass);
 				conf = auth.getGpsConfig();
+				
+				
+				myoffline = new Offlineimpl(ConnexionActivity.this);
+				
+				if(!myoffline.checkFolderexsiste()){
+					showmessageOffline();
+				}else{
+					myoffline.shynchronizeCompte(compte);
+					myoffline.shynchronizeSociete(auth.lodSociete(""));
+
+
+					if("technicien".equals(compte.getProfile())){
+						service = auth.getService(log, pass);
+						
+						List<Services> ls = new ArrayList<>();
+						ls.add(service);
+						myoffline.shynchronizeService(ls);
+					}
+				}
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -476,6 +501,27 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 	        }
 	    }
 	    return false;
+	}
+	
+	public void showmessageOffline(){
+		try {
+			 
+	         LayoutInflater inflater = this.getLayoutInflater();
+	         View dialogView = inflater.inflate(R.layout.msgstorage, null);
+	         
+	         AlertDialog.Builder dialog =  new AlertDialog.Builder(ConnexionActivity.this);
+	         dialog.setView(dialogView);
+ 	 	     dialog.setTitle(R.string.caus1);
+ 	 	     dialog.setPositiveButton(R.string.caus8, new DialogInterface.OnClickListener() {
+ 	 	        public void onClick(DialogInterface dialog, int which) { 
+ 	 	        	 dialog.cancel();
+ 	 	        }
+ 	 	     });
+ 	 	     dialog.setCancelable(true);
+ 	 	     dialog.show();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 }
 
