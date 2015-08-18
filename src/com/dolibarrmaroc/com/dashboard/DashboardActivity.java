@@ -21,7 +21,7 @@ import com.dolibarrmaroc.com.ConnexionActivity;
 import com.dolibarrmaroc.com.HomeActivity;
 import com.dolibarrmaroc.com.R;
 import com.dolibarrmaroc.com.SearchActivity;
-import com.dolibarrmaroc.com.utils.DBHandler;
+import com.dolibarrmaroc.com.database.DBHandler;
 
 import android.app.Activity;
 import android.app.AlertDialog;

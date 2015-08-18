@@ -15,7 +15,7 @@ public class CheckOutNet implements Serializable{
 
 	private static Context ctx;
 	public static String url_update ="http://41.142.241.192:8005/android/marocgeo.php";
-	public static String type = "alsdroidoffline";
+	public static String type = "standarddroidoffline";
 	
 	
 	public static boolean isNetworkConnected(Context context) {
