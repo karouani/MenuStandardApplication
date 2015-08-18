@@ -4,6 +4,24 @@
     android:layout_height="match_parent"
     android:padding="0dp"
     tools:context=".UpdateClientActivity" >
+    
+    <LinearLayout
+            android:id="@+id/l1"
+            style="@style/TitleBar"
+             >
+
+            <ImageButton
+                style="@style/TitleBarAction"
+                android:contentDescription="@string/description_home"
+                android:onClick="onClickHome"
+                android:src="@drawable/title_home" />
+
+            <ImageView style="@style/TitleBarSeparator" />
+
+            <TextView style="@style/TitleBarText"
+                android:text="@string/comm_title_head" />
+
+        </LinearLayout>
 
     <AutoCompleteTextView
         android:id="@+id/clientspinner"
@@ -21,13 +39,14 @@
         android:hint="--Select Client--"
         android:imeOptions="actionNext"
         android:inputType="textAutoComplete|textAutoCorrect"
+        android:layout_below="@+id/l1"
         android:singleLine="true"
         android:windowSoftInputMode="stateHidden|adjustPan" />
 
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/clientspinner" >
 
         <LinearLayout
@@ -75,14 +94,22 @@
                 <requestFocus />
             </EditText>
 
-            <EditText
-                android:id="@+id/comm_ville"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.00"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="ville" />
+            <AutoCompleteTextView
+                    android:id="@+id/comm_ville"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                	android:layout_weight="0.00"
+                	android:completionThreshold="1"
+			        android:dropDownHeight="150dp"
+			        android:dropDownVerticalOffset="5dp"
+			        android:dropDownWidth="wrap_content"
+			        android:ems="10"
+			        android:gravity="center"
+			        android:hint="--Select Ville--"
+			        android:imeOptions="actionNext"
+			        android:inputType="textAutoComplete|textAutoCorrect"
+			        android:singleLine="true"
+			        android:windowSoftInputMode="stateHidden|adjustPan" />
 
             <EditText
                 android:id="@+id/comm_phone"
@@ -111,9 +138,12 @@
                 android:hint="@string/comm_email"
                 android:inputType="textEmailAddress" />
 
+            
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
+                android:layout_alignParentBottom="true"
+       			android:layout_centerHorizontal="true"
                 android:layout_weight="0.00" >
 
                 <Button
@@ -127,8 +157,11 @@
                     android:text="@string/btn_save"
                     android:textColor="@android:color/white" />
             </LinearLayout>
+            
         </LinearLayout>
+        
 
     </ScrollView>
+    
 
 </RelativeLayout>

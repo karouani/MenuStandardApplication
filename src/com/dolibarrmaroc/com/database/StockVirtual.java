@@ -245,6 +245,7 @@ public class StockVirtual extends SQLiteOpenHelper {
 		long id =-1;
 		try {
 
+			Log.e("INSERT date ","begin");
 			deleteChechout();
 
 			SQLiteDatabase db = this.getWritableDatabase();
@@ -257,12 +258,15 @@ public class StockVirtual extends SQLiteOpenHelper {
 			int m      = cl.get(Calendar.MONTH)+1; // Jan = 0, dec = 11
 			int d = cl.get(Calendar.DAY_OF_MONTH); 
 			
+			Log.e("INSERT date ",y+""+m+""+d);
 			
 			values.put(KEY_DT, y+""+m+""+d);
 			values.put(KEY_ISIT, 1);
 
 			// Inserting Row
 			id = db.insert(TABLE_SYNCRO, null, values);
+			
+			Log.e("INSERT ","ID <<"+id);
 
 			db.close(); // Closing database connection
 
@@ -275,9 +279,16 @@ public class StockVirtual extends SQLiteOpenHelper {
 	}
 
 	public void deleteChechout() {
-		SQLiteDatabase db = this.getWritableDatabase();
-		db.execSQL("delete from "+TABLE_SYNCRO);
-		db.close();
+		try {
+			Log.e("DELETE ","GO DELETE");
+			SQLiteDatabase db = this.getWritableDatabase();
+			db.execSQL("DELETE FROM "+TABLE_SYNCRO);
+			db.close();
+			Log.e("DELETE ","GO DELETE");
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e("error delete sysc ","sysc");
+		}
 	}
 
 	public int getSyc() {
@@ -295,6 +306,7 @@ public class StockVirtual extends SQLiteOpenHelper {
 			// looping through all rows and adding to list
 			Log.e("hello ",cursor.getCount()+"");
 			if(cursor.getCount() == 0){
+				db.close();
 				addrowcheckout();
 				return 1;
 			}else{
@@ -315,11 +327,19 @@ public class StockVirtual extends SQLiteOpenHelper {
 				if(!"".equals(dt)){
 					long out = Long.parseLong(dt);
 					
+					
 					if(in > out){
+						Log.e("sys Time ",in +" in##out "+out);
+						db.close();
+						addrowcheckout();
 						return 1;
 					}
 				}
+				
+				
 			}
+			
+			
 			
 		} catch (Exception e) {
 			// TODO: handle exception

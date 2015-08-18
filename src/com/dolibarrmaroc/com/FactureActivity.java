@@ -15,6 +15,7 @@ import com.dolibarrmaroc.com.NextEtapeActivity.ValidationOfflineTask;
 import com.dolibarrmaroc.com.NextEtapeActivity.ValidationTask;
 import com.dolibarrmaroc.com.SignatureActivity.ImageGalleryTask;
 import com.dolibarrmaroc.com.business.CommandeManager;
+import com.dolibarrmaroc.com.business.CommercialManager;
 import com.dolibarrmaroc.com.business.FactureManager;
 import com.dolibarrmaroc.com.business.MouvementManager;
 import com.dolibarrmaroc.com.business.PayementManager;
@@ -37,6 +38,7 @@ import com.dolibarrmaroc.com.models.Remises;
 import com.dolibarrmaroc.com.utils.CheckOutNet;
 import com.dolibarrmaroc.com.utils.CheckOutSysc;
 import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
+import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
 import com.dolibarrmaroc.com.utils.FactureManagerFactory;
 import com.dolibarrmaroc.com.utils.MouvementManagerFactory;
 import com.dolibarrmaroc.com.utils.PayementManagerFactory;
@@ -1068,8 +1070,10 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 				PayementManager payemn = PayementManagerFactory.getPayementFactory();
 				CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
 				CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+				CommercialManager manager = CommercialManagerFactory.getCommercialManager();
+				
 				sv  = new StockVirtual(FactureActivity.this);
-				CheckOutSysc.ReloadProdClt(FactureActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 1);
+				CheckOutSysc.ReloadProdClt(FactureActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 1,manager);
 			}
 			
 			

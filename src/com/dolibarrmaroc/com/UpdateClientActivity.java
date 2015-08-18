@@ -11,6 +11,10 @@ import com.dolibarrmaroc.com.models.GpsTracker;
 import com.dolibarrmaroc.com.models.ProspectData;
 import com.dolibarrmaroc.com.models.Prospection;
 import com.dolibarrmaroc.com.models.Societe;
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CheckOutSysc;
 import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
 
 import android.annotation.SuppressLint;
@@ -56,6 +60,10 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 	private float LOCATION_DISTANCE = 16;
 	private double latitude;
 	private double longitude;
+	
+	private String mycity="";
+	
+	private ioffline myoffline;
 
 	private LocationListener onLocationChange	= new LocationListener()
 	{
@@ -101,7 +109,8 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 
 	private Spinner etat;
 	private Spinner type;
-	private EditText ville;
+	//private EditText ville;
+	private AutoCompleteTextView ville;
 
 	private Button btn,suivant;
 	private LinearLayout myLayout;
@@ -116,6 +125,8 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 	private List<Societe> clients;
 	private LinearLayout scroll;
 	private Societe soc = new Societe();
+	
+	private List<String> lscity = new ArrayList<>();
 
 	public UpdateClientActivity() {
 		// TODO Auto-generated constructor stub
@@ -189,7 +200,35 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 			etat.setOnItemSelectedListener(this);
 			type = (Spinner) findViewById(R.id.comm_type);
 			type.setOnItemSelectedListener(this);
-			ville = (EditText) findViewById(R.id.comm_ville);
+			ville = (AutoCompleteTextView) findViewById(R.id.comm_ville);
+			ville.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long arg3) {
+					String selected = (String) parent.getItemAtPosition(position);
+					ville.showDropDown();
+					
+					Log.e("selected ",selected);
+					mycity = selected;
+
+					final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromInputMethod(parent.getWindowToken(), 0);
+
+					ville.setFilters(new InputFilter[] {new InputFilter.LengthFilter(selected.length())});
+
+					/*
+					for (int i = 0; i < lscity.size(); i++) {
+						if (selected.equals(lscity.get(i))) {
+							
+							break;
+						}
+
+					}
+					*/
+
+				}
+			});
 
 			btn = (Button) findViewById(R.id.comm_etape);
 			btn.setOnClickListener(this);
@@ -200,6 +239,7 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 				StrictMode.setThreadPolicy(policy);
 			}
 
+			myoffline = new Offlineimpl(UpdateClientActivity.this);
 
 			//clientspinner.setOnItemSelectedListener(this);
 			clientspinner.setOnItemClickListener(new OnItemClickListener() {
@@ -299,7 +339,16 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 
 		@Override
 		protected String doInBackground(Void... arg0) {
-			clients = manager.getAll(compte);
+			
+			myoffline = new Offlineimpl(UpdateClientActivity.this);
+			
+			
+			//clients = manager.getAll(compte);
+			clients.clear();
+			clients = myoffline.LoadSocietesClients("");
+			
+			lscity = new ArrayList<>();
+			lscity = myoffline.LoadProspect("").getVilles();
 			return null;
 		}
 
@@ -320,6 +369,8 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 						listclt.add(clients.get(i).getName());
 					}
 					addItemsOnSpinner(clientspinner,listclt);
+					
+					addItemsOnSpinner(ville,lscity);
 				}
 			} catch (Exception e) {
 				Toast.makeText(getApplicationContext(),
@@ -333,7 +384,7 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 	public void addItemsOnSpinner(AutoCompleteTextView clientspinner2,List<String> list) {
 
 		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, listclt);
+				android.R.layout.simple_spinner_item, list);
 		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		clientspinner2.setAdapter(dataAdapter);
 	}
@@ -438,18 +489,29 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 				client.setLatitude(latitude);
 			}
 
-			client.setAddress(address.getText().toString());
-			//client.setZip(zip.getText().toString());
-			client.setPhone(tel.getText().toString());
-			client.setFax(fax.getText().toString());
-			client.setEmail(email.getText().toString());
+			client.setAddress(address.getText().toString()+"");
+			//client.setZip(zip.getText().toString()+"");
+			client.setPhone(tel.getText().toString()+"");
+			client.setFax(fax.getText().toString()+"");
+			client.setEmail(email.getText().toString()+"");
 			client.setStatus(1);
 			client.setId(soc.getId());
+			if(mycity != null || !mycity.equals("")){
+				client.setTown(mycity);
+			}else{
+				client.setTown(ville.getText().toString()+"");
+			}
 			
 			if (v.getId() == R.id.comm_etape) {
-				dialog = ProgressDialog.show(UpdateClientActivity.this, "Enregistration",
-						"Attendez SVP...", true);
-				new EnregistrationTask().execute();
+				dialog = ProgressDialog.show(UpdateClientActivity.this, getResources().getString(R.string.comerciallab3),
+						getResources().getString(R.string.msg_wait), true);
+				
+				if(CheckOutNet.isNetworkConnected(UpdateClientActivity.this)){
+					new EnregistrationTask().execute();
+				}else{
+					new EnregistrationOfflineTask().execute();
+				}
+				
 				//String res = manager.insert(compte, client);
 				//Log.d("Client",client.toString());
 			}
@@ -465,7 +527,7 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 		@Override
 		protected String doInBackground(Void... arg0) {
 			resu = manager.update(compte, client);
-			resu = "Ce client est mise à  jour avec succées";
+		//	resu = "Ce client est mise à  jour avec succées";
 			wakelock.acquire();
 			return null;
 		}
@@ -535,6 +597,92 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 			}
 		}
 	}
+	
+	private	class EnregistrationOfflineTask  extends AsyncTask<Void, Void, String> {
+
+		private long rs;
+		@Override
+		protected String doInBackground(Void... arg0) {
+			myoffline = new Offlineimpl(UpdateClientActivity.this);
+			rs = myoffline.shnchronizeUpClients(client, compte);
+		//	resu = "Ce client est mise à  jour avec succées";
+			wakelock.acquire();
+			return null;
+		}
+
+		@Override
+		protected void onProgressUpdate(Void... unsued) {
+
+		}
+
+
+		@Override
+		protected void onPostExecute(String sResponse) {
+			try {
+				if (dialog.isShowing()){
+					dialog.dismiss();
+					//Toast.makeText(CommercialActivity.this, resu, Toast.LENGTH_LONG).show();
+					if(rs != -1){
+						resu = getResources().getString(R.string.comm_upok);
+					}else{
+						resu = getResources().getString(R.string.comm_upko);
+					}
+
+					AlertDialog.Builder localBuilder = new AlertDialog.Builder(UpdateClientActivity.this);
+					localBuilder
+					.setMessage(resu)
+					.setCancelable(false);
+					/*
+					.setPositiveButton("Retour",
+							new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+							ViewGroup group = (ViewGroup)findViewById(R.id.layoutall);
+
+							for (int i = 0, count = group.getChildCount(); i < count; ++i)
+							{
+								View view = group.getChildAt(i);
+								if (view instanceof EditText) {
+									((EditText)view).setText("");
+								}
+
+							}
+
+							ViewGroup group2 = (ViewGroup)findViewById(R.id.comm_interface);
+
+							for (int i = 0, count = group2.getChildCount(); i < count; ++i)
+							{
+								View view = group2.getChildAt(i);
+								if (view instanceof EditText) {
+									((EditText)view).setText("");
+								}
+							}
+						}
+					});
+					*/
+					localBuilder.setNegativeButton("Quitter ",
+							new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+							
+							Intent intent = new Intent(UpdateClientActivity.this, HomeActivity.class);
+							intent.putExtra("user", compte);
+							intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							startActivity (intent);
+							UpdateClientActivity.this.finish();
+						}
+					}
+							);
+					localBuilder.create().show();
+
+					wakelock.release();
+				}
+			} catch (Exception e) {
+				Toast.makeText(getApplicationContext(),
+						e.getMessage(),
+						Toast.LENGTH_LONG).show();
+				Log.e(e.getClass().getName(), e.getMessage(), e);
+			}
+		}
+	}
 
 	@Override
 	public void onLocationChanged(Location location) {
@@ -558,6 +706,30 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void alertPrdClt(String msg){
+		AlertDialog.Builder alert = new AlertDialog.Builder(UpdateClientActivity.this);
+		alert.setTitle(getResources().getString(R.string.cmdtofc10));
+		alert.setMessage(msg);
+		alert.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				return;
+			}
+		});
+		alert.setCancelable(true);
+		alert.create().show();
+	}
+	
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
 	}
 
 

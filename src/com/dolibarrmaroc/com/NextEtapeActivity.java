@@ -625,6 +625,7 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 			PayementManager payemn = PayementManagerFactory.getPayementFactory();
 			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
 			CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+			CommercialManager managercom = CommercialManagerFactory.getCommercialManager();
 			
 			
 			
@@ -665,7 +666,7 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 				}
 			}
 			
-			CheckOutSysc.ReloadProdClt(NextEtapeActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0);
+			CheckOutSysc.ReloadProdClt(NextEtapeActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0,managercom);
 			
 			
 			return null;
@@ -809,6 +810,7 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 			PayementManager payemn = PayementManagerFactory.getPayementFactory();
 			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
 			CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+			CommercialManager managercom = CommercialManagerFactory.getCommercialManager();
 			
 
 			/*********************** offline ****************************************/
@@ -846,7 +848,7 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 				
 			}
 			
-			CheckOutSysc.ReloadProdClt(NextEtapeActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0);
+			CheckOutSysc.ReloadProdClt(NextEtapeActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0,managercom);
 
 			
 			return null;

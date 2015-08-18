@@ -22,6 +22,7 @@ public class AlertDialogList extends android.app.AlertDialog.Builder implements 
 	private ListView list;
 	private LayoutInflater inflater;
 	
+	
 	public AlertDialogList(Context context, List<AlertDialog> alerts) {
 		super(context);
 		this.context = context;
@@ -46,8 +47,8 @@ public class AlertDialogList extends android.app.AlertDialog.Builder implements 
 				context.startActivity(alert.getIntent());
 			}
 		}
+		
 	}
 
-	
 	
 }

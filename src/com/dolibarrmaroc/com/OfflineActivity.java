@@ -74,7 +74,7 @@ import android.os.Build;
 import android.os.PowerManager.WakeLock;
 
 @SuppressLint("NewApi")
-public class OfflineActivity extends Activity implements OnItemClickListener,OnQueryTextListener{
+public class OfflineActivity extends Activity implements OnItemClickListener{
 
 	private Compte compte;
 	private ListView lisview;
@@ -93,6 +93,8 @@ public class OfflineActivity extends Activity implements OnItemClickListener,OnQ
 	private MyFactureAdapterView regldapter;
 	
 	private WakeLock wakelock;
+	
+	private SearchView search;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -165,6 +167,42 @@ public class OfflineActivity extends Activity implements OnItemClickListener,OnQ
 		//new offlineTask().execute();
 		
 		factadapter = new MyFactureAdapterView();
+		
+		search = (SearchView) findViewById(R.id.searchView1);
+		
+		search.setOnQueryTextListener(new OnQueryTextListener(){
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				// TODO Auto-generated method stub
+				if (TextUtils.isEmpty(newText))
+				{
+					lisview.clearTextFilter();
+					remplireListview(factdata, 0);
+				}
+				else
+				{
+					lisview.setFilterText(newText.toString());
+					factadapter.getFilter().filter(newText.toString());
+					
+					
+					//bindingData = new BinderData(WeatherActivity.this, bindingData.getMap());
+					factadapter.notifyDataSetChanged();
+					lisview.invalidateViews();
+					lisview.setAdapter(factadapter);
+					lisview.refreshDrawableState();
+				}
+
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// TODO Auto-generated method stub
+				Log.e("search data","is me submit");
+				return false;
+			}
+		});
 	}
 	
 	@Override
@@ -238,19 +276,6 @@ public class OfflineActivity extends Activity implements OnItemClickListener,OnQ
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.offline, menu);
-		
-		// Associate searchable configuration with the SearchView
-		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-		SearchView searchView = (SearchView) menu.findItem(R.id.search)
-				.getActionView();
-		searchView.setSearchableInfo(searchManager
-				.getSearchableInfo(getComponentName()));
-
-		searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-		searchView.setSubmitButtonEnabled(true);
-		searchView.setOnQueryTextListener(this);
 
 		//handleIntent(getIntent());
 		return super.onCreateOptionsMenu(menu);
@@ -309,8 +334,10 @@ public class OfflineActivity extends Activity implements OnItemClickListener,OnQ
 			
 			*/
 			
+			myoffline = new Offlineimpl(OfflineActivity.this);
 			factdata = new ArrayList<>();
 			List<MyTicketBluetooth> mx = myoffline.LoadBluetooth("");
+			Log.e("mx size ",mx.size()+"");
 			for(MyTicketBluetooth mm:mx){
 				factdata.add(new MyfactureAdapter(mm.getTicket().getClient(), mm.getTicket().getNumFacture(), mm.getMe().getTotal_ticket().getTotal_ttc()+"", mm.getMe().getAmount(),mm.getMe().getInvoid()));
 			}
@@ -567,36 +594,13 @@ public class OfflineActivity extends Activity implements OnItemClickListener,OnQ
         dialog.show();
 	}
 
-	@Override
-	public boolean onQueryTextChange(String newText) {
-		// TODO Auto-generated method stub
-		Log.e("search data",""+newText);
-		Log.e("util", TextUtils.isEmpty(newText)+"");
-		if (TextUtils.isEmpty(newText))
-		{
-			lisview.clearTextFilter();
-			remplireListview(factdata, 0);
-		}
-		else
-		{
-			lisview.setFilterText(newText.toString());
-			factadapter.getFilter().filter(newText.toString());
-			
-			
-			//bindingData = new BinderData(WeatherActivity.this, bindingData.getMap());
-			factadapter.notifyDataSetChanged();
-			lisview.invalidateViews();
-			lisview.setAdapter(factadapter);
-			lisview.refreshDrawableState();
-		}
-
-		return true;
-	}
-
-	@Override
-	public boolean onQueryTextSubmit(String query) {
-		// TODO Auto-generated method stub
-		Log.e("search data","is me submit");
-		return false;
+	 
+	
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
 	}
 }

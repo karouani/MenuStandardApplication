@@ -3,12 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <LinearLayout
+            android:id="@+id/l1"
+            style="@style/TitleBar"
+            android:layout_width="match_parent" >
+
+            <ImageButton
+                style="@style/TitleBarAction"
+                android:contentDescription="@string/description_home"
+                android:onClick="onClickHome"
+                android:src="@drawable/title_home" />
+
+            <ImageView style="@style/TitleBarSeparator" />
+
+            <TextView style="@style/TitleBarText"
+                android:text="@string/title_activity_settingsynchro" />
+
+        </LinearLayout>
+        
     <ImageView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/l1"
         android:src="@drawable/logo" />
 
    

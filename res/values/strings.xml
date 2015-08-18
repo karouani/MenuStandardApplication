@@ -237,6 +237,10 @@
     <string name="comm_4">C.N.S.S</string>
     <string name="comm_capital">CAPITAL</string>
     <string name="comm_fax">FAX</string>
+    <string name="comm_title_head">Mise a jour des clients</string>
+    <string name="comm_new_head">Créer nouveau client</string>
+    <string name="comm_upok">Ce client est mise à  jour avec succées</string>
+    <string name="comm_upko">La mise à jour n\'est pas termine. Pensé à refaire à nouveau.</string>
 
     <string-array name="comm_effectif">
         <item name="0">0</item>

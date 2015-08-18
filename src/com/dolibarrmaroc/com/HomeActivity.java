@@ -54,6 +54,7 @@ import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Dictionnaire;
 import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.Societe;
 import com.dolibarrmaroc.com.offline.Offlineimpl;
 import com.dolibarrmaroc.com.utils.CheckOutNet;
 import com.dolibarrmaroc.com.utils.CheckOutSysc;
@@ -261,29 +262,50 @@ public class HomeActivity extends DashboardActivity
 			Intent intentfc1 = new Intent(getApplicationContext(), VendeurActivity.class); //CatalogeActivity.class  //CmdViewActivity
 			intentfc1.putExtra("user", compte);
 			intentfc1.putExtra("cmd", "0");
-			com.dolibarrmaroc.com.models.AlertDialog createfc1 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc1, getString(R.string.title_activity_vendeur), "user_add");
+			com.dolibarrmaroc.com.models.AlertDialog createfc1 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc1, getString(R.string.title_activity_vendeur), "invoice_see");
 
 			
 			Intent intentfc2 = new Intent(getApplicationContext(), PayementActivity.class);
 			intentfc2.putExtra("user", compte);
 			intentfc2.putExtra("dico", myoffline.LoadDeco("").getDico());
-			com.dolibarrmaroc.com.models.AlertDialog updatefc2 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc2, getString(R.string.title_activity_payement), "user_add");
+			com.dolibarrmaroc.com.models.AlertDialog updatefc2 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc2, getString(R.string.title_activity_payement), "invoice");
 			 
+			
+			Intent intentfc3 = new Intent(getApplicationContext(), OfflineActivity.class);
+			intentfc3.putExtra("user", compte);
+			com.dolibarrmaroc.com.models.AlertDialog updatefc3 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc3, getString(R.string.title_activity_offline), "invoice_lock");
+			
+			Intent intentfc4 = new Intent(getApplicationContext(), ReglementOfflineActivity.class);
+			intentfc4.putExtra("user", compte);
+			com.dolibarrmaroc.com.models.AlertDialog updatefc4 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc4, getString(R.string.title_activity_reglement_offline), "invoice_pay");
 			
 			alertfc2.add(createfc1);
 			alertfc2.add(updatefc2);
+			alertfc2.add(updatefc3);
+			alertfc2.add(updatefc4);
 			new AlertDialogList(HomeActivity.this, alertfc2).show();
+			
 			break;
 		case R.id.home_btn_tiers :
+			/*
+			myoffline = new Offlineimpl(getApplicationContext());
+			CommercialManager manager = CommercialManagerFactory.getCommercialManager();
+			List<Societe> lsosc = new ArrayList<>();
+			lsosc = CheckOutSysc.checkOutAllSociete(manager, compte);
+			if(lsosc.size() > 0){
+				CheckOutSysc.checkInSocietes(myoffline, lsosc, compte);
+			}
+			*/
+			
 			//startActivity (new Intent(getApplicationContext(), F5Activity.class));
 			List<com.dolibarrmaroc.com.models.AlertDialog> alerts = new ArrayList<>();
 			Intent intentX = new Intent(getApplicationContext(), CommercialActivity.class); //CatalogeActivity.class  //CmdViewActivity
 			intentX.putExtra("user", compte);
-			com.dolibarrmaroc.com.models.AlertDialog create = new com.dolibarrmaroc.com.models.AlertDialog(intentX, "Nouveau", "user_add");
+			com.dolibarrmaroc.com.models.AlertDialog create = new com.dolibarrmaroc.com.models.AlertDialog(intentX, getString(R.string.comm_new_head), "user_yellow_add");
 
 			Intent intentY = new Intent(getApplicationContext(), UpdateClientActivity.class);
 			intentY.putExtra("user", compte);
-			com.dolibarrmaroc.com.models.AlertDialog update = new com.dolibarrmaroc.com.models.AlertDialog(intentY, "Mise à jour", "user_add");
+			com.dolibarrmaroc.com.models.AlertDialog update = new com.dolibarrmaroc.com.models.AlertDialog(intentY,  getString(R.string.comm_title_head), "user_yellow_edit");
 
 			alerts.add(create);
 			alerts.add(update);
@@ -294,12 +316,12 @@ public class HomeActivity extends DashboardActivity
 			List<com.dolibarrmaroc.com.models.AlertDialog> alerts2 = new ArrayList<>();
 			Intent intents1 = new Intent(getApplicationContext(), TransfertstockActivity.class); //CatalogeActivity.class  //CmdViewActivity
 			intents1.putExtra("user", compte);
-			com.dolibarrmaroc.com.models.AlertDialog creates1 = new com.dolibarrmaroc.com.models.AlertDialog(intents1, getString(R.string.title_activity_transfertstock), "user_add");
+			com.dolibarrmaroc.com.models.AlertDialog creates1 = new com.dolibarrmaroc.com.models.AlertDialog(intents1, getString(R.string.title_activity_transfertstock), "warehouse_worker");
 
 			Intent intents2 = new Intent(getApplicationContext(), TransfertvirtualstockActivity.class);
 			intents2.putExtra("user", compte);
 			intents2.putExtra("cmd", "0");
-			com.dolibarrmaroc.com.models.AlertDialog updates2 = new com.dolibarrmaroc.com.models.AlertDialog(intents2, getString(R.string.title_activity_transfertvirtualstock), "user_add");
+			com.dolibarrmaroc.com.models.AlertDialog updates2 = new com.dolibarrmaroc.com.models.AlertDialog(intents2, getString(R.string.title_activity_transfertvirtualstock), "warehouse_put");
 
 			alerts2.add(creates1);
 			alerts2.add(updates2);
@@ -312,15 +334,26 @@ public class HomeActivity extends DashboardActivity
 			Intent intentc1 = new Intent(getApplicationContext(), CatalogeActivity.class); //CatalogeActivity.class  //CmdViewActivity
 			intentc1.putExtra("user", compte);
 			intentc1.putExtra("cmd", "1");
-			com.dolibarrmaroc.com.models.AlertDialog createc1 = new com.dolibarrmaroc.com.models.AlertDialog(intentc1, getString(R.string.title_activity_cataloge), "user_add");
+			com.dolibarrmaroc.com.models.AlertDialog createc1 = new com.dolibarrmaroc.com.models.AlertDialog(intentc1, getString(R.string.title_activity_cataloge), "buy");
 
 			Intent intentc2 = new Intent(getApplicationContext(), CmdViewActivity.class);
 			intentc2.putExtra("user", compte);
-			com.dolibarrmaroc.com.models.AlertDialog updatec2 = new com.dolibarrmaroc.com.models.AlertDialog(intentc2, getString(R.string.title_activity_cmd_view), "user_add");
+			com.dolibarrmaroc.com.models.AlertDialog updatec2 = new com.dolibarrmaroc.com.models.AlertDialog(intentc2, getString(R.string.title_activity_cmd_view), "catalog");
 
 			alertc2.add(createc1);
 			alertc2.add(updatec2);
 			new AlertDialogList(HomeActivity.this, alertc2).show();
+
+			break;
+		case R.id.home_btn_maps : 
+
+			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
+				Intent photosIntent = new Intent(this, MainActivity.class);
+				photosIntent.putExtra("user", compte);
+				startActivity(photosIntent);
+			}else{
+				alertmaps();
+			}
 
 			break;
 		default: 
@@ -349,9 +382,11 @@ public class HomeActivity extends DashboardActivity
 				
 				sv  = new StockVirtual(HomeActivity.this);
 					if(sv.getSyc() == 1){
+						
 						dialogSynchronisation = ProgressDialog.show(HomeActivity.this, getResources().getString(R.string.map_data),
 								getResources().getString(R.string.msg_wait), true);
 						new ConnexionTask().execute();	
+						
 					}
 			
 			}
@@ -433,6 +468,9 @@ public class HomeActivity extends DashboardActivity
 			PayementManager payemn = PayementManagerFactory.getPayementFactory();
 			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
 
+			
+			
+			
 			if(!myoffline.checkFolderexsiste()){
 				showmessageOffline();
 			}else{
@@ -440,7 +478,7 @@ public class HomeActivity extends DashboardActivity
 				if(sv.getSyc() == 1){
 					if(CheckOutNet.isNetworkConnected(HomeActivity.this)){
 						HashMap<String, Integer> res = new HashMap<>();
-						res = CheckOutSysc.ReloadProdClt(HomeActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0);
+						res = CheckOutSysc.ReloadProdClt(HomeActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0,manager);
 						
 						nprod = res.get("prod");
 						nclt = res.get("clt");
@@ -550,5 +588,21 @@ public class HomeActivity extends DashboardActivity
 			return true;
 		}
 		return false;
+	}
+	
+	public void alertmaps(){
+		AlertDialog.Builder alert = new AlertDialog.Builder(HomeActivity.this);
+		alert.setTitle(getResources().getString(R.string.caus17));
+		alert.setMessage(getResources().getString(R.string.caus18));
+		alert.setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+				return;
+			}
+		});
+		alert.setCancelable(true);
+		alert.create().show();
 	}
 } // end class

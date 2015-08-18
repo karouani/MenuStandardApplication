@@ -9,13 +9,23 @@ import com.dolibarrmaroc.com.FactureActivity.ValidationTask;
 import com.dolibarrmaroc.com.ViewcommandeActivity.ConnexionTask;
 import com.dolibarrmaroc.com.ViewcommandeActivity.OfflineTask;
 import com.dolibarrmaroc.com.business.CommandeManager;
+import com.dolibarrmaroc.com.business.CommercialManager;
+import com.dolibarrmaroc.com.business.PayementManager;
+import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.dao.CategorieDao;
+import com.dolibarrmaroc.com.dao.CategorieDaoMysql;
+import com.dolibarrmaroc.com.database.StockVirtual;
 import com.dolibarrmaroc.com.models.Commandeview;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.MyfactureAdapter;
 import com.dolibarrmaroc.com.models.Produit;
 import com.dolibarrmaroc.com.models.Remises;
 import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CheckOutSysc;
 import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
+import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
+import com.dolibarrmaroc.com.utils.PayementManagerFactory;
+import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 import com.dolibarrmaroc.com.offline.Offlineimpl;
 import com.dolibarrmaroc.com.offline.ioffline;
 
@@ -450,6 +460,25 @@ public class CmdDetailActivity extends Activity {
 				res = getResources().getString(R.string.cmdtofc4);
 				break;
 			}
+			
+			if(myoffline.checkAvailableofflinestorage() > 0){
+				myoffline.SendOutData(compte);	
+			}
+			
+			VendeurManager vendeurManager = VendeurManagerFactory.getClientManager();
+			PayementManager payemn = PayementManagerFactory.getPayementFactory();
+			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
+			CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+			CommercialManager managercom = CommercialManagerFactory.getCommercialManager();
+			
+			StockVirtual sv  = new StockVirtual(CmdDetailActivity.this);
+			
+			myoffline = new Offlineimpl(CmdDetailActivity.this);
+			
+			if(CheckOutNet.isNetworkConnected(CmdDetailActivity.this)){
+				CheckOutSysc.ReloadProdClt(CmdDetailActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 1,managercom);
+			}
+			
 
 			return "success";
 		}

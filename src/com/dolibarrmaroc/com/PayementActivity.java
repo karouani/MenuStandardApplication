@@ -713,10 +713,14 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 			PayementManager payemn = PayementManagerFactory.getPayementFactory();
 			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
 			CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+			CommercialManager managercom = CommercialManagerFactory.getCommercialManager();
 			sv  = new StockVirtual(PayementActivity.this);
 			
 			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
-				myoffline.SendOutData(compte);	
+				if(myoffline.checkAvailableofflinestorage() > 0){
+					myoffline.SendOutData(compte);	
+				}
+				
 			}
 			
 
@@ -726,7 +730,7 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 			}else{
 				/*********************** offline ****************************************/
 				if(CheckOutNet.isNetworkConnected(PayementActivity.this)){
-					CheckOutSysc.ReloadProdClt(PayementActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0);
+					CheckOutSysc.ReloadProdClt(PayementActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0,managercom);
 				}
 				
 			}
@@ -1354,10 +1358,14 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 			PayementManager payemn = PayementManagerFactory.getPayementFactory();
 			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
 			CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+			CommercialManager managercom = CommercialManagerFactory.getCommercialManager();
 			sv  = new StockVirtual(PayementActivity.this);
 			
 			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
-				myoffline.SendOutData(compte);	
+				if(myoffline.checkAvailableofflinestorage() > 0){
+					myoffline.SendOutData(compte);	
+				}
+				
 			}
 			
 
@@ -1367,7 +1375,7 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 			}else{
 				/*********************** offline ****************************************/
 				if(CheckOutNet.isNetworkConnected(PayementActivity.this)){
-					CheckOutSysc.ReloadProdClt(PayementActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0);
+					CheckOutSysc.ReloadProdClt(PayementActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0,managercom);
 				}
 				
 			}

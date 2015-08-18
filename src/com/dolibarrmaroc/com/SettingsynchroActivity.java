@@ -12,6 +12,7 @@ import com.dolibarrmaroc.com.models.Myinvoice;
 import com.dolibarrmaroc.com.models.Prospection;
 import com.dolibarrmaroc.com.models.Reglement;
 import com.dolibarrmaroc.com.database.DatabaseHandler;
+import com.dolibarrmaroc.com.database.StockVirtual;
 import com.dolibarrmaroc.com.offline.Offlineimpl;
 import com.dolibarrmaroc.com.offline.ioffline;
 
@@ -262,6 +263,7 @@ public class SettingsynchroActivity extends Activity {
 										getResources().getString(R.string.msg_wait), true);
 
 								myoffline.CleanProspection();
+								myoffline.CleanUpClients();
 								
 								List<Myinvoice> ms  = new ArrayList<>();
 								ms = myoffline.LoadInvoice("");
@@ -278,6 +280,9 @@ public class SettingsynchroActivity extends Activity {
 								myoffline.CleanCmdToFactList(); 
 								myoffline.CleanMouvement();
 								
+								
+								StockVirtual sv = new StockVirtual(SettingsynchroActivity.this);
+								sv.cleantables("");// clean les produits echanges + rendus
 								/*
 								myoffline.CleanProspection();
 								
@@ -429,5 +434,14 @@ public class SettingsynchroActivity extends Activity {
 			startActivity(intent1);
 		}
 		return false;
+	}
+	
+	
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
 	}
 }

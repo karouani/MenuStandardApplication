@@ -197,11 +197,11 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 				StrictMode.setThreadPolicy(policy);
 			}
 			
-			/*
+			
 			PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
 			wakelock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "no sleep");
 			wakelock.acquire();
-			*/
+			
 			
 			myoffline = new Offlineimpl(getApplicationContext());
 			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
@@ -449,7 +449,7 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 			if (v.getId() == R.id.comm_etape) {
 				
 				//checkRequiredFields();
-				if(email.toString().length() == 0 || !email.toString().equals("")){
+				if(email.toString().length() == 0 || email.toString().equals("")){
 					
 					Calendar calendar = Calendar.getInstance();
 					calendar.setTime(new Date()); 

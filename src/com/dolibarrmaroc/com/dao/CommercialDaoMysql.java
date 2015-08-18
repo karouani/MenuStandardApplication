@@ -275,6 +275,8 @@ public class CommercialDaoMysql implements CommercialDao{
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			list = new ArrayList<>();
+			Log.e("get all societe ",e.getMessage()+" >> ");
 		}
 		return list;
 	}

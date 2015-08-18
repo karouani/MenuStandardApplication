@@ -75,6 +75,7 @@ import com.dolibarrmaroc.com.models.Prospection;
 import com.dolibarrmaroc.com.models.Reglement;
 import com.dolibarrmaroc.com.models.Remises;
 import com.dolibarrmaroc.com.models.Services;
+import com.dolibarrmaroc.com.models.Societe;
 import com.dolibarrmaroc.com.models.TotauxTicket;
 import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
 import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
@@ -2777,6 +2778,7 @@ public class Offlineimpl implements ioffline {
 		CleanCategorieList();
 		CleanCategorieClients();
 		CleanCommandeList();
+		CleanSocieteClients();
 		return vl;
 	}
 
@@ -2827,6 +2829,7 @@ public class Offlineimpl implements ioffline {
 		x += LoadCmdList("").size();
 		x += LoadCmdToFact("").size();
 		x += LoadMouvement("").size();
+		x += LoadUpClients("").size(); 
 		
 		Log.e("nbr >>",x+"");
 		
@@ -3903,6 +3906,8 @@ public class Offlineimpl implements ioffline {
 			dataeror3.setCmd(lscmd);
 			dataeror3.setCmdview(lscmdv);
 			CleanAlldataOut(dataeror3, compte);
+			
+			sendUpClients(compte);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -5130,6 +5135,7 @@ public class Offlineimpl implements ioffline {
 		long ix = -1;
 		try {
 			//CleanCmdList();
+			CleanCategorieClients();
 			file = new File(path, "/catcustomerdata.txt");
 			FileOutputStream outputStream;
 
@@ -5207,6 +5213,195 @@ public class Offlineimpl implements ioffline {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+
+	@Override
+	public long shnchronizeSocietesClients(List<Societe> ct, Compte cp) {
+		// TODO Auto-generated method stub
+		long ix = -1;
+		try {
+			//CleanCmdList();
+			CleanSocieteClients();
+			file = new File(path, "/socclientsdata.txt");
+			FileOutputStream outputStream;
+
+			if(!file.exists()){
+				file.createNewFile();
+				file.mkdir();
+			}
+
+			if(file.exists()){
+				FileWriter fw = new FileWriter(file, true);
+				PrintWriter pout = new PrintWriter(fw);
+				
+				for (int i = 0; i < ct.size(); i++) {
+					pout.println("["+gson.toJson(ct.get(i),Societe.class)+"]");
+				}
+				
+				ix =1;
+				pout.close();
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e("save soc clt ",e.getMessage()  +" << ");
+			ix =-1;
+		}
+		return ix;
+	}
+
+	@Override
+	public List<Societe> LoadSocietesClients(String fl) {
+		// TODO Auto-generated method stub
+		List<Societe> list = new ArrayList<Societe>();
+
+		try{
+			int n;
+
+			File file = new File(path, "/socclientsdata.txt");
+			if(file.exists()){
+				//Log.e("data loaded exist  ",file.getAbsolutePath());
+				File secondInputFile = new File(file.getAbsolutePath());
+				InputStream secondInputStream = new BufferedInputStream(new FileInputStream(secondInputFile));
+				BufferedReader r = new BufferedReader(new InputStreamReader(secondInputStream));
+				StringBuilder total = new StringBuilder();
+				String line;
+				
+				while ((line = r.readLine()) != null) {
+					
+					JSONArray jr = new JSONArray(line);
+					for (int i = 0; i < jr.length(); i++) {
+						JSONObject json = jr.getJSONObject(i);
+						Societe c = new Societe();
+
+						c = gson.fromJson(json.toString(), Societe.class);
+
+						list.add(c);
+					}
+
+
+					}
+				}
+
+		}catch(Exception e){
+			Log.e("load socclientsdata",e.getMessage()  +" << ");
+		}
+		return list;
+	}
+
+	@Override
+	public void CleanSocieteClients() {
+		// TODO Auto-generated method stub
+		try {
+			File file = new File(path, "/socclientsdata.txt");
+			if(file.exists()){
+				FileWriter fw = new FileWriter(file,false);
+				PrintWriter pout = new PrintWriter(fw);
+				pout.print("");
+				pout.close();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	@Override
+	public long shnchronizeUpClients(Prospection ct, Compte cp) {
+		// TODO Auto-generated method stub
+		long ix = -1;
+		try {
+			file = new File(path, "/upclientsdata.txt");
+			FileOutputStream outputStream;
+
+			if(!file.exists()){
+				file.createNewFile();
+				file.mkdir();
+			}
+
+			if(file.exists()){
+				FileWriter fw = new FileWriter(file, true);
+				PrintWriter pout = new PrintWriter(fw);
+				
+				pout.println("["+gson.toJson(ct,Prospection.class)+"]");
+				
+				ix =1;
+				pout.close();
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e("save upclientsdata clt ",e.getMessage()  +" << ");
+			ix =-1;
+		}
+		return ix;
+	}
+
+	@Override
+	public List<Prospection> LoadUpClients(String fl) {
+		// TODO Auto-generated method stub
+		List<Prospection> list = new ArrayList<Prospection>();
+
+		try{
+			int n;
+
+			File file = new File(path, "/upclientsdata.txt");
+			if(file.exists()){
+				//Log.e("data loaded exist  ",file.getAbsolutePath());
+				File secondInputFile = new File(file.getAbsolutePath());
+				InputStream secondInputStream = new BufferedInputStream(new FileInputStream(secondInputFile));
+				BufferedReader r = new BufferedReader(new InputStreamReader(secondInputStream));
+				StringBuilder total = new StringBuilder();
+				String line;
+				
+				while ((line = r.readLine()) != null) {
+					
+					JSONArray jr = new JSONArray(line);
+					for (int i = 0; i < jr.length(); i++) {
+						JSONObject json = jr.getJSONObject(i);
+						Prospection c = new Prospection();
+
+						c = gson.fromJson(json.toString(), Prospection.class);
+
+						list.add(c);
+					}
+
+
+					}
+				}
+
+		}catch(Exception e){
+			Log.e("load upclientsdata",e.getMessage()  +" << ");
+		}
+		return list;
+	}
+
+	@Override
+	public void CleanUpClients() {
+		// TODO Auto-generated method stub
+		try {
+			File file = new File(path, "/upclientsdata.txt");
+			if(file.exists()){
+				FileWriter fw = new FileWriter(file,false);
+				PrintWriter pout = new PrintWriter(fw);
+				pout.print("");
+				pout.close();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	@Override
+	public long sendUpClients(Compte cp) {
+		// TODO Auto-generated method stub
+		CommercialManager manager = CommercialManagerFactory.getCommercialManager();
+		
+		for (int i = 0; i < LoadUpClients("").size(); i++) {
+			manager.update(cp, LoadUpClients("").get(i));
+		}
+		
+		CleanUpClients();
+		return 0;
 	}
 	
 }

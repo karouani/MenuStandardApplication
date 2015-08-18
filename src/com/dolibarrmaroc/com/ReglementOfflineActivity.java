@@ -45,7 +45,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SearchView.OnQueryTextListener;
 
 @SuppressLint("NewApi")
-public class ReglementOfflineActivity extends Activity implements OnItemClickListener,OnQueryTextListener {
+public class ReglementOfflineActivity extends Activity implements OnItemClickListener {
 
 	private Compte compte;
 	private ListView lisview;
@@ -55,6 +55,8 @@ public class ReglementOfflineActivity extends Activity implements OnItemClickLis
 	private Myinvoice meinvo;
 	
 	private ProgressDialog dialog;
+	
+	private SearchView search;
 	
 	
 	private List<MyfactureAdapter> factdata;
@@ -95,6 +97,43 @@ public class ReglementOfflineActivity extends Activity implements OnItemClickLis
 		//new offlineTask().execute();
 		
 		factadapter = new MyFactureAdapterView();
+		
+		search = (SearchView) findViewById(R.id.searchView1);
+		
+		search.setOnQueryTextListener(new OnQueryTextListener(){
+
+			@Override
+			public boolean onQueryTextChange(String newText) {
+				// TODO Auto-generated method stub
+				Log.e("search data",""+newText);
+				Log.e("util", TextUtils.isEmpty(newText)+"");
+				if (TextUtils.isEmpty(newText))
+				{
+					lisview.clearTextFilter();
+					remplireListview(factdata, 0);
+				}
+				else
+				{
+					lisview.setFilterText(newText.toString());
+					factadapter.getFilter().filter(newText.toString());
+					
+					
+					//bindingData = new BinderData(WeatherActivity.this, bindingData.getMap());
+					factadapter.notifyDataSetChanged();
+					lisview.invalidateViews();
+					lisview.setAdapter(factadapter);
+					lisview.refreshDrawableState();
+				}
+				return true;
+			}
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// TODO Auto-generated method stub
+				Log.e("search data","is me submit");
+				return false;
+			}
+		});
 	}
 
 	public void remplireListview(List<MyfactureAdapter> fc,int n){
@@ -175,17 +214,6 @@ public class ReglementOfflineActivity extends Activity implements OnItemClickLis
 				MenuInflater inflater = getMenuInflater();
 				inflater.inflate(R.menu.reglement_offline, menu);
 				
-				// Associate searchable configuration with the SearchView
-				SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-				SearchView searchView = (SearchView) menu.findItem(R.id.search)
-						.getActionView();
-				searchView.setSearchableInfo(searchManager
-						.getSearchableInfo(getComponentName()));
-
-				searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-				searchView.setSubmitButtonEnabled(true);
-				searchView.setOnQueryTextListener(this);
-
 				//handleIntent(getIntent());
 				return super.onCreateOptionsMenu(menu);
 	}
@@ -203,37 +231,7 @@ public class ReglementOfflineActivity extends Activity implements OnItemClickLis
 		return super.onOptionsItemSelected(item);
 	}
 
-	@Override
-	public boolean onQueryTextChange(String newText) {
-		// TODO Auto-generated method stub
-		Log.e("search data",""+newText);
-		Log.e("util", TextUtils.isEmpty(newText)+"");
-		if (TextUtils.isEmpty(newText))
-		{
-			lisview.clearTextFilter();
-			remplireListview(factdata, 0);
-		}
-		else
-		{
-			lisview.setFilterText(newText.toString());
-			factadapter.getFilter().filter(newText.toString());
-			
-			
-			//bindingData = new BinderData(WeatherActivity.this, bindingData.getMap());
-			factadapter.notifyDataSetChanged();
-			lisview.invalidateViews();
-			lisview.setAdapter(factadapter);
-			lisview.refreshDrawableState();
-		}
-
-		return true;
-	}
-
-	@Override
-	public boolean onQueryTextSubmit(String arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	 
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -271,5 +269,13 @@ public class ReglementOfflineActivity extends Activity implements OnItemClickLis
 			
 		}
 		return false;
+	}
+	
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
 	}
 }
