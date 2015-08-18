@@ -83,7 +83,7 @@ public class HomeActivity extends DashboardActivity
 	 * 
 	 * Always followed by onStart().
 	 *
-	 */
+	 */  
 	//Declaration Objet
 	private VendeurManager vendeurManager;
 	private StockVirtual sv;

@@ -17,6 +17,7 @@ import com.dolibarrmaroc.com.database.StockVirtual;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Dictionnaire;
+import com.dolibarrmaroc.com.models.Payement;
 import com.dolibarrmaroc.com.models.Produit;
 import com.dolibarrmaroc.com.offline.Offlineimpl;
 import com.dolibarrmaroc.com.utils.CheckOutNet;
@@ -83,32 +84,7 @@ public class CmdPayActivity extends ActionBarActivity {
 			type= Integer.parseInt(getIntent().getStringExtra("type"));
 		}
 		
-		if(CheckOutNet.isNetworkConnected(CmdPayActivity.this)){
-			
-		}else{
-			
-		}
-		
-		switch (type) {
-		case 0:
-
-			break;
-		case 1:
-
-			break;
-		case 2:
-
-			break;
-		case 3:
-
-			break;
-		case 4:
-
-			break;
-
-		default:
-			break;
-		}
+	
 	}
 
 	@Override
@@ -230,14 +206,58 @@ public class CmdPayActivity extends ActionBarActivity {
 			if(!myoffline.checkFolderexsiste()){
 				showmessageOffline();
 			}else{
-				Log.e("is alreadey sysc ",sv.getSyc()+"");
-					if(CheckOutNet.isNetworkConnected(CmdPayActivity.this)){
-						HashMap<String, Integer> res = new HashMap<>();
-						res = CheckOutSysc.ReloadProdClt(CmdPayActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0,manager);
+				if(CheckOutNet.isNetworkConnected(CmdPayActivity.this)){
+					
+				}else{
+					
+				}
+				
+				switch (type) {
+				case 0:
+
+					int nbprod,nbclt;
+					List<Produit> products = new ArrayList<>();
+					products =  CheckOutSysc.checkOutProducts(vendeurManager, compte);//   vendeurManager.selectAllProduct(compte);
+					
+					List<Client> clients = new ArrayList<>();
+					clients = CheckOutSysc.checkOutClient(vendeurManager, compte); //   vendeurManager.selectAllClient(compte);
+
+					
+						if(products.size() > 0){
+							nbprod = products.size();
+							for (int i = 0; i < products.size(); i++) {
+								for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+									if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId()+"")){
+										products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
+									}
+								}
+							}
+							CheckOutSysc.checkInProductsPromotion(myoffline, compte, products, vendeurManager.getPromotionProduits());
+						} 
+
+
+						if(clients.size() > 0){
+							nbclt =clients.size(); 
+							CheckOutSysc.checkInClientsPromotion(myoffline, compte, clients, vendeurManager.getPromotionClients());
+						}
 						
-						nprod = res.get("prod");
-						nclt = res.get("clt");
-					}
+					break;
+				case 1:
+
+					break;
+				case 2:
+
+					break;
+				case 3:
+
+					break;
+				case 4:
+
+					break;
+
+				default:
+					break;
+				}
 			}
 
 			Log.e("start ","start cnx task");
