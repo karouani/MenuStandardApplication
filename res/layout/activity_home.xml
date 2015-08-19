@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  android:background="#000000" -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/db1_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+   android:background="#000000"
+    android:orientation="vertical" >
+
+    <LinearLayout style="@style/TitleBar" >
+
+        <ImageView
+            style="@style/TitleBarLogo"
+            android:contentDescription="@string/description_logo"
+            android:src="@drawable/title_logo" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+
+        <TextView style="@style/TitleBarText" />
+
+        <ImageButton
+            style="@style/TitleBarAction"
+            android:contentDescription="@string/description_about"
+            android:onClick="onClickAbout"
+            android:src="@drawable/title_about" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="6dip" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/home_btn_livraison"
+                style="@style/HomeButton"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/home_livraison"
+                android:onClick="onClickFeature"
+                android:text="@string/description_livreur"
+                android:textColor="#FFFFFFFF" />
+
+            <Button
+                android:id="@+id/home_btn_tiers"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/home_tiers"
+                android:onClick="onClickFeature"
+                android:text="@string/description_tiers"
+                android:textColor="#FFFFFFFF" />
+
+            <Button
+                android:id="@+id/home_btn_prise_cmd"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/home_commande"
+                android:onClick="onClickFeature"
+                android:text="@string/description_commande"
+                android:textColor="#FFFFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/home_btn_maps"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/home_carte"
+                android:onClick="onClickFeature"
+                android:text="@string/description_map"
+                android:textColor="#FFFFFFFF" />
+
+            <Button
+                android:id="@+id/home_btn_intervention"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/home_intervention"
+                android:onClick="onClickFeature"
+                android:text="@string/description_intervention"
+                android:textColor="#FFFFFFFF" />
+
+            <Button
+                android:id="@+id/home_btn_stock"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/home_stocks"
+                android:onClick="onClickFeature"
+                android:text="@string/description_stock"
+                android:textColor="#FFFFFFFF" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/home_btn_statistque"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/home_state"
+                android:onClick="onClickFeature"
+                android:text="@string/description_state"
+                android:textColor="#FFFFFFFF" />
+
+            <Button
+                android:id="@+id/home_btn_synchronisation"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/home_sync"
+                android:onClick="onClickFeature"
+                android:text="@string/description_sync"
+                android:textColor="#FFFFFFFF" />
+
+            <Button
+                android:id="@+id/home_btn_logout"
+                style="@style/HomeButton"
+                android:drawableTop="@drawable/home_decon"
+                android:onClick="onClickFeature"
+                android:text="@string/description_logout"
+                android:textColor="#FFFFFFFF" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

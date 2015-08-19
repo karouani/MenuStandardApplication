@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:app="http://schemas.android.com/apk/res-auto" 
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.marocgeo.als.OfflineActivity">
+  
+  <item
+       android:id="@+id/search"
+       android:actionViewClass="android.widget.SearchView"
+       android:showAsAction="always"
+       android:title="Search"/>
+  
+  <item
+        android:id="@+id/reglofflineticket"
+        android:icon="@drawable/sys_clipboard"
+        android:orderInCategory="0"
+        android:showAsAction="always|withText"
+        android:title="Liste des reglements"/>
+ </menu>
+

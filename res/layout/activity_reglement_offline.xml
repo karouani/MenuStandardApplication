@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.marocgeo.als.ReglementOfflineActivity" >
+
+    <LinearLayout
+        android:id="@+id/l1"
+        style="@style/TitleBar"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:onClick="onClickHome"
+            android:src="@drawable/title_home" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+
+        <com.karouani.cicin.widget.searcheview.SearchView
+                android:id="@+id/searchView1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:icon="@drawable/title_search_default"
+                 >
+            </com.karouani.cicin.widget.searcheview.SearchView>
+
+         
+        <TextView style="@style/TitleBarText"
+                android:text="@string/title_activity_reglement_offline" 
+                />
+         
+
+    </LinearLayout>
+    
+    <ListView
+        android:id="@+id/reglos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_below="@+id/l1">
+
+    </ListView>
+
+</RelativeLayout>

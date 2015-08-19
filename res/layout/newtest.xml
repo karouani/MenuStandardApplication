@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+ <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo" />
+
+ <RelativeLayout
+     android:id="@+id/relativeLayout1"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:layout_alignParentBottom="true"
+     android:layout_alignRight="@+id/imageView1"
+     android:layout_weight="0.05"
+     android:background="@drawable/legend"
+     android:orientation="vertical"
+     android:padding="10dp" >
+
+        <Button
+            android:id="@+id/nextStepTech"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/round_corner_drawable"
+            android:text="@string/tecv11" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/LinearLayout2" >
+
+            <EditText
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text" />
+
+            <Button
+                android:id="@+id/btnCalendar"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_weight="0"
+                android:background="@drawable/mybuttontop"
+                android:padding="10dp"
+                android:text="@string/tecv12"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/linearLayout3"
+            android:layout_below="@+id/linearLayout1"
+            android:layout_marginTop="10dp" >
+
+            <EditText
+                android:id="@+id/txtTimeD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/btnTimePickerD"
+                 style="?android:attr/buttonStyleSmall"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_weight="0"
+                android:background="@drawable/mybuttontop"
+                android:padding="10dp"
+                android:textColor="@android:color/white"
+                android:text="@string/tecv7" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/nextStepTech"
+            android:layout_below="@+id/LinearLayout2" 
+            android:layout_marginTop="10dp">
+
+            <EditText
+                android:id="@+id/txtTimeF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="number" >
+				
+                <requestFocus />
+            </EditText>
+
+            <Button
+                android:id="@+id/btnTimePickerF"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_weight="0"
+                android:background="@drawable/mybuttontop"
+                android:padding="10dp"
+                android:textColor="@android:color/white"
+                android:text="@string/tecv8" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/nameOfTechn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/nextStepTech"
+            android:layout_alignLeft="@+id/nextStepTech"
+            android:ems="10"
+            android:hint="@string/tecv10"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/resttxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/nameOfTechn"
+            android:layout_alignLeft="@+id/nameOfTechn"
+            android:text="@string/tecv9" />
+    </RelativeLayout>
+</LinearLayout>

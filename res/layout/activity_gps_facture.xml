@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GpsFactureActivity" >
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/labelsignature"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/labelsignature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:text="Enregistrement de la Facture"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColorLink="#ff0000" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelsignature"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp" />
+
+    <TextView
+        android:id="@+id/totaltxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressBar1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="Attendez SVP..." />
+
+</RelativeLayout>

@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.sig.google.maps.ReadPDFActivity" >
+
+    <item
+        android:id="@+id/telecharger"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Envoyer par mail"/>
+
+    
+</menu>

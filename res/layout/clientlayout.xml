@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFBCC2BE"
+    android:gravity="center_vertical"
+    tools:context=".CommercialActivity" >
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/produitpointer"
+        android:layout_marginTop="22dp"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/clientshowme"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/mybuttonbottom"
+            android:text="@string/btn_map_facture"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/itenermoiclient"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="31dp"
+            android:background="@drawable/mybuttonbottom"
+            android:text="@string/btn_map_itiniraire"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/annulershowme"
+            android:layout_width="match_parent"
+            android:layout_height="50dip"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/mybuttonbottom"
+            android:text="@string/btn_cancel"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/produitpointer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="18dp" />
+
+</RelativeLayout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+            android:id="@+id/l1"
+            style="@style/TitleBar"
+            android:layout_width="match_parent" >
+
+            <ImageButton
+                style="@style/TitleBarAction"
+                android:contentDescription="@string/description_home"
+                android:onClick="onClickHome"
+                android:src="@drawable/title_home" />
+
+            <ImageView style="@style/TitleBarSeparator" />
+
+            <TextView style="@style/TitleBarText"
+                android:text="@string/title_activity_settingsynchro" />
+
+        </LinearLayout>
+        
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/l1"
+        android:src="@drawable/logo" />
+
+   
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+        
+         <Button
+        android:id="@+id/setingdelcache"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/logo"
+        android:background="@drawable/mybuttontop"
+        android:text="@string/caus12" />
+
+    <Button
+        android:id="@+id/setingdelcache2"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/setingdelcache"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/mybuttontop"
+        android:text="@string/caus11" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,141 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="0dp"
+    >
+
+   <LinearLayout
+        android:id="@+id/l1"
+        style="@style/TitleBar"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:onClick="onClickHome"
+            android:src="@drawable/title_home" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+
+         
+        <TextView style="@style/TitleBarText"
+                android:text="@string/title_activity_transfertvirtualstock" 
+                />
+         
+
+    </LinearLayout>
+
+        <LinearLayout
+            	android:id="@+id/flay1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/l1"
+                android:orientation="vertical" >
+
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <RadioGroup
+                android:id="@+id/radioGroup1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+                android:gravity="center" >
+
+
+                <RadioButton
+                    android:id="@+id/dch2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cmdtofc23" />
+                
+                <RadioButton
+                    android:id="@+id/dch3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cmdtofc24" />
+            </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/flay1"
+            android:background="#ff347c12" >
+
+            <TextView
+                android:id="@+id/lsrefs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:text="Ref"
+                android:textColor="#ffffff" />
+            
+            <TextView
+                android:id="@+id/item2"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.42"
+                android:height="30dip"
+                android:text="@string/desig"
+                android:textColor="#ffffff"
+                android:width="100dip" />
+
+            <TextView
+                android:id="@+id/labelsignature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.13"
+                android:text="Qte"
+                android:textColor="#ffffff" />
+            
+            
+            
+        </LinearLayout>
+
+       <LinearLayout 
+           android:id="@+id/lsvs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/foot1"
+            android:layout_below="@+id/header">
+           
+				<ListView
+                    android:id="@+id/listviewsv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="ifContentScrolls" />
+           
+       </LinearLayout>
+       
+       <LinearLayout
+           android:id="@+id/foot1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="0.03"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/savetransfersv"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="5px"
+            android:layout_weight="0.03"
+            android:background="@drawable/mybuttontop"
+            android:padding="10dp"
+            android:text="@string/btn_mvmstckgo"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+</RelativeLayout>
