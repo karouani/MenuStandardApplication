@@ -73,7 +73,7 @@ import com.karouani.cicin.widget.alert.AlertDialogList;
  * This is a simple activity that demonstrates the dashboard user interface pattern.
  *
  */
-
+/****************** HOMEACTIVITY************************/
 public class HomeActivity extends Activity
 {
 
