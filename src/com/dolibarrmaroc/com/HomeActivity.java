@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -35,6 +36,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dolibarrmaroc.com.VendeurActivity.ConnexionTask;
@@ -72,7 +74,7 @@ import com.karouani.cicin.widget.alert.AlertDialogList;
  *
  */
 
-public class HomeActivity extends DashboardActivity 
+public class HomeActivity extends Activity
 {
 
 	/**
@@ -232,10 +234,8 @@ public class HomeActivity extends DashboardActivity
 
 	/**
 	 */
-	@Override
 	public void onClickFeature(View v) {
 		// TODO Auto-generated method stub
-		super.onClickFeature(v);
 		
 		myoffline = new Offlineimpl(HomeActivity.this);
 
@@ -634,4 +634,129 @@ public class HomeActivity extends DashboardActivity
 		alert.setCancelable(true);
 		alert.create().show();
 	}
+	
+	/**
+	 * Handle the click on the home button.
+	 * 
+	 * @param v View
+	 * @return void
+	 */
+
+	public void onClickHome (View v)
+	{
+		goHome (this);
+	}
+
+	/**
+	 * Handle the click on the search button.
+	 * 
+	 * @param v View
+	 * @return void
+	 */
+
+	public void onClickSearch (View v)
+	{
+		startActivity (new Intent(getApplicationContext(), SearchActivity.class));
+	}
+
+	/**
+	 * Handle the click on the About button.
+	 * 
+	 * @param v View
+	 * @return void
+	 */
+
+	public void onClickAbout (View v)
+	{
+		startActivity (new Intent(getApplicationContext(), AboutActivity.class));
+	}
+
+	/**
+	 * Go back to the home activity.
+	 * 
+	 * @param context Context
+	 * @return void
+	 */
+
+	public void goHome(Context context) 
+	{
+		final Intent intent = new Intent(context, HomeActivity.class);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		context.startActivity (intent);
+	}
+
+	
+	/**
+	 * Use the activity label to set the text in the activity's title text view.
+	 * The argument gives the name of the view.
+	 *
+	 * <p> This method is needed because we have a custom title bar rather than the default Android title bar.
+	 * See the theme definitons in styles.xml.
+	 * 
+	 * @param textViewId int
+	 * @return void
+	 */
+
+	public void setTitleFromActivityLabel(int textViewId)
+	{
+		TextView tv = (TextView) findViewById (textViewId);
+		if (tv != null) tv.setText (getTitle ());
+	} // end setTitleText
+
+	/**
+	 * Show a string on the screen via Toast.
+	 * 
+	 * @param msg String
+	 * @return void
+	 */
+
+	public void toast (String msg)
+	{
+		Toast.makeText (getApplicationContext(), msg, Toast.LENGTH_SHORT).show ();
+	} // end toast
+
+	/**
+	 * Send a message to the debug log and display it using Toast.
+	 */
+	public void trace (String msg) 
+	{
+		Log.d("Demo", msg);
+		toast (msg);
+	}
+
+	public AlertDialog.Builder deconnecter(final Activity context){
+		AlertDialog.Builder alert = new AlertDialog.Builder(context);
+		alert.setTitle(context.getResources().getString(R.string.btn_decon));
+		alert.setMessage(context.getResources().getString(R.string.tecv47));
+		alert.setNegativeButton(context.getResources().getString(R.string.description_logout), new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//startActivity (new Intent(getApplicationContext(), F2Activity.class));
+				TelephonyManager tManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+				String imei = tManager.getDeviceId();
+				if(mydb.numberOfRows() > 0){
+					Log.e(">>"+imei," >> "+mydb.numberOfRows());
+					mydb.deleteUser(imei);
+					//Log.e("All Compte",mydb.getAll().toString());
+				}
+
+				Intent intent = new Intent(context,ConnexionActivity.class);
+				startActivity(intent);
+				context.finish();
+				return;
+			}
+		});
+
+		alert.setPositiveButton(context.getResources().getString(R.string.btn_cancel), new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				return;
+			}
+		});
+		alert.setCancelable(true);
+		return alert;
+	}
+
 } // end class
