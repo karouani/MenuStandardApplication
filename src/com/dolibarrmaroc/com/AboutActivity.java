@@ -29,7 +29,7 @@ import android.widget.TextView;
  * It displays some text and provides a way to get back to the home activity.
  *
  */
-
+/********** ABOUT *****************/
 public class AboutActivity extends DashboardActivity 
 {
 
