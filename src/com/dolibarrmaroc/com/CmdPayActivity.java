@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.dolibarrmaroc.com.CmdPayActivity.ConnexionTask;
-import com.dolibarrmaroc.com.CmdPayActivity.ServerSideTask;
 import com.dolibarrmaroc.com.business.CommandeManager;
 import com.dolibarrmaroc.com.business.CommercialManager;
 import com.dolibarrmaroc.com.business.PayementManager;
@@ -33,6 +32,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager.WakeLock;
@@ -41,10 +41,16 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CmdPayActivity extends ActionBarActivity {
 
+	
+	private TextView msgres;
+
+	
 	//Declaration Objet
 		private VendeurManager vendeurManager;
 		private StockVirtual sv;
@@ -65,6 +71,7 @@ public class CmdPayActivity extends ActionBarActivity {
 
 		//type de synchronisation 0 == clt+prod // 1 == comercial // 2 == cmd+catalogue // 3 == payement
 		private int type =-1;
+		private String msg;
 		
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +92,8 @@ public class CmdPayActivity extends ActionBarActivity {
 			compte = (Compte) getIntent().getSerializableExtra("user");
 			type= Integer.parseInt(getIntent().getStringExtra("type"));
 		}
+		
+		msgres = (TextView)findViewById(R.id.syscmsgres);
 		
 	
 	}
@@ -113,17 +122,9 @@ public class CmdPayActivity extends ActionBarActivity {
 
 			//getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-			myoffline = new Offlineimpl(getApplicationContext());
-			if(myoffline.checkAvailableofflinestorage() > 0){
-				dialogSynchronisation = ProgressDialog.show(CmdPayActivity.this, getResources().getString(R.string.caus15),
-						getResources().getString(R.string.msg_wait_sys), true);
-				new ServerSideTask().execute();
-			}else{
-				sv  = new StockVirtual(CmdPayActivity.this);
 						dialogSynchronisation = ProgressDialog.show(CmdPayActivity.this, getResources().getString(R.string.map_data),
 								getResources().getString(R.string.msg_wait), true);
 						new ConnexionTask().execute();	
-			}
 
 			//new ConnexionTask().execute();
 		}else{
@@ -131,67 +132,27 @@ public class CmdPayActivity extends ActionBarActivity {
 		}
 	}
 
-	class ServerSideTask extends AsyncTask<Void, Void, String> {
 
-		@Override
-		protected String doInBackground(Void... params) {
-
-			try {
-				myoffline = new Offlineimpl(getApplicationContext());
-				if(CheckOutNet.isNetworkConnected(getApplicationContext())){
-					myoffline.SendOutData(compte);
-				}
-
-			} catch (Exception e) {
-				// TODO: handle exception
-				Log.e("erreu synchro",e.getMessage() +" << ");
-			}
-
-			Log.e("start ","start cnx service");
-
-			return null;
-		}
-
-		protected void onPostExecute(String sResponse) {
-			try {
-				if (dialogSynchronisation.isShowing()){
-					dialogSynchronisation.dismiss();
-
-					dialogSynchronisation = ProgressDialog.show(CmdPayActivity.this, getResources().getString(R.string.map_data),
-							getResources().getString(R.string.msg_wait), true);
-
-					if(CheckOutNet.isNetworkConnected(getApplicationContext())){
-						new ConnexionTask().execute();	
-					}
-
-					Log.e("end ","start cnx service");
-					/*
-				Intent intent2 = new Intent(ConnexionActivity.this, SettingsynchroActivity.class);
-				intent2.putExtra("user", compte);
-				startActivity(intent2);
-					 */
-				}
-
-			} catch (Exception e) {
-				Toast.makeText(getApplicationContext(),
-						getResources().getString(R.string.fatal_error),
-						Toast.LENGTH_LONG).show();
-				Log.e("Error","");
-			}
-		}
-
-	}
-
-	class ConnexionTask extends AsyncTask<Void, Void, String> {
+	class ConnexionTask extends AsyncTask<String, Integer, String> {
 
 
 		int nclt;
 		int nprod;
+		int myProgress =0;
 
 		@Override
-		protected String doInBackground(Void... params) {
+		protected String doInBackground(String... paramsw) {
 
 			//getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+			
+			
+			// Set your ProgressBar Title 
+			//mProgressDialog.setIcon(R.drawable.ic_launcher);
+			// Set your ProgressBar Message
+			// Show ProgressBar
+			//  mProgressDialog.setCanceledOnTouchOutside(false);
+			
+			msgres.setText("Debut de connexion avec le serveur a distance \n \n");
 
 			Log.e("Compte User ",compte.toString());
 			sv  = new StockVirtual(CmdPayActivity.this);
@@ -203,31 +164,23 @@ public class CmdPayActivity extends ActionBarActivity {
 			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
 
 			
-			
+			if(myoffline.checkAvailableofflinestorage() > 0){
+				myoffline.SendOutData(compte);
+			}
 			
 			if(!myoffline.checkFolderexsiste()){
 				showmessageOffline();
 			}else{
-				if(CheckOutNet.isNetworkConnected(CmdPayActivity.this)){
-					
-				}else{
-					
-				}
-				
 				switch (type) {
 				case 0:
 
-					int nbprod,nbclt;
-					String msg = "";
+					msgres.setText("Debut de chargement des produits \n");
 					List<Produit> products = new ArrayList<>();
 					products =  CheckOutSysc.checkOutProducts(vendeurManager, compte);//   vendeurManager.selectAllProduct(compte);
 					
-					List<Client> clients = new ArrayList<>();
-					clients = CheckOutSysc.checkOutClient(vendeurManager, compte); //   vendeurManager.selectAllClient(compte);
-
 					
 						if(products.size() > 0){
-							nbprod = products.size();
+							nprod = products.size();
 							for (int i = 0; i < products.size(); i++) {
 								for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
 									if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId()+"")){
@@ -238,9 +191,14 @@ public class CmdPayActivity extends ActionBarActivity {
 							CheckOutSysc.checkInProductsPromotion(myoffline, compte, products, vendeurManager.getPromotionProduits());
 						} 
 
+						msgres.setText("Fin de chargement des produits \n \n");
+						msgres.setText("Debut de chargement des clients \n");
+						List<Client> clients = new ArrayList<>();
+						clients = CheckOutSysc.checkOutClient(vendeurManager, compte); //   vendeurManager.selectAllClient(compte);
 
+						
 						if(clients.size() > 0){
-							nbclt =clients.size(); 
+							nclt =clients.size(); 
 							CheckOutSysc.checkInClientsPromotion(myoffline, compte, clients, vendeurManager.getPromotionClients());
 						}
 						
@@ -252,13 +210,15 @@ public class CmdPayActivity extends ActionBarActivity {
 							msg += getResources().getString(R.string.caus27)+"\n";
 						}
 						
-						if(nclt == 0 || nprod == 0 ){
-							alertPrdClt(msg);
-						}
-						
+						msgres.setText("Fin de chargement des clients \n \n");
 						CheckOutSysc.checkInDictionnaire(myoffline, CheckOutSysc.checkOutDictionnaire(vendeurManager, compte));
 						
 						CheckOutSysc.checkInClientSecteur(myoffline, CheckOutSysc.checkOutClientSecteur(vendeurManager, compte), compte);
+						
+						if(nclt != 0 && nprod != 0 ){
+						//	alertPrdClt(msg);
+							msg = getResources().getString(R.string.cnxlab8)+"\n";
+						}
 						
 					break;
 				case 1:
@@ -271,12 +231,14 @@ public class CmdPayActivity extends ActionBarActivity {
 						CheckOutSysc.checkInSocietes(myoffline, lsosc, compte);
 					}
 					
+					msg = getResources().getString(R.string.cnxlab8)+"\n";
+				//	alertPrdClt(msg);
+					
 					break;
 				case 2:
 
 					List<Categorie> lscats = CheckOutSysc.checkOutCatalogueProduit(categorie, compte);
 
-					
 					products = new ArrayList<>();
 					products =  myoffline.LoadProduits("");
 					
@@ -298,21 +260,35 @@ public class CmdPayActivity extends ActionBarActivity {
 							}
 						}
 					}
+					
+					CheckOutSysc.checkInCommandeview(myoffline, CheckOutSysc.checkOutCommandes(managercmd, compte), compte);
+					
+					CheckOutSysc.checkInClientSecteur(myoffline, CheckOutSysc.checkOutClientSecteur(vendeurManager, compte), compte);
 
 					if(lscats.size() > 0){
 						CheckOutSysc.checkInCatalogueProduit(myoffline, lscats, compte);
+						msg = getResources().getString(R.string.cnxlab8)+"\n";
+					//	alertPrdClt(msg);
+					}else{
+						msg = getResources().getString(R.string.cnxlab9)+"\n";
+					//	alertPrdClt(msg);
 					}
 
-					CheckOutSysc.checkInCommandeview(myoffline, CheckOutSysc.checkOutCommandes(managercmd, compte), compte);
+					
 					
 					break;
 				case 3:
-
+					List<Payement> pay = CheckOutSysc.checkOutPayement(payemn, compte);
+					if(pay.size() > 0){
+						CheckOutSysc.checkInPayement(myoffline, pay, compte);	
+						msg = getResources().getString(R.string.cnxlab8)+"\n";
+					//	alertPrdClt(msg);
+					}else{
+						msg = getResources().getString(R.string.cmdtofc21)+"\n";
+						//alertPrdClt(msg);
+					}
+					
 					break;
-				case 4:
-
-					break;
-
 				default:
 					break;
 				}
@@ -327,41 +303,22 @@ public class CmdPayActivity extends ActionBarActivity {
 		}
 
 		@Override
-		protected void onProgressUpdate(Void... unsued) {
+		protected void onProgressUpdate(Integer... progress) {
 
 		}
 
 		@Override
 		protected void onPostExecute(String sResponse) {
 			try {
-				if (dialogSynchronisation.isShowing()){
-					dialogSynchronisation.dismiss();
-					String msg ="";
+			//	if (dialogSynchronisation.isShowing()){
+				//	dialogSynchronisation.dismiss();
 					//wakelock.release();
 
-					if(nprod == 0){
-						msg += getResources().getString(R.string.caus26)+"\n";
-					}
-
-					if(nclt == 0){
-						msg += getResources().getString(R.string.caus27)+"\n";
-					}
-
-					int k =0;
-					if(nclt == 0 || nprod == 0 ){
-						alertPrdClt(msg);
-						k=-1;
-					}
-
-					if(k == 0) {
-						if(nclt == 0 || nprod == 0 ){
-							showmessageOffline();
-						}
-					}
+					msgres.setText(msg);
 
 
 					Log.e("end ","end cnx task");
-				}
+				//}
 
 			} catch (Exception e) {
 				Toast.makeText(getApplicationContext(),

@@ -250,33 +250,35 @@ public class HomeActivity extends Activity
 			//wakelock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "no sleep");
 			//wakelock.acquire();
 
-			synchronisation();
+			//synchronisation();
 			
 			List<com.dolibarrmaroc.com.models.AlertDialog> alertfc22 = new ArrayList<>();
-			Intent intentfc12 = new Intent(getApplicationContext(), VendeurActivity.class); //CatalogeActivity.class  //CmdViewActivity
-			intentfc12.putExtra("user", compte);
-			intentfc12.putExtra("cmd", "0");
-			com.dolibarrmaroc.com.models.AlertDialog createfc12 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc12, getString(R.string.title_activity_vendeur), "invoice_see");
+			Intent intentfc12 = new Intent(getApplicationContext(), CmdPayActivity.class); //CatalogeActivity.class  //CmdViewActivity
+			intentfc12.putExtra("type", "0");
+			com.dolibarrmaroc.com.models.AlertDialog createfc12 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc12, getString(R.string.syscl1), "invoice_see");
 
 			
-			Intent intentfc22 = new Intent(getApplicationContext(), PayementActivity.class);
-			intentfc22.putExtra("user", compte);
-			intentfc22.putExtra("dico", myoffline.LoadDeco("").getDico());
-			com.dolibarrmaroc.com.models.AlertDialog updatefc22 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc22, getString(R.string.title_activity_payement), "invoice");
+			Intent intentfc22 = new Intent(getApplicationContext(), CmdPayActivity.class);
+			intentfc12.putExtra("type", "1");
+			com.dolibarrmaroc.com.models.AlertDialog updatefc22 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc22, getString(R.string.syscl2), "invoice");
 			 
 			
-			Intent intentfc32 = new Intent(getApplicationContext(), OfflineActivity.class);
-			intentfc32.putExtra("user", compte);
-			com.dolibarrmaroc.com.models.AlertDialog updatefc32 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc32, getString(R.string.title_activity_offline), "invoice_lock");
+			Intent intentfc32 = new Intent(getApplicationContext(), CmdPayActivity.class);
+			intentfc12.putExtra("type", "2");
+			com.dolibarrmaroc.com.models.AlertDialog updatefc32 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc32, getString(R.string.syscl3), "invoice_lock");
 			
-			Intent intentfc42 = new Intent(getApplicationContext(), ReglementOfflineActivity.class);
-			intentfc42.putExtra("user", compte);
-			com.dolibarrmaroc.com.models.AlertDialog updatefc24 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc42, getString(R.string.title_activity_reglement_offline), "invoice_pay");
+			Intent intentfc42 = new Intent(getApplicationContext(), CmdPayActivity.class);
+			intentfc12.putExtra("type", "3");
+			com.dolibarrmaroc.com.models.AlertDialog updatefc24 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc42, getString(R.string.syscl4), "invoice_pay");
+			
+			Intent intentfc52 = new Intent(getApplicationContext(), CmdPayActivity.class);
+			com.dolibarrmaroc.com.models.AlertDialog updatefc25 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc52, getString(R.string.syscl5), "invoice_pay");
 			
 			alertfc22.add(createfc12);
 			alertfc22.add(updatefc22);
 			alertfc22.add(updatefc32);
 			alertfc22.add(updatefc24);
+			alertfc22.add(updatefc25);
 			new AlertDialogList(HomeActivity.this, alertfc22).show();
 
 			

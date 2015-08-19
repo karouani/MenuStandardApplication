@@ -468,9 +468,20 @@
 	<string name="cnxlab4">Veuillez saisire une valeur plus que zero</string>
 	<string name="cnxlab5">Le numéro de la facture choisi est introuvable</string>
 	<string name="cnxlab7">Le montant encaisse est invalide</string>
+	<string name="cnxlab8">La phase de synchronisation est bien terminé</string>
+	<string name="cnxlab9">Vous n\'avez pas des catégories des produits. Pensé à ajouter des produits à des catégories</string>
 	
 	<string name="cnxlab6">Veuillez verifier le type du transfert ou le nombre des produits</string>
 	<string name="title_activity_transfertvirtualstock">Transfert des Rendus,Echanges</string>
 	
 	<string name="vendcat1">Categorie par defaut</string>
+	
+	
+	<!-- synchronisation labels -->
+	<string name="syscl1">Chargement des produits et clients</string>
+	<string name="syscl2">Chargement des informations des commerciaux</string>
+	<string name="syscl3">Chargement des commandes et catalogue produits</string>
+	<string name="syscl4">Chargement des factures</string>
+	<string name="syscl5">Vider le cache hors ligne</string>
+	
 </resources>

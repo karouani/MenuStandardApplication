@@ -171,8 +171,6 @@ public class CheckOutSysc implements Serializable{
 			List<Client> clients = new ArrayList<>();
 			clients = checkOutClient(vendeurManager, compte); //   vendeurManager.selectAllClient(compte);
 
-			List<Payement> paym = new ArrayList<>();
-			paym = checkOutPayement(payemnmanager, compte);
 			
 				if(products.size() > 0){
 					nbprod = products.size();
@@ -224,6 +222,20 @@ public class CheckOutSysc implements Serializable{
 
 				}
 				
+				
+				
+				
+				
+			if(in == 0){
+				List<Payement> paym = new ArrayList<>();
+				paym = checkOutPayement(payemnmanager, compte);
+				
+				checkInPayement(myoffline, paym, compte);
+				nbpay = paym.size();
+				
+			}
+			
+			/*
 				List<Societe> lsosc = new ArrayList<>();
 				lsosc = checkOutAllSociete(manager, compte);
 				if(lsosc.size() > 0){
@@ -231,15 +243,7 @@ public class CheckOutSysc implements Serializable{
 				}
 				
 				checkInClientSecteur(myoffline, checkOutClientSecteur(vendeurManager, compte), compte);
-				
-			if(in == 0){
-				checkInPayement(myoffline, paym, compte);
-				nbpay = paym.size();
-				
-			}
-			
-			
-			
+			*/
 			res.put("prod", nbprod);
 			res.put("clt", nbclt);
 			res.put("pay", nbpay);

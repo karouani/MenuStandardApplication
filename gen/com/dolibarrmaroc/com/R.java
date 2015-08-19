@@ -1573,7 +1573,7 @@ containing a value of this type.
         public static final int btnTimePickerD=0x7f0600d1;
         public static final int btnTimePickerF=0x7f0600d3;
         public static final int btn_enr_track=0x7f0600e3;
-        public static final int btn_quit=0x7f060063;
+        public static final int btn_quit=0x7f060064;
         public static final int button_scan=0x7f060124;
         public static final int camera=0x7f060173;
         public static final int categoriespinner=0x7f06010d;
@@ -1586,27 +1586,27 @@ containing a value of this type.
         public static final int clshistinterv=0x7f060179;
         public static final int clsv=0x7f060185;
         public static final int collapseActionView=0x7f060011;
-        public static final int comm_address=0x7f06006c;
+        public static final int comm_address=0x7f06006d;
         public static final int comm_cnss=0x7f0600be;
         public static final int comm_effectif=0x7f0600c1;
-        public static final int comm_email=0x7f060071;
-        public static final int comm_etape=0x7f060072;
-        public static final int comm_fax=0x7f060070;
+        public static final int comm_email=0x7f060072;
+        public static final int comm_etape=0x7f060073;
+        public static final int comm_fax=0x7f060071;
         public static final int comm_form=0x7f0600c2;
         public static final int comm_if=0x7f0600bd;
-        public static final int comm_interface=0x7f060069;
+        public static final int comm_interface=0x7f06006a;
         public static final int comm_last=0x7f0600c3;
         public static final int comm_patente=0x7f0600bc;
-        public static final int comm_phone=0x7f06006f;
+        public static final int comm_phone=0x7f060070;
         public static final int comm_rc=0x7f0600bb;
         public static final int comm_save=0x7f0600d6;
-        public static final int comm_ste=0x7f060068;
-        public static final int comm_suivant=0x7f060073;
+        public static final int comm_ste=0x7f060069;
+        public static final int comm_suivant=0x7f060074;
         public static final int comm_tierce=0x7f0600c0;
         public static final int comm_tva=0x7f0600bf;
-        public static final int comm_type=0x7f06006b;
-        public static final int comm_ville=0x7f06006e;
-        public static final int comm_zip=0x7f06006d;
+        public static final int comm_type=0x7f06006c;
+        public static final int comm_ville=0x7f06006f;
+        public static final int comm_zip=0x7f06006e;
         public static final int commentaire=0x7f060088;
         public static final int connecter=0x7f06007d;
         public static final int container=0x7f0600e2;
@@ -1639,7 +1639,7 @@ containing a value of this type.
         public static final int ftbtn_quit=0x7f06008d;
         public static final int ftgeocom=0x7f06008e;
         public static final int gallery=0x7f060174;
-        public static final int geocom=0x7f060064;
+        public static final int geocom=0x7f060065;
         public static final int getIntervention=0x7f0600a3;
         public static final int gotransfertstck=0x7f0600f9;
         public static final int header=0x7f060057;
@@ -1659,13 +1659,13 @@ containing a value of this type.
         public static final int home_btn_tiers=0x7f06009b;
         public static final int hybrid=0x7f060004;
         public static final int icon=0x7f060035;
-        public static final int idtxt=0x7f06006a;
+        public static final int idtxt=0x7f06006b;
         public static final int ifRoom=0x7f06000e;
         public static final int image=0x7f060032;
         public static final int imageButton1=0x7f060082;
-        public static final int imageView1=0x7f060065;
+        public static final int imageView1=0x7f060066;
         public static final int imageView1cat=0x7f060138;
-        public static final int imageView2=0x7f060066;
+        public static final int imageView2=0x7f060067;
         public static final int imei=0x7f0600e5;
         public static final int imgcancelbtn=0x7f06004d;
         public static final int imguploadbtn=0x7f06004c;
@@ -1707,7 +1707,7 @@ containing a value of this type.
         public static final int layout_cid=0x7f060148;
         public static final int layout_item_car=0x7f06013b;
         public static final int layout_reste_price=0x7f060145;
-        public static final int layoutall=0x7f060067;
+        public static final int layoutall=0x7f060068;
         public static final int lblListItem=0x7f060116;
         public static final int lblListItem2=0x7f06012d;
         public static final int lbl_car_color=0x7f06014c;
@@ -1743,8 +1743,8 @@ containing a value of this type.
         public static final int lngfieldbd=0x7f060092;
         public static final int login=0x7f060078;
         public static final int loginbd=0x7f060094;
-        public static final int logo=0x7f060074;
-        public static final int lscicincmd=0x7f060062;
+        public static final int logo=0x7f060061;
+        public static final int lscicincmd=0x7f060063;
         public static final int lsrefs=0x7f060102;
         public static final int lsvs=0x7f060103;
         public static final int lt1=0x7f0600e9;
@@ -1860,6 +1860,7 @@ containing a value of this type.
         public static final int step=0x7f0600e8;
         public static final int stop=0x7f0600e7;
         public static final int submit_area=0x7f060044;
+        public static final int syscmsgres=0x7f060062;
         public static final int tabMode=0x7f060006;
         public static final int tablebd=0x7f060096;
         public static final int telecharger=0x7f06017b;
@@ -1911,7 +1912,6 @@ containing a value of this type.
         public static final int validerfactureNext=0x7f0600ae;
         public static final int validerfiche=0x7f0600b6;
         public static final int viewcmd=0x7f060183;
-        public static final int viewcmdme=0x7f060061;
         public static final int viewcmdpr=0x7f060177;
         public static final int webView=0x7f060113;
         public static final int webview=0x7f0600c6;
@@ -2185,7 +2185,7 @@ containing a value of this type.
         public static final int bluetooth_connect_fail=0x7f0700f1;
         public static final int bluetooth_connect_sucess=0x7f0700f2;
         public static final int bluetooth_unconnected=0x7f0700f0;
-        public static final int btn_add_Customer=0x7f0701ae;
+        public static final int btn_add_Customer=0x7f0701b5;
         public static final int btn_add_client=0x7f0700a3;
         public static final int btn_cancel=0x7f070061;
         public static final int btn_decon=0x7f070063;
@@ -2199,7 +2199,7 @@ containing a value of this type.
         public static final int btn_gps_deactiver=0x7f070067;
         /**  Chercher Map 
          */
-        public static final int btn_map_Customer=0x7f0701b1;
+        public static final int btn_map_Customer=0x7f0701b8;
         /**  Chercher Map 
  Chercher Map 
          */
@@ -2335,8 +2335,10 @@ containing a value of this type.
         public static final int cnxlab3=0x7f0701a2;
         public static final int cnxlab4=0x7f0701a3;
         public static final int cnxlab5=0x7f0701a4;
-        public static final int cnxlab6=0x7f0701a6;
+        public static final int cnxlab6=0x7f0701a8;
         public static final int cnxlab7=0x7f0701a5;
+        public static final int cnxlab8=0x7f0701a6;
+        public static final int cnxlab9=0x7f0701a7;
         public static final int color_gris=0x7f0700b9;
         public static final int comerciallab1=0x7f070194;
         public static final int comerciallab10=0x7f07019d;
@@ -2579,6 +2581,13 @@ containing a value of this type.
         public static final int stock_limit=0x7f07007d;
         public static final int stock_msg=0x7f07007e;
         public static final int subject_email=0x7f07006d;
+        /**  synchronisation labels 
+         */
+        public static final int syscl1=0x7f0701ab;
+        public static final int syscl2=0x7f0701ac;
+        public static final int syscl3=0x7f0701ad;
+        public static final int syscl4=0x7f0701ae;
+        public static final int syscl5=0x7f0701af;
         /**   intervention technicien 
          */
         public static final int tecboredereau=0x7f070126;
@@ -2592,10 +2601,10 @@ containing a value of this type.
         public static final int tecv15=0x7f070136;
         public static final int tecv16=0x7f070137;
         public static final int tecv17=0x7f070138;
-        public static final int tecv18=0x7f0701a9;
-        public static final int tecv19=0x7f0701aa;
+        public static final int tecv18=0x7f0701b0;
+        public static final int tecv19=0x7f0701b1;
         public static final int tecv2=0x7f070129;
-        public static final int tecv20=0x7f0701ab;
+        public static final int tecv20=0x7f0701b2;
         public static final int tecv21=0x7f070139;
         public static final int tecv22=0x7f07013a;
         public static final int tecv23=0x7f07013b;
@@ -2623,7 +2632,7 @@ containing a value of this type.
         public static final int tecv43=0x7f07014f;
         public static final int tecv44=0x7f070150;
         public static final int tecv45=0x7f070151;
-        public static final int tecv46=0x7f0701ac;
+        public static final int tecv46=0x7f0701b3;
         public static final int tecv47=0x7f070152;
         public static final int tecv48=0x7f070153;
         public static final int tecv49=0x7f070154;
@@ -2634,8 +2643,8 @@ containing a value of this type.
         public static final int tecv8=0x7f070130;
         public static final int tecv9=0x7f070131;
         public static final int title_about=0x7f07003b;
-        public static final int title_activity_Customer=0x7f0701af;
-        public static final int title_activity_Sales_commercial=0x7f0701ad;
+        public static final int title_activity_Customer=0x7f0701b6;
+        public static final int title_activity_Sales_commercial=0x7f0701b4;
         public static final int title_activity_ad=0x7f0700aa;
         public static final int title_activity_admin=0x7f0700c7;
         public static final int title_activity_camera=0x7f0700db;
@@ -2674,7 +2683,7 @@ containing a value of this type.
         public static final int title_activity_reglement_offline=0x7f070105;
         public static final int title_activity_reglement_ticket=0x7f0700cd;
         public static final int title_activity_second_step_techn=0x7f0700d8;
-        public static final int title_activity_seconde_etape_Sales_commercial=0x7f0701b2;
+        public static final int title_activity_seconde_etape_Sales_commercial=0x7f0701b9;
         public static final int title_activity_seconde_etape_commercial=0x7f0700ee;
         public static final int title_activity_service=0x7f0700c0;
         public static final int title_activity_service_gps=0x7f0700ca;
@@ -2689,8 +2698,8 @@ containing a value of this type.
         public static final int title_activity_ticket_offline=0x7f0700cf;
         public static final int title_activity_tracking=0x7f070096;
         public static final int title_activity_transfertstock=0x7f070159;
-        public static final int title_activity_transfertvirtualstock=0x7f0701a7;
-        public static final int title_activity_update_Customer=0x7f0701b0;
+        public static final int title_activity_transfertvirtualstock=0x7f0701a9;
+        public static final int title_activity_update_Customer=0x7f0701b7;
         public static final int title_activity_update_client=0x7f0700b5;
         public static final int title_activity_valider=0x7f070124;
         public static final int title_activity_vendeur=0x7f0700ba;
@@ -2714,7 +2723,7 @@ containing a value of this type.
         public static final int title_section3=0x7f0700bd;
         public static final int total_ht=0x7f07005c;
         public static final int total_ttc=0x7f07005b;
-        public static final int vendcat1=0x7f0701a8;
+        public static final int vendcat1=0x7f0701aa;
     }
     public static final class style {
         /** 
