@@ -30,8 +30,8 @@ import android.widget.TextView;
  * It displays some text and provides a way to get back to the home activity.
  *
  */
-/********** ABOUT *****************/
-public class AboutActivity extends Activity
+
+public class AboutActivity extends Activity 
 {
 
 /**
@@ -58,18 +58,7 @@ protected void onCreate(Bundle savedInstanceState)
     test1.setMovementMethod(LinkMovementMethod.getInstance());
     test1.setText(spanned);
 }
-    
 
-/**
- * Use the activity label to set the text in the activity's title text view.
- * The argument gives the name of the view.
- *
- * <p> This method is needed because we have a custom title bar rather than the default Android title bar.
- * See the theme definitons in styles.xml.
- * 
- * @param textViewId int
- * @return void
- */
 
 public void setTitleFromActivityLabel (int textViewId)
 {
@@ -77,4 +66,5 @@ public void setTitleFromActivityLabel (int textViewId)
 	if (tv != null) tv.setText (getTitle ());
 } // end setTitleText
 
+    
 } // end class

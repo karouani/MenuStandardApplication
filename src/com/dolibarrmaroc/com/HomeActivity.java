@@ -73,8 +73,8 @@ import com.karouani.cicin.widget.alert.AlertDialogList;
  * This is a simple activity that demonstrates the dashboard user interface pattern.
  *
  */
-/****************** HOMEACTIVITY************************/
-public class HomeActivity extends Activity
+
+public class HomeActivity extends Activity 
 {
 
 	/**
@@ -635,49 +635,6 @@ public class HomeActivity extends Activity
 		alert.create().show();
 	}
 	
-	/**
-	 * Handle the click on the home button.
-	 * 
-	 * @param v View
-	 * @return void
-	 */
-
-	public void onClickHome (View v)
-	{
-		goHome (this);
-	}
-
-	/**
-	 * Handle the click on the search button.
-	 * 
-	 * @param v View
-	 * @return void
-	 */
-
-	public void onClickSearch (View v)
-	{
-		startActivity (new Intent(getApplicationContext(), SearchActivity.class));
-	}
-
-	/**
-	 * Handle the click on the About button.
-	 * 
-	 * @param v View
-	 * @return void
-	 */
-
-	public void onClickAbout (View v)
-	{
-		startActivity (new Intent(getApplicationContext(), AboutActivity.class));
-	}
-
-	/**
-	 * Go back to the home activity.
-	 * 
-	 * @param context Context
-	 * @return void
-	 */
-
 	public void goHome(Context context) 
 	{
 		final Intent intent = new Intent(context, HomeActivity.class);
@@ -685,7 +642,6 @@ public class HomeActivity extends Activity
 		context.startActivity (intent);
 	}
 
-	
 	/**
 	 * Use the activity label to set the text in the activity's title text view.
 	 * The argument gives the name of the view.
@@ -697,7 +653,7 @@ public class HomeActivity extends Activity
 	 * @return void
 	 */
 
-	public void setTitleFromActivityLabel(int textViewId)
+	public void setTitleFromActivityLabel (int textViewId)
 	{
 		TextView tv = (TextView) findViewById (textViewId);
 		if (tv != null) tv.setText (getTitle ());
@@ -758,5 +714,4 @@ public class HomeActivity extends Activity
 		alert.setCancelable(true);
 		return alert;
 	}
-
 } // end class

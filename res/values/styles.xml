@@ -26,7 +26,7 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="Theme.D1" parent="android:style/Theme.Light">
+    <style name="Theme.D1" parent="Theme.AppCompat.Light">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>

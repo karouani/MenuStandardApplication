@@ -195,7 +195,7 @@ public class CheckOutSysc implements Serializable{
 				
 				if(compte.getPermissionbl() == 1){
 
-					List<Categorie> lscats = CheckOutSysc.checkOutCatalogueProduit(categorie, compte);
+					List<Categorie> lscats = checkOutCatalogueProduit(categorie, compte);
 
 					for (int i = 0; i < products.size(); i++) {
 						for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
@@ -217,10 +217,10 @@ public class CheckOutSysc implements Serializable{
 					}
 
 					if(lscats.size() > 0){
-						CheckOutSysc.checkInCatalogueProduit(myoffline, lscats, compte);
+						checkInCatalogueProduit(myoffline, lscats, compte);
 					}
 
-					CheckOutSysc.checkInCommandeview(myoffline, CheckOutSysc.checkOutCommandes(managercmd, compte), compte);
+					checkInCommandeview(myoffline, checkOutCommandes(managercmd, compte), compte);
 
 				}
 				
@@ -229,6 +229,8 @@ public class CheckOutSysc implements Serializable{
 				if(lsosc.size() > 0){
 					checkInSocietes(myoffline, lsosc, compte);
 				}
+				
+				checkInClientSecteur(myoffline, checkOutClientSecteur(vendeurManager, compte), compte);
 				
 			if(in == 0){
 				checkInPayement(myoffline, paym, compte);
