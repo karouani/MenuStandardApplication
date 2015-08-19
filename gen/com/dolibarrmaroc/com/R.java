@@ -2110,55 +2110,55 @@ containing a value of this type.
         public static final int web_view=0x7f0d0032;
     }
     public static final class string {
-        public static final int Commentaire=0x7f070057;
-        public static final int Recu=0x7f070058;
+        public static final int Commentaire=0x7f070056;
+        public static final int Recu=0x7f070057;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
-        public static final int abc_action_bar_home_description=0x7f07001c;
+        public static final int abc_action_bar_home_description=0x7f07001b;
         /**  Content description for the action bar "up" affordance. [CHAR LIMIT=NONE] 
          */
-        public static final int abc_action_bar_up_description=0x7f07001d;
+        public static final int abc_action_bar_up_description=0x7f07001c;
         /**  Content description for the action menu overflow button. [CHAR LIMIT=NONE] 
          */
-        public static final int abc_action_menu_overflow_description=0x7f07001e;
+        public static final int abc_action_menu_overflow_description=0x7f07001d;
         /**  Label for the "Done" button on the far left of action mode toolbars. 
          */
-        public static final int abc_action_mode_done=0x7f07001b;
+        public static final int abc_action_mode_done=0x7f07001a;
         /**  Title for a button to expand the list of activities in ActivityChooserView [CHAR LIMIT=25] 
          */
-        public static final int abc_activity_chooser_view_see_all=0x7f070025;
+        public static final int abc_activity_chooser_view_see_all=0x7f070024;
         /**  ActivityChooserView - accessibility support 
  Description of the shwoing of a popup window with activities to choose from. [CHAR LIMIT=NONE] 
          */
-        public static final int abc_activitychooserview_choose_application=0x7f070024;
+        public static final int abc_activitychooserview_choose_application=0x7f070023;
         /**  SearchView accessibility description for clear button [CHAR LIMIT=NONE] 
          */
-        public static final int abc_searchview_description_clear=0x7f070021;
+        public static final int abc_searchview_description_clear=0x7f070020;
         /**  SearchView accessibility description for search text field [CHAR LIMIT=NONE] 
          */
-        public static final int abc_searchview_description_query=0x7f070020;
+        public static final int abc_searchview_description_query=0x7f07001f;
         /**  SearchView accessibility description for search button [CHAR LIMIT=NONE] 
          */
-        public static final int abc_searchview_description_search=0x7f07001f;
+        public static final int abc_searchview_description_search=0x7f07001e;
         /**  SearchView accessibility description for submit button [CHAR LIMIT=NONE] 
          */
-        public static final int abc_searchview_description_submit=0x7f070022;
+        public static final int abc_searchview_description_submit=0x7f070021;
         /**  SearchView accessibility description for voice button [CHAR LIMIT=NONE] 
          */
-        public static final int abc_searchview_description_voice=0x7f070023;
+        public static final int abc_searchview_description_voice=0x7f070022;
         /**  Description of the choose target button in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
-        public static final int abc_shareactionprovider_share_with=0x7f070027;
+        public static final int abc_shareactionprovider_share_with=0x7f070026;
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
-        public static final int abc_shareactionprovider_share_with_application=0x7f070026;
-        public static final int about_email=0x7f07004c;
-        public static final int about_intro=0x7f07004b;
-        public static final int action_save=0x7f070097;
-        public static final int action_settings=0x7f07002a;
-        public static final int addpan=0x7f07016c;
-        public static final int app_name=0x7f070028;
-        public static final int appel=0x7f07006c;
+        public static final int abc_shareactionprovider_share_with_application=0x7f070025;
+        public static final int about_email=0x7f07004b;
+        public static final int about_intro=0x7f07004a;
+        public static final int action_save=0x7f070096;
+        public static final int action_settings=0x7f070029;
+        public static final int addpan=0x7f07016b;
+        public static final int app_name=0x7f070027;
+        public static final int appel=0x7f07006b;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
          */
@@ -2182,90 +2182,90 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f070014;
-        public static final int bluetooth_connect_fail=0x7f0700f1;
-        public static final int bluetooth_connect_sucess=0x7f0700f2;
-        public static final int bluetooth_unconnected=0x7f0700f0;
-        public static final int btn_add_Customer=0x7f0701ae;
-        public static final int btn_add_client=0x7f0700a3;
-        public static final int btn_cancel=0x7f070061;
-        public static final int btn_decon=0x7f070063;
-        public static final int btn_delete=0x7f07005f;
+        public static final int bluetooth_connect_fail=0x7f0700f0;
+        public static final int bluetooth_connect_sucess=0x7f0700f1;
+        public static final int bluetooth_unconnected=0x7f0700ef;
+        public static final int btn_add_Customer=0x7f0701ad;
+        public static final int btn_add_client=0x7f0700a2;
+        public static final int btn_cancel=0x7f070060;
+        public static final int btn_decon=0x7f070062;
+        public static final int btn_delete=0x7f07005e;
         /**  Cote Nouveau Creation facture 
  Cote Nouveau Creation facture 
  Cote Nouveau Creation facture 
          */
-        public static final int btn_facture=0x7f0700a1;
-        public static final int btn_gps_activer=0x7f070066;
-        public static final int btn_gps_deactiver=0x7f070067;
+        public static final int btn_facture=0x7f0700a0;
+        public static final int btn_gps_activer=0x7f070065;
+        public static final int btn_gps_deactiver=0x7f070066;
         /**  Chercher Map 
          */
-        public static final int btn_map_Customer=0x7f0701b1;
+        public static final int btn_map_Customer=0x7f0701b0;
         /**  Chercher Map 
  Chercher Map 
          */
-        public static final int btn_map_client=0x7f0700d2;
-        public static final int btn_map_facture=0x7f0700d3;
-        public static final int btn_map_itiniraire=0x7f0700d4;
-        public static final int btn_mvmstck=0x7f07015a;
-        public static final int btn_mvmstckall=0x7f07015c;
-        public static final int btn_mvmstckgo=0x7f07015b;
-        public static final int btn_next=0x7f07005e;
-        public static final int btn_print=0x7f070062;
-        public static final int btn_produit=0x7f0700a2;
-        public static final int btn_save=0x7f07005d;
-        public static final int btn_serveur=0x7f07009b;
+        public static final int btn_map_client=0x7f0700d1;
+        public static final int btn_map_facture=0x7f0700d2;
+        public static final int btn_map_itiniraire=0x7f0700d3;
+        public static final int btn_mvmstck=0x7f070159;
+        public static final int btn_mvmstckall=0x7f07015b;
+        public static final int btn_mvmstckgo=0x7f07015a;
+        public static final int btn_next=0x7f07005d;
+        public static final int btn_print=0x7f070061;
+        public static final int btn_produit=0x7f0700a1;
+        public static final int btn_save=0x7f07005c;
+        public static final int btn_serveur=0x7f07009a;
         /**  Cote Nouveau Compte 
  Cote Nouveau Compte 
  Cote Nouveau Compte 
          */
-        public static final int btn_signin=0x7f07009d;
-        public static final int btn_step=0x7f070099;
-        public static final int btn_stop=0x7f07009a;
+        public static final int btn_signin=0x7f07009c;
+        public static final int btn_step=0x7f070098;
+        public static final int btn_stop=0x7f070099;
         /**  Cote tracking 
  Cote tracking 
  Cote tracking 
          */
-        public static final int btn_track=0x7f070098;
-        public static final int btn_validate=0x7f070060;
-        public static final int btn_validete_invoice=0x7f070053;
-        public static final int btn_validete_order=0x7f070054;
-        public static final int button_scan=0x7f0700f9;
+        public static final int btn_track=0x7f070097;
+        public static final int btn_validate=0x7f07005f;
+        public static final int btn_validete_invoice=0x7f070052;
+        public static final int btn_validete_order=0x7f070053;
+        public static final int button_scan=0x7f0700f8;
         /**  avertisement stockage offline 
  avertisement stockage offline 
          */
-        public static final int caus1=0x7f070106;
-        public static final int caus10=0x7f07010f;
+        public static final int caus1=0x7f070105;
+        public static final int caus10=0x7f07010e;
         /**  setting synnchronization offline 
  setting synnchronization offline 
          */
-        public static final int caus11=0x7f070110;
-        public static final int caus12=0x7f070111;
-        public static final int caus13=0x7f070112;
-        public static final int caus14=0x7f070113;
-        public static final int caus15=0x7f070114;
-        public static final int caus16=0x7f070115;
-        public static final int caus17=0x7f070116;
-        public static final int caus18=0x7f070117;
-        public static final int caus19=0x7f070118;
-        public static final int caus2=0x7f070107;
-        public static final int caus20=0x7f070119;
-        public static final int caus21=0x7f07011a;
-        public static final int caus22=0x7f07011b;
-        public static final int caus23=0x7f07011c;
-        public static final int caus24=0x7f07011d;
-        public static final int caus25=0x7f07011e;
-        public static final int caus26=0x7f07011f;
-        public static final int caus27=0x7f070120;
-        public static final int caus3=0x7f070108;
-        public static final int caus4=0x7f070109;
-        public static final int caus5=0x7f07010a;
-        public static final int caus6=0x7f07010b;
-        public static final int caus7=0x7f07010c;
-        public static final int caus8=0x7f07010d;
-        public static final int caus9=0x7f07010e;
-        public static final int cheque=0x7f070059;
-        public static final int client=0x7f070083;
-        public static final int client_action=0x7f07007b;
+        public static final int caus11=0x7f07010f;
+        public static final int caus12=0x7f070110;
+        public static final int caus13=0x7f070111;
+        public static final int caus14=0x7f070112;
+        public static final int caus15=0x7f070113;
+        public static final int caus16=0x7f070114;
+        public static final int caus17=0x7f070115;
+        public static final int caus18=0x7f070116;
+        public static final int caus19=0x7f070117;
+        public static final int caus2=0x7f070106;
+        public static final int caus20=0x7f070118;
+        public static final int caus21=0x7f070119;
+        public static final int caus22=0x7f07011a;
+        public static final int caus23=0x7f07011b;
+        public static final int caus24=0x7f07011c;
+        public static final int caus25=0x7f07011d;
+        public static final int caus26=0x7f07011e;
+        public static final int caus27=0x7f07011f;
+        public static final int caus3=0x7f070107;
+        public static final int caus4=0x7f070108;
+        public static final int caus5=0x7f070109;
+        public static final int caus6=0x7f07010a;
+        public static final int caus7=0x7f07010b;
+        public static final int caus8=0x7f07010c;
+        public static final int caus9=0x7f07010d;
+        public static final int cheque=0x7f070058;
+        public static final int client=0x7f070082;
+        public static final int client_action=0x7f07007a;
         /**  RESTE 
 
     URL WEB SERVICES 
@@ -2280,97 +2280,97 @@ containing a value of this type.
     
  RESTE 
          */
-        public static final int client_spinner=0x7f07004e;
-        public static final int clt_address=0x7f0700b0;
-        public static final int clt_btn=0x7f0700b3;
-        public static final int clt_facture=0x7f0700b4;
-        public static final int clt_list=0x7f0700b2;
-        public static final int clt_nom=0x7f0700ad;
+        public static final int client_spinner=0x7f07004d;
+        public static final int clt_address=0x7f0700af;
+        public static final int clt_btn=0x7f0700b2;
+        public static final int clt_facture=0x7f0700b3;
+        public static final int clt_list=0x7f0700b1;
+        public static final int clt_nom=0x7f0700ac;
         /**  Proprieter d'un Client 
  Proprieter d'un Client 
  Proprieter d'un Customer 
          */
-        public static final int clt_patente=0x7f0700ac;
-        public static final int clt_prenom=0x7f0700ae;
-        public static final int clt_rc=0x7f0700b1;
-        public static final int clt_tel=0x7f0700af;
-        public static final int clt_update=0x7f0700b6;
+        public static final int clt_patente=0x7f0700ab;
+        public static final int clt_prenom=0x7f0700ad;
+        public static final int clt_rc=0x7f0700b0;
+        public static final int clt_tel=0x7f0700ae;
+        public static final int clt_update=0x7f0700b5;
         /**  message de confirmation 
          */
-        public static final int cmdtofc1=0x7f070171;
-        public static final int cmdtofc10=0x7f070179;
-        public static final int cmdtofc11=0x7f07017b;
-        public static final int cmdtofc12=0x7f07017c;
-        public static final int cmdtofc13=0x7f07017d;
-        public static final int cmdtofc14=0x7f07017e;
-        public static final int cmdtofc15=0x7f07017f;
-        public static final int cmdtofc16=0x7f070180;
-        public static final int cmdtofc17=0x7f070181;
-        public static final int cmdtofc18=0x7f070182;
-        public static final int cmdtofc19=0x7f070183;
-        public static final int cmdtofc2=0x7f070172;
-        public static final int cmdtofc20=0x7f070184;
-        public static final int cmdtofc21=0x7f070185;
-        public static final int cmdtofc22=0x7f070186;
-        public static final int cmdtofc23=0x7f070187;
-        public static final int cmdtofc24=0x7f070188;
-        public static final int cmdtofc25=0x7f070189;
-        public static final int cmdtofc26=0x7f07018a;
-        public static final int cmdtofc27=0x7f07018b;
-        public static final int cmdtofc28=0x7f07018e;
-        public static final int cmdtofc29=0x7f07018f;
-        public static final int cmdtofc3=0x7f070173;
-        public static final int cmdtofc30=0x7f070190;
-        public static final int cmdtofc31=0x7f07018c;
-        public static final int cmdtofc32=0x7f07018d;
-        public static final int cmdtofc33=0x7f070191;
-        public static final int cmdtofc4=0x7f070174;
-        public static final int cmdtofc5=0x7f070175;
-        public static final int cmdtofc6=0x7f070176;
-        public static final int cmdtofc7=0x7f070177;
-        public static final int cmdtofc8=0x7f070178;
-        public static final int cmdtofc9=0x7f07017a;
-        public static final int cnxlab1=0x7f0701a0;
-        public static final int cnxlab2=0x7f0701a1;
-        public static final int cnxlab3=0x7f0701a2;
-        public static final int cnxlab4=0x7f0701a3;
-        public static final int cnxlab5=0x7f0701a4;
-        public static final int cnxlab6=0x7f0701a6;
-        public static final int cnxlab7=0x7f0701a5;
-        public static final int color_gris=0x7f0700b9;
-        public static final int comerciallab1=0x7f070194;
-        public static final int comerciallab10=0x7f07019d;
-        public static final int comerciallab11=0x7f07019e;
-        public static final int comerciallab12=0x7f07019f;
-        public static final int comerciallab2=0x7f070195;
-        public static final int comerciallab3=0x7f070196;
-        public static final int comerciallab4=0x7f070197;
-        public static final int comerciallab5=0x7f070198;
-        public static final int comerciallab6=0x7f070199;
-        public static final int comerciallab7=0x7f07019a;
-        public static final int comerciallab8=0x7f07019b;
-        public static final int comerciallab9=0x7f07019c;
-        public static final int comm_1=0x7f0700e3;
-        public static final int comm_2=0x7f0700e4;
-        public static final int comm_3=0x7f0700e5;
-        public static final int comm_4=0x7f0700e6;
-        public static final int comm_address=0x7f0700de;
-        public static final int comm_capital=0x7f0700e7;
-        public static final int comm_email=0x7f0700e2;
-        public static final int comm_fax=0x7f0700e8;
+        public static final int cmdtofc1=0x7f070170;
+        public static final int cmdtofc10=0x7f070178;
+        public static final int cmdtofc11=0x7f07017a;
+        public static final int cmdtofc12=0x7f07017b;
+        public static final int cmdtofc13=0x7f07017c;
+        public static final int cmdtofc14=0x7f07017d;
+        public static final int cmdtofc15=0x7f07017e;
+        public static final int cmdtofc16=0x7f07017f;
+        public static final int cmdtofc17=0x7f070180;
+        public static final int cmdtofc18=0x7f070181;
+        public static final int cmdtofc19=0x7f070182;
+        public static final int cmdtofc2=0x7f070171;
+        public static final int cmdtofc20=0x7f070183;
+        public static final int cmdtofc21=0x7f070184;
+        public static final int cmdtofc22=0x7f070185;
+        public static final int cmdtofc23=0x7f070186;
+        public static final int cmdtofc24=0x7f070187;
+        public static final int cmdtofc25=0x7f070188;
+        public static final int cmdtofc26=0x7f070189;
+        public static final int cmdtofc27=0x7f07018a;
+        public static final int cmdtofc28=0x7f07018d;
+        public static final int cmdtofc29=0x7f07018e;
+        public static final int cmdtofc3=0x7f070172;
+        public static final int cmdtofc30=0x7f07018f;
+        public static final int cmdtofc31=0x7f07018b;
+        public static final int cmdtofc32=0x7f07018c;
+        public static final int cmdtofc33=0x7f070190;
+        public static final int cmdtofc4=0x7f070173;
+        public static final int cmdtofc5=0x7f070174;
+        public static final int cmdtofc6=0x7f070175;
+        public static final int cmdtofc7=0x7f070176;
+        public static final int cmdtofc8=0x7f070177;
+        public static final int cmdtofc9=0x7f070179;
+        public static final int cnxlab1=0x7f07019f;
+        public static final int cnxlab2=0x7f0701a0;
+        public static final int cnxlab3=0x7f0701a1;
+        public static final int cnxlab4=0x7f0701a2;
+        public static final int cnxlab5=0x7f0701a3;
+        public static final int cnxlab6=0x7f0701a5;
+        public static final int cnxlab7=0x7f0701a4;
+        public static final int color_gris=0x7f0700b8;
+        public static final int comerciallab1=0x7f070193;
+        public static final int comerciallab10=0x7f07019c;
+        public static final int comerciallab11=0x7f07019d;
+        public static final int comerciallab12=0x7f07019e;
+        public static final int comerciallab2=0x7f070194;
+        public static final int comerciallab3=0x7f070195;
+        public static final int comerciallab4=0x7f070196;
+        public static final int comerciallab5=0x7f070197;
+        public static final int comerciallab6=0x7f070198;
+        public static final int comerciallab7=0x7f070199;
+        public static final int comerciallab8=0x7f07019a;
+        public static final int comerciallab9=0x7f07019b;
+        public static final int comm_1=0x7f0700e2;
+        public static final int comm_2=0x7f0700e3;
+        public static final int comm_3=0x7f0700e4;
+        public static final int comm_4=0x7f0700e5;
+        public static final int comm_address=0x7f0700dd;
+        public static final int comm_capital=0x7f0700e6;
+        public static final int comm_email=0x7f0700e1;
+        public static final int comm_fax=0x7f0700e7;
         /**  ************************* Commercial ***************************************** 
  ************************* Commercial ***************************************** 
  ************************* Sales Representative ***************************************** 
          */
-        public static final int comm_name=0x7f0700dd;
-        public static final int comm_new_head=0x7f0700ea;
-        public static final int comm_tel=0x7f0700e1;
-        public static final int comm_title_head=0x7f0700e9;
-        public static final int comm_upko=0x7f0700ec;
-        public static final int comm_upok=0x7f0700eb;
-        public static final int comm_ville=0x7f0700e0;
-        public static final int comm_zip=0x7f0700df;
-        public static final int commande_num=0x7f07007a;
+        public static final int comm_name=0x7f0700dc;
+        public static final int comm_new_head=0x7f0700e9;
+        public static final int comm_tel=0x7f0700e0;
+        public static final int comm_title_head=0x7f0700e8;
+        public static final int comm_upko=0x7f0700eb;
+        public static final int comm_upok=0x7f0700ea;
+        public static final int comm_ville=0x7f0700df;
+        public static final int comm_zip=0x7f0700de;
+        public static final int commande_num=0x7f070079;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -2442,279 +2442,276 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f070013;
-        public static final int connexion=0x7f070093;
-        public static final int data_clean=0x7f070122;
-        public static final int default_intro=0x7f070044;
-        public static final int description_about=0x7f07002e;
-        public static final int description_commande=0x7f070032;
-        public static final int description_home=0x7f07002f;
-        public static final int description_intervention=0x7f070039;
-        public static final int description_livreur=0x7f070037;
+        public static final int connexion=0x7f070092;
+        public static final int data_clean=0x7f070121;
+        public static final int default_intro=0x7f070043;
+        public static final int description_about=0x7f07002d;
+        public static final int description_commande=0x7f070031;
+        public static final int description_home=0x7f07002e;
+        public static final int description_intervention=0x7f070038;
+        public static final int description_livreur=0x7f070036;
         /**      	********************************* DASHBOARD ********************************* 
          */
-        public static final int description_logo=0x7f07002d;
-        public static final int description_logout=0x7f070033;
-        public static final int description_map=0x7f070031;
-        public static final int description_search=0x7f070030;
-        public static final int description_state=0x7f070038;
-        public static final int description_stock=0x7f070035;
-        public static final int description_sync=0x7f070036;
-        public static final int description_tiers=0x7f070034;
-        public static final int desig=0x7f070055;
-        public static final int dtcmd=0x7f070101;
-        public static final int error=0x7f070073;
-        public static final int external_dir=0x7f0700be;
-        public static final int factlab1=0x7f070192;
-        public static final int factlab2=0x7f070193;
-        public static final int facture=0x7f070081;
-        public static final int facture2=0x7f070082;
-        public static final int facture_action=0x7f070078;
-        public static final int facture_choice=0x7f07007c;
-        public static final int facture_num=0x7f070079;
-        public static final int facture_vide=0x7f070074;
-        public static final int fatal_error=0x7f070072;
-        public static final int feature1_intro=0x7f070045;
-        public static final int feature2_intro=0x7f070046;
-        public static final int feature3_intro=0x7f070047;
-        public static final int feature4_intro=0x7f070048;
-        public static final int feature5_intro=0x7f070049;
-        public static final int feature6_intro=0x7f07004a;
-        public static final int field_Email=0x7f0700a0;
-        public static final int field_idFac=0x7f0700a9;
-        public static final int field_login=0x7f07009e;
-        public static final int field_mtnttc=0x7f0700a8;
-        public static final int field_password=0x7f07009f;
-        public static final int field_pu=0x7f0700a5;
-        public static final int field_qntdsp=0x7f0700a7;
-        public static final int field_qte=0x7f0700a4;
-        public static final int field_total=0x7f0700a6;
-        public static final int hello_world=0x7f070029;
-        public static final int le=0x7f070085;
-        /**  Location client code resources (prefix with location_client) 
-         */
-        public static final int location_client_powered_by_google=0x7f07001a;
+        public static final int description_logo=0x7f07002c;
+        public static final int description_logout=0x7f070032;
+        public static final int description_map=0x7f070030;
+        public static final int description_search=0x7f07002f;
+        public static final int description_state=0x7f070037;
+        public static final int description_stock=0x7f070034;
+        public static final int description_sync=0x7f070035;
+        public static final int description_tiers=0x7f070033;
+        public static final int desig=0x7f070054;
+        public static final int dtcmd=0x7f070100;
+        public static final int error=0x7f070072;
+        public static final int external_dir=0x7f0700bd;
+        public static final int factlab1=0x7f070191;
+        public static final int factlab2=0x7f070192;
+        public static final int facture=0x7f070080;
+        public static final int facture2=0x7f070081;
+        public static final int facture_action=0x7f070077;
+        public static final int facture_choice=0x7f07007b;
+        public static final int facture_num=0x7f070078;
+        public static final int facture_vide=0x7f070073;
+        public static final int fatal_error=0x7f070071;
+        public static final int feature1_intro=0x7f070044;
+        public static final int feature2_intro=0x7f070045;
+        public static final int feature3_intro=0x7f070046;
+        public static final int feature4_intro=0x7f070047;
+        public static final int feature5_intro=0x7f070048;
+        public static final int feature6_intro=0x7f070049;
+        public static final int field_Email=0x7f07009f;
+        public static final int field_idFac=0x7f0700a8;
+        public static final int field_login=0x7f07009d;
+        public static final int field_mtnttc=0x7f0700a7;
+        public static final int field_password=0x7f07009e;
+        public static final int field_pu=0x7f0700a4;
+        public static final int field_qntdsp=0x7f0700a6;
+        public static final int field_qte=0x7f0700a3;
+        public static final int field_total=0x7f0700a5;
+        public static final int hello_world=0x7f070028;
+        public static final int le=0x7f070084;
         /**  String Pour Authentification 
  String Pour Authentification 
  String Pour Authentification 
          */
-        public static final int login=0x7f070090;
-        public static final int mapKey=0x7f07002b;
-        public static final int map_data=0x7f070080;
-        public static final int montantfact=0x7f0700ff;
-        public static final int movetoregls=0x7f070103;
-        public static final int movetoreglscncl=0x7f070104;
+        public static final int login=0x7f07008f;
+        public static final int mapKey=0x7f07002a;
+        public static final int map_data=0x7f07007f;
+        public static final int montantfact=0x7f0700fe;
+        public static final int movetoregls=0x7f070102;
+        public static final int movetoreglscncl=0x7f070103;
         /**  ticket dialog 
  ticket dialog 
          */
-        public static final int movetoticket=0x7f070102;
-        public static final int msg_add_invoice=0x7f070051;
-        public static final int msg_add_product=0x7f070050;
+        public static final int movetoticket=0x7f070101;
+        public static final int msg_add_invoice=0x7f070050;
+        public static final int msg_add_product=0x7f07004f;
         /**  new added cici 
          */
-        public static final int msg_add_reglement=0x7f0700fa;
-        public static final int msg_add_signature=0x7f070052;
-        public static final int msg_device_unsupported=0x7f07006a;
-        public static final int msg_deviced=0x7f07006b;
-        public static final int msg_fields=0x7f07006f;
-        public static final int msg_gps_desactive=0x7f070065;
-        public static final int msg_network=0x7f070068;
-        public static final int msg_network_alert=0x7f070069;
-        public static final int msg_profile_error=0x7f070071;
-        public static final int msg_retour=0x7f070064;
-        public static final int msg_wait=0x7f070070;
-        public static final int msg_wait_sys=0x7f070123;
-        public static final int mvm1=0x7f07015d;
-        public static final int mvm10=0x7f070166;
-        public static final int mvm11=0x7f070167;
-        public static final int mvm12=0x7f070168;
-        public static final int mvm2=0x7f07015e;
-        public static final int mvm2_stock=0x7f070169;
-        public static final int mvm3=0x7f07015f;
-        public static final int mvm4=0x7f070160;
-        public static final int mvm5=0x7f070161;
-        public static final int mvm6=0x7f070162;
-        public static final int mvm7=0x7f070163;
-        public static final int mvm8=0x7f070164;
-        public static final int mvm9=0x7f070165;
-        public static final int no_email=0x7f07006e;
-        public static final int none_found=0x7f0700f6;
-        public static final int none_paired=0x7f0700f5;
-        public static final int password=0x7f070092;
-        public static final int payermontantfact=0x7f070100;
-        public static final int pdf_required=0x7f07007f;
+        public static final int msg_add_reglement=0x7f0700f9;
+        public static final int msg_add_signature=0x7f070051;
+        public static final int msg_device_unsupported=0x7f070069;
+        public static final int msg_deviced=0x7f07006a;
+        public static final int msg_fields=0x7f07006e;
+        public static final int msg_gps_desactive=0x7f070064;
+        public static final int msg_network=0x7f070067;
+        public static final int msg_network_alert=0x7f070068;
+        public static final int msg_profile_error=0x7f070070;
+        public static final int msg_retour=0x7f070063;
+        public static final int msg_wait=0x7f07006f;
+        public static final int msg_wait_sys=0x7f070122;
+        public static final int mvm1=0x7f07015c;
+        public static final int mvm10=0x7f070165;
+        public static final int mvm11=0x7f070166;
+        public static final int mvm12=0x7f070167;
+        public static final int mvm2=0x7f07015d;
+        public static final int mvm2_stock=0x7f070168;
+        public static final int mvm3=0x7f07015e;
+        public static final int mvm4=0x7f07015f;
+        public static final int mvm5=0x7f070160;
+        public static final int mvm6=0x7f070161;
+        public static final int mvm7=0x7f070162;
+        public static final int mvm8=0x7f070163;
+        public static final int mvm9=0x7f070164;
+        public static final int no_email=0x7f07006d;
+        public static final int none_found=0x7f0700f5;
+        public static final int none_paired=0x7f0700f4;
+        public static final int password=0x7f070091;
+        public static final int payermontantfact=0x7f0700ff;
+        public static final int pdf_required=0x7f07007e;
         /**  IMPRIMENT BLUe 
  IMPRIMENT BLUe 
  IMPRIMENT BLUe 
          */
-        public static final int print_table_content2=0x7f0700ef;
-        public static final int product=0x7f070056;
-        public static final int product_spinner=0x7f07004f;
-        public static final int produit_min=0x7f070089;
-        public static final int produit_min2=0x7f07008a;
-        public static final int produit_offert=0x7f07008e;
-        public static final int promo_alert=0x7f07008b;
-        public static final int promo_msg=0x7f07008c;
-        public static final int promotion=0x7f070084;
-        public static final int promotion_list=0x7f07008d;
-        public static final int promotion_remise=0x7f07008f;
-        public static final int qte_size=0x7f070077;
-        public static final int qte_vide=0x7f070075;
-        public static final int qte_zero=0x7f070076;
-        public static final int refclient=0x7f0700fb;
-        public static final int refcmd=0x7f0700fe;
-        public static final int reffact=0x7f0700fc;
-        public static final int refreg=0x7f0700fd;
-        public static final int regle=0x7f070087;
-        public static final int regles=0x7f070086;
-        public static final int reste=0x7f07005a;
-        public static final int rested=0x7f070088;
+        public static final int print_table_content2=0x7f0700ee;
+        public static final int product=0x7f070055;
+        public static final int product_spinner=0x7f07004e;
+        public static final int produit_min=0x7f070088;
+        public static final int produit_min2=0x7f070089;
+        public static final int produit_offert=0x7f07008d;
+        public static final int promo_alert=0x7f07008a;
+        public static final int promo_msg=0x7f07008b;
+        public static final int promotion=0x7f070083;
+        public static final int promotion_list=0x7f07008c;
+        public static final int promotion_remise=0x7f07008e;
+        public static final int qte_size=0x7f070076;
+        public static final int qte_vide=0x7f070074;
+        public static final int qte_zero=0x7f070075;
+        public static final int refclient=0x7f0700fa;
+        public static final int refcmd=0x7f0700fd;
+        public static final int reffact=0x7f0700fb;
+        public static final int refreg=0x7f0700fc;
+        public static final int regle=0x7f070086;
+        public static final int regles=0x7f070085;
+        public static final int reste=0x7f070059;
+        public static final int rested=0x7f070087;
         /**  DeviceListActivity 
  DeviceListActivity 
  DeviceListActivity 
          */
-        public static final int scanning=0x7f0700f3;
-        public static final int search_intro=0x7f07004d;
-        public static final int select_device=0x7f0700f4;
-        public static final int sign=0x7f070091;
-        public static final int stock_limit=0x7f07007d;
-        public static final int stock_msg=0x7f07007e;
-        public static final int subject_email=0x7f07006d;
+        public static final int scanning=0x7f0700f2;
+        public static final int search_intro=0x7f07004c;
+        public static final int select_device=0x7f0700f3;
+        public static final int sign=0x7f070090;
+        public static final int stock_limit=0x7f07007c;
+        public static final int stock_msg=0x7f07007d;
+        public static final int subject_email=0x7f07006c;
         /**   intervention technicien 
          */
-        public static final int tecboredereau=0x7f070126;
-        public static final int teccarte=0x7f070127;
-        public static final int tecv1=0x7f070128;
-        public static final int tecv10=0x7f070132;
-        public static final int tecv11=0x7f070133;
-        public static final int tecv12=0x7f07012e;
-        public static final int tecv13=0x7f070134;
-        public static final int tecv14=0x7f070135;
-        public static final int tecv15=0x7f070136;
-        public static final int tecv16=0x7f070137;
-        public static final int tecv17=0x7f070138;
-        public static final int tecv18=0x7f0701a9;
-        public static final int tecv19=0x7f0701aa;
-        public static final int tecv2=0x7f070129;
-        public static final int tecv20=0x7f0701ab;
-        public static final int tecv21=0x7f070139;
-        public static final int tecv22=0x7f07013a;
-        public static final int tecv23=0x7f07013b;
-        public static final int tecv24=0x7f07013c;
-        public static final int tecv25=0x7f07013d;
-        public static final int tecv26=0x7f07013e;
-        public static final int tecv27=0x7f07013f;
-        public static final int tecv28=0x7f070140;
-        public static final int tecv29=0x7f070141;
-        public static final int tecv3=0x7f07012a;
-        public static final int tecv30=0x7f070142;
-        public static final int tecv31=0x7f070143;
-        public static final int tecv32=0x7f070144;
-        public static final int tecv33=0x7f070145;
-        public static final int tecv34=0x7f070146;
-        public static final int tecv35=0x7f070147;
-        public static final int tecv36=0x7f070148;
-        public static final int tecv37=0x7f070149;
-        public static final int tecv38=0x7f07014a;
-        public static final int tecv39=0x7f07014b;
-        public static final int tecv4=0x7f07012b;
-        public static final int tecv40=0x7f07014c;
-        public static final int tecv41=0x7f07014d;
-        public static final int tecv42=0x7f07014e;
-        public static final int tecv43=0x7f07014f;
-        public static final int tecv44=0x7f070150;
-        public static final int tecv45=0x7f070151;
-        public static final int tecv46=0x7f0701ac;
-        public static final int tecv47=0x7f070152;
-        public static final int tecv48=0x7f070153;
-        public static final int tecv49=0x7f070154;
-        public static final int tecv5=0x7f07012c;
-        public static final int tecv50=0x7f070155;
-        public static final int tecv6=0x7f07012d;
-        public static final int tecv7=0x7f07012f;
-        public static final int tecv8=0x7f070130;
-        public static final int tecv9=0x7f070131;
-        public static final int title_about=0x7f07003b;
-        public static final int title_activity_Customer=0x7f0701af;
-        public static final int title_activity_Sales_commercial=0x7f0701ad;
-        public static final int title_activity_ad=0x7f0700aa;
-        public static final int title_activity_admin=0x7f0700c7;
-        public static final int title_activity_camera=0x7f0700db;
+        public static final int tecboredereau=0x7f070125;
+        public static final int teccarte=0x7f070126;
+        public static final int tecv1=0x7f070127;
+        public static final int tecv10=0x7f070131;
+        public static final int tecv11=0x7f070132;
+        public static final int tecv12=0x7f07012d;
+        public static final int tecv13=0x7f070133;
+        public static final int tecv14=0x7f070134;
+        public static final int tecv15=0x7f070135;
+        public static final int tecv16=0x7f070136;
+        public static final int tecv17=0x7f070137;
+        public static final int tecv18=0x7f0701a8;
+        public static final int tecv19=0x7f0701a9;
+        public static final int tecv2=0x7f070128;
+        public static final int tecv20=0x7f0701aa;
+        public static final int tecv21=0x7f070138;
+        public static final int tecv22=0x7f070139;
+        public static final int tecv23=0x7f07013a;
+        public static final int tecv24=0x7f07013b;
+        public static final int tecv25=0x7f07013c;
+        public static final int tecv26=0x7f07013d;
+        public static final int tecv27=0x7f07013e;
+        public static final int tecv28=0x7f07013f;
+        public static final int tecv29=0x7f070140;
+        public static final int tecv3=0x7f070129;
+        public static final int tecv30=0x7f070141;
+        public static final int tecv31=0x7f070142;
+        public static final int tecv32=0x7f070143;
+        public static final int tecv33=0x7f070144;
+        public static final int tecv34=0x7f070145;
+        public static final int tecv35=0x7f070146;
+        public static final int tecv36=0x7f070147;
+        public static final int tecv37=0x7f070148;
+        public static final int tecv38=0x7f070149;
+        public static final int tecv39=0x7f07014a;
+        public static final int tecv4=0x7f07012a;
+        public static final int tecv40=0x7f07014b;
+        public static final int tecv41=0x7f07014c;
+        public static final int tecv42=0x7f07014d;
+        public static final int tecv43=0x7f07014e;
+        public static final int tecv44=0x7f07014f;
+        public static final int tecv45=0x7f070150;
+        public static final int tecv46=0x7f0701ab;
+        public static final int tecv47=0x7f070151;
+        public static final int tecv48=0x7f070152;
+        public static final int tecv49=0x7f070153;
+        public static final int tecv5=0x7f07012b;
+        public static final int tecv50=0x7f070154;
+        public static final int tecv6=0x7f07012c;
+        public static final int tecv7=0x7f07012e;
+        public static final int tecv8=0x7f07012f;
+        public static final int tecv9=0x7f070130;
+        public static final int title_about=0x7f07003a;
+        public static final int title_activity_Customer=0x7f0701ae;
+        public static final int title_activity_Sales_commercial=0x7f0701ac;
+        public static final int title_activity_ad=0x7f0700a9;
+        public static final int title_activity_admin=0x7f0700c6;
+        public static final int title_activity_camera=0x7f0700da;
         /**  catalogue produits 
          */
-        public static final int title_activity_cataloge=0x7f07016b;
-        public static final int title_activity_client=0x7f0700ab;
-        public static final int title_activity_cmd_detail=0x7f07016f;
-        public static final int title_activity_cmd_pay=0x7f070170;
-        public static final int title_activity_cmd_view=0x7f07016e;
-        public static final int title_activity_commande=0x7f07016d;
-        public static final int title_activity_commande_view=0x7f070158;
-        public static final int title_activity_commercial=0x7f070094;
-        public static final int title_activity_connexion=0x7f07002c;
-        public static final int title_activity_esignature=0x7f0700bf;
-        public static final int title_activity_facture=0x7f0700b8;
-        public static final int title_activity_facture_ticket=0x7f0700cc;
-        public static final int title_activity_gps_facture=0x7f0700d5;
-        public static final int title_activity_gps_tracker=0x7f0700c1;
-        public static final int title_activity_groupe_vendeur=0x7f0700c5;
-        public static final int title_activity_home=0x7f070156;
-        public static final int title_activity_imprimer=0x7f0700dc;
-        public static final int title_activity_interface_technicien=0x7f0700d9;
+        public static final int title_activity_cataloge=0x7f07016a;
+        public static final int title_activity_client=0x7f0700aa;
+        public static final int title_activity_cmd_detail=0x7f07016e;
+        public static final int title_activity_cmd_pay=0x7f07016f;
+        public static final int title_activity_cmd_view=0x7f07016d;
+        public static final int title_activity_commande=0x7f07016c;
+        public static final int title_activity_commande_view=0x7f070157;
+        public static final int title_activity_commercial=0x7f070093;
+        public static final int title_activity_connexion=0x7f07002b;
+        public static final int title_activity_esignature=0x7f0700be;
+        public static final int title_activity_facture=0x7f0700b7;
+        public static final int title_activity_facture_ticket=0x7f0700cb;
+        public static final int title_activity_gps_facture=0x7f0700d4;
+        public static final int title_activity_gps_tracker=0x7f0700c0;
+        public static final int title_activity_groupe_vendeur=0x7f0700c4;
+        public static final int title_activity_home=0x7f070155;
+        public static final int title_activity_imprimer=0x7f0700db;
+        public static final int title_activity_interface_technicien=0x7f0700d8;
         /**  intervention technicien 
  intervention technicien 
          */
-        public static final int title_activity_interventionhisto=0x7f070125;
-        public static final int title_activity_network_service=0x7f0700c2;
-        public static final int title_activity_next_etape=0x7f0700c3;
-        public static final int title_activity_observation_tech=0x7f0700da;
-        public static final int title_activity_offline=0x7f0700ce;
-        public static final int title_activity_payement=0x7f0700d1;
-        public static final int title_activity_personne_physique=0x7f0700ed;
-        public static final int title_activity_print_dialog=0x7f0700d6;
-        public static final int title_activity_read_pdf=0x7f0700c6;
-        public static final int title_activity_reglement_offline=0x7f070105;
-        public static final int title_activity_reglement_ticket=0x7f0700cd;
-        public static final int title_activity_second_step_techn=0x7f0700d8;
-        public static final int title_activity_seconde_etape_Sales_commercial=0x7f0701b2;
-        public static final int title_activity_seconde_etape_commercial=0x7f0700ee;
-        public static final int title_activity_service=0x7f0700c0;
-        public static final int title_activity_service_gps=0x7f0700ca;
-        public static final int title_activity_settingsynchro=0x7f070121;
-        public static final int title_activity_show_location=0x7f0700cb;
-        public static final int title_activity_signature=0x7f0700c4;
-        public static final int title_activity_signin=0x7f07009c;
-        public static final int title_activity_technicien=0x7f070095;
-        public static final int title_activity_technicien_tab=0x7f0700d7;
-        public static final int title_activity_test=0x7f0700b7;
-        public static final int title_activity_ticket=0x7f0700d0;
-        public static final int title_activity_ticket_offline=0x7f0700cf;
-        public static final int title_activity_tracking=0x7f070096;
-        public static final int title_activity_transfertstock=0x7f070159;
-        public static final int title_activity_transfertvirtualstock=0x7f0701a7;
-        public static final int title_activity_update_Customer=0x7f0701b0;
-        public static final int title_activity_update_client=0x7f0700b5;
-        public static final int title_activity_valider=0x7f070124;
-        public static final int title_activity_vendeur=0x7f0700ba;
-        public static final int title_activity_vendeur_tab=0x7f0700c9;
-        public static final int title_activity_viewcommande=0x7f070157;
-        public static final int title_activity_viewstock=0x7f07016a;
-        public static final int title_activity_web_view=0x7f0700c8;
-        public static final int title_feature1=0x7f07003e;
-        public static final int title_feature2=0x7f07003f;
-        public static final int title_feature3=0x7f070040;
-        public static final int title_feature4=0x7f070041;
-        public static final int title_feature5=0x7f070042;
-        public static final int title_feature6=0x7f070043;
-        public static final int title_home=0x7f07003c;
-        public static final int title_other_devices=0x7f0700f8;
-        public static final int title_paired_devices=0x7f0700f7;
-        public static final int title_recherche=0x7f07003a;
-        public static final int title_search=0x7f07003d;
-        public static final int title_section1=0x7f0700bb;
-        public static final int title_section2=0x7f0700bc;
-        public static final int title_section3=0x7f0700bd;
-        public static final int total_ht=0x7f07005c;
-        public static final int total_ttc=0x7f07005b;
-        public static final int vendcat1=0x7f0701a8;
+        public static final int title_activity_interventionhisto=0x7f070124;
+        public static final int title_activity_network_service=0x7f0700c1;
+        public static final int title_activity_next_etape=0x7f0700c2;
+        public static final int title_activity_observation_tech=0x7f0700d9;
+        public static final int title_activity_offline=0x7f0700cd;
+        public static final int title_activity_payement=0x7f0700d0;
+        public static final int title_activity_personne_physique=0x7f0700ec;
+        public static final int title_activity_print_dialog=0x7f0700d5;
+        public static final int title_activity_read_pdf=0x7f0700c5;
+        public static final int title_activity_reglement_offline=0x7f070104;
+        public static final int title_activity_reglement_ticket=0x7f0700cc;
+        public static final int title_activity_second_step_techn=0x7f0700d7;
+        public static final int title_activity_seconde_etape_Sales_commercial=0x7f0701b1;
+        public static final int title_activity_seconde_etape_commercial=0x7f0700ed;
+        public static final int title_activity_service=0x7f0700bf;
+        public static final int title_activity_service_gps=0x7f0700c9;
+        public static final int title_activity_settingsynchro=0x7f070120;
+        public static final int title_activity_show_location=0x7f0700ca;
+        public static final int title_activity_signature=0x7f0700c3;
+        public static final int title_activity_signin=0x7f07009b;
+        public static final int title_activity_technicien=0x7f070094;
+        public static final int title_activity_technicien_tab=0x7f0700d6;
+        public static final int title_activity_test=0x7f0700b6;
+        public static final int title_activity_ticket=0x7f0700cf;
+        public static final int title_activity_ticket_offline=0x7f0700ce;
+        public static final int title_activity_tracking=0x7f070095;
+        public static final int title_activity_transfertstock=0x7f070158;
+        public static final int title_activity_transfertvirtualstock=0x7f0701a6;
+        public static final int title_activity_update_Customer=0x7f0701af;
+        public static final int title_activity_update_client=0x7f0700b4;
+        public static final int title_activity_valider=0x7f070123;
+        public static final int title_activity_vendeur=0x7f0700b9;
+        public static final int title_activity_vendeur_tab=0x7f0700c8;
+        public static final int title_activity_viewcommande=0x7f070156;
+        public static final int title_activity_viewstock=0x7f070169;
+        public static final int title_activity_web_view=0x7f0700c7;
+        public static final int title_feature1=0x7f07003d;
+        public static final int title_feature2=0x7f07003e;
+        public static final int title_feature3=0x7f07003f;
+        public static final int title_feature4=0x7f070040;
+        public static final int title_feature5=0x7f070041;
+        public static final int title_feature6=0x7f070042;
+        public static final int title_home=0x7f07003b;
+        public static final int title_other_devices=0x7f0700f7;
+        public static final int title_paired_devices=0x7f0700f6;
+        public static final int title_recherche=0x7f070039;
+        public static final int title_search=0x7f07003c;
+        public static final int title_section1=0x7f0700ba;
+        public static final int title_section2=0x7f0700bb;
+        public static final int title_section3=0x7f0700bc;
+        public static final int total_ht=0x7f07005b;
+        public static final int total_ttc=0x7f07005a;
+        public static final int vendcat1=0x7f0701a7;
     }
     public static final class style {
         /** 
