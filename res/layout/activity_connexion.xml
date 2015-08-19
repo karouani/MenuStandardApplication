@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:padding="0dp"
     tools:context=".ConnexionActivity" >
-    
+
     <LinearLayout
         android:id="@+id/l1"
         style="@style/TitleBar"
+        android:layout_width="match_parent"
         android:layout_alignParentTop="true"
-        	android:layout_centerHorizontal="true"
-        android:layout_width="match_parent" >
+        android:layout_centerHorizontal="true" >
 
         <TextView
             style="@style/TitleBarText"
@@ -21,99 +21,97 @@
 
         <ImageButton
             style="@style/TitleBarAction"
-            android:contentDescription="@string/description_home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_weight="0.35"
+            android:contentDescription="@string/description_home"
             android:onClick="onClickHome"
+            android:scaleType="fitEnd"
             android:src="@drawable/update" />
     </LinearLayout>
-    
-     <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/linearLayout1"
         android:layout_below="@+id/l1"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/l4"
         android:orientation="vertical" >
-        
-    <LinearLayout
-        android:id="@+id/l2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/l1" >
 
-        <ImageView
-            android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
-            android:src="@drawable/logo" />
-    </LinearLayout>
-    
-    
-     <LinearLayout android:id="@+id/l6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-         android:layout_below="@+id/l2">
-        
-      <EditText
-        android:id="@+id/login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_margin="5px"
-        android:text="vendeur"
-        android:hint="@string/login"
-        android:inputType="text"  >
-
-        <requestFocus />
-    </EditText>
-    </LinearLayout>
-    
-    <LinearLayout
-        android:id="@+id/l3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/l6" >
-
-        <EditText
-            android:id="@+id/password"
+        <LinearLayout
+            android:id="@+id/l6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5px"
-            android:layout_marginRight="5px"
-            android:ems="10"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:text="1234"  >
+            android:layout_below="@+id/l2" >
 
-        <requestFocus />
-    </EditText>
+            <EditText
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5px"
+                android:ems="10"
+                android:hint="@string/login"
+                android:inputType="text"
+                android:text="vendeur" >
 
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/l3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/l6" >
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5px"
+                android:layout_marginRight="5px"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:text="1234" >
+
+                <requestFocus />
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/l5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/l3" >
+
+            <CheckBox
+                android:id="@+id/souvenir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_save" />
+        </LinearLayout>
     </LinearLayout>
-    
-    <LinearLayout android:id="@+id/l5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-         android:layout_below="@+id/l3">
-        
-       <CheckBox
-        android:id="@+id/souvenir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/action_save" />
-    </LinearLayout>
-    
-     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/l4"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        android:layout_marginBottom="5dp" >
-       
-       <Button
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal" >
+
+        <Button
             android:id="@+id/connecter"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -123,7 +121,6 @@
             android:background="@drawable/mybuttontop"
             android:text="@string/connexion"
             android:textColor="@android:color/white" />
-
     </LinearLayout>
-    
+
 </RelativeLayout>

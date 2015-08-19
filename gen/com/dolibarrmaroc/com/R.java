@@ -1688,11 +1688,11 @@ containing a value of this type.
         public static final int itenermoifact=0x7f060126;
         public static final int l1=0x7f06004f;
         public static final int l1w=0x7f06016b;
-        public static final int l2=0x7f060074;
-        public static final int l3=0x7f060078;
-        public static final int l4=0x7f06007c;
+        public static final int l2=0x7f060077;
+        public static final int l3=0x7f060079;
+        public static final int l4=0x7f060075;
         public static final int l4ww=0x7f06012e;
-        public static final int l5=0x7f06007a;
+        public static final int l5=0x7f06007b;
         public static final int l6=0x7f060076;
         public static final int labelqntdispo4=0x7f0600f6;
         public static final int labelqntdispo44=0x7f060087;
@@ -1741,9 +1741,9 @@ containing a value of this type.
         public static final int listview=0x7f06005c;
         public static final int listviewsv=0x7f060105;
         public static final int lngfieldbd=0x7f060092;
-        public static final int login=0x7f060077;
+        public static final int login=0x7f060078;
         public static final int loginbd=0x7f060094;
-        public static final int logo=0x7f060075;
+        public static final int logo=0x7f060074;
         public static final int lscicincmd=0x7f060062;
         public static final int lsrefs=0x7f060102;
         public static final int lsvs=0x7f060103;
@@ -1787,7 +1787,7 @@ containing a value of this type.
         public static final int oreffactcmd=0x7f060141;
         public static final int paired_devices=0x7f060121;
         public static final int passbd=0x7f060098;
-        public static final int password=0x7f060079;
+        public static final int password=0x7f06007a;
         public static final int pdfout=0x7f06005e;
         public static final int pdfview=0x7f0600c7;
         public static final int pointerClt=0x7f060091;
@@ -1853,7 +1853,7 @@ containing a value of this type.
         public static final int showHome=0x7f060008;
         public static final int showTitle=0x7f06000a;
         public static final int signaturePad=0x7f06007e;
-        public static final int souvenir=0x7f06007b;
+        public static final int souvenir=0x7f06007c;
         public static final int spinner1=0x7f0600b9;
         public static final int spinner5=0x7f0600c5;
         public static final int split_action_bar=0x7f060029;

@@ -624,11 +624,11 @@ int id itenermoiclient 0x7f06011c
 int id itenermoifact 0x7f060126
 int id l1 0x7f06004f
 int id l1w 0x7f06016b
-int id l2 0x7f060074
-int id l3 0x7f060078
-int id l4 0x7f06007c
+int id l2 0x7f060077
+int id l3 0x7f060079
+int id l4 0x7f060075
 int id l4ww 0x7f06012e
-int id l5 0x7f06007a
+int id l5 0x7f06007b
 int id l6 0x7f060076
 int id labelqntdispo4 0x7f0600f6
 int id labelqntdispo44 0x7f060087
@@ -677,9 +677,9 @@ int id list_item 0x7f060034
 int id listview 0x7f06005c
 int id listviewsv 0x7f060105
 int id lngfieldbd 0x7f060092
-int id login 0x7f060077
+int id login 0x7f060078
 int id loginbd 0x7f060094
-int id logo 0x7f060075
+int id logo 0x7f060074
 int id lscicincmd 0x7f060062
 int id lsrefs 0x7f060102
 int id lsvs 0x7f060103
@@ -723,7 +723,7 @@ int id oreffact2 0x7f060154
 int id oreffactcmd 0x7f060141
 int id paired_devices 0x7f060121
 int id passbd 0x7f060098
-int id password 0x7f060079
+int id password 0x7f06007a
 int id pdfout 0x7f06005e
 int id pdfview 0x7f0600c7
 int id pointerClt 0x7f060091
@@ -789,7 +789,7 @@ int id showCustom 0x7f06000b
 int id showHome 0x7f060008
 int id showTitle 0x7f06000a
 int id signaturePad 0x7f06007e
-int id souvenir 0x7f06007b
+int id souvenir 0x7f06007c
 int id spinner1 0x7f0600b9
 int id spinner5 0x7f0600c5
 int id split_action_bar 0x7f060029
