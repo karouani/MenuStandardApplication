@@ -186,7 +186,7 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 				if(compte != null){
 					basedonne = true;
 					
-					compte = myoffline.LoadCompte(compte.getLogin(), compte.getPassword()); 
+					//compte = myoffline.LoadCompte(compte.getLogin(), compte.getPassword()); 
 
 					/*
 					dialog = ProgressDialog.show(ConnexionActivity.this, "Connexion",
