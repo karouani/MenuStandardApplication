@@ -79,7 +79,7 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 	private Offlineimpl myoffline;
 
 	private AuthentificationManager auth;
-
+  
 	private String log;
 	private String pass;
 	private Compte compte;
