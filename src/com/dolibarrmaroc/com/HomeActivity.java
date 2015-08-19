@@ -255,20 +255,24 @@ public class HomeActivity extends Activity
 			List<com.dolibarrmaroc.com.models.AlertDialog> alertfc22 = new ArrayList<>();
 			Intent intentfc12 = new Intent(getApplicationContext(), CmdPayActivity.class); //CatalogeActivity.class  //CmdViewActivity
 			intentfc12.putExtra("type", "0");
+			intentfc12.putExtra("user", compte);
 			com.dolibarrmaroc.com.models.AlertDialog createfc12 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc12, getString(R.string.syscl1), "invoice_see");
 
 			
 			Intent intentfc22 = new Intent(getApplicationContext(), CmdPayActivity.class);
-			intentfc12.putExtra("type", "1");
+			intentfc22.putExtra("type", "1");
+			intentfc22.putExtra("user", compte);
 			com.dolibarrmaroc.com.models.AlertDialog updatefc22 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc22, getString(R.string.syscl2), "invoice");
 			 
 			
 			Intent intentfc32 = new Intent(getApplicationContext(), CmdPayActivity.class);
-			intentfc12.putExtra("type", "2");
+			intentfc32.putExtra("type", "2");
+			intentfc32.putExtra("user", compte);
 			com.dolibarrmaroc.com.models.AlertDialog updatefc32 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc32, getString(R.string.syscl3), "invoice_lock");
 			
 			Intent intentfc42 = new Intent(getApplicationContext(), CmdPayActivity.class);
-			intentfc12.putExtra("type", "3");
+			intentfc42.putExtra("type", "3");
+			intentfc42.putExtra("user", compte);
 			com.dolibarrmaroc.com.models.AlertDialog updatefc24 = new com.dolibarrmaroc.com.models.AlertDialog(intentfc42, getString(R.string.syscl4), "invoice_pay");
 			
 			Intent intentfc52 = new Intent(getApplicationContext(), CmdPayActivity.class);

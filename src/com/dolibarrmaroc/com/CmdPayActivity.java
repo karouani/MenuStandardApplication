@@ -32,6 +32,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -60,10 +61,6 @@ public class CmdPayActivity extends ActionBarActivity {
 		//synchro offline
 		private Offlineimpl myoffline;
 		private Dictionnaire dico;
-		//Spinner Remplissage
-		private List<String> listclt;
-		private List<String> listprd;
-		private List<Client> clients;
 
 		private DBHandler mydb ;
 		private WakeLock wakelock;
@@ -81,9 +78,6 @@ public class CmdPayActivity extends ActionBarActivity {
 		products = new ArrayList<Produit>();
 		dico = new Dictionnaire();
 
-		listclt = new ArrayList<String>();
-		listprd = new ArrayList<String>();
-		clients = new ArrayList<Client>();
 		
 		mydb = new DBHandler(this);
 
@@ -95,6 +89,10 @@ public class CmdPayActivity extends ActionBarActivity {
 		
 		msgres = (TextView)findViewById(R.id.syscmsgres);
 		
+		msg = "";
+		
+		
+		synchronisation();
 	
 	}
 
@@ -136,64 +134,169 @@ public class CmdPayActivity extends ActionBarActivity {
 	class ConnexionTask extends AsyncTask<String, Integer, String> {
 
 
-		int nclt;
-		int nprod;
+		int nclt =0;
+		int nprod =0;
 		int myProgress =0;
 
 		@Override
 		protected String doInBackground(String... paramsw) {
 
-			//getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-			
-			
-			// Set your ProgressBar Title 
-			//mProgressDialog.setIcon(R.drawable.ic_launcher);
-			// Set your ProgressBar Message
-			// Show ProgressBar
-			//  mProgressDialog.setCanceledOnTouchOutside(false);
-			
-			msgres.setText("Debut de connexion avec le serveur a distance \n \n");
 
-			Log.e("Compte User ",compte.toString());
-			sv  = new StockVirtual(CmdPayActivity.this);
-			vendeurManager = VendeurManagerFactory.getClientManager();
-			myoffline = new Offlineimpl(CmdPayActivity.this);
-			CommandeManager managercmd =  new CommandeManagerFactory().getManager();
-			CommercialManager manager = CommercialManagerFactory.getCommercialManager();
-			PayementManager payemn = PayementManagerFactory.getPayementFactory();
-			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
+			return "success";
+		}
 
-			
-			if(myoffline.checkAvailableofflinestorage() > 0){
-				myoffline.SendOutData(compte);
-			}
-			
-			if(!myoffline.checkFolderexsiste()){
-				showmessageOffline();
-			}else{
-				switch (type) {
-				case 0:
+		@Override
+		protected void onProgressUpdate(Integer... progress) {
 
-					msgres.setText("Debut de chargement des produits \n");
-					List<Produit> products = new ArrayList<>();
-					products =  CheckOutSysc.checkOutProducts(vendeurManager, compte);//   vendeurManager.selectAllProduct(compte);
-					
-					
-						if(products.size() > 0){
-							nprod = products.size();
-							for (int i = 0; i < products.size(); i++) {
-								for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
-									if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId()+"")){
-										products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
+		}
+
+		@Override
+		protected void onPostExecute(String sResponse) {
+			try {
+				if (dialogSynchronisation.isShowing()){
+					dialogSynchronisation.dismiss();
+					//wakelock.release();
+				msg += "Debut de connexion avec le serveur a distance \n \n";
+				msgres.setText(msg);
+				
+				
+				Log.e("Compte Us>>er ",compte.toString());
+				sv  = new StockVirtual(CmdPayActivity.this);
+				vendeurManager = VendeurManagerFactory.getClientManager();
+				myoffline = new Offlineimpl(CmdPayActivity.this);
+				CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+				CommercialManager manager = CommercialManagerFactory.getCommercialManager();
+				PayementManager payemn = PayementManagerFactory.getPayementFactory();
+				CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
+				
+				
+				if(myoffline.checkAvailableofflinestorage() > 0){
+					myoffline.SendOutData(compte);
+				}
+				
+				List<Produit> products = new ArrayList<>();
+				List<Client> clients = new ArrayList<>();
+				
+				if(!myoffline.checkFolderexsiste()){
+					showmessageOffline();
+				}else{
+					switch (type) {
+					case 0:
+
+						msg += "Debut de chargement des produits \n";
+						msgres.setText(msg);
+						
+						products =  CheckOutSysc.checkOutProducts(vendeurManager, compte);//   vendeurManager.selectAllProduct(compte);
+						
+							if(products.size() > 0){
+								nprod = products.size();
+								for (int i = 0; i < products.size(); i++) {
+									for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+										if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId()+"")){
+											products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
+										}
+									}
+								}
+								CheckOutSysc.checkInProductsPromotion(myoffline, compte, products, vendeurManager.getPromotionProduits());
+							} 
+
+							msg += "Fin de chargement des produits \n \n";
+							msgres.setText(msg);
+							
+							msg += "Debut de chargement des clients \n";
+							//msgres.setText(msg);
+							
+							clients = CheckOutSysc.checkOutClient(vendeurManager, compte); //   vendeurManager.selectAllClient(compte);
+
+							
+							if(clients.size() > 0){
+								nclt =clients.size(); 
+								CheckOutSysc.checkInClientsPromotion(myoffline, compte, clients, vendeurManager.getPromotionClients());
+							}
+							
+							
+							
+							msg += "Fin de chargement des clients \n \n";
+							msgres.setText(msg);
+							
+							if(nprod == 0){
+								msg += " *** "+getResources().getString(R.string.caus26)+"\n";
+							}
+
+							if(nclt == 0){
+								msg +=" *** "+ getResources().getString(R.string.caus27)+"\n";
+								
+							}
+							msgres.setText(msg);
+							
+							CheckOutSysc.checkInDictionnaire(myoffline, CheckOutSysc.checkOutDictionnaire(vendeurManager, compte));
+							
+							CheckOutSysc.checkInClientSecteur(myoffline, CheckOutSysc.checkOutClientSecteur(vendeurManager, compte), compte);
+							
+							if(nclt != 0 && nprod != 0 ){
+							//	alertPrdClt(msg);
+								msg += getResources().getString(R.string.cnxlab8)+"\n";
+								msgres.setText(msg);
+							}
+							
+						break;
+					case 1:
+
+						msg += "Debut de chargement des Clients et les caractéristiques des tiers \n";
+						//msgres.setText(msg);
+						
+						CheckOutSysc.checkInCommercialInfo(myoffline, CheckOutSysc.checkOutCommercialInfo(manager, compte), compte);
+						
+						List<Societe> lsosc = new ArrayList<>();
+						lsosc = CheckOutSysc.checkOutAllSociete(manager, compte);
+						if(lsosc.size() > 0){
+							CheckOutSysc.checkInSocietes(myoffline, lsosc, compte);
+						}
+						
+						msg += "Fin de chargement \n \n";
+						msg += getResources().getString(R.string.cnxlab8)+"\n";
+						//msgres.setText(msg);
+						//	alertPrdClt(msg);
+						
+						break;
+					case 2:
+
+						msg += "Debut de chargement de catalogue des produits \n";
+						//msgres.setText(msg);
+						
+						List<Categorie> lscats = CheckOutSysc.checkOutCatalogueProduit(categorie, compte);
+
+						
+						products = new ArrayList<>();
+						products =  myoffline.LoadProduits("");
+						
+						for (int i = 0; i < products.size(); i++) {
+							for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+								//Log.e(products.get(i).getId()+"",sv.getAllProduits().get(j).getRef());
+								if(Integer.parseInt(sv.getAllProduits(-1).get(j).getRef()) == products.get(i).getId()){
+									products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
+								}
+							}
+						}
+
+						for (int j = 0; j < lscats.size(); j++) {
+							for (int i = 0; i < lscats.get(j).getProducts().size(); i++) {
+								for (int k = 0; k < products.size(); k++) {
+									if(lscats.get(j).getProducts().get(i).getId() == products.get(k).getId()){
+										lscats.get(j).getProducts().get(i).setQteDispo(products.get(k).getQteDispo());
 									}
 								}
 							}
-							CheckOutSysc.checkInProductsPromotion(myoffline, compte, products, vendeurManager.getPromotionProduits());
-						} 
-
-						msgres.setText("Fin de chargement des produits \n \n");
-						msgres.setText("Debut de chargement des clients \n");
-						List<Client> clients = new ArrayList<>();
+						}
+						
+						
+						msg += "Fin de chargement de catalogue des produits \n \n";
+					///	msgres.setText(msg);
+						
+						msg += "Debut de chargement des clients \n";
+						//msgres.setText(msg);
+						
+						clients = new ArrayList<>();
 						clients = CheckOutSysc.checkOutClient(vendeurManager, compte); //   vendeurManager.selectAllClient(compte);
 
 						
@@ -210,115 +313,69 @@ public class CmdPayActivity extends ActionBarActivity {
 							msg += getResources().getString(R.string.caus27)+"\n";
 						}
 						
-						msgres.setText("Fin de chargement des clients \n \n");
-						CheckOutSysc.checkInDictionnaire(myoffline, CheckOutSysc.checkOutDictionnaire(vendeurManager, compte));
+						msg += "Fin de chargement des clients \n \n";
+						//msgres.setText(msg);
 						
+						msg += "Debut de chargement des commandes \n";
+						//msgres.setText(msg);
+						
+						CheckOutSysc.checkInCommandeview(myoffline, CheckOutSysc.checkOutCommandes(managercmd, compte), compte);
+						
+						msg += "Fin de chargement des commandes \n \n";
+						//msgres.setText(msg);
+						
+						msg += "Debut de chargement des secteurs clients \n";
+						//msgres.setText(msg);
 						CheckOutSysc.checkInClientSecteur(myoffline, CheckOutSysc.checkOutClientSecteur(vendeurManager, compte), compte);
+						msg += "Fin de chargement des secteurs clients \n \n";
+						//msgres.setText(msg);
 						
-						if(nclt != 0 && nprod != 0 ){
+						if(lscats.size() > 0){
+							CheckOutSysc.checkInCatalogueProduit(myoffline, lscats, compte);
+							msg += getResources().getString(R.string.cnxlab8)+"\n";
 						//	alertPrdClt(msg);
-							msg = getResources().getString(R.string.cnxlab8)+"\n";
+						}else{
+							msg += getResources().getString(R.string.cnxlab9)+"\n";
+						//	alertPrdClt(msg);
+						}
+
+						msg += "Fin de chargement du transaction \n \n";
+					//	msgres.setText(msg);
+						
+						break;
+					case 3:
+						
+						msg += "Debut de chargement des payements \n";
+					//	msgres.setText(msg);
+						List<Payement> pay = CheckOutSysc.checkOutPayement(payemn, compte);
+						if(pay.size() > 0){
+							CheckOutSysc.checkInPayement(myoffline, pay, compte);	
+							msg += getResources().getString(R.string.cnxlab8)+"\n";
+						//	alertPrdClt(msg);
+						}else{
+							msg += getResources().getString(R.string.cmdtofc21)+"\n";
+							//alertPrdClt(msg);
 						}
 						
-					break;
-				case 1:
-
-					CheckOutSysc.checkInCommercialInfo(myoffline, CheckOutSysc.checkOutCommercialInfo(manager, compte), compte);
-					
-					List<Societe> lsosc = new ArrayList<>();
-					lsosc = CheckOutSysc.checkOutAllSociete(manager, compte);
-					if(lsosc.size() > 0){
-						CheckOutSysc.checkInSocietes(myoffline, lsosc, compte);
+						msg += "Fin de chargement des payements \n \n";
+					//	msgres.setText(msg);
+						
+						break;
+					default:
+						break;
 					}
-					
-					msg = getResources().getString(R.string.cnxlab8)+"\n";
-				//	alertPrdClt(msg);
-					
-					break;
-				case 2:
-
-					List<Categorie> lscats = CheckOutSysc.checkOutCatalogueProduit(categorie, compte);
-
-					products = new ArrayList<>();
-					products =  myoffline.LoadProduits("");
-					
-					for (int i = 0; i < products.size(); i++) {
-						for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
-							//Log.e(products.get(i).getId()+"",sv.getAllProduits().get(j).getRef());
-							if(Integer.parseInt(sv.getAllProduits(-1).get(j).getRef()) == products.get(i).getId()){
-								products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
-							}
-						}
-					}
-
-					for (int j = 0; j < lscats.size(); j++) {
-						for (int i = 0; i < lscats.get(j).getProducts().size(); i++) {
-							for (int k = 0; k < products.size(); k++) {
-								if(lscats.get(j).getProducts().get(i).getId() == products.get(k).getId()){
-									lscats.get(j).getProducts().get(i).setQteDispo(products.get(k).getQteDispo());
-								}
-							}
-						}
-					}
-					
-					CheckOutSysc.checkInCommandeview(myoffline, CheckOutSysc.checkOutCommandes(managercmd, compte), compte);
-					
-					CheckOutSysc.checkInClientSecteur(myoffline, CheckOutSysc.checkOutClientSecteur(vendeurManager, compte), compte);
-
-					if(lscats.size() > 0){
-						CheckOutSysc.checkInCatalogueProduit(myoffline, lscats, compte);
-						msg = getResources().getString(R.string.cnxlab8)+"\n";
-					//	alertPrdClt(msg);
-					}else{
-						msg = getResources().getString(R.string.cnxlab9)+"\n";
-					//	alertPrdClt(msg);
-					}
-
-					
-					
-					break;
-				case 3:
-					List<Payement> pay = CheckOutSysc.checkOutPayement(payemn, compte);
-					if(pay.size() > 0){
-						CheckOutSysc.checkInPayement(myoffline, pay, compte);	
-						msg = getResources().getString(R.string.cnxlab8)+"\n";
-					//	alertPrdClt(msg);
-					}else{
-						msg = getResources().getString(R.string.cmdtofc21)+"\n";
-						//alertPrdClt(msg);
-					}
-					
-					break;
-				default:
-					break;
 				}
-			}
 
-			Log.e("start ","start cnx task");
+				
+				
+				Log.e("start ","start cnx task");
+				
 
-
-
-
-			return "success";
-		}
-
-		@Override
-		protected void onProgressUpdate(Integer... progress) {
-
-		}
-
-		@Override
-		protected void onPostExecute(String sResponse) {
-			try {
-			//	if (dialogSynchronisation.isShowing()){
-				//	dialogSynchronisation.dismiss();
-					//wakelock.release();
-
+					msg += "Fin de chargement Global & fin de connexion \n \n";
+					
 					msgres.setText(msg);
-
-
-					Log.e("end ","end cnx task");
-				//}
+					Log.e("end ",msg);
+				}
 
 			} catch (Exception e) {
 				Toast.makeText(getApplicationContext(),
@@ -326,6 +383,8 @@ public class CmdPayActivity extends ActionBarActivity {
 						Toast.LENGTH_LONG).show();
 				Log.e(e.getClass().getName(), e.getMessage() +" << ", e);
 			}
+			
+			
 		}
 
 	}
@@ -365,5 +424,13 @@ public class CmdPayActivity extends ActionBarActivity {
 		});
 		alert.setCancelable(true);
 		alert.create().show();
+	}
+	
+	public void onClickHome(View v){
+		Intent intent = new Intent(this, HomeActivity.class);
+		intent.putExtra("user", compte);
+		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity (intent);
+		this.finish();
 	}
 }

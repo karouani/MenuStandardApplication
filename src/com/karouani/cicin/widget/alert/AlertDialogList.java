@@ -7,6 +7,7 @@ import com.dolibarrmaroc.com.adapter.AlertDialogAdapter;
 import com.dolibarrmaroc.com.models.AlertDialog;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.sax.StartElementListener;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,10 +37,13 @@ public class AlertDialogList extends android.app.AlertDialog.Builder implements 
 		list.setAdapter(adapter);
 		list.setOnItemClickListener(this);
 		
+		
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		
+		
 		
 		String selected = (String) adapter.getItem(position).getLabel();
 		for (AlertDialog alert : alerts) {
