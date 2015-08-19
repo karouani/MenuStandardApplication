@@ -14,11 +14,13 @@ import com.dolibarrmaroc.com.dao.CategorieDao;
 import com.dolibarrmaroc.com.dao.CategorieDaoMysql;
 import com.dolibarrmaroc.com.database.DBHandler;
 import com.dolibarrmaroc.com.database.StockVirtual;
+import com.dolibarrmaroc.com.models.Categorie;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Dictionnaire;
 import com.dolibarrmaroc.com.models.Payement;
 import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.Societe;
 import com.dolibarrmaroc.com.offline.Offlineimpl;
 import com.dolibarrmaroc.com.utils.CheckOutNet;
 import com.dolibarrmaroc.com.utils.CheckOutSysc;
@@ -216,6 +218,7 @@ public class CmdPayActivity extends ActionBarActivity {
 				case 0:
 
 					int nbprod,nbclt;
+					String msg = "";
 					List<Produit> products = new ArrayList<>();
 					products =  CheckOutSysc.checkOutProducts(vendeurManager, compte);//   vendeurManager.selectAllProduct(compte);
 					
@@ -241,12 +244,67 @@ public class CmdPayActivity extends ActionBarActivity {
 							CheckOutSysc.checkInClientsPromotion(myoffline, compte, clients, vendeurManager.getPromotionClients());
 						}
 						
+						if(nprod == 0){
+							msg += getResources().getString(R.string.caus26)+"\n";
+						}
+
+						if(nclt == 0){
+							msg += getResources().getString(R.string.caus27)+"\n";
+						}
+						
+						if(nclt == 0 || nprod == 0 ){
+							alertPrdClt(msg);
+						}
+						
+						CheckOutSysc.checkInDictionnaire(myoffline, CheckOutSysc.checkOutDictionnaire(vendeurManager, compte));
+						
+						CheckOutSysc.checkInClientSecteur(myoffline, CheckOutSysc.checkOutClientSecteur(vendeurManager, compte), compte);
+						
 					break;
 				case 1:
 
+					CheckOutSysc.checkInCommercialInfo(myoffline, CheckOutSysc.checkOutCommercialInfo(manager, compte), compte);
+					
+					List<Societe> lsosc = new ArrayList<>();
+					lsosc = CheckOutSysc.checkOutAllSociete(manager, compte);
+					if(lsosc.size() > 0){
+						CheckOutSysc.checkInSocietes(myoffline, lsosc, compte);
+					}
+					
 					break;
 				case 2:
 
+					List<Categorie> lscats = CheckOutSysc.checkOutCatalogueProduit(categorie, compte);
+
+					
+					products = new ArrayList<>();
+					products =  myoffline.LoadProduits("");
+					
+					for (int i = 0; i < products.size(); i++) {
+						for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+							//Log.e(products.get(i).getId()+"",sv.getAllProduits().get(j).getRef());
+							if(Integer.parseInt(sv.getAllProduits(-1).get(j).getRef()) == products.get(i).getId()){
+								products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
+							}
+						}
+					}
+
+					for (int j = 0; j < lscats.size(); j++) {
+						for (int i = 0; i < lscats.get(j).getProducts().size(); i++) {
+							for (int k = 0; k < products.size(); k++) {
+								if(lscats.get(j).getProducts().get(i).getId() == products.get(k).getId()){
+									lscats.get(j).getProducts().get(i).setQteDispo(products.get(k).getQteDispo());
+								}
+							}
+						}
+					}
+
+					if(lscats.size() > 0){
+						CheckOutSysc.checkInCatalogueProduit(myoffline, lscats, compte);
+					}
+
+					CheckOutSysc.checkInCommandeview(myoffline, CheckOutSysc.checkOutCommandes(managercmd, compte), compte);
+					
 					break;
 				case 3:
 
