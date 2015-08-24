@@ -4,7 +4,13 @@ package com.dolibarrmaroc.com;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dolibarrmaroc.com.business.CommandeManager;
 import com.dolibarrmaroc.com.business.CommercialManager;
+import com.dolibarrmaroc.com.business.PayementManager;
+import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.dao.CategorieDao;
+import com.dolibarrmaroc.com.dao.CategorieDaoMysql;
+import com.dolibarrmaroc.com.database.StockVirtual;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.GpsTracker;
@@ -15,7 +21,10 @@ import com.dolibarrmaroc.com.offline.Offlineimpl;
 import com.dolibarrmaroc.com.offline.ioffline;
 import com.dolibarrmaroc.com.utils.CheckOutNet;
 import com.dolibarrmaroc.com.utils.CheckOutSysc;
+import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
 import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
+import com.dolibarrmaroc.com.utils.PayementManagerFactory;
+import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -34,6 +43,8 @@ import android.os.StrictMode;
 import android.os.PowerManager.WakeLock;
 import android.text.InputFilter;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -529,6 +540,21 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 			resu = manager.update(compte, client);
 		//	resu = "Ce client est mise à  jour avec succées";
 			wakelock.acquire();
+			
+			VendeurManager vendeurManager = VendeurManagerFactory.getClientManager();
+			PayementManager payemn = PayementManagerFactory.getPayementFactory();
+			CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
+			CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+			CommercialManager managercom = CommercialManagerFactory.getCommercialManager();
+			StockVirtual sv  = new StockVirtual(UpdateClientActivity.this);
+
+
+			myoffline = new Offlineimpl(getApplicationContext());
+							if(myoffline.checkAvailableofflinestorage() > 0){
+								myoffline.SendOutData(compte);
+							}
+		
+			CheckOutSysc.RelaodClientSectInfoCommDicto(UpdateClientActivity.this, myoffline, compte, vendeurManager, managercom, 0);
 			return null;
 		}
 
@@ -732,5 +758,13 @@ public class UpdateClientActivity extends Activity implements OnClickListener,On
 		this.finish();
 	}
 
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			onClickHome(LayoutInflater.from(UpdateClientActivity.this).inflate(R.layout.activity_update_client, null));
+			return true;
+		}
+		return false;
+	}
 
 }

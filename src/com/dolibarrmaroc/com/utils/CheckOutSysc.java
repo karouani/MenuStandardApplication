@@ -157,83 +157,227 @@ public class CheckOutSysc implements Serializable{
 	
 	/******************************  Reload data **************************************************************/
 	/*
-	 * in : 0 == all // 1 == without payement
+	 * in : 0 == all // 1 == without payement // 2 == only products  // 3 == only clients  // 4 == catalogue // 5 == payement
 	 */
 	public static HashMap<String, Integer> ReloadProdClt(Context context,ioffline myoffline,Compte compte,VendeurManager vendeurManager,PayementManager payemnmanager,StockVirtual sv,CategorieDao categorie,CommandeManager managercmd,int in,CommercialManager manager){
 		
 		int nbprod =0,nbclt =0,nbpay =0;
 		HashMap<String, Integer> res = new HashMap<>();
 		
+		List<Client> clients = new ArrayList<>();
+		List<Produit> products = new ArrayList<>();
+		List<Payement> paym = new ArrayList<>();
 		try {
-			List<Produit> products = new ArrayList<>();
-			products =  checkOutProducts(vendeurManager, compte);//   vendeurManager.selectAllProduct(compte);
 			
-			List<Client> clients = new ArrayList<>();
-			clients = checkOutClient(vendeurManager, compte); //   vendeurManager.selectAllClient(compte);
-
-			
-				if(products.size() > 0){
-					nbprod = products.size();
-					for (int i = 0; i < products.size(); i++) {
-						for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
-							if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId()+"")){
-								products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
-							}
-						}
-					}
-					checkInProductsPromotion(myoffline, compte, products, vendeurManager.getPromotionProduits());
-				} 
-
-
-				if(clients.size() > 0){
-					nbclt =clients.size(); 
-					checkInClientsPromotion(myoffline, compte, clients, vendeurManager.getPromotionClients());
-				}
+			switch (in) {
+			case 0:
+				products = new ArrayList<>();
+				products =  checkOutProducts(vendeurManager, compte);//   vendeurManager.selectAllProduct(compte);
 				
+				clients = new ArrayList<>();
+				clients = checkOutClient(vendeurManager, compte); //   vendeurManager.selectAllClient(compte);
+
 				
-				if(compte.getPermissionbl() == 1){
-
-					List<Categorie> lscats = checkOutCatalogueProduit(categorie, compte);
-
-					for (int i = 0; i < products.size(); i++) {
-						for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
-							//Log.e(products.get(i).getId()+"",sv.getAllProduits().get(j).getRef());
-							if(Integer.parseInt(sv.getAllProduits(-1).get(j).getRef()) == products.get(i).getId()){
-								products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
-							}
-						}
-					}
-
-					for (int j = 0; j < lscats.size(); j++) {
-						for (int i = 0; i < lscats.get(j).getProducts().size(); i++) {
-							for (int k = 0; k < products.size(); k++) {
-								if(lscats.get(j).getProducts().get(i).getId() == products.get(k).getId()){
-									lscats.get(j).getProducts().get(i).setQteDispo(products.get(k).getQteDispo());
+					if(products.size() > 0){
+						nbprod = products.size();
+						for (int i = 0; i < products.size(); i++) {
+							for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+								if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId()+"")){
+									products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
 								}
 							}
 						}
+						checkInProductsPromotion(myoffline, compte, products, vendeurManager.getPromotionProduits());
+					} 
+
+					
+					
+					if(clients.size() > 0){
+						nbclt =clients.size(); 
+						checkInClientsPromotion(myoffline, compte, clients, vendeurManager.getPromotionClients());
 					}
+					
+					
+					if(compte.getPermissionbl() == 1){
 
-					if(lscats.size() > 0){
-						checkInCatalogueProduit(myoffline, lscats, compte);
+						List<Categorie> lscats = checkOutCatalogueProduit(categorie, compte);
+
+						for (int i = 0; i < products.size(); i++) {
+							for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+								//Log.e(products.get(i).getId()+"",sv.getAllProduits().get(j).getRef());
+								if(Integer.parseInt(sv.getAllProduits(-1).get(j).getRef()) == products.get(i).getId()){
+									products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
+								}
+							}
+						}
+
+						for (int j = 0; j < lscats.size(); j++) {
+							for (int i = 0; i < lscats.get(j).getProducts().size(); i++) {
+								for (int k = 0; k < products.size(); k++) {
+									if(lscats.get(j).getProducts().get(i).getId() == products.get(k).getId()){
+										lscats.get(j).getProducts().get(i).setQteDispo(products.get(k).getQteDispo());
+									}
+								}
+							}
+						}
+
+						if(lscats.size() > 0){
+							checkInCatalogueProduit(myoffline, lscats, compte);
+						}
+
+						checkInCommandeview(myoffline, checkOutCommandes(managercmd, compte), compte);
+
 					}
+					
+					
+					checkInDictionnaire(myoffline, checkOutDictionnaire(vendeurManager, compte));
+					
+					
+					paym = new ArrayList<>();
+					paym = checkOutPayement(payemnmanager, compte);
+					
+					checkInPayement(myoffline, paym, compte);
+					nbpay = paym.size();
+					
+				break;
 
-					checkInCommandeview(myoffline, checkOutCommandes(managercmd, compte), compte);
+			case 1:
+				products = new ArrayList<>();
+				products =  checkOutProducts(vendeurManager, compte);//   vendeurManager.selectAllProduct(compte);
+				
+				clients = new ArrayList<>();
+				clients = checkOutClient(vendeurManager, compte); //   vendeurManager.selectAllClient(compte);
 
-				}
 				
+					if(products.size() > 0){
+						nbprod = products.size();
+						for (int i = 0; i < products.size(); i++) {
+							for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+								if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId()+"")){
+									products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
+								}
+							}
+						}
+						checkInProductsPromotion(myoffline, compte, products, vendeurManager.getPromotionProduits());
+					} 
+
+					
+					
+					if(clients.size() > 0){
+						nbclt =clients.size(); 
+						checkInClientsPromotion(myoffline, compte, clients, vendeurManager.getPromotionClients());
+					}
+					
+					
+					if(compte.getPermissionbl() == 1){
+
+						List<Categorie> lscats = checkOutCatalogueProduit(categorie, compte);
+
+						for (int i = 0; i < products.size(); i++) {
+							for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+								//Log.e(products.get(i).getId()+"",sv.getAllProduits().get(j).getRef());
+								if(Integer.parseInt(sv.getAllProduits(-1).get(j).getRef()) == products.get(i).getId()){
+									products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
+								}
+							}
+						}
+
+						for (int j = 0; j < lscats.size(); j++) {
+							for (int i = 0; i < lscats.get(j).getProducts().size(); i++) {
+								for (int k = 0; k < products.size(); k++) {
+									if(lscats.get(j).getProducts().get(i).getId() == products.get(k).getId()){
+										lscats.get(j).getProducts().get(i).setQteDispo(products.get(k).getQteDispo());
+									}
+								}
+							}
+						}
+
+						if(lscats.size() > 0){
+							checkInCatalogueProduit(myoffline, lscats, compte);
+						}
+
+						checkInCommandeview(myoffline, checkOutCommandes(managercmd, compte), compte);
+
+					}
+					
+					
+					checkInDictionnaire(myoffline, checkOutDictionnaire(vendeurManager, compte));
+					
+				break;
 				
+				case 2:
+					products = new ArrayList<>();
+					products =  checkOutProducts(vendeurManager, compte);//   vendeurManager.selectAllProduct(compte);
+					
+					
+						if(products.size() > 0){
+							nbprod = products.size();
+							for (int i = 0; i < products.size(); i++) {
+								for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+									if(sv.getAllProduits(-1).get(j).getRef().equals(products.get(i).getId()+"")){
+										products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
+									}
+								}
+							}
+							checkInProductsPromotion(myoffline, compte, products, vendeurManager.getPromotionProduits());
+						} 
+						checkInDictionnaire(myoffline, checkOutDictionnaire(vendeurManager, compte));
+					break;
 				
-				
-				
-			if(in == 0){
-				List<Payement> paym = new ArrayList<>();
-				paym = checkOutPayement(payemnmanager, compte);
-				
-				checkInPayement(myoffline, paym, compte);
-				nbpay = paym.size();
-				
+				case 3:
+					clients = new ArrayList<>();
+					clients = checkOutClient(vendeurManager, compte); //   vendeurManager.selectAllClient(compte);
+						
+						if(clients.size() > 0){
+							nbclt =clients.size(); 
+							checkInClientsPromotion(myoffline, compte, clients, vendeurManager.getPromotionClients());
+						}
+						
+					break;
+				case 4:
+					if(compte.getPermissionbl() == 1){
+
+						List<Categorie> lscats = checkOutCatalogueProduit(categorie, compte);
+
+						products = new ArrayList<>();
+						products = myoffline.LoadProduits("");
+						for (int i = 0; i < products.size(); i++) {
+							for (int j = 0; j < sv.getAllProduits(-1).size(); j++) {
+								//Log.e(products.get(i).getId()+"",sv.getAllProduits().get(j).getRef());
+								if(Integer.parseInt(sv.getAllProduits(-1).get(j).getRef()) == products.get(i).getId()){
+									products.get(i).setQteDispo(products.get(i).getQteDispo() - sv.getAllProduits(-1).get(j).getQteDispo());
+								}
+							}
+						}
+
+						for (int j = 0; j < lscats.size(); j++) {
+							for (int i = 0; i < lscats.get(j).getProducts().size(); i++) {
+								for (int k = 0; k < products.size(); k++) {
+									if(lscats.get(j).getProducts().get(i).getId() == products.get(k).getId()){
+										lscats.get(j).getProducts().get(i).setQteDispo(products.get(k).getQteDispo());
+									}
+								}
+							}
+						}
+
+						if(lscats.size() > 0){
+							checkInCatalogueProduit(myoffline, lscats, compte);
+						}
+
+						checkInCommandeview(myoffline, checkOutCommandes(managercmd, compte), compte);
+
+					}
+					break;
+					
+				case 5:
+					paym = new ArrayList<>();
+					paym = checkOutPayement(payemnmanager, compte);
+					
+					checkInPayement(myoffline, paym, compte);
+					nbpay = paym.size();
+					break;
 			}
+			
 			
 			/*
 				List<Societe> lsosc = new ArrayList<>();
@@ -256,5 +400,37 @@ public class CheckOutSysc implements Serializable{
 		}
 		
 		return res;
+	}
+	
+	
+	/*********************** Reload basic data ***************************************/
+	// in == 0 all else in == 1 only client
+	public static int RelaodClientSectInfoCommDicto(Context context,ioffline myoffline,Compte compte,VendeurManager vendeurManager,CommercialManager manager,int in){
+		try {
+			switch (in) {
+			case 0:
+				List<Societe> lsosc = new ArrayList<>();
+				lsosc = checkOutAllSociete(manager, compte);
+				if(lsosc.size() > 0){
+					checkInSocietes(myoffline, lsosc, compte);
+				}
+				
+				checkInClientSecteur(myoffline, checkOutClientSecteur(vendeurManager, compte), compte);
+				
+				checkInDictionnaire(myoffline, checkOutDictionnaire(vendeurManager, compte));
+				
+				checkInCommercialInfo(myoffline, checkOutCommercialInfo(manager, compte), compte);
+				
+				
+				break;
+
+			default:
+				break;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return 0;
 	}
 }

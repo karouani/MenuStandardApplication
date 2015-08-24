@@ -3751,28 +3751,35 @@ public class Offlineimpl implements ioffline {
 		CleanCmdList();
 		CleanCmdToFactList();
 		
+		
 		for (int i = 0; i < data.getPros().size(); i++) {
-			shynchronizeProspection_out(data.getPros().get(i), cp);
+			//shynchronizeProspection_out(data.getPros().get(i), cp);
+			PutDeniededData(data.getPros().get(i), 1);
 		}
 		
 		for (int j = 0; j < data.getInvo().size(); j++) {
-			saveInvoice(data.getInvo().get(j));
+			//saveInvoice(data.getInvo().get(j));
+			PutDeniededData(data.getInvo().get(j), 2);
 		}
 		
 		for (int i = 0; i < data.getLsreg().size(); i++) {
-			shynchronizeReglement(data.getLsreg().get(i));
+			//shynchronizeReglement(data.getLsreg().get(i));
+			PutDeniededData(data.getLsreg().get(i), 3);
 		}
 		
 		for (int i = 0; i < data.getMsgps().size(); i++) {
-			shynchronizeGpsInvoice(data.getMsgps().get(i));
+			//shynchronizeGpsInvoice(data.getMsgps().get(i));
+			PutDeniededData(data.getMsgps().get(i), 4);
 		}
 		
 		for (int i = 0; i < data.getCmd().size(); i++) {
-			shynchornizeCmd(data.getCmd().get(i));
+			//shynchornizeCmd(data.getCmd().get(i));
+			PutDeniededData(data.getCmd().get(i), 5);
 		}
 		
 		for (int i = 0; i < data.getCmdview().size(); i++) {
-			shynchornizeCmdToFact(data.getCmdview().get(i));
+			//shynchornizeCmdToFact(data.getCmdview().get(i));
+			PutDeniededData(data.getCmdview().get(i), 6);
 		}
 		
 		return k;
@@ -5402,6 +5409,97 @@ public class Offlineimpl implements ioffline {
 		
 		CleanUpClients();
 		return 0;
+	}
+
+	@Override
+	public long PutDeniededData(Object in,int ob) {
+		// TODO Auto-generated method stub
+		file = new File(path, "/deniededdata.txt");
+		Log.e("filesavz",file.getPath());
+		FileOutputStream outputStream;
+
+		try {
+			if(!file.exists()){
+				file.createNewFile();
+				file.mkdir();
+				//Log.e("file not exist ","wloo wloo");
+			}
+
+			if(file.exists()){
+				FileWriter fw = new FileWriter(file, true);
+				PrintWriter pout = new PrintWriter(fw);
+				switch (ob) {
+				case 1:
+					pout.println("["+gson.toJson((Prospection)in,Prospection.class)+"]");
+					break;
+				case 2:
+					pout.println("["+gson.toJson((Myinvoice)in,Myinvoice.class)+"]");
+					break;
+				case 3:
+					pout.println("["+gson.toJson((Reglement)in,Reglement.class)+"]");
+					break;
+				case 4:
+					pout.println("["+gson.toJson((MyGpsInvoice)in,MyGpsInvoice.class)+"]");
+					break;
+				case 5:
+					pout.println("["+gson.toJson((Commande)in,Commande.class)+"]");
+					break;
+				case 6:
+					pout.println("["+gson.toJson((Commandeview)in,Commandeview.class)+"]");
+					break;
+				}
+						
+				pout.close();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return 0;
+	}
+
+	@Override
+	public void CleanAllDeniededData() {
+		// TODO Auto-generated method stub
+		try {
+			File file = new File(path, "/deniededdata.txt");
+			if(file.exists()){
+				FileWriter fw = new FileWriter(file,false);
+				PrintWriter pout = new PrintWriter(fw);
+				pout.print("");
+				pout.close();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	@Override
+	public List<String> LoadDenided(String fl) {
+		// TODO Auto-generated method stub
+		List<String> list = new ArrayList<String>();
+
+		try{
+			int n;
+
+			File file = new File(path, "/deniededdata.txt");
+			if(file.exists()){
+				//Log.e("data loaded exist  ",file.getAbsolutePath());
+				File secondInputFile = new File(file.getAbsolutePath());
+				InputStream secondInputStream = new BufferedInputStream(new FileInputStream(secondInputFile));
+				BufferedReader r = new BufferedReader(new InputStreamReader(secondInputStream));
+				StringBuilder total = new StringBuilder();
+				String line;
+				
+				while ((line = r.readLine()) != null) {
+					list.add(line);
+					}
+				}
+
+		}catch(Exception e){
+			Log.e("load deniede data error",e.getMessage()  +" << ");
+		}
+		return list;
 	}
 	
 }

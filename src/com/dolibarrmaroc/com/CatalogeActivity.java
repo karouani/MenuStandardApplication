@@ -36,7 +36,6 @@ import com.dolibarrmaroc.com.utils.PayementManagerFactory;
 import com.dolibarrmaroc.com.utils.TinyDB;
 import com.dolibarrmaroc.com.utils.UrlImage;
 import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
-
 import com.dolibarrmaroc.com.database.DatabaseHandler;
 import com.dolibarrmaroc.com.database.StockVirtual;
 import com.dolibarrmaroc.com.offline.Offlineimpl;
@@ -482,7 +481,7 @@ public class CatalogeActivity extends Activity implements OnItemSelectedListener
 	}
 
 	
-
+/*
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -503,7 +502,7 @@ public class CatalogeActivity extends Activity implements OnItemSelectedListener
 		
 		return true; //super.onOptionsItemSelected(item);
 	}
-	
+	*/
 	public void alertPutQty(){
 		try {
 			Builder dialog = new AlertDialog.Builder(CatalogeActivity.this);
@@ -683,7 +682,7 @@ public class CatalogeActivity extends Activity implements OnItemSelectedListener
 			Log.e("erreur",e.getMessage() +" << ");
 		}
 	}
-
+/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -701,7 +700,7 @@ public class CatalogeActivity extends Activity implements OnItemSelectedListener
 		searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 		searchView.setSubmitButtonEnabled(true);
 		searchView.setOnQueryTextListener(this);
-*/
+*
 		
 		//menu.removeItem(R.id.viewcmdpr);
 		if(compte != null){
@@ -712,7 +711,7 @@ public class CatalogeActivity extends Activity implements OnItemSelectedListener
 		//handleIntent(getIntent());
 		return super.onCreateOptionsMenu(menu);
 	}
-
+*/
 
 	
 	public void remplireListview(List<Categorie> fc ){
@@ -1239,7 +1238,7 @@ public class CatalogeActivity extends Activity implements OnItemSelectedListener
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-
+			/*
 			new AlertDialog.Builder(this)
 			.setTitle(getResources().getString(R.string.cmdtofc8))
 			.setMessage(getResources().getString(R.string.tecv47))
@@ -1248,6 +1247,7 @@ public class CatalogeActivity extends Activity implements OnItemSelectedListener
 
 				public void onClick(DialogInterface arg0, int arg1) {
 					//VendeurActivity.super.onBackPressed();
+					
 					Intent intent1 = new Intent(CatalogeActivity.this, ConnexionActivity.class);
 					intent1.putExtra("user", compte);
 					intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -1258,10 +1258,13 @@ public class CatalogeActivity extends Activity implements OnItemSelectedListener
 					stopService(intentService);
 
 					CatalogeActivity.this.finish();
+					
 
 				}
 
 			}).create().show();
+			*/
+			onClickHome(LayoutInflater.from(CatalogeActivity.this).inflate(R.layout.activity_cataloge, null));
 		}
 		return false;
 	}

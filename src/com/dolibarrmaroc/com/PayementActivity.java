@@ -429,14 +429,20 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 			}).create().show();
 			
 			*/
+			/*
 			Intent intent1 = new Intent(PayementActivity.this, VendeurActivity.class);
 			intent1.putExtra("user", compte);
 			startActivity(intent1);
 			PayementActivity.this.finish();
+			*/
+			
+			onClickHome(LayoutInflater.from(PayementActivity.this).inflate(R.layout.activity_payement, null));
 			return true;
 		}
 		return false;
 	}
+	
+/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -455,7 +461,7 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+*/
 
 	class ConnexionTask extends AsyncTask<Void, Void, String> {
 
@@ -730,7 +736,7 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 			}else{
 				/*********************** offline ****************************************/
 				if(CheckOutNet.isNetworkConnected(PayementActivity.this)){
-					CheckOutSysc.ReloadProdClt(PayementActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0,managercom);
+					CheckOutSysc.ReloadProdClt(PayementActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 5,managercom);
 				}
 				
 			}
@@ -1375,7 +1381,7 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 			}else{
 				/*********************** offline ****************************************/
 				if(CheckOutNet.isNetworkConnected(PayementActivity.this)){
-					CheckOutSysc.ReloadProdClt(PayementActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0,managercom);
+					CheckOutSysc.ReloadProdClt(PayementActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 5,managercom);
 				}
 				
 			}
@@ -1391,7 +1397,7 @@ public class PayementActivity extends Activity implements OnItemSelectedListener
 					
 					if(vl.equals("ok")){
 						
-						Intent intent1 = new Intent(PayementActivity.this, ConnexionActivity.class);
+						Intent intent1 = new Intent(PayementActivity.this, HomeActivity.class);
 						intent1.putExtra("user", compte);
 						startActivity(intent1);
 						PayementActivity.this.finish();

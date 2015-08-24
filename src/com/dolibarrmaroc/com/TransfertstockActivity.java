@@ -53,6 +53,7 @@ import android.os.StrictMode;
 import android.os.PowerManager.WakeLock;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -342,7 +343,7 @@ public class TransfertstockActivity extends Activity implements OnClickListener,
 			s.setAdapter(dataAdapter);
 
 	}
-
+/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -361,7 +362,7 @@ public class TransfertstockActivity extends Activity implements OnClickListener,
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+*/
 	@Override
 	public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 			long arg3) {
@@ -503,11 +504,15 @@ public class TransfertstockActivity extends Activity implements OnClickListener,
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			/*
 			Intent intent = new Intent(this, ConnexionActivity.class);
 			intent.putExtra("user", compte);
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
 			startActivity(intent);
 			TransfertstockActivity.this.finish();
+			*/
+			
+			onClickHome(LayoutInflater.from(TransfertstockActivity.this).inflate(R.layout.activity_transfertstock, null));
 			return true;
 		}
 		return false;

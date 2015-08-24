@@ -272,6 +272,7 @@ public class OfflineActivity extends Activity implements OnItemClickListener{
 		super.onStart();
 	}
 
+	/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -282,17 +283,24 @@ public class OfflineActivity extends Activity implements OnItemClickListener{
 		
 		
 	}
+	*/
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			/*
 			OfflineActivity.this.finish();
 			Intent intent1 = new Intent(OfflineActivity.this, VendeurActivity.class);
 			intent1.putExtra("user", compte);
 			startActivity(intent1);
+			*/
+			
+			onClickHome(LayoutInflater.from(OfflineActivity.this).inflate(R.layout.activity_offline, null));
 		}
 		return false;
 	}
+	
+	/*
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -304,10 +312,10 @@ public class OfflineActivity extends Activity implements OnItemClickListener{
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-		*/
+		*
 		
 		switch (item.getItemId()) {
-		/************************MENU Carte *****************************************/
+		/************************MENU Carte *****************************************
 		case R.id.reglofflineticket:
 			Intent photosIntent = new Intent(this, ReglementOfflineActivity.class);
 			photosIntent.putExtra("user", compte);
@@ -317,6 +325,7 @@ public class OfflineActivity extends Activity implements OnItemClickListener{
 		}
 		return true;
 	}
+	*/
 	class offlineTask extends AsyncTask<Void, Void, String> {
 
 

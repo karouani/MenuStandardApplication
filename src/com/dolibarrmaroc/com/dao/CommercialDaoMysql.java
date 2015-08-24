@@ -280,4 +280,6 @@ public class CommercialDaoMysql implements CommercialDao{
 		}
 		return list;
 	}
+
+	
 }

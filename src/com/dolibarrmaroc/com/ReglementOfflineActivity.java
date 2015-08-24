@@ -207,7 +207,9 @@ public class ReglementOfflineActivity extends Activity implements OnItemClickLis
 		}
 
 	}
+
 	
+/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -230,7 +232,7 @@ public class ReglementOfflineActivity extends Activity implements OnItemClickLis
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+*/
 	 
 
 	@Override
@@ -262,10 +264,14 @@ public class ReglementOfflineActivity extends Activity implements OnItemClickLis
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			/*
 			ReglementOfflineActivity.this.finish();
 			Intent intent1 = new Intent(ReglementOfflineActivity.this, VendeurActivity.class);
 			intent1.putExtra("user", compte);
 			startActivity(intent1);
+			*/
+			
+			onClickHome(LayoutInflater.from(ReglementOfflineActivity.this).inflate(R.layout.activity_reglement_offline, null));
 			
 		}
 		return false;

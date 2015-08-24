@@ -161,7 +161,31 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 
 	@Override
 	public void onBackPressed() {
-		NextEtapeActivity.this.finish();
+		//NextEtapeActivity.this.finish();
+		
+		AlertDialog.Builder alert = new AlertDialog.Builder(NextEtapeActivity.this);
+		alert.setTitle(getResources().getString(R.string.cmdtofc10));
+		alert.setMessage(getResources().getString(R.string.cmdtofc34));
+		alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface d, int arg1) {
+				//VendeurActivity.super.onBackPressed();
+				d.dismiss();
+
+			}
+
+		});
+		alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface d, int arg1) {
+				//VendeurActivity.super.onBackPressed();
+				onClickHome(LayoutInflater.from(NextEtapeActivity.this).inflate(R.layout.activity_next_etape, null));
+			}
+
+		});
+		alert.setCancelable(false);
+		alert.create();
+		alert.show();
 	}
 
 
@@ -666,7 +690,8 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 				}
 			}
 			
-			CheckOutSysc.ReloadProdClt(NextEtapeActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0,managercom);
+			CheckOutSysc.ReloadProdClt(NextEtapeActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 2,managercom);
+			CheckOutSysc.ReloadProdClt(NextEtapeActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 5,managercom);
 			
 			
 			return null;
@@ -848,7 +873,8 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 				
 			}
 			
-			CheckOutSysc.ReloadProdClt(NextEtapeActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 0,managercom);
+			CheckOutSysc.ReloadProdClt(NextEtapeActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 2,managercom);
+			CheckOutSysc.ReloadProdClt(NextEtapeActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 5,managercom);
 
 			
 			return null;
@@ -1252,7 +1278,7 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
  	 	     dialog.setTitle(R.string.caus9);
  	 	     dialog.setPositiveButton(R.string.caus8, new DialogInterface.OnClickListener() {
  	 	        public void onClick(DialogInterface dialog, int which) { 
- 	 	        	Intent intent =new Intent(NextEtapeActivity.this,ConnexionActivity.class);//EsignatureActivity
+ 	 	        	Intent intent =new Intent(NextEtapeActivity.this,HomeActivity.class);//EsignatureActivity
 					intent.putExtra("user", compte);
 					startActivity(intent);
  	 	        	 dialog.cancel();
@@ -1292,7 +1318,7 @@ public class NextEtapeActivity extends Activity implements OnClickListener,OnIte
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				Intent intent = new Intent(NextEtapeActivity.this,ConnexionActivity.class);
+				Intent intent = new Intent(NextEtapeActivity.this,HomeActivity.class);
 				intent.putExtra("user", compte);
 				startActivity(intent);
 				NextEtapeActivity.this.finish();

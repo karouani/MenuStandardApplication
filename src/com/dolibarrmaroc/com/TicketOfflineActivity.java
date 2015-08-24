@@ -227,7 +227,7 @@ public class TicketOfflineActivity extends Activity {
 
 				@Override
 				public void onClick(View arg0) {
-					Intent intent = new Intent(TicketOfflineActivity.this, ConnexionActivity.class);
+					Intent intent = new Intent(TicketOfflineActivity.this, HomeActivity.class);
 					intent.putExtra("user", compte);
 					startActivity(intent);
 					TicketOfflineActivity.this.finish();

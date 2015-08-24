@@ -305,7 +305,8 @@ public class EsignatureActivity extends Activity {
 						startActivity(intent);	
 					}else{
 						if("finishyes".equals(pdf)){
-							Intent intent = new Intent(EsignatureActivity.this,ConnexionActivity.class);
+							Intent intent = new Intent(EsignatureActivity.this,HomeActivity.class);
+							intent.putExtra("user", compte);
 							startActivity(intent);
 							wl.release();
 						}

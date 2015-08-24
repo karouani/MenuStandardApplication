@@ -124,6 +124,11 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 		db = new TinyDB(this);
 		db.clear();
 
+		Calendar cl = Calendar.getInstance(TimeZone.getTimeZone("Africa/Casablanca"));
+		cl.add(Calendar.DAY_OF_MONTH, 30);
+		Log.e(">>> new date ",cl.get(Calendar.YEAR)+"/"+(cl.get(Calendar.MONTH)+1)+"/"+cl.get(Calendar.DAY_OF_MONTH));
+		
+		
 		try {
 			forcer = new ForcerActivationGps(this);
 
@@ -132,7 +137,12 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 				StrictMode.setThreadPolicy(policy);
 			}
 
+			login = (EditText) findViewById(R.id.login);
+			password = (EditText) findViewById(R.id.password);
+			souvenir = (CheckBox) findViewById(R.id.souvenir);
 
+			connexion = (Button) findViewById(R.id.connecter);
+			connexion.setOnClickListener(this);
 
 			//Getting the Object of TelephonyManager 
 			TelephonyManager tManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
@@ -186,27 +196,23 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 				if(compte != null){
 					basedonne = true;
 					
-					//compte = myoffline.LoadCompte(compte.getLogin(), compte.getPassword());  
+					compte = myoffline.LoadCompte(compte.getLogin(), compte.getPassword());  
 
 					/*
 					dialog = ProgressDialog.show(ConnexionActivity.this, "Connexion",
 							getResources().getString(R.string.msg_wait), true);
 					new ConnexionTask().execute();
 					 */
+					
 					Intent intent1 = new Intent(ConnexionActivity.this, HomeActivity.class);
 					intent1.putExtra("user", compte);
 					startActivity(intent1);
+					
 				}else{
-					Log.d("Compte null ",compte.toString());
 
 					mydb.deleteUser(imei);
 					basedonne = false;
-					login = (EditText) findViewById(R.id.login);
-					password = (EditText) findViewById(R.id.password);
-					souvenir = (CheckBox) findViewById(R.id.souvenir);
-
-					connexion = (Button) findViewById(R.id.connecter);
-					connexion.setOnClickListener(this);
+					
 				}
 
 
@@ -216,20 +222,18 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 
 				basedonne = false;
 
-				login = (EditText) findViewById(R.id.login);
-				password = (EditText) findViewById(R.id.password);
-				souvenir = (CheckBox) findViewById(R.id.souvenir);
-
-				connexion = (Button) findViewById(R.id.connecter);
-				connexion.setOnClickListener(this);
+				
 			}
 
 			Bundle objetbunble  = this.getIntent().getExtras();
 
 			if (objetbunble != null) {
 				compte = (Compte) getIntent().getSerializableExtra("user");
-				login.setText(compte.getLogin());
-				password.setText(compte.getPassword());
+				if(compte != null){
+					login.setText(compte.getLogin());
+					password.setText(compte.getPassword());
+				}
+				
 			}
 
 
@@ -431,7 +435,7 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 
 				if(!myoffline.checkFolderexsiste()){
 					showmessageOffline();
-				}else{
+				}else if(compte != null){
 					myoffline.shynchronizeCompte(compte);
 					myoffline.shynchronizeSociete(auth.lodSociete(""));
 
@@ -546,6 +550,8 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 			
 			try {
 				Log.e("in offline cpt","star");
+				mydb = new DBHandler(ConnexionActivity.this);
+
 				
 				if(!myoffline.checkFolderexsiste()){
 					showmessageOffline();
@@ -605,6 +611,25 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 						default: 
 							String act = compte.getProfile();
 							act  = act.toLowerCase();
+							
+							if (db.getList("login") != null) {
+								db.remove("login");
+							}
+
+							GregorianCalendar calendar = new GregorianCalendar();
+							//TimeZone.getTimeZone("Africa/Casablanca")
+							calendar.setTimeZone(TimeZone.getTimeZone("Africa/Casablanca"));
+
+
+							long timeStamp = calendar.getTimeInMillis()/1000;
+
+							if (souvenir.isChecked()) {
+								mydb.insertUser(log, pass, timeStamp, 1, imei, act , compte.getId());
+							}
+							ArrayList<String> auton = new ArrayList<>();
+							auton.add(log);
+							auton.add(pass);
+							db.putList("login", auton);
 
 							Intent intent1 = new Intent(ConnexionActivity.this, HomeActivity.class);
 							intent1.putExtra("user", compte);

@@ -42,6 +42,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.*;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +52,7 @@ public class CmdPayActivity extends ActionBarActivity {
 
 	
 	private TextView msgres;
+	private Button btn;
 
 	
 	//Declaration Objet
@@ -88,11 +91,20 @@ public class CmdPayActivity extends ActionBarActivity {
 		}
 		
 		msgres = (TextView)findViewById(R.id.syscmsgres);
+		btn = (Button)findViewById(R.id.syscbtn);
 		
+		btn.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				synchronisation();
+			}
+		});
 		msg = "";
 		
 		
-		synchronisation();
+		
 	
 	}
 

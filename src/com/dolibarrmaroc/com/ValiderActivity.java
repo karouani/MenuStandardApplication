@@ -185,7 +185,7 @@ public class ValiderActivity extends Activity {
 						long ix = myoffline.shynchronizeBluetooth(new MyTicketBluetooth("", me, ticket, remises));
 						
 						//if(ix > -1){
-							Intent intent1 = new Intent(ValiderActivity.this, ConnexionActivity.class);
+							Intent intent1 = new Intent(ValiderActivity.this, HomeActivity.class);
 							intent1.putExtra("user", compte);
 							startActivity(intent1);
 							ValiderActivity.this.finish();
@@ -235,12 +235,12 @@ public class ValiderActivity extends Activity {
 
 
 					long ix = myoffline.shynchronizePayemntTicket(new MyTicketPayement(compte, ticket, offlineticket, clt, mypay, myreg, lsreg));
-					Intent intent1 = new Intent(ValiderActivity.this, ConnexionActivity.class);
+					Intent intent1 = new Intent(ValiderActivity.this, HomeActivity.class);
 					intent1.putExtra("user", compte);
 					startActivity(intent1);
 					ValiderActivity.this.finish();
 				}else{
-					Intent intent1 = new Intent(ValiderActivity.this, ConnexionActivity.class);
+					Intent intent1 = new Intent(ValiderActivity.this, HomeActivity.class);
 					intent1.putExtra("user", compte);
 					startActivity(intent1);
 					ValiderActivity.this.finish();
@@ -248,7 +248,7 @@ public class ValiderActivity extends Activity {
 			}
 			
 			
-			Intent intent1 = new Intent(ValiderActivity.this, ConnexionActivity.class);
+			Intent intent1 = new Intent(ValiderActivity.this, HomeActivity.class);
 			intent1.putExtra("user", compte);
 			startActivity(intent1);
 			ValiderActivity.this.finish();

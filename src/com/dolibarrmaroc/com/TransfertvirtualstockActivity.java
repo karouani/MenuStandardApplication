@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -185,7 +186,7 @@ public class TransfertvirtualstockActivity extends Activity {
 	}
 	
 	
-
+/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -204,7 +205,7 @@ public class TransfertvirtualstockActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+	*/
 	public SimpleAdapter getSimple(int nmb){
 		// create the grid item mapping
 		SimpleAdapter adap;
@@ -424,5 +425,14 @@ public class TransfertvirtualstockActivity extends Activity {
 		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity (intent);
 		this.finish();
+	}
+	
+	@Override
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			onClickHome(LayoutInflater.from(TransfertvirtualstockActivity.this).inflate(R.layout.activity_transfertvirtualstock, null));
+			return true;
+		}
+		return false;
 	}
 }

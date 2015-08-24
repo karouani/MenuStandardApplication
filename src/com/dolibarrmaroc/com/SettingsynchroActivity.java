@@ -11,6 +11,7 @@ import com.dolibarrmaroc.com.models.MyfactureAdapter;
 import com.dolibarrmaroc.com.models.Myinvoice;
 import com.dolibarrmaroc.com.models.Prospection;
 import com.dolibarrmaroc.com.models.Reglement;
+import com.dolibarrmaroc.com.database.DBHandler;
 import com.dolibarrmaroc.com.database.DatabaseHandler;
 import com.dolibarrmaroc.com.database.StockVirtual;
 import com.dolibarrmaroc.com.offline.Offlineimpl;
@@ -158,7 +159,7 @@ public class SettingsynchroActivity extends Activity {
 		}
 
 	}
-
+/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -178,7 +179,7 @@ public class SettingsynchroActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+*/
 	public void alertchachedel(int n){
 		try {
 			Builder dialog = new AlertDialog.Builder(SettingsynchroActivity.this);
@@ -283,6 +284,10 @@ public class SettingsynchroActivity extends Activity {
 								
 								StockVirtual sv = new StockVirtual(SettingsynchroActivity.this);
 								sv.cleantables("");// clean les produits echanges + rendus
+								sv.cleantablesSysc("");
+								
+								DBHandler mydb = new DBHandler(SettingsynchroActivity.this);
+								mydb.deleteUserAll();
 								/*
 								myoffline.CleanProspection();
 								
@@ -428,17 +433,21 @@ public class SettingsynchroActivity extends Activity {
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			/*
 			SettingsynchroActivity.this.finish();
 			Intent intent1 = new Intent(SettingsynchroActivity.this, VendeurActivity.class);
 			intent1.putExtra("user", compte);
 			startActivity(intent1);
+			*/
+			
+			onClickHome(LayoutInflater.from(SettingsynchroActivity.this).inflate(R.layout.activity_settingsynchro, null));
 		}
 		return false;
 	}
 	
 	
 	public void onClickHome(View v){
-		Intent intent = new Intent(this, HomeActivity.class);
+		Intent intent = new Intent(this, SynchronisationHomeActivity.class);
 		intent.putExtra("user", compte);
 		intent.setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity (intent);

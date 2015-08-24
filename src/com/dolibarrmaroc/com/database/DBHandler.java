@@ -151,6 +151,20 @@ public class DBHandler extends SQLiteOpenHelper {
 		}
 		return x;
 	}
+	
+	public Integer deleteUserAll()
+	{
+		SQLiteDatabase db = this.getWritableDatabase();
+		int x = 0;
+		try{
+			 x = db.delete("utilisateurs", 
+					null, 
+					null);
+		}finally{
+			db.close();
+		}
+		return x;
+	}
 
 	public Compte getAll()
 	{

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
 import com.dolibarrmaroc.com.ConnexionActivity;
 import com.dolibarrmaroc.com.DeviceListActivity;
+import com.dolibarrmaroc.com.HomeActivity;
 import com.dolibarrmaroc.com.OfflineActivity;
 import com.dolibarrmaroc.com.R;
 import com.dolibarrmaroc.com.models.Client;
@@ -172,7 +173,7 @@ public class ReglementTicketActivity extends Activity {
 
 				@Override
 				public void onClick(View arg0) {
-					Intent intent = new Intent(ReglementTicketActivity.this, ConnexionActivity.class);
+					Intent intent = new Intent(ReglementTicketActivity.this, HomeActivity.class);
 					intent.putExtra("user", compte);
 					startActivity(intent);
 					ReglementTicketActivity.this.finish();

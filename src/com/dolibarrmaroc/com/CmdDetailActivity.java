@@ -299,7 +299,7 @@ public class CmdDetailActivity extends Activity {
 
 	 
 
-
+/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -319,7 +319,7 @@ public class CmdDetailActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-
+*/
  
 
 	public void showmessageOffline(){
@@ -425,6 +425,7 @@ public class CmdDetailActivity extends Activity {
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 
+			
 			Intent intent1 = new Intent(CmdDetailActivity.this, CmdViewActivity.class);
 			intent1.putExtra("user", compte);
 			intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -476,7 +477,7 @@ public class CmdDetailActivity extends Activity {
 			myoffline = new Offlineimpl(CmdDetailActivity.this);
 			
 			if(CheckOutNet.isNetworkConnected(CmdDetailActivity.this)){
-				CheckOutSysc.ReloadProdClt(CmdDetailActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 1,managercom);
+				CheckOutSysc.ReloadProdClt(CmdDetailActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 5,managercom);
 			}
 			
 

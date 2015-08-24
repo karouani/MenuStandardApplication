@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -29,6 +30,7 @@ public class StockVirtual extends SQLiteOpenHelper {
 	//  tableS name
 	private static final String TABLE_PROD = "storageprod";
 	private static final String TABLE_SYNCRO = "storagesynchronisation";
+	private static final String TABLE_SYNERROR = "storagesyncroerror";
 
 
 	// Table Columns names
@@ -61,6 +63,12 @@ public class StockVirtual extends SQLiteOpenHelper {
 			String cr1 = "CREATE TABLE " + TABLE_SYNCRO + "("
 					+ KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_DT + " VARCHAR(30), "+KEY_ISIT+" INTEGER )";
 			db.execSQL(cr1);
+
+		
+			String cr2 = "CREATE TABLE " + TABLE_SYNERROR + "("
+					+ KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_DT + " VARCHAR(30), "+KEY_ISIT+" INTEGER )";
+			db.execSQL(cr2);
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			Log.e("erreur ","creation data table");
@@ -118,6 +126,19 @@ public class StockVirtual extends SQLiteOpenHelper {
 		try {
 			SQLiteDatabase db = this.getWritableDatabase();
 			db.execSQL("delete from "+TABLE_PROD);
+			db.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return id;
+	}
+	
+	public long cleantablesSysc(String tb){
+		long id =-1;
+		try {
+			SQLiteDatabase db = this.getWritableDatabase();
+			db.execSQL("delete from "+TABLE_SYNCRO);
+			db.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -304,7 +325,7 @@ public class StockVirtual extends SQLiteOpenHelper {
 			Cursor cursor = db.rawQuery(selectQuery, nm);
 
 			// looping through all rows and adding to list
-			Log.e("hello ",cursor.getCount()+"");
+			Log.e("hello >> ",cursor.getCount()+"");
 			if(cursor.getCount() == 0){
 				db.close();
 				addrowcheckout();
@@ -312,7 +333,7 @@ public class StockVirtual extends SQLiteOpenHelper {
 			}else{
 				if (cursor.moveToFirst()) {
 					do {
-						Log.e(">>> sysc ",cursor.getString(1)+"  "+cursor.getInt(2));
+						//Log.e(">>> sysc ",cursor.getString(1)+"  "+cursor.getInt(2));
 						dt = cursor.getString(1);
 						//break;
 					} while (cursor.moveToNext());
@@ -329,6 +350,111 @@ public class StockVirtual extends SQLiteOpenHelper {
 					
 					
 					if(in > out){
+						Log.e("sys Time ",in +" in##out "+out);
+						db.close();
+						addrowcheckout();
+						return 1;
+					}
+				}
+				
+				
+			}
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e("errror sysc get ",e.getMessage() +"");
+			return -1;
+		}
+
+		return -1;
+	}   
+	
+	/**************************  synchronisation of error data ***********************************/
+	public long addrowcheckouterror() {
+		long id =-1;
+		try {
+
+			deleteChechouterror();
+
+			SQLiteDatabase db = this.getWritableDatabase();
+
+			ContentValues values = new ContentValues();
+			
+			Calendar cl = Calendar.getInstance(TimeZone.getTimeZone("Africa/Casablanca"));
+			int y       = cl.get(Calendar.YEAR);
+			int m      = cl.get(Calendar.MONTH)+1; // Jan = 0, dec = 11
+			int d = cl.get(Calendar.DAY_OF_MONTH); 
+			
+			values.put(KEY_DT, y+""+m+""+d);
+			values.put(KEY_ISIT, 1);
+
+			// Inserting Row
+			id = db.insert(TABLE_SYNERROR, null, values);
+			
+			db.close(); // Closing database connection
+
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e("insert data","insert data");
+		}
+		return id;
+	}
+
+	public void deleteChechouterror() {
+		try {
+			SQLiteDatabase db = this.getWritableDatabase();
+			db.execSQL("DELETE FROM "+TABLE_SYNERROR);
+			db.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			Log.e("error delete sysc ","sysc");
+		}
+	}
+
+	public int getSycerror() {
+		// Select All Query
+		String dt = "";
+		int n = -1;
+		try {
+			String selectQuery = "";
+			String[] nm = null;
+			selectQuery = "SELECT * FROM " + TABLE_SYNERROR;
+
+
+			SQLiteDatabase db = this.getWritableDatabase();
+			Cursor cursor = db.rawQuery(selectQuery, nm);
+
+			if(cursor.getCount() == 0){
+				db.close();
+				addrowcheckouterror();
+				return 1;
+			}else{
+				if (cursor.moveToFirst()) {
+					do {
+						dt = cursor.getString(1);
+						n = cursor.getInt(2);
+					} while (cursor.moveToNext());
+				}
+				
+				Calendar cl = Calendar.getInstance(TimeZone.getTimeZone("Africa/Casablanca"));
+				int y       = cl.get(Calendar.YEAR);
+				int m      = cl.get(Calendar.MONTH)+1; // Jan = 0, dec = 11
+				int d = cl.get(Calendar.DAY_OF_MONTH); 
+				
+				cl.add(Calendar.DAY_OF_MONTH, 30);
+				Log.e(">>> new date ",cl.get(Calendar.YEAR)+"/"+(cl.get(Calendar.MONTH)+1)+"/"+cl.get(Calendar.DAY_OF_MONTH));
+				
+				long in = Long.parseLong(y+""+m+""+d);
+				
+				Calendar calendar = new GregorianCalendar(2013,1,28,13,24,56);
+				if(!"".equals(dt)){
+					long out = Long.parseLong(dt);
+					
+					
+					if(in > out && n==1){
 						Log.e("sys Time ",in +" in##out "+out);
 						db.close();
 						addrowcheckout();

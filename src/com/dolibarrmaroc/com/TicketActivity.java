@@ -235,7 +235,7 @@ public class TicketActivity extends Activity {
 
 				@Override
 				public void onClick(View arg0) {
-					Intent intent = new Intent(TicketActivity.this, ConnexionActivity.class);
+					Intent intent = new Intent(TicketActivity.this, HomeActivity.class);
 					intent.putExtra("user", compte);
 					startActivity(intent);
 					TicketActivity.this.finish();
@@ -959,7 +959,7 @@ public class TicketActivity extends Activity {
 			startActivity(intent4);
 			
 			*/
-			Intent intent1 = new Intent(TicketActivity.this, ConnexionActivity.class);
+			Intent intent1 = new Intent(TicketActivity.this, HomeActivity.class);
 			intent1.putExtra("user", compte);
 			intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
 			startActivity(intent1);

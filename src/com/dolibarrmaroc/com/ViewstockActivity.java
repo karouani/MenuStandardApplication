@@ -170,7 +170,7 @@ public class ViewstockActivity extends Activity implements OnItemClickListener,O
 		
 		
 	}
-
+/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -189,7 +189,7 @@ public class ViewstockActivity extends Activity implements OnItemClickListener,O
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+	*/
 	
 	public void addItemsOnSpinner(AutoCompleteTextView s,int type) {
 
@@ -706,10 +706,34 @@ public class ViewstockActivity extends Activity implements OnItemClickListener,O
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			Intent intent = new Intent(this, TransfertstockActivity.class);
-			intent.putExtra("user", compte);
-			startActivity(intent);
-			ViewstockActivity.this.finish();
+			
+			
+			AlertDialog.Builder alert = new AlertDialog.Builder(ViewstockActivity.this);
+			alert.setTitle(getResources().getString(R.string.cmdtofc10));
+			alert.setMessage(getResources().getString(R.string.cmdtofc34));
+			alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface d, int arg1) {
+					//VendeurActivity.super.onBackPressed();
+					d.dismiss();
+
+				}
+
+			});
+			alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+				public void onClick(DialogInterface d, int arg1) {
+					//VendeurActivity.super.onBackPressed();
+					Intent intent = new Intent(ViewstockActivity.this, TransfertstockActivity.class);
+					intent.putExtra("user", compte);
+					startActivity(intent);
+					ViewstockActivity.this.finish();
+				}
+
+			});
+			alert.setCancelable(false);
+			alert.create();
+			alert.show();
 			return true;
 		}
 		return false;

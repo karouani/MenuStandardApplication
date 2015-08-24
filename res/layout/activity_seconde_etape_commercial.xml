@@ -4,6 +4,20 @@
     android:layout_height="match_parent"
     tools:context=".SecondeEtapeCommercialActivity" >
 
+    <LinearLayout 
+        android:id="@+id/l1"
+        style="@style/TitleBar">
+        <ImageButton style="@style/TitleBarAction"
+            android:contentDescription="@string/description_home"
+            android:src="@drawable/title_home"
+            android:onClick="onClickHome" />
+
+        <ImageView style="@style/TitleBarSeparator" />
+
+        <TextView style="@style/TitleBarText" android:text="@string/title_activity_seconde_etape_commercial"/>
+        
+    </LinearLayout>
+    
     <Button
         android:id="@+id/comm_save"
         android:layout_width="match_parent"
@@ -19,9 +33,8 @@
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:orientation="vertical"
+        android:layout_below="@+id/l1"
         android:padding="5dp" >
 
         <EditText

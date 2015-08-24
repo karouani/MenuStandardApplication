@@ -249,6 +249,7 @@ public class CmdViewActivity extends Activity implements OnItemClickListener{
 		super.onStart();
 	}
 
+	/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -256,18 +257,22 @@ public class CmdViewActivity extends Activity implements OnItemClickListener{
 		
 		
 	}
-
+*/
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			/*
 			CmdViewActivity.this.finish();
 			Intent intent1 = new Intent(CmdViewActivity.this, CatalogeActivity.class);
 			intent1.putExtra("user", compte);
 			intent1.putExtra("cmd", "1");
 			startActivity(intent1);
+			*/
+			onClickHome(LayoutInflater.from(CmdViewActivity.this).inflate(R.layout.activity_cmd_view, null));
 		}
 		return false;
 	}
+	/*
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
@@ -276,6 +281,7 @@ public class CmdViewActivity extends Activity implements OnItemClickListener{
 		 
 		return true;
 	}
+	*/
 	
 	class ConnexionTask extends AsyncTask<Void, Void, String> {
 

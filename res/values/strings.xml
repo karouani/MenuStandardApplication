@@ -4,10 +4,10 @@
     <string name="app_name">GOOGLE+ APPLICATION</string>
     <string name="hello_world">GEO.COM!</string>
     <string name="action_settings">Settings</string>
-    <string name="mapKey">AIzaSyD6v5nSGrKHFzfngOhA-WcPGBEEUbNSV9Q</string>
+    <string name="mapKey">AIzaSyBs7LDzcCTU1sDJccSM7UF6Bz4RVc8RNek</string>
     <string name="title_activity_connexion">GEO.COM</string>
 
-<!--     	********************************* DASHBOARD ********************************* -->
+    <!-- ********************************* DASHBOARD ********************************* -->
     <string name="description_logo">Demo</string>
     <string name="description_about">About</string>
     <string name="description_home">Home</string>
@@ -18,11 +18,10 @@
     <string name="description_tiers">Tiers</string>
     <string name="description_stock">Stocks</string>
     <string name="description_sync">Sync</string>
-     <string name="description_livreur">Livraison</string>
-     <string name="description_state">Statistiques</string>
-     <string name="description_intervention">Intervention</string>
-     
-     <string name="title_recherche">Recherche....</string>
+    <string name="description_livreur">Livraison</string>
+    <string name="description_state">Statistiques</string>
+    <string name="description_intervention">Intervention</string>
+    <string name="title_recherche">Recherche....</string>
     <string name="title_about">A propos de nous</string>
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
@@ -39,8 +38,7 @@
     <string name="feature4_intro">Feature 4 content goes here.</string>
     <string name="feature5_intro">Feature 5 content goes here.</string>
     <string name="feature6_intro">Feature 6 content goes here.</string>
-    <string name="about_intro">
-        "<font size="15"><b><u>Historique</u></b></font>\n\r
+    <string name="about_intro">        "<font size="15"><b><u>Historique</u></b></font>\n\r
 		    \n\r2007 : Création de GEO.COM
 		    Fin 2009 : Fin de la phase de dévelopement des softs et début de la commercialisation.\n\r
 		    2012 : Mises à jours importantes, avec  l\'intégration de différents modèles et marques de balises GPS/GPRS.\n\r
@@ -55,9 +53,7 @@
 		    Ingénieurs : 4\n\r
 		    Assistantes de direction : 1\n\r
 		    Techniciens : 3\n\r
-		\n\r"
-		</string>
-	
+		\n\r"</string>
     <string name="about_email"><font size="15"><b><u>En savoir plus sur notre site : <a href="http://dolibarrmaroc.com">GEO.COM</a></u></b></font></string>
     <string name="search_intro">Content for the Search page goes here.</string>
 
@@ -122,7 +118,7 @@
     <string name="regle">A REGLER:</string>
     <string name="rested">RESTE:</string>
     <string name="produit_min">Ajouter au moin un produit au Facture ! </string>
-      <string name="produit_min2">Ajouter au moin un produit au panier </string>
+    <string name="produit_min2">Ajouter au moin un produit au panier </string>
     <string name="promo_alert">Promotion</string>
     <string name="promo_msg">Vous avez demandé plus que la quantité que vous avez %1$s \n </string>
     <string name="promotion_list">Liste des promotions</string>
@@ -137,8 +133,8 @@
     <string name="title_activity_commercial">GEO.COM</string>
     <string name="title_activity_technicien">GEO.COM</string>
     <string name="title_activity_tracking">GEO.COM</string>
-	 <string name="action_save">Se souvenir de moi</string>
-	 
+    <string name="action_save">Se souvenir de moi</string>
+
     <!-- Cote tracking -->
     <string name="btn_track">Enregistrer</string>
     <string name="btn_step">Step</string>
@@ -410,78 +406,79 @@
     <string name="title_activity_cmd_view">Consulter mes commandes</string>
     <string name="title_activity_cmd_detail">Détail commande</string>
     <string name="title_activity_cmd_pay">Facturer une commande</string>
-    
+
     <!-- message de confirmation -->
     <string name="cmdtofc1">Le transfert de votre commande est bien effectuer</string>
     <string name="cmdtofc2">Vérifier votre stock. Veuillez contacter votre administrateur</string>
     <string name="cmdtofc3">Le processus de création de la facture n\'est pas terminer.</string>
     <string name="cmdtofc4">Un problème est survenu dans le phase de validation de votre commande.</string>
     <string name="cmdtofc5">Votre transaction est enregistré dans le mode hors-line. Pensée à ce connecter à internet.</string>
-	<string name="cmdtofc6">Cette option n\'est pas disponible pour le moment. \n Veuillez vous connecter à Internet.</string>
-	<string name="cmdtofc7">Veuillez selectionner un numéro de commande valide avant de commencer votre traitement.</string>
-	<string name="cmdtofc8">Message de confirmation</string>
-	<string name="cmdtofc10">Message d\'information</string>
-	<string name="cmdtofc9">Vous voulez créer votre facture depuis cette commande ?</string>
-	<string name="cmdtofc11">Bien compris</string>
-	<string name="cmdtofc12">Consulter détails de la commande</string>
-	<string name="cmdtofc13">Vous voulez enregistrer votre commande</string>
-	<string name="cmdtofc14">Vous ne pouvez pas passer des produits avec des quantités vides (0)</string>
-	<string name="cmdtofc15">Vérifier si vous disposez d\'un stock physique ou vous avez les permissions de création des commandes</string>
-	<string name="cmdtofc16">L\'un des quantités des produits demander n\'est pas disponibles dans votre stock</string>
-	<string name="cmdtofc17">La commande n\'est pas enregistré. Pensée à refaire votre commande </string>
-	<string name="cmdtofc18">Votre commande est bien enregistrer</string>
-	<string name="cmdtofc19">Ajouter une nouvelle commande</string>
-	<string name="cmdtofc20">Réessayer à nouveau</string>
-	<string name="cmdtofc21">Vous n\'avez aucunes factures pour le moment</string>
-	<string name="cmdtofc22">Vente</string>
-	<string name="cmdtofc23">Retour</string>
-	<string name="cmdtofc24">Echange</string>
-	<string name="cmdtofc25">Le type de votre transaction est inconnu (Vente,Echange,Retour)</string>
-	<string name="cmdtofc26">Mouvement stock</string>
-	<string name="cmdtofc27">Valider retour</string>
-	<string name="cmdtofc31">Entrepôt cible  </string>
-	<string name="cmdtofc32">Entrepôt source  </string>
-	<string name="cmdtofc28">Vous voulez enregistrer votre echanges des produits</string>
-	<string name="cmdtofc29">Assurez vous que vous êtes connecté à Internet (Wifi - 3G)</string>
-	<string name="cmdtofc30">Le client est encours dans état inactif. Veuillez synchronizer votre client avant de passer des transactions</string>
-	<string name="cmdtofc33">--Liste secteurs--</string>
-	
-	<string name="factlab1">Le montant n\'est pas valide</string>
-	<string name="factlab2">Le montant encaisser est supérieure au montant total</string>
-	
-	<string name="comerciallab1">Récupération des données</string>
-	<string name="comerciallab2">Tous les champs sont Obligatoirs</string>
-	<string name="comerciallab3">Enregistration</string> 
-	<string name="comerciallab4">Le Clients n\'est pas ajouter vérifier votre email ou nom</string>
-	<string name="comerciallab5">Ce client exist déjà dans notre base de donnée</string>
-	<string name="comerciallab6">Client ajouter avec success</string> 
-	<string name="comerciallab7">Téléphone du client</string> 
-	<string name="comerciallab8">Fax du client</string> 
-	<string name="comerciallab9">Email du client</string> 
-	<string name="comerciallab10">Addresse du client</string> 
-	<string name="comerciallab11">Nom du client</string> 
-	<string name="comerciallab12">Code zip</string> 
-	
-	<string name="cnxlab1">Recherche d\'une mise à jour disponible</string> 
-	<string name="cnxlab2">Veuillez patienter ... </string> 
-	<string name="cnxlab3">Echéc : le montant de la facture est depassé</string>
-	<string name="cnxlab4">Veuillez saisire une valeur plus que zero</string>
-	<string name="cnxlab5">Le numéro de la facture choisi est introuvable</string>
-	<string name="cnxlab7">Le montant encaisse est invalide</string>
-	<string name="cnxlab8">La phase de synchronisation est bien terminé</string>
-	<string name="cnxlab9">Vous n\'avez pas des catégories des produits. Pensé à ajouter des produits à des catégories</string>
-	
-	<string name="cnxlab6">Veuillez verifier le type du transfert ou le nombre des produits</string>
-	<string name="title_activity_transfertvirtualstock">Transfert des Rendus,Echanges</string>
-	
-	<string name="vendcat1">Categorie par defaut</string>
-	
-	
-	<!-- synchronisation labels -->
-	<string name="syscl1">Chargement des produits et clients</string>
-	<string name="syscl2">Chargement des informations des commerciaux</string>
-	<string name="syscl3">Chargement des commandes et catalogue produits</string>
-	<string name="syscl4">Chargement des factures</string>
-	<string name="syscl5">Vider le cache hors ligne</string>
-	
+    <string name="cmdtofc6">Cette option n\'est pas disponible pour le moment. \n Veuillez vous connecter à Internet.</string>
+    <string name="cmdtofc7">Veuillez selectionner un numéro de commande valide avant de commencer votre traitement.</string>
+    <string name="cmdtofc8">Message de confirmation</string>
+    <string name="cmdtofc10">Message d\'information</string>
+    <string name="cmdtofc9">Vous voulez créer votre facture depuis cette commande ?</string>
+    <string name="cmdtofc11">Bien compris</string>
+    <string name="cmdtofc12">Consulter détails de la commande</string>
+    <string name="cmdtofc13">Vous voulez enregistrer votre commande</string>
+    <string name="cmdtofc14">Vous ne pouvez pas passer des produits avec des quantités vides (0)</string>
+    <string name="cmdtofc15">Vérifier si vous disposez d\'un stock physique ou vous avez les permissions de création des commandes</string>
+    <string name="cmdtofc16">L\'un des quantités des produits demander n\'est pas disponibles dans votre stock</string>
+    <string name="cmdtofc17">La commande n\'est pas enregistré. Pensée à refaire votre commande </string>
+    <string name="cmdtofc18">Votre commande est bien enregistrer</string>
+    <string name="cmdtofc19">Ajouter une nouvelle commande</string>
+    <string name="cmdtofc20">Réessayer à nouveau</string>
+    <string name="cmdtofc21">Vous n\'avez aucunes factures pour le moment</string>
+    <string name="cmdtofc22">Vente</string>
+    <string name="cmdtofc23">Retour</string>
+    <string name="cmdtofc24">Echange</string>
+    <string name="cmdtofc25">Le type de votre transaction est inconnu (Vente,Echange,Retour)</string>
+    <string name="cmdtofc26">Mouvement stock</string>
+    <string name="cmdtofc27">Valider retour</string>
+    <string name="cmdtofc31">Entrepôt cible  </string>
+    <string name="cmdtofc32">Entrepôt source  </string>
+    <string name="cmdtofc28">Vous voulez enregistrer votre echanges des produits</string>
+    <string name="cmdtofc29">Assurez vous que vous êtes connecté à Internet (Wifi - 3G)</string>
+    <string name="cmdtofc30">Le client est encours dans état inactif. Veuillez synchronizer votre client avant de passer des transactions</string>
+    <string name="cmdtofc33">--Liste secteurs--</string>
+    <string name="cmdtofc34">Vous voulez annuler votre operation ?</string>
+    <string name="factlab1">Le montant n\'est pas valide</string>
+    <string name="factlab2">Le montant encaisser est supérieure au montant total</string>
+    <string name="comerciallab1">Récupération des données</string>
+    <string name="comerciallab2">Tous les champs sont Obligatoirs</string>
+    <string name="comerciallab3">Enregistration</string>
+    <string name="comerciallab4">Le Clients n\'est pas ajouter vérifier votre email ou nom</string>
+    <string name="comerciallab5">Ce client exist déjà dans notre base de donnée</string>
+    <string name="comerciallab6">Client ajouter avec success</string>
+    <string name="comerciallab7">Téléphone du client</string>
+    <string name="comerciallab8">Fax du client</string>
+    <string name="comerciallab9">Email du client</string>
+    <string name="comerciallab10">Addresse du client</string>
+    <string name="comerciallab11">Nom du client</string>
+    <string name="comerciallab12">Code zip</string>
+    <string name="cnxlab1">Recherche d\'une mise à jour disponible</string>
+    <string name="cnxlab2">Veuillez patienter ... </string>
+    <string name="cnxlab3">Echéc : le montant de la facture est depassé</string>
+    <string name="cnxlab4">Veuillez saisire une valeur plus que zero</string>
+    <string name="cnxlab5">Le numéro de la facture choisi est introuvable</string>
+    <string name="cnxlab7">Le montant encaisse est invalide</string>
+    <string name="cnxlab8">La phase de synchronisation est bien terminé</string>
+    <string name="cnxlab9">Vous n\'avez pas des catégories des produits. Pensé à ajouter des produits à des catégories</string>
+    <string name="cnxlab6">Veuillez verifier le type du transfert ou le nombre des produits</string>
+    <string name="title_activity_transfertvirtualstock">Transfert des Rendus,Echanges</string>
+    <string name="vendcat1">Categorie par defaut</string>
+
+    <!-- synchronisation labels -->
+    <string name="syscl1">Chargement des produits et clients</string>
+    <string name="syscl2">Chargement des informations des commerciaux</string>
+    <string name="syscl3">Chargement des commandes et catalogue produits</string>
+    <string name="syscl4">Chargement des factures</string>
+    <string name="syscl5">Vider le cache hors ligne</string>
+    <string name="syscl6">Votre choix est introuvable</string>
+    <string name="syscl7">Vous ne disposer pas des droits pour Ajouter et modifier les clients</string>
+    <string name="syscl8">Vous ne disposer pas des droits pour passer des commandes</string>
+    <string name="syscl9">Cette option n\'est pas disponible pour le moment</string>
+    <string name="syscl10">Vous ne disposer pas des droits pour passer des factures et effectuer des payements</string>
+    <string name="title_activity_synchronisation_home">Accueil de synchronisation</string>
+
 </resources>

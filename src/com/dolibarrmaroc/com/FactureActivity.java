@@ -406,9 +406,6 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 	@Override
 	public void onClick(View v) {
 		if(v.getId() == R.id.retour){
-
-			
-			
 			//Button facture = (Button) dialog.findViewById(R.id.facturedialog);
 			facturePop.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -848,9 +845,35 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 	
 	@Override
 	public void onBackPressed() {
+		/*
 		Intent intent = new Intent(this, ConnexionActivity.class);
 		startActivity(intent);
 		FactureActivity.this.finish();
+		*/
+		AlertDialog.Builder alert = new AlertDialog.Builder(FactureActivity.this);
+		alert.setTitle(getResources().getString(R.string.cmdtofc10));
+		alert.setMessage(getResources().getString(R.string.cmdtofc34));
+		alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface d, int arg1) {
+				//VendeurActivity.super.onBackPressed();
+				d.dismiss();
+
+			}
+
+		});
+		alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface d, int arg1) {
+				//VendeurActivity.super.onBackPressed();
+				onClickHome(LayoutInflater.from(FactureActivity.this).inflate(R.layout.activity_facture, null));
+			}
+
+		});
+		alert.setCancelable(false);
+		alert.create();
+		alert.show();
+		
 	}
 
 	@Override
@@ -1073,7 +1096,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 				CommercialManager manager = CommercialManagerFactory.getCommercialManager();
 				
 				sv  = new StockVirtual(FactureActivity.this);
-				CheckOutSysc.ReloadProdClt(FactureActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 1,manager);
+				CheckOutSysc.ReloadProdClt(FactureActivity.this, myofline, compte, vendeurManager, payemn, sv, categorie, managercmd, 4,manager);
 			}
 			
 			
@@ -1116,9 +1139,9 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 							public void onClick(DialogInterface ds, int arg1) {
 								//VendeurActivity.super.onBackPressed();
 								ds.dismiss();
-								Intent intent = new Intent(FactureActivity.this, CatalogeActivity.class);
+								Intent intent = new Intent(FactureActivity.this, HomeActivity.class);
 								intent.putExtra("user", compte);
-								intent.putExtra("cmd", "1");
+								//intent.putExtra("cmd", "1");
 								startActivity(intent);
 								FactureActivity.this.finish();
 							}
@@ -1209,9 +1232,9 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 							public void onClick(DialogInterface ds, int arg1) {
 								//VendeurActivity.super.onBackPressed();
 								ds.dismiss();
-								Intent intent = new Intent(FactureActivity.this, CatalogeActivity.class);
+								Intent intent = new Intent(FactureActivity.this, HomeActivity.class);
 								intent.putExtra("user", compte);
-								intent.putExtra("cmd", "1");
+								//intent.putExtra("cmd", "1");
 								startActivity(intent);
 								FactureActivity.this.finish();
 							}
@@ -1323,6 +1346,12 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 			List<Mouvement> lsmv = new ArrayList<>();
 			for (int i = 0; i < produitsFacture.size(); i++) {
 				lsmv.add(new Mouvement(produitsFacture.get(i).getId(), produitsFacture.get(i), ""+compte.getIduser(), ""+compte.getIduser(), (double)produitsFacture.get(i).getQtedemander()));
+			}
+			
+			if(CheckOutNet.isNetworkConnected(FactureActivity.this)){
+				if(myofline.checkAvailableofflinestorage() > 0){
+					myofline.SendOutData(compte);	
+				}
 			}
 			
 			res = stockManager.makeechange(lsmv, compte, prepa_label(),idclt+"",0);  // stockManager.makemouvement(lsmv, compte, prepa_label());
@@ -1446,7 +1475,7 @@ public class FactureActivity extends Activity implements OnItemClickListener,OnC
 			public void onClick(DialogInterface d, int which) {
 				d.dismiss();
 				
-				Intent intent = new Intent(FactureActivity.this, ConnexionActivity.class);
+				Intent intent = new Intent(FactureActivity.this, HomeActivity.class);
 				intent.putExtra("user", compte);
 				startActivity(intent);
 				FactureActivity.this.finish();

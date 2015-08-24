@@ -782,6 +782,8 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 				return true;
 			}
 		}else if (keyCode == KeyEvent.KEYCODE_BACK) {
+			
+			/*
 			new AlertDialog.Builder(this)
 			.setTitle("Vraiment déconnecter?")
 			.setMessage("Vous voulez vraiment déconnecter?")
@@ -802,6 +804,9 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 				}
 
 			}).create().show();
+			*/
+			onClickHome(LayoutInflater.from(VendeurActivity.this).inflate(R.layout.activity_vendeur, null));
+			
 			return true;
 		}
 		return false;
@@ -1385,7 +1390,7 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 		return gps;
 	}
 
-
+/*
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater menuInflater = getMenuInflater();
@@ -1408,11 +1413,12 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 		
 		return super.onCreateOptionsMenu(menu);
 	}
-
+*/
+/*
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		/************************MENU Carte *****************************************/
+		/************************MENU Carte *****************************************
 		case R.id.pointerClt:
 			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
 				Intent photosIntent = new Intent(this, MainActivity.class);
@@ -1472,7 +1478,7 @@ public class VendeurActivity extends android.support.v4.app.FragmentActivity imp
 		return true;
 
 	}
-
+*/
 	public void alert(){
 		AlertDialog.Builder alert = new AlertDialog.Builder(VendeurActivity.this);
 		alert.setTitle(getResources().getString(R.string.stock_limit));

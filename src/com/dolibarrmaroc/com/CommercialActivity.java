@@ -37,9 +37,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dolibarrmaroc.com.HomeActivity.ServerSideTask;
+import com.dolibarrmaroc.com.business.CommandeManager;
 import com.dolibarrmaroc.com.business.CommercialManager;
 import com.dolibarrmaroc.com.business.PayementManager;
 import com.dolibarrmaroc.com.business.VendeurManager;
+import com.dolibarrmaroc.com.dao.CategorieDao;
+import com.dolibarrmaroc.com.dao.CategorieDaoMysql;
 import com.dolibarrmaroc.com.dashboard.DashboardActivity;
 import com.dolibarrmaroc.com.database.DatabaseHandler;
 import com.dolibarrmaroc.com.database.StockVirtual;
@@ -53,6 +57,8 @@ import com.dolibarrmaroc.com.models.Prospection;
 import com.dolibarrmaroc.com.offline.Offlineimpl;
 import com.dolibarrmaroc.com.offline.ioffline;
 import com.dolibarrmaroc.com.utils.CheckOutNet;
+import com.dolibarrmaroc.com.utils.CheckOutSysc;
+import com.dolibarrmaroc.com.utils.CommandeManagerFactory;
 import com.dolibarrmaroc.com.utils.CommercialManagerFactory;
 import com.dolibarrmaroc.com.utils.PayementManagerFactory;
 import com.dolibarrmaroc.com.utils.VendeurManagerFactory;
@@ -204,6 +210,7 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 			
 			
 			myoffline = new Offlineimpl(getApplicationContext());
+			/*
 			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
 				
 				
@@ -224,6 +231,10 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 						getResources().getString(R.string.msg_wait), true);
 				new OfflineTask().execute();
 			}
+			*/
+			dialog = ProgressDialog.show(CommercialActivity.this, getResources().getString(R.string.comerciallab1),
+					getResources().getString(R.string.msg_wait), true);
+			new OfflineTask().execute();
 			
 			/*
 			Class squareClass = Class.forName("com.marocgeo.als.models.Prospection");
@@ -579,6 +590,22 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 			
 			if(CheckOutNet.isNetworkConnected(getApplicationContext())){
 				resu = manager.insert(compte, client);
+				
+				VendeurManager vendeurManager = VendeurManagerFactory.getClientManager();
+				PayementManager payemn = PayementManagerFactory.getPayementFactory();
+				CategorieDao categorie = new CategorieDaoMysql(getApplicationContext());
+				CommandeManager managercmd =  new CommandeManagerFactory().getManager();
+				CommercialManager managercom = CommercialManagerFactory.getCommercialManager();
+				sv  = new StockVirtual(CommercialActivity.this);
+
+
+				myoffline = new Offlineimpl(getApplicationContext());
+								if(myoffline.checkAvailableofflinestorage() > 0){
+									myoffline.SendOutData(compte);
+								}
+			
+				CheckOutSysc.ReloadProdClt(CommercialActivity.this, myoffline, compte, vendeurManager, payemn, sv, categorie, managercmd, 3,managercom);
+				CheckOutSysc.RelaodClientSectInfoCommDicto(CommercialActivity.this, myoffline, compte, vendeurManager, managercom, 0);
 			}else{
 				if(!myoffline.checkFolderexsiste()){
 		        	showmessageOffline();
@@ -644,7 +671,8 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 							new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface paramDialogInterface, int paramInt) {
 							CommercialActivity.this.finish();
-							Intent intent = new Intent(CommercialActivity.this,ConnexionActivity.class);
+							Intent intent = new Intent(CommercialActivity.this,HomeActivity.class);
+							intent.putExtra("user", compte);
 							startActivity(intent);
 						}
 					}
@@ -727,7 +755,8 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 							new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface paramDialogInterface, int paramInt) {
 							CommercialActivity.this.finish();
-							Intent intent = new Intent(CommercialActivity.this,ConnexionActivity.class);
+							Intent intent = new Intent(CommercialActivity.this,HomeActivity.class);
+							intent.putExtra("user", compte);
 							startActivity(intent);
 						}
 					}
@@ -884,10 +913,15 @@ public class CommercialActivity extends Activity implements OnClickListener,OnIt
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			/*
 			CommercialActivity.this.finish();
 			Intent intent1 = new Intent(CommercialActivity.this, VendeurActivity.class);
 			intent1.putExtra("user", compte);
 			startActivity(intent1);
+			*/
+			
+			onClickHome(LayoutInflater.from(CommercialActivity.this).inflate(R.layout.activity_commercial, null));
+			
 		}
 		return false;
 	}

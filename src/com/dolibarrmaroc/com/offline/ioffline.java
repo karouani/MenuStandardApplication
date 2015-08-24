@@ -74,6 +74,7 @@ public interface ioffline {
 	public long shnchronizeCategorieClients(CategorieCustomer ct,Compte cp);
 	public long shnchronizeSocietesClients(List<Societe> ct,Compte cp);
 	public long shnchronizeUpClients(Prospection ct,Compte cp);
+	public long PutDeniededData(Object in,int cl);
 
 	
 	/* Load data from offline */
@@ -103,6 +104,7 @@ public interface ioffline {
 	public List<CategorieCustomer> LoadCategorieClients(String fl);
 	public List<Societe> LoadSocietesClients(String fl);
 	public List<Prospection> LoadUpClients(String fl);
+	public List<String> LoadDenided(String fl);
 	
 	public Compte LoadCompte(String log,String pwd);
 	
@@ -135,6 +137,7 @@ public interface ioffline {
 	public void CleanCategorieClients();
 	public void CleanSocieteClients();
 	public void CleanUpClients();
+	public void CleanAllDeniededData();
 	
 	public List<Promotion> getPromotions(int idclt, int idprd);
 	public Client seeClient(List<Client> ls,String id);
