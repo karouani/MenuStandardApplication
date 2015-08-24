@@ -53,7 +53,7 @@
         </service>
 
         <activity
-            android:name="com.dolibarrmaroc.com.MainActivity"
+            android:name="com.dolibarrmaroc.com.maps.MainActivity"
             android:label="@string/title_feature1"
             android:theme="@style/Theme.D1" />
         <activity
@@ -89,7 +89,7 @@
             android:label="@string/title_search"
             android:theme="@style/Theme.D1" />
         <activity
-            android:name="com.dolibarrmaroc.com.VendeurActivity"
+            android:name="com.dolibarrmaroc.com.commercial.VendeurActivity"
             android:label="@string/title_activity_vendeur"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
@@ -113,13 +113,13 @@
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name="com.dolibarrmaroc.com.FactureActivity"
+            android:name="com.dolibarrmaroc.com.commercial.FactureActivity"
             android:label="@string/title_activity_facture"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name="com.dolibarrmaroc.com.NextEtapeActivity"
+            android:name="com.dolibarrmaroc.com.commercial.NextEtapeActivityapeActivity"
             android:label="@string/title_activity_next_etape"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
@@ -131,7 +131,7 @@
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name="com.dolibarrmaroc.com.EsignatureActivity"
+            android:name="com.dolibarrmaroc.com.commercial.EsignatureActivitycom.EsignatureActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout"
             android:label="@string/title_activity_esignature"
             android:screenOrientation="portrait"
@@ -144,7 +144,7 @@
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name="com.dolibarrmaroc.com.ReadPDFActivity"
+            android:name="com.dolibarrmaroc.com.impression.ReadPDFActivity"
             android:label="@string/title_activity_read_pdf"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
@@ -162,7 +162,7 @@
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name="com.dolibarrmaroc.com.VendeurTabActivity"
+            android:name="com.dolibarrmaroc.com.commercial.VendeurTabActivity"
             android:label="@string/title_activity_vendeur_tab"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1"
@@ -213,13 +213,13 @@
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name="com.dolibarrmaroc.com.CameraActivity"
+            android:name="com.dolibarrmaroc.com.intervention.CameraActivity"
             android:label="@string/title_activity_camera"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name="com.dolibarrmaroc.com.ImprimerActivity"
+            android:name="com.dolibarrmaroc.com.impression.ImprimerActivity"
             android:label="@string/title_activity_imprimer"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
@@ -239,30 +239,30 @@
 
         <!-- Ticket Bluthouth -->
         <activity
-            android:name="com.dolibarrmaroc.com.DeviceListActivity"
+            android:name="com.dolibarrmaroc.com.impression.DeviceListActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/select_device"
             android:theme="@android:style/Theme.Dialog" />
         <activity
-            android:name="com.dolibarrmaroc.com.TicketActivity"
+            android:name="com.dolibarrmaroc.com.impression.TicketActivity"
             android:label="@string/title_activity_ticket"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name="com.dolibarrmaroc.com.PayementActivity"
+            android:name="com.dolibarrmaroc.com.commercial.PayementActivity"
             android:label="@string/title_activity_payement"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name="com.dolibarrmaroc.com.OfflineActivity"
+            android:name="com.dolibarrmaroc.com.commercial.OfflineActivity"
             android:label="@string/title_activity_offline"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name="com.dolibarrmaroc.com.TicketOfflineActivity"
+            android:name="com.dolibarrmaroc.com.impression.TicketOfflineActivity"
             android:label="@string/title_activity_ticket_offline"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
@@ -280,7 +280,7 @@
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name="com.dolibarrmaroc.com.ReglementOfflineActivity"
+            android:name="com.dolibarrmaroc.com.commercial.ReglementOfflineActivity"
             android:label="@string/title_activity_reglement_offline"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
@@ -292,7 +292,7 @@
             android:theme="@style/Theme.D1" >
         </activity>
         <activity
-            android:name="com.dolibarrmaroc.com.ValiderActivity"
+            android:name="com.dolibarrmaroc.com.commercial.ValiderActivity"
             android:label="@string/title_activity_valider"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.D1" >
@@ -365,8 +365,8 @@
         <activity
             android:name="com.dolibarrmaroc.com.SynchronisationHomeActivity"
             android:label="@string/title_activity_synchronisation_home"
-        	android:screenOrientation="portrait"
-            android:theme="@style/Theme.D1">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.D1" >
         </activity>
     </application>
 
@@ -392,7 +392,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <!--
      The following two permissions are not required to use
-     Google Maps Android API v2, but are recommended.
+     Google Maps Android API v2, but are recommended.
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

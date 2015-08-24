@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.dolibarrmaroc.com.VendeurActivity;
+import com.dolibarrmaroc.com.commercial.VendeurActivity;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.Produit;
@@ -31,7 +31,7 @@ public class CaisseDolibarr extends AsyncTask<Void, Void, String> {
 	public CaisseDolibarr() {
 		super();
 		// TODO Auto-generated constructor stub
-		dialog2 = ProgressDialog.show(this.context, "Enregistrement des données Données",
+		dialog2 = ProgressDialog.show(this.context, "Enregistrement des donnï¿½es Donnï¿½es",
 				"Attendez SVP...", true);
 	}
 

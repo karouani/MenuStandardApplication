@@ -1,49 +1,86 @@
-package com.dolibarrmaroc.com.ticket;
+package com.dolibarrmaroc.com.impression;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
+import com.google.gson.Gson;
+import com.dolibarrmaroc.com.R;
+import com.dolibarrmaroc.com.R.id;
+import com.dolibarrmaroc.com.R.layout;
+import com.dolibarrmaroc.com.R.string;
+import com.dolibarrmaroc.com.commercial.PayementActivity;
+import com.dolibarrmaroc.com.dashboard.HomeActivity;
+import com.dolibarrmaroc.com.models.Client;
+import com.dolibarrmaroc.com.models.Compte;
+import com.dolibarrmaroc.com.models.Dictionnaire;
+import com.dolibarrmaroc.com.models.FileData;
+import com.dolibarrmaroc.com.models.MyTicketBluetooth;
+import com.dolibarrmaroc.com.models.MyTicketPayement;
+import com.dolibarrmaroc.com.models.MyTicketWitouhtProduct;
+import com.dolibarrmaroc.com.models.Myinvoice;
+import com.dolibarrmaroc.com.models.Payement;
+import com.dolibarrmaroc.com.models.Produit;
+import com.dolibarrmaroc.com.models.PromoTicket;
+import com.dolibarrmaroc.com.models.Reglement;
+import com.dolibarrmaroc.com.models.Remises;
+import com.dolibarrmaroc.com.models.TotauxTicket;
+import com.dolibarrmaroc.com.utils.MyTicket;
+import com.dolibarrmaroc.com.utils.ProduitTicket;
+import com.dolibarrmaroc.com.utils.TinyDB;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import com.dolibarrmaroc.com.offline.Offlineimpl;
+import com.dolibarrmaroc.com.offline.ioffline;
+
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v4.app.Fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources.NotFoundException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
+import android.os.Build;
 
-import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
-import com.dolibarrmaroc.com.ConnexionActivity;
-import com.dolibarrmaroc.com.R;
-import com.dolibarrmaroc.com.commercial.OfflineActivity;
-import com.dolibarrmaroc.com.dashboard.HomeActivity;
-import com.dolibarrmaroc.com.impression.DeviceListActivity;
-import com.dolibarrmaroc.com.models.Compte;
-import com.dolibarrmaroc.com.models.MyTicketBluetooth;
-import com.dolibarrmaroc.com.models.PromoTicket;
-import com.dolibarrmaroc.com.offline.Offlineimpl;
-import com.dolibarrmaroc.com.offline.ioffline;
-import com.dolibarrmaroc.com.utils.MyTicket;
+public class TicketOfflineActivity extends Activity {
 
-public class FactureTicketActivity extends Activity {
-
-	private List<PromoTicket> remises = new ArrayList<>();
-	
-	private ioffline myofline;
-	
-	private MyTicketBluetooth myticket;
-	private int reffacture;
-	
-	
 	/** Called when the activity is first created. */
 	public static BluetoothAdapter myBluetoothAdapter;
 	public String SelectedBDAddress;
+	private double ttc_remise = 0;
 
+	private ioffline myoffline;
+	
 	// Message types sent from the BluetoothChatService Handler
 	public static final int MESSAGE_STATE_CHANGE = 1;
 	public static final int MESSAGE_READ = 2;
@@ -76,40 +113,54 @@ public class FactureTicketActivity extends Activity {
 	 * SERIALZABLE DATA
 	 */
 	private Compte compte;
+	//private FileData objet;
 	private MyTicket ticket;
+	private MyTicketWitouhtProduct offlineticket;
+	private Client clt;
+	private Payement mypay;
+	private Reglement myreg;
 	private Button autre,quitter;
+	private List<Reglement> lsreg;
+	private ArrayList<HashMap<String, String>> dico;
+	
 	private int okey = 0;
+	private int msrg =0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_facture_ticket);
+		setContentView(R.layout.activity_ticket);
 		setTitle(R.string.bluetooth_unconnected);
 
-		
-		myofline = new Offlineimpl(getApplicationContext());
 		try {
 			Bundle objetbunble  = this.getIntent().getExtras();
-			
 
 			ticket = new MyTicket();
+			
+			myoffline = new Offlineimpl(getApplicationContext());
+
 			if (objetbunble != null) {
 				compte =  (Compte) getIntent().getSerializableExtra("user");
+				offlineticket = (MyTicketWitouhtProduct) getIntent().getSerializableExtra("offlineticket");
+				mypay = (Payement) getIntent().getSerializableExtra("mypay");
+				myreg = (Reglement)getIntent().getSerializableExtra("myreg");
+				clt = (Client)getIntent().getSerializableExtra("clt");
+				dico = (ArrayList<HashMap<String, String>>) getIntent().getSerializableExtra("dico");
+				lsreg = new ArrayList<>();
 				
 				
-				reffacture = (Integer)getIntent().getSerializableExtra("myticket");
 				
-				myticket = myofline.checkMyFactureticket(reffacture);
 				
-				/******************* REMPLIR TICKET ************************************/
-				
-				ticket = myticket.getTicket();
-				remises = myticket.getRemises();
-				
-				Log.e("ticket off",myticket.toString());
+				msrg = (Integer)getIntent().getSerializableExtra("lsreg");
+			
+				if(msrg > 0){
+					for (int i = 0; i < msrg; i++) {
+						Reglement r = (Reglement)getIntent().getSerializableExtra("reg"+i);
+						Log.e("reg",r.toString());
+						lsreg.add(r);
+					}
+				}
 			}
-			
-			
 			
 			SelectedBDAddress = "";
 			if((myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter())==null)
@@ -122,23 +173,43 @@ public class FactureTicketActivity extends Activity {
 				startActivityForResult(enableBtIntent, 2);
 			}
 
-
 			
-			autre = (Button) findViewById(R.id.ftgeocom);
+
+			/******************* REMPLIR TICKET ************************************/
+			ticket.setAddresse(removeDiacritic(offlineticket.getAddresse()));
+			ticket.setClient(removeDiacritic(clt.getName()));
+			ticket.setDejaRegler(myreg.getAmount());
+			ticket.setDescription(removeDiacritic(offlineticket.getDescription()));
+			ticket.setFax(offlineticket.getFax());
+			ticket.setIF(offlineticket.getIF());
+			ticket.setMsg(getResources().getString(R.string.promotion));
+			ticket.setNameSte(removeDiacritic(offlineticket.getNameSte()).toUpperCase());
+			ticket.setPatente(offlineticket.getPatente());
+			ticket.setSiteWeb(offlineticket.getSiteWeb());
+			ticket.setTel(offlineticket.getTel());
+			ticket.setNumFacture(mypay.getNum());  //mypay.getNum()
+
+
+
+
+			myoffline.shynchronizePayemntTicket(new MyTicketPayement(compte, ticket, offlineticket, clt, mypay, myreg, lsreg));
+			
+			
+			autre = (Button) findViewById(R.id.geocom);
 			autre.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View v) {
+					
 					SelectedBDAddress = "";
-					Log.e("okey",okey+"");
 					if((myBluetoothAdapter = BluetoothAdapter.getDefaultAdapter())==null)
 					{
-						Toast.makeText(FactureTicketActivity.this,getResources().getString(R.string.none_paired), Toast.LENGTH_LONG).show();
+						Toast.makeText(TicketOfflineActivity.this,getResources().getString(R.string.none_paired), Toast.LENGTH_LONG).show();
 					}else{
 						if(!"".equals(myBluetoothAdapter.getAddress()) && myBluetoothAdapter.getAddress() != null){
 							if(okey == 1)
 							{
-								Intent serverIntent = new Intent(FactureTicketActivity.this, DeviceListActivity.class);
+								Intent serverIntent = new Intent(TicketOfflineActivity.this, DeviceListActivity.class);
 								startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
 
 							}else{
@@ -151,19 +222,21 @@ public class FactureTicketActivity extends Activity {
 						Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);    
 						startActivityForResult(enableBtIntent, 2);
 					}
-
+					
+					
+					createTicket(ticket);
 				}
 			});
 
-			quitter = (Button) findViewById(R.id.ftbtn_quit);
+			quitter = (Button) findViewById(R.id.btn_quit);
 			quitter.setOnClickListener(new OnClickListener() {
 
 				@Override
 				public void onClick(View arg0) {
-					Intent intent = new Intent(FactureTicketActivity.this, HomeActivity.class);
+					Intent intent = new Intent(TicketOfflineActivity.this, HomeActivity.class);
 					intent.putExtra("user", compte);
 					startActivity(intent);
-					FactureTicketActivity.this.finish();
+					TicketOfflineActivity.this.finish();
 				}
 			});
 		} catch (NumberFormatException e) {
@@ -203,7 +276,7 @@ public class FactureTicketActivity extends Activity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)  {
-		Log.e("request code",requestCode+"");
+		Log.e("req code ",requestCode+"");
 		if(data != null){
 			switch (requestCode) {
 			case REQUEST_CONNECT_DEVICE_SECURE:
@@ -221,7 +294,7 @@ public class FactureTicketActivity extends Activity {
 						setTitle(R.string.bluetooth_connect_fail);
 						//	            		mTitle.setText("����ʧ��");
 
-						Intent serverIntent = new Intent(FactureTicketActivity.this, DeviceListActivity.class);
+						Intent serverIntent = new Intent(TicketOfflineActivity.this, DeviceListActivity.class);
 						startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
 
 						okey = 1;
@@ -234,7 +307,6 @@ public class FactureTicketActivity extends Activity {
 						this.setTitle(bluetoothConnectSucess+SelectedBDAddress);
 
 						createTicket(ticket);
-						
 					}
 				}
 				break;
@@ -247,9 +319,20 @@ public class FactureTicketActivity extends Activity {
 				break;
 			}
 		}else{
+			Log.e("data nulled","walo walo");
 			onStart();
 		}
+	
+	}
+	
+	private void createTicket2(MyTicket ticket) {
+		DecimalFormat df = new DecimalFormat("0.00");
+		double ht = (mypay.getTotal()*100)/120D;
+		double ttc = mypay.getTotal();
+		double regle = myreg.getAmount();
+		double cpt =  mypay.getTotal() - (mypay.getAmount()+myreg.getAmount());
 		
+		Log.e("MyTicket",ticket.toString()+ "ht# "+ht+" ttc# "+ttc+" regl#  "+regle+" cpt# "+cpt+" tva# "+df.format(mypay.getTotal() - ht));
 	}
 
 	/************************************ CREATION TICKET *********************************************/
@@ -257,6 +340,8 @@ public class FactureTicketActivity extends Activity {
 	private void createTicket(MyTicket ticket) {
 		if(!BluetoothPrintDriver.IsNoConnection()){
 			BluetoothPrintDriver.Begin();
+			
+			Gson gson = new Gson();
 
 			/******************* ENVOYER TICKET ************************************/
 			/******************** LOGO NAME SOCIETE ******************************/
@@ -341,6 +426,7 @@ public class FactureTicketActivity extends Activity {
 			BluetoothPrintDriver.ClearData();
 
 			/************************* LES tables Headers ***********************/
+			/*
 			String tmpString2 = this.getResources().getString(R.string.print_table_content2);
 			BluetoothPrintDriver.AddBold((byte)0x01);//����
 			BluetoothPrintDriver.SetZoom((byte)0x01);//Ĭ�Ͽ�ȡ�Ĭ�ϸ߶�
@@ -351,60 +437,8 @@ public class FactureTicketActivity extends Activity {
 			BluetoothPrintDriver.excute();
 			BluetoothPrintDriver.ClearData();
 
+			*/
 			DecimalFormat df = new DecimalFormat("0.00");
-			/********************** Content Table *******************************/
-			for (int i = 0; i < ticket.getPrds().size(); i++) {
-				BluetoothPrintDriver.AddInverse((byte)0x00);
-				BluetoothPrintDriver.SetZoom((byte)0x00);//���ߣ�����
-				BluetoothPrintDriver.AddBold((byte)0x00);//����
-				String data = "";
-				if(ticket.getPrds().get(i).getRef().length() > 16){
-					String t = ticket.getPrds().get(i).getRef().substring(0,16);
-					String e = ticket.getPrds().get(i).getRef().substring(16,ticket.getPrds().get(i).getRef().length());
-					data = t+"| "+ticket.getPrds().get(i).getQte()+"  |"+df.format(ticket.getPrds().get(i).getPrix());
-					if(data.length()<32){
-						int p = 32 - data.length();
-						for (int j = 0; j < p; j++) {
-							data = data + " ";
-						}
-					}
-					String rest = main(e);
-					data = data + rest;
-				}else{
-					String space = "";
-					int k = 16 - ticket.getPrds().get(i).getRef().length();
-					for (int j = 0; j <k; j++) {
-						space = space + " ";
-					}
-					data = ticket.getPrds().get(i).getRef()+space+"| "+ticket.getPrds().get(i).getQte()+" |"+df.format(ticket.getPrds().get(i).getPrix());
-				}
-
-				BluetoothPrintDriver.SetZoom((byte)0x00);//Ĭ�Ͽ�ȡ�Ĭ�ϸ߶�
-				BluetoothPrintDriver.AddInverse((byte)0x00);
-				BluetoothPrintDriver.AddAlignMode((byte) 0);//����
-
-				//BluetoothPrintDriver.ImportData(new byte[]{0x1d,0x21,0x01}, 3);	//���ñ���
-				BluetoothPrintDriver.ImportData(String.format(data),true);
-
-				BluetoothPrintDriver.excute();
-				BluetoothPrintDriver.ClearData();
-
-				if(i < ticket.getPrds().size() - 1){
-					BluetoothPrintDriver.LF();
-					BluetoothPrintDriver.ImportData(ticket.getLine());
-					BluetoothPrintDriver.LF();
-					BluetoothPrintDriver.excute();
-					BluetoothPrintDriver.ClearData();
-				}else{
-					BluetoothPrintDriver.LF();
-					BluetoothPrintDriver.excute();
-					BluetoothPrintDriver.ClearData();
-					BluetoothPrintDriver.LF();
-					BluetoothPrintDriver.excute();
-					BluetoothPrintDriver.ClearData();
-				}
-
-			}
 
 			/************************** LEs tautaux ********************************************/
 			/*
@@ -415,15 +449,17 @@ public class FactureTicketActivity extends Activity {
 			Infos TVA (20%)	418.00 	DH	
 			 */
 
+			/*
 			BluetoothPrintDriver.ImportData(ticket.getLine());
 			BluetoothPrintDriver.LF();
 			BluetoothPrintDriver.excute();
 			BluetoothPrintDriver.ClearData();
 
+			*/
 			/*------------------------ HT---------------------------*/
 
 			String data = getResources().getString(R.string.total_ht);
-			double ht = myticket.getMe().getTotal_ticket().getTotal_ht();
+			double ht = (mypay.getTotal()*100)/120D;
 
 			int espace = 32 - (df.format(ht).length() + data.length() + 3);
 
@@ -439,7 +475,7 @@ public class FactureTicketActivity extends Activity {
 			BluetoothPrintDriver.ImportData(data,true);
 			/*------------------------ TTC --------------------------*/
 			String data2 = getResources().getString(R.string.total_ttc);
-			double ttc = myticket.getMe().getTotal_ticket().getTotal_ttc();
+			double ttc = mypay.getTotal();
 
 			int espace2 = 32 - (df.format(ttc).length() + data2.length() + 3);
 
@@ -473,8 +509,7 @@ public class FactureTicketActivity extends Activity {
 
 			/*------------------------ Deja Regle---------------------------*/
 			String data3 = getResources().getString(R.string.regle);
-			double regle = myticket.getMe().getTotal_ticket().getRegle();
-			
+			double regle = myreg.getAmount();
 			int espace3 = 33 - (df.format(regle).length() + data3.length()  + 3);
 
 			for (int j = 0; j < espace3; j++) {
@@ -492,13 +527,12 @@ public class FactureTicketActivity extends Activity {
 			/*------------------------ Rest a Paye --------------------------*/
 
 			String data4 = getResources().getString(R.string.rested);
-			double cpt =  myticket.getMe().getTotal_ticket().getRest();
+			double cpt =  Double.parseDouble(myreg.getFk_facture());
 			int espace4 = 33 - ((df.format(cpt)).length() + data4.length() + 3);
 
 			for (int j = 0; j < espace4; j++) {
 				data4 = data4 + " ";
 			}
-
 			data4 = data4 + df.format(cpt) + "DH";
 			BluetoothPrintDriver.SetZoom((byte)0x00);//Ĭ�Ͽ�ȡ�Ĭ�ϸ߶�
 			BluetoothPrintDriver.AddInverse((byte)0x00);
@@ -509,13 +543,13 @@ public class FactureTicketActivity extends Activity {
 			/*------------------------ INFO TVA --------------------------*/
 
 			String data5 = "TVA (20%)";
-			int espace5 = 33 - (df.format(myticket.getMe().getTotal_ticket().getTotal_tva()).length() + 9 + 3);
+			int espace5 = 33 - (df.format(mypay.getTotal() - ht).length() + 9 + 3);
 
 			for (int j = 0; j < espace5; j++) {
 				data5 = data5 + " ";
 			}
 
-			data5 = data5 + df.format(myticket.getMe().getTotal_ticket().getTotal_tva()) + "DH";
+			data5 = data5 + df.format(mypay.getTotal() - ht) + "DH";
 			BluetoothPrintDriver.SetZoom((byte)0x00);//Ĭ�Ͽ�ȡ�Ĭ�ϸ߶�
 			BluetoothPrintDriver.AddInverse((byte)0x00);
 			BluetoothPrintDriver.AddAlignMode((byte) 0);//����
@@ -531,121 +565,31 @@ public class FactureTicketActivity extends Activity {
 			BluetoothPrintDriver.excute();
 			BluetoothPrintDriver.ClearData();
 
-			if (remises.size()>0) {
-
-				/*************************** List Promotion *****************************************/
-				/*-------------------------Header Table --------------------------------------------*/
-
-				BluetoothPrintDriver.SetZoom((byte)0x00);//Ĭ�Ͽ�ȡ�Ĭ�ϸ߶�
-				BluetoothPrintDriver.AddInverse((byte)0x01);
-				BluetoothPrintDriver.AddAlignMode((byte) 0);//����
-				String data6 = getResources().getString(R.string.promotion_list);
-				int espace6 = 32 - data6.length();
-				for (int j = 0; j < espace6; j++) {
-					data6 = data6 + " ";
-				}
-				BluetoothPrintDriver.ImportData(data6,true);
-
-				String dataX = getResources().getString(R.string.promotion_remise);
-				int espaceX = 33 - dataX.length();
-				for (int j = 0; j < espaceX; j++) {
-					dataX = dataX + " ";
-				}
-				int X = 0;
-				/********************** Content Table *******************************/
-				for (int i = 0; i < remises.size(); i++) {
-					BluetoothPrintDriver.AddInverse((byte)0x00);
-					BluetoothPrintDriver.SetZoom((byte)0x00);//���ߣ�����
-					BluetoothPrintDriver.AddBold((byte)0x00);//����
-					BluetoothPrintDriver.AddAlignMode((byte) 0x01);//����
-
-					PromoTicket prom = new PromoTicket();
-					prom = remises.get(i);
-
-					if (prom.getType() == 1) {
-						String data7 = getResources().getString(R.string.produit_offert);
-						int espace7 = 33 - data7.length();
-						for (int j = 0; j < espace7; j++) {
-							data7 = data7 + " ";
-						}
-						BluetoothPrintDriver.ImportData(data7,true);
-						String data8 = prom.getValue()+"->"+prom.getDesig();
-						BluetoothPrintDriver.ImportData(removeDiacritic(data8),true);
-					}else{
-						if(X == 0){
-							BluetoothPrintDriver.AddInverse((byte)0x01);
-							BluetoothPrintDriver.AddAlignMode((byte) 0);//����
-							BluetoothPrintDriver.ImportData(dataX,true);
-						}
-
-						BluetoothPrintDriver.AddInverse((byte)0x00);
-						BluetoothPrintDriver.SetZoom((byte)0x00);//���ߣ�����
-						BluetoothPrintDriver.AddBold((byte)0x00);//����
-						BluetoothPrintDriver.AddAlignMode((byte) 0x01);//����
-
-						char c= '\u0025';
-						String data7  = "";
-						if(prom.getDesig().length() > 16){
-							String t = prom.getDesig().substring(0,16);
-							String e = prom.getDesig().substring(16,prom.getDesig().length());
-							data7 = t+"|"+prom.getQte()+c+"|"+prom.getValue();
-							if(data7.length()<33){
-								int p = 33 - data7.length();
-								for (int j = 0; j < p; j++) {
-									data7 = data7 + " ";
-								}
-							}
-							String rest = main(e);
-							data7 = data7 + rest;
-						}else{
-							String space = "";
-							int k = 16 - prom.getDesig().length();
-							for (int j = 0; j <k; j++) {
-								space = space + " ";
-							}
-							data7 = prom.getDesig()+space+"| "+prom.getQte()+c+" |"+prom.getValue();
-						}
-
-						//BluetoothPrintDriver.ImportData(new byte[]{0x1d,0x21,0x01}, 3);	//���ñ���
-						BluetoothPrintDriver.ImportData(removeDiacritic(data7),true);
-
-						X++;
-					}
-
-
-					BluetoothPrintDriver.excute();
-					BluetoothPrintDriver.ClearData();
-
-					if(i < remises.size() - 1){
-						BluetoothPrintDriver.LF();
-						BluetoothPrintDriver.ImportData(ticket.getLine());
-						BluetoothPrintDriver.LF();
-						BluetoothPrintDriver.excute();
-						BluetoothPrintDriver.ClearData();
-					}else{
-						BluetoothPrintDriver.LF();
-						BluetoothPrintDriver.excute();
-						BluetoothPrintDriver.ClearData();
-						BluetoothPrintDriver.LF();
-						BluetoothPrintDriver.excute();
-						BluetoothPrintDriver.ClearData();
-					}
-
-				}
-				/*------------------------ LIGNE --------------------------*/
-				BluetoothPrintDriver.LF();
-				BluetoothPrintDriver.excute();
-				BluetoothPrintDriver.ClearData();
-				BluetoothPrintDriver.LF();
-				BluetoothPrintDriver.excute();
-				BluetoothPrintDriver.ClearData();
-			}
-
+			
+			BluetoothPrintDriver.LF();
+			BluetoothPrintDriver.excute();
+			BluetoothPrintDriver.ClearData();
+			
 
 			/************************ BAR CODE **************************************************/
 			BluetoothPrintDriver.SetCharacterFont((byte) 0x00);
 			String print1DBarcodeStr = "";
-			String tmp="";
+			String tmp = "";
+			/*
+			if (ticket.getNumFacture().substring(2).length() > 7) {
+				int p = ticket.getNumFacture().indexOf("-");
+				tmp = ticket.getNumFacture().substring(p);
+				if(tmp.length() > 6){
+					print1DBarcodeStr="-"+tmp.substring(7);
+				}else{
+					print1DBarcodeStr = tmp;
+				}
+			}else{
+				print1DBarcodeStr = ticket.getNumFacture().substring(2);
+			}
+
+			*/
+			
 			if (ticket.getNumFacture().substring(2).length() > 7) {
 				int p = ticket.getNumFacture().indexOf("-");
 				tmp = ticket.getNumFacture().substring(p);
@@ -799,13 +743,11 @@ public class FactureTicketActivity extends Activity {
 			BluetoothPrintDriver.excute();
 			BluetoothPrintDriver.ClearData();
 			*/
-			
-			
-			//Log.e("tickets ",myoffline.LoadBluetooth("").toString());
-	
-	}else{
+		}else{
 			onStart();
 		}
+		
+		
 		
 	}
 
@@ -867,16 +809,27 @@ public class FactureTicketActivity extends Activity {
 		return new String(vysl);
 	}
 	
+	public double offlineregl(){
+		double res =0;
+		if(this.lsreg.size() > 0){
+			for (int i = 0; i < lsreg.size(); i++) {
+				res += lsreg.get(i).getAmount();
+			}
+		}
+		Log.e("ttamont",res+"");
+		return res;
+	}
+	
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		Log.e("data keyup","is in");
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			Intent intent4 = new Intent(FactureTicketActivity.this, OfflineActivity.class);
+			Intent intent4 = new Intent(TicketOfflineActivity.this, PayementActivity.class);
 			intent4.putExtra("user", compte);
+			intent4.putExtra("dico", dico);
 			startActivity(intent4);
 			return true;
 		}
 		return false;
 	}
-	
 }

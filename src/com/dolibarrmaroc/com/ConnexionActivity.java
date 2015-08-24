@@ -48,7 +48,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dolibarrmaroc.com.business.AuthentificationManager;
+import com.dolibarrmaroc.com.dashboard.HomeActivity;
 import com.dolibarrmaroc.com.database.DBHandler;
+import com.dolibarrmaroc.com.gps.ShowLocationActivity;
+import com.dolibarrmaroc.com.gps.TrackingActivity;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.ConfigGps;
 import com.dolibarrmaroc.com.models.Services;
@@ -176,7 +179,7 @@ public class ConnexionActivity extends Activity implements OnClickListener {
 				 */
 				/*
 				mProgressDialog = new ProgressDialog(ConnexionActivity.this);
-				mProgressDialog.setMessage("Recherche d\'une mise à jour disponible");
+				mProgressDialog.setMessage("Recherche d\'une mise ï¿½ jour disponible");
 				mProgressDialog.setIndeterminate(false);
 				mProgressDialog.setMax(100);
 				mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);

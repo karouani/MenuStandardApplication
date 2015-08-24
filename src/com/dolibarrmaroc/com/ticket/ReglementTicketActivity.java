@@ -19,10 +19,10 @@ import android.widget.Toast;
 
 import com.RT_Printer.BluetoothPrinter.BLUETOOTH.BluetoothPrintDriver;
 import com.dolibarrmaroc.com.ConnexionActivity;
-import com.dolibarrmaroc.com.DeviceListActivity;
-import com.dolibarrmaroc.com.HomeActivity;
-import com.dolibarrmaroc.com.OfflineActivity;
 import com.dolibarrmaroc.com.R;
+import com.dolibarrmaroc.com.commercial.OfflineActivity;
+import com.dolibarrmaroc.com.dashboard.HomeActivity;
+import com.dolibarrmaroc.com.impression.DeviceListActivity;
 import com.dolibarrmaroc.com.models.Client;
 import com.dolibarrmaroc.com.models.Compte;
 import com.dolibarrmaroc.com.models.MyTicketPayement;

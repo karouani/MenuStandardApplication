@@ -16,7 +16,6 @@
 
 package com.dolibarrmaroc.com;
 
-import com.dolibarrmaroc.com.dashboard.DashboardActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
